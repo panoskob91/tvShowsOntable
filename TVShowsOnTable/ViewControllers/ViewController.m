@@ -10,20 +10,11 @@
 
 @interface ViewController ()
 
-@property (strong, nonatomic) NSMutableArray *showTitle;
-@property (strong, nonatomic) NSMutableArray *showDescription;
-@property (strong, nonatomic) NSMutableArray *showImage;
-
-
 @end
 
 @implementation ViewController
 
     NSMutableArray *shows;
-
-    NSMutableArray *testDescription;
-    NSMutableArray *testTitle;
-    NSMutableArray *testImage;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
