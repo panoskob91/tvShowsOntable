@@ -18,6 +18,7 @@
 		1A47C1BA2072076E00D63753 /* TVShowsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C1B92072076E00D63753 /* TVShowsCell.m */; };
 		1A47C1C32072321500D63753 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C1C22072321500D63753 /* DetailsViewController.m */; };
 		1AC5D19820736690002FB850 /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC5D19720736690002FB850 /* Show.m */; };
+		1AF62F3D2074C95A005FC411 /* showData.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AF62F3A2074B167005FC411 /* showData.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		1A47C1C22072321500D63753 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		1AC5D19620736690002FB850 /* Show.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Show.h; path = TVShowsOnTable/Models/Show.h; sourceTree = SOURCE_ROOT; };
 		1AC5D19720736690002FB850 /* Show.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Show.m; path = TVShowsOnTable/Models/Show.m; sourceTree = SOURCE_ROOT; };
+		1AF62F3A2074B167005FC411 /* showData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = showData.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 		1A47C1852072058200D63753 /* TVShowsOnTable */ = {
 			isa = PBXGroup;
 			children = (
+				1AF62F3C2074C123005FC411 /* Data */,
 				1AC5D19320736657002FB850 /* Models */,
 				1A47C1BE207230BA00D63753 /* TableCell */,
 				1A47C1BB2072308100D63753 /* ViewControllers */,
@@ -169,6 +172,14 @@
 				1AC5D19620736690002FB850 /* Show.h */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1AF62F3C2074C123005FC411 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				1AF62F3A2074B167005FC411 /* showData.json */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,6 +288,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AF62F3D2074C95A005FC411 /* showData.json in Resources */,
 				1A47C1932072058200D63753 /* LaunchScreen.storyboard in Resources */,
 				1A47C1902072058200D63753 /* Assets.xcassets in Resources */,
 				1A47C18E2072058200D63753 /* Main.storyboard in Resources */,

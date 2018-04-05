@@ -14,47 +14,26 @@
 @property (strong, nonatomic) NSMutableArray *showDescription;
 @property (strong, nonatomic) NSMutableArray *showImage;
 
+
 @end
 
 @implementation ViewController
 
     NSMutableArray *shows;
 
+    NSMutableArray *testDescription;
+    NSMutableArray *testTitle;
+    NSMutableArray *testImage;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    self.showTitle = [[NSMutableArray alloc] initWithObjects:@"Batman", @"Superman", @"Italian Spiderman", nil];
-    self.showImage = [[NSMutableArray alloc] initWithObjects:@"Batman", @"Superman", @"italianSpiderman", nil];
-    self.showDescription = [[NSMutableArray alloc] initWithObjects:@"Wealthy entrepreneur Bruce Wayne and his ward Dick Grayson lead a double life: they are actually crime fighting duo Batman and Robin. A secret Batpole in the Wayne mansion leads to the Batcave, where Police Commissioner Gordon often calls with the latest emergency threatening Gotham City. Racing to the scene of the crime in the Batmobile, Batman and Robin must (with the help of their trusty Bat-utility-belt) thwart the efforts of a variety of master criminals, including Catwoman, Egghead, The Joker, King Tut, The Penguin, and The Riddler.",
-        @"Superman is a 1988 animated Saturday morning television series produced by Ruby-Spears Productions and Warner Bros. Television that aired on CBS featuring the DC Comics superhero of the same name (coinciding with the character's 50th anniversary, along with the live-action Superboy TV series that year). Veteran comic book writer Marv Wolfman was the head story editor, and noted comic book artist Gil Kane provided character designs.",
-        @"Have you ever wondered what would happen if an Italian producer took quaaludes, stumbled into a theater, and saw the first 5 minutes of spider man 2? Well worry no more because Italian Spider-Man is here to haunt your dreams with meteors, snake men, and macchiatos. Let's do it PussyCat!",nil];
-    
     
     self.title = @"Shows";
     
     //Initialise shows array
     shows = [[NSMutableArray alloc] init];
-    
-    //Populate shows array
-    for (int i = 0; i < self.showTitle.count; i++) {
-        Show *showInfo;
-        showInfo = [[Show alloc] init];
-        [showInfo setShowTitle: self.showTitle[i]];
-        [showInfo setShowImage:self.showImage[i]];
-        [showInfo setShowDescription:self.showDescription[i]];
-        
-        [shows addObject:showInfo];
-        
-    }
-    
-//    NSLog(@"New array: %@", shows);
-//    for (int i = 0 ; i < 3; i++) {
-//        NSLog(@"SHOW TITLE: %@", [shows[i] getShowTitle]);
-//        NSLog(@"SHOW IMAGE: %@", [shows[i] getShowImage]);
-//        NSLog(@"SHOW DESCRIPTION: %@", [shows[i] getShowDescription]);
-//
-//    }
+
+    [self parseLocalJSONFileWithName:@"showData"];
     
 }
 
@@ -113,18 +92,41 @@
     return footer;
 }
 
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewAutomaticDimension;
     
 }
 
 //custom cell height
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewAutomaticDimension;
     
 }
 
+- (void)parseLocalJSONFileWithName: (NSString *)fileName
+{
+    //Get file's path
+    NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"json"];
+    NSString *jsonString = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    NSError *error;
+    //Convert to JSON object
+    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
+    //get the array of values
+    NSArray *items = [jsonObject valueForKeyPath:@"Shows"];
+    
+    for (NSDictionary *item in items)
+    {
+        Show *showInfo;
+        showInfo = [[Show alloc] init];
+        [showInfo setShowTitle:[item objectForKey:@"name"]];
+        [showInfo setShowImage:[item objectForKey:@"image"]];
+        [showInfo setShowDescription:[item objectForKey:@"description"]];
+
+        [shows addObject:showInfo];
+    }
+    
+}
 
 @end
