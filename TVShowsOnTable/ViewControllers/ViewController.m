@@ -132,30 +132,6 @@
         
     });
     
-//    NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"json"];
-//    NSError *error;
-//    NSString *jsonString = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
-//    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
-//    NSArray *items = [jsonDictionary valueForKey:@"Shows"];
-//
-//    for (NSDictionary *item in items)
-//    {
-//        Show *showInfo = [[Show alloc] init];
-//        [showInfo setShowTitle:item[@"name"]];
-//        [showInfo setShowImage:item[@"image"]];
-//        [showInfo setShowDescription:item[@"description"]];
-//        NSDictionary *rating = item[@"rating"];
-//        NSNumber *average = rating[@"average"];
-//            if (![average isEqual:[NSNull null]])
-//            {
-//                [showInfo setAverageRating:average];
-//            }else{
-//                [showInfo setAverageRating:(NSNumber *)@""];
-//            }
-//        [shows addObject:showInfo];
-//    }
-    
-    
 }
 
 
