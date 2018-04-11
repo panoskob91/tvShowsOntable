@@ -25,7 +25,7 @@
     shows = [[NSMutableArray alloc] init];
 
     [self parseLocalJSONFileWithName:@"showData"];
-    
+        
 }
 
 
@@ -118,6 +118,12 @@
         [shows addObject:showInfo];
     }
     
+}
+- (void)parseRemoteJSONWithSearchText: (NSString *)userSearchText
+{
+    userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    NSString *userSearchQuery = [NSString stringWithFormat:@"http://api.tvmaze.com/search/shows?q=%@", userSearchText];
+    NSLog(@"search Query %@", userSearchQuery);
 }
 
 @end

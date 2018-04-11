@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 - (void)parseLocalJSONFileWithName: (NSString *)fileName;
+- (void)parseRemoteJSONWithSearchText: (NSString *)userSearchText;
 
 @end
 
