@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A3F8DBF207DDFE0000F4C8A /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F8DBE207DDFE0000F4C8A /* SearchViewController.m */; };
 		1A47C1882072058200D63753 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C1872072058200D63753 /* AppDelegate.m */; };
 		1A47C18B2072058200D63753 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C18A2072058200D63753 /* ViewController.m */; };
 		1A47C18E2072058200D63753 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A47C18C2072058200D63753 /* Main.storyboard */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A3F8DBD207DDFE0000F4C8A /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		1A3F8DBE207DDFE0000F4C8A /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		1A47C1832072058200D63753 /* TVShowsOnTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShowsOnTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A47C1862072058200D63753 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1A47C1872072058200D63753 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -148,6 +151,8 @@
 		1A47C1BB2072308100D63753 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1A3F8DBD207DDFE0000F4C8A /* SearchViewController.h */,
+				1A3F8DBE207DDFE0000F4C8A /* SearchViewController.m */,
 				1A47C1892072058200D63753 /* ViewController.h */,
 				1A47C18A2072058200D63753 /* ViewController.m */,
 				1A47C1C22072321500D63753 /* DetailsViewController.m */,
@@ -322,6 +327,7 @@
 				1A47C1BA2072076E00D63753 /* TVShowsCell.m in Sources */,
 				1AC5D19820736690002FB850 /* Show.m in Sources */,
 				1A47C1882072058200D63753 /* AppDelegate.m in Sources */,
+				1A3F8DBF207DDFE0000F4C8A /* SearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

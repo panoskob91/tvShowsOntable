@@ -13,8 +13,9 @@
 
 @interface ViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) NSString *searchedText;
 
-- (void)parseLocalJSONFileWithName: (NSString *)fileName;
+- (void)parseLocalJSONFileWithName:(NSString *)fileName;
 
 @end
 

@@ -10,6 +10,10 @@
 
 @interface ViewController ()
 
+@property (strong, nonatomic) NSMutableArray *showTitle;
+@property (strong, nonatomic) NSMutableArray *showDescription;
+@property (strong, nonatomic) NSMutableArray *showImage;
+
 @end
 
 @implementation ViewController
@@ -23,9 +27,8 @@
     
     //Initialise shows array
     shows = [[NSMutableArray alloc] init];
-
-    [self parseLocalJSONFileWithName:@"showData"];
     
+    [self parseLocalJSONFileWithName:@"showData"];
 }
 
 
@@ -50,6 +53,7 @@
     cell.showTitleLabel.text = [shows[indexPath.row] getShowTitle]; //Get the title on each element
     cell.TVShowsImage.image = [UIImage imageNamed:[shows[indexPath.row] getShowImage]]; //Get image on each element and pass it to UIImage constructor
     cell.showsTitleDescription.text = [shows[indexPath.row] getShowDescription]; //Get description on each element
+    cell.averageRating.text = [NSString stringWithFormat:@"%@", [shows[indexPath.row] getAverageRating]];
     cell.layer.cornerRadius = 10;
     
         return cell;
@@ -83,41 +87,76 @@
     return footer;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewAutomaticDimension;
     
 }
 
 //custom cell height
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewAutomaticDimension;
     
 }
 
-- (void)parseLocalJSONFileWithName: (NSString *)fileName
+- (void)parseLocalJSONFileWithName:(NSString *)fileName
 {
-    //Get file's path
-    NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"json"];
-    NSString *jsonString = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-    NSError *error;
-    //Convert to JSON object
-    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
-    //get the array of values
-    NSArray *items = [jsonObject valueForKeyPath:@"Shows"];
     
-    for (NSDictionary *item in items)
-    {
-        Show *showInfo;
-        showInfo = [[Show alloc] init];
-        [showInfo setShowTitle:[item objectForKey:@"name"]];
-        [showInfo setShowImage:[item objectForKey:@"image"]];
-        [showInfo setShowDescription:[item objectForKey:@"description"]];
-
-        [shows addObject:showInfo];
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"json"];
+        NSError *error;
+        NSString *jsonString = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
+        NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
+        NSArray *items = [jsonDictionary valueForKey:@"Shows"];
+        
+        for (NSDictionary *item in items)
+        {
+            Show *showInfo = [[Show alloc] init];
+            [showInfo setShowTitle:item[@"name"]];
+            [showInfo setShowImage:item[@"image"]];
+            [showInfo setShowDescription:item[@"description"]];
+            NSDictionary *rating = item[@"rating"];
+            NSNumber *average = rating[@"average"];
+            if (![average isEqual:[NSNull null]])
+            {
+                [showInfo setAverageRating:average];
+            }else{
+                [showInfo setAverageRating:(NSNumber *)@""];
+            }
+            [shows addObject:showInfo];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+        }
+        
+    });
+    
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"json"];
+//    NSError *error;
+//    NSString *jsonString = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
+//    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
+//    NSArray *items = [jsonDictionary valueForKey:@"Shows"];
+//
+//    for (NSDictionary *item in items)
+//    {
+//        Show *showInfo = [[Show alloc] init];
+//        [showInfo setShowTitle:item[@"name"]];
+//        [showInfo setShowImage:item[@"image"]];
+//        [showInfo setShowDescription:item[@"description"]];
+//        NSDictionary *rating = item[@"rating"];
+//        NSNumber *average = rating[@"average"];
+//            if (![average isEqual:[NSNull null]])
+//            {
+//                [showInfo setAverageRating:average];
+//            }else{
+//                [showInfo setAverageRating:(NSNumber *)@""];
+//            }
+//        [shows addObject:showInfo];
+//    }
+    
     
 }
+
 
 @end

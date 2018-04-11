@@ -25,6 +25,11 @@
     description = showDescription;
 }
 
+- (void)setAverageRating:(NSNumber*)rating
+{
+    averageRating = rating;
+}
+
 - (void)printInstancevariables
 {
     NSLog(@"\ntitle: %@,\nimage: %@,\ndescription: %@\n", title, image, description);
@@ -43,6 +48,11 @@
 - (NSString *)getShowDescription
 {
     return description;
+}
+
+- (NSNumber *)getAverageRating
+{
+    return averageRating;
 }
 
 @end
