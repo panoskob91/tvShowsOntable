@@ -16,6 +16,7 @@
 @property (weak, nonatomic) NSString *searchedText;
 
 - (void)parseLocalJSONFileWithName:(NSString *)fileName;
+- (void)parseRemoteJSONWithSearchText: (NSString *)userText;
 
 @end
 

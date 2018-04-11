@@ -27,8 +27,8 @@
     
     //Initialise shows array
     shows = [[NSMutableArray alloc] init];
-    
     [self parseLocalJSONFileWithName:@"showData"];
+    [self parseRemoteJSONWithSearchText:_searchedText];
 }
 
 
@@ -132,6 +132,13 @@
         
     });
     
+}
+
+- (void)parseRemoteJSONWithSearchText: (NSString *)userText
+{
+    NSString *userQuery = [userText stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    NSLog(@"user text %@", userQuery);
+    //NSString *user
 }
 
 
