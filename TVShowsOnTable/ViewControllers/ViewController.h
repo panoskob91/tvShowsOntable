@@ -12,10 +12,15 @@
 #import "Show.h"
 
 @interface ViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) NSString *searchedText;
+
 
 - (void)parseLocalJSONFileWithName: (NSString *)fileName;
 - (void)parseRemoteJSONWithSearchText: (NSString *)userSearchText;
+
+
 
 @end
 

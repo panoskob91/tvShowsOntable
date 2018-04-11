@@ -3,16 +3,19 @@
         
         "name" : "Batman",
         "image": "Batman",
+             "rating" : { "average" : 8.2},
         "description" : "Wealthy entrepreneur Bruce Wayne and his ward Dick Grayson lead a double life:                                 they are actually crime fighting duo Batman and Robin. A secret Batpole in the Wayne mansion leads to the Batcave, where Police Commissioner Gordon often calls with the latest emergency threatening Gotham City. Racing to the scene of the crime in the Batmobile, Batman and Robin must (with the help of their trusty Bat-utility-belt) thwart the efforts of a variety of master criminals, including Catwoman, Egghead, The Joker, King Tut, The Penguin, and The Riddler."
     },
     {
          "name" : "Superman",
          "image" : "Superman",
+             "rating" : { "average" : null },
          "description" : "Superman is a 1988 animated Saturday morning television series produced by Ruby-Spears Productions and Warner Bros. Television that aired on CBS featuring the DC Comics superhero of the same name (coinciding with the character's 50th anniversary, along with the live-action Superboy TV series that year). Veteran comic book writer Marv Wolfman was the head story editor, and noted comic book artist Gil Kane provided character designs."
     },
     {
          "name" : "Italian Spiderman",
          "image" : "italianSpiderman",
+             "rating" : { "average" : null },
          "description" : "Have you ever wondered what would happen if an Italian producer took quaaludes, stumbled into a theater, and saw the first 5 minutes of spider man 2? Well worry no more because Italian Spider-Man is here to haunt your dreams with meteors, snake men, and macchiatos. Let's do it PussyCat!"
     }]
     

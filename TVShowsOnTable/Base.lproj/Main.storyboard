@@ -11,6 +11,49 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Search View Controller-->
+        <scene sceneID="HCh-ti-ZsF">
+            <objects>
+                <viewController id="0NZ-9L-Qt4" customClass="SearchViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xij-Uh-AAg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y5M-hH-JaN">
+                                <rect key="frame" x="8" y="72" width="305" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bv2-Tc-0wh">
+                                <rect key="frame" x="321" y="72" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="searchButtonPressed:" destination="0NZ-9L-Qt4" eventType="touchUpInside" id="1bn-rA-nku"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="tableViewSegue" id="OZ8-9q-Kzo"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bv2-Tc-0wh" firstAttribute="top" secondItem="ONd-Ge-jNb" secondAttribute="top" constant="8" id="1TF-9x-97t"/>
+                            <constraint firstItem="bv2-Tc-0wh" firstAttribute="leading" secondItem="y5M-hH-JaN" secondAttribute="trailing" constant="8" id="6WH-Zz-spo"/>
+                            <constraint firstItem="ONd-Ge-jNb" firstAttribute="trailing" secondItem="bv2-Tc-0wh" secondAttribute="trailing" constant="8" id="GiE-e0-yNi"/>
+                            <constraint firstItem="y5M-hH-JaN" firstAttribute="leading" secondItem="ONd-Ge-jNb" secondAttribute="leading" constant="8" id="ghH-Cu-rzQ"/>
+                            <constraint firstItem="y5M-hH-JaN" firstAttribute="top" secondItem="ONd-Ge-jNb" secondAttribute="top" constant="8" id="t2i-ci-p2a"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ONd-Ge-jNb"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9Q7-In-Yjb"/>
+                    <connections>
+                        <outlet property="searchBar" destination="y5M-hH-JaN" id="EzN-cP-i97"/>
+                        <outlet property="searchButton" destination="bv2-Tc-0wh" id="P6X-Eh-NZk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hyu-HP-xsy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="29.600000000000001" y="131.78410794602701"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -38,7 +81,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMJ-wk-ei9">
-                                                    <rect key="frame" x="81" y="8" width="286" height="31.5"/>
+                                                    <rect key="frame" x="81" y="8" width="236" height="31.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -57,16 +100,24 @@
                                                         <constraint firstAttribute="height" constant="1" id="dpH-U6-A1K"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWs-Y8-VKU">
+                                                    <rect key="frame" x="325" y="8" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Ywx-cT-iOc" firstAttribute="leading" secondItem="BMU-At-NUx" secondAttribute="trailing" constant="8" id="3jn-nZ-Xtb"/>
+                                                <constraint firstItem="VWs-Y8-VKU" firstAttribute="leading" secondItem="sMJ-wk-ei9" secondAttribute="trailing" constant="8" id="6wF-kR-jpa"/>
                                                 <constraint firstItem="sMJ-wk-ei9" firstAttribute="leading" secondItem="BMU-At-NUx" secondAttribute="trailing" constant="10" id="Col-fK-lPe"/>
                                                 <constraint firstItem="BMU-At-NUx" firstAttribute="top" secondItem="9af-LW-Zsc" secondAttribute="top" constant="8" id="EuK-nd-Uet"/>
                                                 <constraint firstAttribute="trailing" secondItem="olT-Zt-0TB" secondAttribute="trailing" constant="8" id="IX5-LE-Ue6"/>
                                                 <constraint firstItem="Ywx-cT-iOc" firstAttribute="top" secondItem="sMJ-wk-ei9" secondAttribute="bottom" constant="3" id="JDa-wr-r7Z"/>
-                                                <constraint firstAttribute="trailing" secondItem="sMJ-wk-ei9" secondAttribute="trailing" constant="8" id="LRZ-Ii-fXw"/>
+                                                <constraint firstItem="VWs-Y8-VKU" firstAttribute="top" secondItem="9af-LW-Zsc" secondAttribute="top" constant="8" id="Txt-kL-RRE"/>
                                                 <constraint firstItem="olT-Zt-0TB" firstAttribute="top" secondItem="sMJ-wk-ei9" secondAttribute="bottom" constant="8" id="YP8-nA-6kw"/>
                                                 <constraint firstItem="BMU-At-NUx" firstAttribute="top" secondItem="sMJ-wk-ei9" secondAttribute="top" id="lH9-NQ-dzc"/>
+                                                <constraint firstAttribute="trailing" secondItem="VWs-Y8-VKU" secondAttribute="trailing" constant="8" id="n5X-3v-Rkr"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Ywx-cT-iOc" secondAttribute="trailing" constant="50" id="oIJ-5t-mzQ"/>
                                                 <constraint firstItem="BMU-At-NUx" firstAttribute="leading" secondItem="9af-LW-Zsc" secondAttribute="leading" constant="8" id="qxx-VE-jX7"/>
                                                 <constraint firstAttribute="bottom" secondItem="olT-Zt-0TB" secondAttribute="bottom" constant="8" id="rEb-TV-1Pn"/>
@@ -75,6 +126,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="TVShowsImage" destination="BMU-At-NUx" id="oeH-Ix-hIt"/>
+                                            <outlet property="averageRating" destination="VWs-Y8-VKU" id="Gp9-MZ-6Um"/>
                                             <outlet property="showTitleLabel" destination="sMJ-wk-ei9" id="3F1-EA-ogt"/>
                                             <outlet property="showsTitleDescription" destination="olT-Zt-0TB" id="CpT-gT-b1e"/>
                                             <segue destination="irP-al-gVw" kind="show" identifier="detailsSegue" id="Gjb-Bl-TwO"/>
@@ -103,7 +155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="476" y="131.78410794602701"/>
+            <point key="canvasLocation" x="750" y="132"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="CgQ-tT-vKV">
@@ -135,7 +187,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GUc-sD-o2U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1181.5999999999999" y="131.78410794602701"/>
+            <point key="canvasLocation" x="1455" y="132"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aEJ-PE-hDD">
@@ -148,12 +200,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="dQ9-gc-5rd"/>
+                        <segue destination="0NZ-9L-Qt4" kind="relationship" relationship="rootViewController" id="FB4-5K-sKa"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bzw-rO-t5d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-276" y="132"/>
+            <point key="canvasLocation" x="-665" y="132"/>
         </scene>
     </scenes>
 </document>
