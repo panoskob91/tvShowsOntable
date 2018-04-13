@@ -10,4 +10,9 @@
 
 @implementation TVSeries
 
+- (NSString *)getSummary
+{
+    return self.summary;
+}
+
 @end

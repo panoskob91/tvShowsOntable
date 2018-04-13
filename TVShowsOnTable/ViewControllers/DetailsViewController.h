@@ -12,5 +12,6 @@
 @interface DetailsViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *detailsViewInfoLabel;
 @property (strong, nonatomic) NSString *labelValue;
+@property (strong, nonatomic) NSString *navigationItemTitle;
 
 @end

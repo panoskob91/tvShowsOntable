@@ -51,6 +51,8 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self performSegueWithIdentifier:@"tableViewSegue" sender:self];
+//    ViewController *vc = [[ViewController alloc] init];
+//    vc.shows = [[NSMutableArray alloc] init];
     [_searchBar resignFirstResponder];
     return YES;
 }
@@ -58,6 +60,8 @@
 
 - (IBAction)searchButtonPressed:(id)sender {
     
+//    ViewController *vc = [[ViewController alloc] init];
+//    vc.shows = [[NSMutableArray alloc] init];
     [_searchBar resignFirstResponder];
 }
 

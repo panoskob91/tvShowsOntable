@@ -10,4 +10,9 @@
 
 @interface TVSeries : Show
 
+@property (strong, nonatomic) NSString *episode;
+@property (strong, nonatomic) NSString *summary;
+
+- (NSString *)getSummary;
+
 @end

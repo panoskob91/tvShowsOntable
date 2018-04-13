@@ -10,4 +10,9 @@
 
 @implementation Movie
 
+- (NSString *)getSummary
+{
+    return self.summary;
+}
+
 @end

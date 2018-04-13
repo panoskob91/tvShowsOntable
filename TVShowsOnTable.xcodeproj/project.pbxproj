@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A3E0CC82080B641006DB87A /* NSString_stripHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3E0CC62080B641006DB87A /* NSString_stripHtml.m */; };
 		1A3F8DBF207DDFE0000F4C8A /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F8DBE207DDFE0000F4C8A /* SearchViewController.m */; };
 		1A3F8DC5207E0070000F4C8A /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F8DC4207E0070000F4C8A /* Movie.m */; };
 		1A3F8DC8207E009C000F4C8A /* TVSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F8DC7207E009C000F4C8A /* TVSeries.m */; };
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A3E0CC62080B641006DB87A /* NSString_stripHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_stripHtml.m; sourceTree = "<group>"; };
+		1A3E0CC72080B641006DB87A /* NSString_stripHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_stripHtml.h; sourceTree = "<group>"; };
 		1A3F8DBD207DDFE0000F4C8A /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		1A3F8DBE207DDFE0000F4C8A /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		1A3F8DC3207E0070000F4C8A /* Movie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
@@ -98,6 +101,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A3E0CC52080B588006DB87A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1A3E0CC72080B641006DB87A /* NSString_stripHtml.h */,
+				1A3E0CC62080B641006DB87A /* NSString_stripHtml.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		1A47C17A2072058200D63753 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +133,7 @@
 		1A47C1852072058200D63753 /* TVShowsOnTable */ = {
 			isa = PBXGroup;
 			children = (
+				1A3E0CC52080B588006DB87A /* Helpers */,
 				1AF62F3C2074C123005FC411 /* Data */,
 				1AC5D19320736657002FB850 /* Models */,
 				1A47C1BE207230BA00D63753 /* TableCell */,
@@ -340,6 +353,7 @@
 				1A47C1882072058200D63753 /* AppDelegate.m in Sources */,
 				1A3F8DC8207E009C000F4C8A /* TVSeries.m in Sources */,
 				1A3F8DBF207DDFE0000F4C8A /* SearchViewController.m in Sources */,
+				1A3E0CC82080B641006DB87A /* NSString_stripHtml.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

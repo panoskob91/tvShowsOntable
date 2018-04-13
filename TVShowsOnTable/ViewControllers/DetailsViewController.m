@@ -18,6 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.detailsViewInfoLabel.text = self.labelValue;
+    self.navigationItem.title = [NSString stringWithFormat:@"%@ Details", self.navigationItemTitle];
     
 }
 

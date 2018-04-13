@@ -12,9 +12,11 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+   
     self.TVShowsImage.layer.cornerRadius = 5;
     self.TVShowsImage.clipsToBounds = YES;
+    self.showsTitleDescription.numberOfLines = 2;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
