@@ -14,7 +14,6 @@
 
 - (instancetype)initWithTitle:(NSString *)ST
                      andImage:(NSString *)SI
-               andDescription:(NSString *)SD
              andAverageRating:(NSNumber *)SAR
 {
     self = [super init];
@@ -24,7 +23,7 @@
         
         self.showTitle = ST;
         self.showImage = SI;
-        self.showDescription = SD;
+        //self.showDescription = SD;
         self.showAverageRating = SAR;
         
     }

@@ -29,6 +29,20 @@
     return self;
 }
 
+- (instancetype)initWithEpisodeName: (NSString *)episodeName
+                  andEpisodeSummary: (NSString *)episodeSummary
+{
+    self = [super init];
+    
+    if (self)
+    {
+        self.episode = episodeName;
+        self.summary = episodeSummary;
+    }
+    
+    return self;
+}
+
 - (NSString *)getSummary
 {
     return self.summary;

@@ -18,6 +18,9 @@
                      andSummary: (NSString *)summary
                   andShowObject: (Show *)showObject;
 
+- (instancetype)initWithEpisodeName: (NSString *)episodeName
+                  andEpisodeSummary: (NSString *)episodeSummary;
+
 - (NSString *)getSummary;
 
 @end

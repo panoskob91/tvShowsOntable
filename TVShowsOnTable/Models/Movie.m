@@ -8,7 +8,14 @@
 
 #import "Movie.h"
 
+@interface Movie ()
+
+@property (strong, nonatomic) NSString *summary;
+
+@end
+
 @implementation Movie
+
 
 #pragma mark -Initialisers
 - (instancetype)initWithMovie: (NSString *)movieName
@@ -24,9 +31,24 @@
         self.summary = movieSummary;
         self.showTitle = showObject.showTitle;
         self.showImage = showObject.showImage;
+        self.showAverageRating = showObject.showAverageRating;
         
     }
     
+    return self;
+    
+}
+
+- (instancetype)initWithMovieName: (NSString *)movieName
+                  andMovieSummary: (NSString *)movieSummary
+{
+    self = [super init];
+    
+    if (self)
+    {
+        self.movie = movieName;
+        self.summary = movieSummary;
+    }
     return self;
     
 }

@@ -5,7 +5,6 @@
 //  Created by Panagiotis Kompotis on 02/04/2018.
 //  Copyright © 2018 AFSE. All rights reserved.
 //
-
 #import "ViewController.h"
 #import "TVSeries.h"
 #import "Movie.h"
@@ -30,7 +29,14 @@
     //Initialise shows array
     self.shows = [[NSMutableArray alloc] init];
     
+    self.searchBar.barTintColor = [UIColor whiteColor];
+    self.searchBar.tintColor = [UIColor whiteColor];
+    self.searchBar.backgroundColor = [UIColor grayColor];
+    self.searchBar.placeholder = @"Search";
     
+    self.searchBar.delegate = self;
+    
+//    self.searchedText = self.searchBar.text;
     
     //[self parseLocalJSONFileWithName:@"showData"];
     [self parseRemoteJSONWithSearchText:_searchedText];
@@ -42,6 +48,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    self.searchedText = self.searchBar.text;
+    [self parseRemoteJSONWithSearchText:_searchedText];
+    [self.searchBar resignFirstResponder];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -64,7 +77,8 @@
     NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
     
     cell.TVShowsImage.image = [UIImage imageWithData:imageData];
-    cell.showsTitleDescription.text = self.shows[indexPath.row].showDescription;
+    //cell.showsTitleDescription.text = self.shows[indexPath.row].showDescription;
+    cell.showsTitleDescription.text = [self.shows[indexPath.row] getSummary];
     cell.averageRating.text = [NSString stringWithFormat:@"%@", self.shows[indexPath.row].showAverageRating];
     
     cell.layer.cornerRadius = 10;
@@ -86,7 +100,8 @@
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         DetailsViewController *detailsVC = segue.destinationViewController;
-        detailsVC.labelValue = self.shows[indexPath.row].showDescription;
+        //detailsVC.labelValue = self.shows[indexPath.row].showDescription;
+        detailsVC.labelValue = [self.shows[indexPath.row] getSummary];//Read summary from a private property
         detailsVC.navigationItemTitle = self.shows[indexPath.row].showTitle;
     }
     
@@ -148,13 +163,11 @@
 //}
 - (void)parseRemoteJSONWithSearchText: (NSString *)userSearchText
 {
+    [self.shows removeAllObjects];
     
-        [self.shows removeAllObjects];
+    userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     
-    
-        userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *userSearchQuery = [NSString stringWithFormat:@"http://api.tvmaze.com/search/shows?q=%@", userSearchText];
         NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
         NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
@@ -163,16 +176,15 @@
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             if (httpResponse.statusCode == 200)
             {
+                
                 NSError *parseError = nil;
                 NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-
                 
                 for (NSDictionary *dict in responseDictionary)
                 {
                     
                     Show *showInfo;
                     NSDictionary *showsReturned = dict[@"show"];
-                    
                     NSString *title = showsReturned[@"name"];
                     NSDictionary *image = showsReturned[@"image"];
                     NSDictionary *averageRatingDictionary = showsReturned[@"rating"];
@@ -197,9 +209,12 @@
                         
                         showAverageRating = (NSNumber *)@"";
                         
+                        
                     }else if (averageRatingDictionary[@"average"] != [NSNull null]){
                         
                         showAverageRating = averageRatingDictionary[@"average"];
+                        showAverageRating = @(showAverageRating.floatValue);
+                       
                         
                     }
                     
@@ -254,28 +269,28 @@
                     
                     showInfo = [[Show alloc] initWithTitle:showTitle
                                                   andImage:showImage
-                                            andDescription:showDescription
                                           andAverageRating:showAverageRating];
                     
-                    [self.shows addObject:showInfo];
+                    Movie *movie = [[Movie alloc] initWithMovie:showTitle andSummary:showDescription andShowObject:showInfo];
                     
+                    [self.shows addObject:movie];
                 }
-                
-                
             }
             else{
                 NSLog(@"ERROR %@", error);
             }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+
+                [self.tableView reloadData];
+
+            });
         }];
         [dataTask resume];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            [self.tableView reloadData];
-            
-        });
-    });
+    
+    //});
     
 }
+
 
 @end

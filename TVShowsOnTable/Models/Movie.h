@@ -11,11 +11,17 @@
 @interface Movie : Show
 
 @property (strong, nonatomic) NSString *movie;
-@property (strong, nonatomic) NSString *summary;
+//@property (strong, nonatomic) NSString *summary;
 
+
+#pragma mark -Initialisers
 - (instancetype)initWithMovie: (NSString *)movieName
                    andSummary:(NSString *)movieSummary
                 andShowObject:(Show *)showObject;
+
+- (instancetype)initWithMovieName: (NSString *)movieName
+                  andMovieSummary: (NSString *)movieSummary;
+
 
 - (NSString *)getSummary;
 
