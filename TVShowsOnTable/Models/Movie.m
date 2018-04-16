@@ -10,6 +10,27 @@
 
 @implementation Movie
 
+#pragma mark -Initialisers
+- (instancetype)initWithMovie: (NSString *)movieName
+                     andSummary:(NSString *)movieSummary
+                  andShowObject:(Show *)showObject
+{
+    
+    self = [super init];
+    
+    if (self)
+    {
+        self.movie = movieName;
+        self.summary = movieSummary;
+        self.showTitle = showObject.showTitle;
+        self.showImage = showObject.showImage;
+        
+    }
+    
+    return self;
+    
+}
+
 - (NSString *)getSummary
 {
     return self.summary;

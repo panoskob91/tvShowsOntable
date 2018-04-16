@@ -13,6 +13,10 @@
 @property (strong, nonatomic) NSString *movie;
 @property (strong, nonatomic) NSString *summary;
 
-//- (instancetype)initiWithMovie: (NSString *)movieName Summary:(NSString *)smovieSummary;
+- (instancetype)initWithMovie: (NSString *)movieName
+                   andSummary:(NSString *)movieSummary
+                andShowObject:(Show *)showObject;
+
 - (NSString *)getSummary;
+
 @end

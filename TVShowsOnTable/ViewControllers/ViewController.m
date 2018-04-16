@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "TVSeries.h"
+#import "Movie.h"
 
 @interface ViewController ()
 
