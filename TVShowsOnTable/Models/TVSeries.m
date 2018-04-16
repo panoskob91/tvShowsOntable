@@ -10,4 +10,28 @@
 
 @implementation TVSeries
 
+- (instancetype)initWithEpisode: (NSString *)seriesEpisode
+                     andSummary: (NSString *)summary
+                  andShowObject: (Show *)showObject
+{
+    
+    self = [super init];
+    
+    if (self)
+    {
+        self.episode = seriesEpisode;
+        self.summary = summary;
+        self.showTitle = showObject.showTitle;
+        self.showImage = showObject.showImage;
+        self.showAverageRating = showObject.showAverageRating;
+    }
+    
+    return self;
+}
+
+- (NSString *)getSummary
+{
+    return self.summary;
+}
+
 @end

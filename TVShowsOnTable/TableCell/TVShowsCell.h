@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TVShowsCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UIImageView *TVShowsImage;
 @property (weak, nonatomic) IBOutlet UILabel *showTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *showsTitleDescription;

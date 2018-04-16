@@ -10,8 +10,10 @@
 #import "ViewController.h"
 
 @interface SearchViewController : UIViewController<UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *searchBar;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 - (IBAction)searchButtonPressed:(id)sender;
+
 
 @end

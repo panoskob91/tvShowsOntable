@@ -10,49 +10,28 @@
 
 @implementation Show
 
-- (void)setShowTitle: (NSString*)showTitle
+#pragma mark -Class initialisers
+
+- (instancetype)initWithTitle:(NSString *)ST
+                     andImage:(NSString *)SI
+               andDescription:(NSString *)SD
+             andAverageRating:(NSNumber *)SAR
 {
-    title = showTitle;
+    self = [super init];
+    
+    if (self)
+    {
+        
+        self.showTitle = ST;
+        self.showImage = SI;
+        self.showDescription = SD;
+        self.showAverageRating = SAR;
+        
+    }
+    
+    return self;
+    
 }
 
-- (void)setShowImage:(NSString *)showImage
-{
-    image = showImage;
-}
-
-- (void)setShowDescription:(NSString *)showDescription
-{
-    description = showDescription;
-}
-
-- (void)setAverageRating:(NSNumber*)rating
-{
-    averageRating = rating;
-}
-
-- (void)printInstancevariables
-{
-    NSLog(@"\ntitle: %@,\nimage: %@,\ndescription: %@\n", title, image, description);
-}
-
-- (NSString *)getShowTitle
-{
-    return title;
-}
-
-- (NSString *)getShowImage
-{
-    return image;
-}
-
-- (NSString *)getShowDescription
-{
-    return description;
-}
-
-- (NSNumber *)getAverageRating
-{
-    return averageRating;
-}
 
 @end

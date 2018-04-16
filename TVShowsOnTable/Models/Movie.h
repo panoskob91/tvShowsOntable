@@ -10,4 +10,13 @@
 
 @interface Movie : Show
 
+@property (strong, nonatomic) NSString *movie;
+@property (strong, nonatomic) NSString *summary;
+
+- (instancetype)initWithMovie: (NSString *)movieName
+                   andSummary:(NSString *)movieSummary
+                andShowObject:(Show *)showObject;
+
+- (NSString *)getSummary;
+
 @end

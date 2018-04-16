@@ -9,23 +9,20 @@
 #import <Foundation/Foundation.h>
 
 @interface Show : NSObject
-{
-    NSString *title;
-    NSString *image;
-    NSString *description;
-    NSNumber *averageRating;
-}
-//Setters
-- (void)setShowTitle: (NSString*)showTitle;
-- (void)setShowImage: (NSString*)showImage;
-- (void)setShowDescription: (NSString*)showDescription;
-- (void)setAverageRating:(NSNumber*)rating;
-//Getters
-- (NSString *)getShowTitle;
-- (NSString *)getShowImage;
-- (NSString *)getShowDescription;
-- (NSNumber *)getAverageRating;
-//Print iinstances
-- (void)printInstancevariables;
+
+#pragma mark -Class Properties
+
+@property (strong, nonatomic) NSString *showTitle;
+@property (strong, nonatomic) NSString *showImage;
+@property (strong, nonatomic) NSString *showDescription;
+@property (strong, nonatomic) NSNumber *showAverageRating;
+
+
+#pragma mark -Initialisers
+
+- (instancetype)initWithTitle: (NSString *)ST
+                     andImage: (NSString *)SI
+               andDescription: (NSString *)SD
+             andAverageRating: (NSNumber *)SAR;
 
 @end

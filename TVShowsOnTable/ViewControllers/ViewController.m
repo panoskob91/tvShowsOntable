@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "TVSeries.h"
+#import "Movie.h"
 
 @interface ViewController ()
 
@@ -18,7 +20,7 @@
 
 @implementation ViewController
 
-    NSMutableArray *shows;
+    //NSMutableArray<Show *> *shows;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,9 +28,14 @@
     self.title = @"Shows";
     
     //Initialise shows array
-    shows = [[NSMutableArray alloc] init];
-    [self parseLocalJSONFileWithName:@"showData"];
+    self.shows = [[NSMutableArray alloc] init];
+    
+    
+    
+    //[self parseLocalJSONFileWithName:@"showData"];
     [self parseRemoteJSONWithSearchText:_searchedText];
+    
+    
 }
 
 
@@ -44,16 +51,22 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return shows.count;
+    return self.shows.count;
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TVShowsCell"];
-    cell.showTitleLabel.text = [shows[indexPath.row] getShowTitle]; //Get the title on each element
-    cell.TVShowsImage.image = [UIImage imageNamed:[shows[indexPath.row] getShowImage]]; //Get image on each element and pass it to UIImage constructor
-    cell.showsTitleDescription.text = [shows[indexPath.row] getShowDescription]; //Get description on each element
-    cell.averageRating.text = [NSString stringWithFormat:@"%@", [shows[indexPath.row] getAverageRating]];
+    
+    cell.showTitleLabel.text = self.shows[indexPath.row].showTitle;
+    
+    NSURL *imageURL = [NSURL URLWithString:self.shows[indexPath.row].showImage];
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
+    
+    cell.TVShowsImage.image = [UIImage imageWithData:imageData];
+    cell.showsTitleDescription.text = self.shows[indexPath.row].showDescription;
+    cell.averageRating.text = [NSString stringWithFormat:@"%@", self.shows[indexPath.row].showAverageRating];
+    
     cell.layer.cornerRadius = 10;
     
         return cell;
@@ -73,8 +86,8 @@
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         DetailsViewController *detailsVC = segue.destinationViewController;
-        //detailsVC.labelValue = self.showDescription[indexPath.row];
-        detailsVC.labelValue = [shows[indexPath.row] getShowDescription];
+        detailsVC.labelValue = self.shows[indexPath.row].showDescription;
+        detailsVC.navigationItemTitle = self.shows[indexPath.row].showTitle;
     }
     
 }
@@ -100,46 +113,169 @@
     
 }
 
-- (void)parseLocalJSONFileWithName:(NSString *)fileName
+//- (void)parseLocalJSONFileWithName:(NSString *)fileName
+//{
+//    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"json"];
+//        NSError *error;
+//        NSString *jsonString = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
+//        NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
+//        NSArray *items = [jsonDictionary valueForKey:@"Shows"];
+//        
+//        for (NSDictionary *item in items)
+//        {
+//            Show *showInfo = [[Show alloc] init];
+//            [showInfo setShowTitle:item[@"name"]];
+//            [showInfo setShowImage:item[@"image"]];
+//            [showInfo setShowDescription:item[@"description"]];
+//            NSDictionary *rating = item[@"rating"];
+//            NSNumber *average = rating[@"average"];
+//            if (![average isEqual:[NSNull null]])
+//            {
+//                [showInfo setAverageRating:average];
+//            }else{
+//                [showInfo setAverageRating:(NSNumber *)@""];
+//            }
+//            [shows addObject:showInfo];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self.tableView reloadData];
+//            });
+//        }
+//        
+//    });
+//    
+//}
+- (void)parseRemoteJSONWithSearchText: (NSString *)userSearchText
 {
     
+        [self.shows removeAllObjects];
+    
+    
+        userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"json"];
-        NSError *error;
-        NSString *jsonString = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
-        NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
-        NSArray *items = [jsonDictionary valueForKey:@"Shows"];
-        
-        for (NSDictionary *item in items)
-        {
-            Show *showInfo = [[Show alloc] init];
-            [showInfo setShowTitle:item[@"name"]];
-            [showInfo setShowImage:item[@"image"]];
-            [showInfo setShowDescription:item[@"description"]];
-            NSDictionary *rating = item[@"rating"];
-            NSNumber *average = rating[@"average"];
-            if (![average isEqual:[NSNull null]])
+        NSString *userSearchQuery = [NSString stringWithFormat:@"http://api.tvmaze.com/search/shows?q=%@", userSearchText];
+        NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
+        NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            if (httpResponse.statusCode == 200)
             {
-                [showInfo setAverageRating:average];
-            }else{
-                [showInfo setAverageRating:(NSNumber *)@""];
+                NSError *parseError = nil;
+                NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+
+                
+                for (NSDictionary *dict in responseDictionary)
+                {
+                    
+                    Show *showInfo;
+                    NSDictionary *showsReturned = dict[@"show"];
+                    
+                    NSString *title = showsReturned[@"name"];
+                    NSDictionary *image = showsReturned[@"image"];
+                    NSDictionary *averageRatingDictionary = showsReturned[@"rating"];
+                    
+                    NSString *showTitle = [[NSString alloc] init];
+                    NSString *showImage = [[NSString alloc] init];
+                    NSNumber *showAverageRating = [[NSNumber alloc] init];
+                    NSString *showDescription = [[NSString alloc] init];
+                    
+                    if (title)
+                    {
+                        
+                        showTitle = title;
+                        
+                    }else if (!title){
+                        
+                        showTitle = @"";
+                        
+                    }
+                    if (averageRatingDictionary[@"average"] == [NSNull null])
+                    {
+                        
+                        showAverageRating = (NSNumber *)@"";
+                        
+                    }else if (averageRatingDictionary[@"average"] != [NSNull null]){
+                        
+                        showAverageRating = averageRatingDictionary[@"average"];
+                        
+                    }
+                    
+                    if ([showsReturned[@"summary"] isEqual:[NSNull null]] ||
+                        [showsReturned[@"summary"] isEqualToString:@""])
+                    {
+                       
+                        showDescription = @"No summary available";
+                        
+                    }else if (![showsReturned[@"summary"] isEqualToString:@""] ||
+                              ![showsReturned[@"summary"] isEqual:[NSNull null]]){
+                        
+                        showDescription = showsReturned[@"summary"];
+                        
+                    }
+                    
+                    if ([image isEqual:[NSNull null]])
+                    {
+                        
+                        showImage = @"http://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
+                        
+                    }else{
+                    
+                    NSString *originalImage = image[@"original"];
+                    NSString *mediumImage = image[@"medium"];
+                    
+                    
+                    if ((![originalImage isEqual:[NSNull null]]) && (![mediumImage isEqual:[NSNull null]]))
+                    {
+                        
+                        showImage = originalImage;
+                        
+                    }else if ((![originalImage isEqual:[NSNull null]]) && ([mediumImage isEqual:[NSNull null]]))
+                    {
+                        
+                        showImage = originalImage;
+                        
+                    }else if ([originalImage isEqual:[NSNull null]] && (![mediumImage isEqual:[NSNull null]]))
+                    {
+                        
+                        showImage = mediumImage;
+                        
+                    }else if ([originalImage isEqual:[NSNull null]] && [mediumImage isEqual:[NSNull null]])
+                    {
+                        
+                        showImage = @"http://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
+                    
+                    }
+                }
+                    
+                    showDescription = [showDescription stripHtml];
+                    
+                    showInfo = [[Show alloc] initWithTitle:showTitle
+                                                  andImage:showImage
+                                            andDescription:showDescription
+                                          andAverageRating:showAverageRating];
+                    
+                    [self.shows addObject:showInfo];
+                    
+                }
+                
+                
             }
-            [shows addObject:showInfo];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
-        }
+            else{
+                NSLog(@"ERROR %@", error);
+            }
+        }];
+        [dataTask resume];
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.tableView reloadData];
+            
+        });
     });
     
 }
-
-- (void)parseRemoteJSONWithSearchText: (NSString *)userText
-{
-    NSString *userQuery = [userText stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    NSLog(@"user text %@", userQuery);
-    //NSString *user
-}
-
 
 @end

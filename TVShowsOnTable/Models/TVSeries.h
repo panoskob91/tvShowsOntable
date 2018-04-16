@@ -10,4 +10,14 @@
 
 @interface TVSeries : Show
 
+@property (strong, nonatomic) NSString *episode;
+@property (strong, nonatomic) NSString *summary;
+
+#pragma mark -initialisers
+- (instancetype)initWithEpisode: (NSString *)seriesEpisode
+                     andSummary: (NSString *)summary
+                  andShowObject: (Show *)showObject;
+
+- (NSString *)getSummary;
+
 @end

@@ -10,13 +10,17 @@
 #import "TVShowsCell.h"
 #import "DetailsViewController.h"
 #import "Show.h"
+#import "NSString_stripHtml.h"
 
 @interface ViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) NSString *searchedText;
+@property (strong, nonatomic) NSMutableArray<Show *> *shows;
 
-- (void)parseLocalJSONFileWithName:(NSString *)fileName;
-- (void)parseRemoteJSONWithSearchText: (NSString *)userText;
+
+//- (void)parseLocalJSONFileWithName: (NSString *)fileName;
+- (void)parseRemoteJSONWithSearchText: (NSString *)userSearchText;
 
 @end
 

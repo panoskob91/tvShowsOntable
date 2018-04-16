@@ -94,11 +94,8 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ywx-cT-iOc">
-                                                    <rect key="frame" x="79" y="42.5" width="231" height="1"/>
+                                                    <rect key="frame" x="79" y="42.5" width="231" height="2"/>
                                                     <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="dpH-U6-A1K"/>
-                                                    </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWs-Y8-VKU">
                                                     <rect key="frame" x="325" y="8" width="42" height="21"/>
@@ -110,17 +107,20 @@
                                             <constraints>
                                                 <constraint firstItem="Ywx-cT-iOc" firstAttribute="leading" secondItem="BMU-At-NUx" secondAttribute="trailing" constant="8" id="3jn-nZ-Xtb"/>
                                                 <constraint firstItem="VWs-Y8-VKU" firstAttribute="leading" secondItem="sMJ-wk-ei9" secondAttribute="trailing" constant="8" id="6wF-kR-jpa"/>
+                                                <constraint firstItem="Ywx-cT-iOc" firstAttribute="top" secondItem="sMJ-wk-ei9" secondAttribute="bottom" constant="3" id="9cq-my-jJt"/>
                                                 <constraint firstItem="sMJ-wk-ei9" firstAttribute="leading" secondItem="BMU-At-NUx" secondAttribute="trailing" constant="10" id="Col-fK-lPe"/>
                                                 <constraint firstItem="BMU-At-NUx" firstAttribute="top" secondItem="9af-LW-Zsc" secondAttribute="top" constant="8" id="EuK-nd-Uet"/>
                                                 <constraint firstAttribute="trailing" secondItem="olT-Zt-0TB" secondAttribute="trailing" constant="8" id="IX5-LE-Ue6"/>
                                                 <constraint firstItem="Ywx-cT-iOc" firstAttribute="top" secondItem="sMJ-wk-ei9" secondAttribute="bottom" constant="3" id="JDa-wr-r7Z"/>
                                                 <constraint firstItem="VWs-Y8-VKU" firstAttribute="top" secondItem="9af-LW-Zsc" secondAttribute="top" constant="8" id="Txt-kL-RRE"/>
                                                 <constraint firstItem="olT-Zt-0TB" firstAttribute="top" secondItem="sMJ-wk-ei9" secondAttribute="bottom" constant="8" id="YP8-nA-6kw"/>
+                                                <constraint firstAttribute="bottom" secondItem="BMU-At-NUx" secondAttribute="bottom" constant="14.5" id="dbu-Md-DYu"/>
                                                 <constraint firstItem="BMU-At-NUx" firstAttribute="top" secondItem="sMJ-wk-ei9" secondAttribute="top" id="lH9-NQ-dzc"/>
                                                 <constraint firstAttribute="trailing" secondItem="VWs-Y8-VKU" secondAttribute="trailing" constant="8" id="n5X-3v-Rkr"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Ywx-cT-iOc" secondAttribute="trailing" constant="50" id="oIJ-5t-mzQ"/>
                                                 <constraint firstItem="BMU-At-NUx" firstAttribute="leading" secondItem="9af-LW-Zsc" secondAttribute="leading" constant="8" id="qxx-VE-jX7"/>
                                                 <constraint firstAttribute="bottom" secondItem="olT-Zt-0TB" secondAttribute="bottom" constant="8" id="rEb-TV-1Pn"/>
+                                                <constraint firstItem="olT-Zt-0TB" firstAttribute="top" secondItem="Ywx-cT-iOc" secondAttribute="bottom" constant="3" id="sWK-dP-lW5"/>
                                                 <constraint firstItem="olT-Zt-0TB" firstAttribute="leading" secondItem="BMU-At-NUx" secondAttribute="trailing" constant="10" id="tvX-Oc-zEL"/>
                                             </constraints>
                                         </tableViewCellContentView>
