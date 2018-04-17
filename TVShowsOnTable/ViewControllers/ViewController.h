@@ -20,7 +20,7 @@
 @property (weak, nonatomic) NSString *searchedText;
 //@property (strong, nonatomic) NSMutableArray<Show *> *shows;
 @property (strong, nonatomic) NSMutableArray<Movie *> *shows;
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
 
 //- (void)parseLocalJSONFileWithName: (NSString *)fileName;

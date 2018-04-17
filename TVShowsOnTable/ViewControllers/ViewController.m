@@ -36,10 +36,10 @@
     
     self.searchBar.delegate = self;
     
-//    self.searchedText = self.searchBar.text;
+   //self.searchedText = self.searchBar.text;
     
     //[self parseLocalJSONFileWithName:@"showData"];
-    [self parseRemoteJSONWithSearchText:_searchedText];
+    //[self parseRemoteJSONWithSearchText:_searchedText];
     
     
 }
@@ -50,7 +50,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     self.searchedText = self.searchBar.text;
     [self parseRemoteJSONWithSearchText:_searchedText];
