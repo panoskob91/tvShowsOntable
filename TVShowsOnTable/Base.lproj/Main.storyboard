@@ -11,48 +11,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search View Controller-->
-        <scene sceneID="HCh-ti-ZsF">
-            <objects>
-                <viewController id="0NZ-9L-Qt4" customClass="SearchViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xij-Uh-AAg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y5M-hH-JaN">
-                                <rect key="frame" x="8" y="28" width="305" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bv2-Tc-0wh">
-                                <rect key="frame" x="321" y="28" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="searchButtonPressed:" destination="0NZ-9L-Qt4" eventType="touchUpInside" id="1bn-rA-nku"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="bv2-Tc-0wh" firstAttribute="top" secondItem="ONd-Ge-jNb" secondAttribute="top" constant="8" id="1TF-9x-97t"/>
-                            <constraint firstItem="bv2-Tc-0wh" firstAttribute="leading" secondItem="y5M-hH-JaN" secondAttribute="trailing" constant="8" id="6WH-Zz-spo"/>
-                            <constraint firstItem="ONd-Ge-jNb" firstAttribute="trailing" secondItem="bv2-Tc-0wh" secondAttribute="trailing" constant="8" id="GiE-e0-yNi"/>
-                            <constraint firstItem="y5M-hH-JaN" firstAttribute="leading" secondItem="ONd-Ge-jNb" secondAttribute="leading" constant="8" id="ghH-Cu-rzQ"/>
-                            <constraint firstItem="y5M-hH-JaN" firstAttribute="top" secondItem="ONd-Ge-jNb" secondAttribute="top" constant="8" id="t2i-ci-p2a"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="ONd-Ge-jNb"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="9Q7-In-Yjb"/>
-                    <connections>
-                        <outlet property="searchBar" destination="y5M-hH-JaN" id="EzN-cP-i97"/>
-                        <outlet property="searchButton" destination="bv2-Tc-0wh" id="P6X-Eh-NZk"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hyu-HP-xsy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="29.600000000000001" y="131.78410794602701"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -140,13 +98,22 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="80"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3yb-Wt-jSW">
+                                <rect key="frame" x="147" y="365.5" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="F3E-Db-0B7"/>
+                                    <constraint firstAttribute="height" constant="80" id="iKV-yA-DZE"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="uIQ-Xa-RkO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2sG-hy-Dlq"/>
+                            <constraint firstItem="3yb-Wt-jSW" firstAttribute="centerX" secondItem="qes-z9-cDf" secondAttribute="centerX" id="CSp-iH-3hJ"/>
                             <constraint firstItem="qes-z9-cDf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EJ4-5U-3mh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qes-z9-cDf" secondAttribute="trailing" id="LG3-3P-FQ1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qes-z9-cDf" secondAttribute="bottom" id="QxJ-g2-OfU"/>
+                            <constraint firstItem="3yb-Wt-jSW" firstAttribute="centerY" secondItem="qes-z9-cDf" secondAttribute="centerY" id="Rd6-J2-3Rk"/>
                             <constraint firstItem="uIQ-Xa-RkO" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="aVY-Kb-UOk"/>
                             <constraint firstItem="qes-z9-cDf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="b7m-K8-lWW"/>
                             <constraint firstItem="uIQ-Xa-RkO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ga1-A5-mjq"/>
@@ -159,6 +126,7 @@
                         <outlet property="searchBar" destination="uIQ-Xa-RkO" id="vkv-aq-A7l"/>
                         <outlet property="searchDisplayController" destination="pRa-R1-ARr" id="X8q-O4-WIE"/>
                         <outlet property="tableView" destination="qes-z9-cDf" id="tU2-J5-gbR"/>
+                        <outlet property="tableViewActivityindicator" destination="3yb-Wt-jSW" id="LNX-6n-YJc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -171,7 +139,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="750" y="132"/>
+            <point key="canvasLocation" x="447" y="132"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="CgQ-tT-vKV">
@@ -190,10 +158,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="HBg-fs-W6W" firstAttribute="bottom" secondItem="khc-Np-g4G" secondAttribute="bottom" constant="8" id="81m-YC-bTb"/>
-                            <constraint firstItem="HBg-fs-W6W" firstAttribute="trailing" secondItem="khc-Np-g4G" secondAttribute="trailing" constant="8" id="Y8K-RX-Duj"/>
-                            <constraint firstItem="khc-Np-g4G" firstAttribute="leading" secondItem="HBg-fs-W6W" secondAttribute="leading" constant="8" id="fzc-0k-Hgp"/>
-                            <constraint firstItem="khc-Np-g4G" firstAttribute="top" secondItem="HBg-fs-W6W" secondAttribute="top" constant="8" id="pQL-Xf-bKJ"/>
+                            <constraint firstItem="khc-Np-g4G" firstAttribute="leading" secondItem="HBg-fs-W6W" secondAttribute="leading" constant="8" id="FMc-7d-0nG"/>
+                            <constraint firstItem="HBg-fs-W6W" firstAttribute="trailing" secondItem="khc-Np-g4G" secondAttribute="trailing" constant="8" id="Z9u-V6-fZz"/>
+                            <constraint firstAttribute="bottom" secondItem="khc-Np-g4G" secondAttribute="bottom" constant="8" id="bVj-Sg-tUx"/>
+                            <constraint firstItem="khc-Np-g4G" firstAttribute="top" secondItem="HBg-fs-W6W" secondAttribute="top" constant="8" id="gIU-Yp-7Fm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HBg-fs-W6W"/>
                     </view>

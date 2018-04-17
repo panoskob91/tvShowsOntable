@@ -19,8 +19,6 @@
 
 @implementation ViewController
 
-    //NSMutableArray<Show *> *shows;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -30,17 +28,13 @@
     self.shows = [[NSMutableArray alloc] init];
     
     self.searchBar.barTintColor = [UIColor whiteColor];
-    self.searchBar.tintColor = [UIColor whiteColor];
+    self.searchBar.tintColor = [UIColor blackColor];
     self.searchBar.backgroundColor = [UIColor grayColor];
     self.searchBar.placeholder = @"Search";
     
     self.searchBar.delegate = self;
     
-   //self.searchedText = self.searchBar.text;
-    
-    //[self parseLocalJSONFileWithName:@"showData"];
-    //[self parseRemoteJSONWithSearchText:_searchedText];
-    
+    self.tableViewActivityindicator.hidden = YES;
     
 }
 
@@ -50,11 +44,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+//- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+//{
+//    self.searchedText = self.searchBar.text;
+//    [self parseRemoteJSONWithSearchText:self.searchedText];
+//
+//}
+
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     self.searchedText = self.searchBar.text;
-    [self parseRemoteJSONWithSearchText:_searchedText];
-    [self.searchBar resignFirstResponder];
+    [self parseRemoteJSONWithSearchText:self.searchedText];
+    [searchBar resignFirstResponder];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -71,18 +73,21 @@
 {
     TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TVShowsCell"];
     
-    cell.showTitleLabel.text = self.shows[indexPath.row].showTitle;
+    if (indexPath.row <= self.shows.count && self.shows.count != 0){
     
-    NSURL *imageURL = [NSURL URLWithString:self.shows[indexPath.row].showImage];
-    NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
+        cell.showTitleLabel.text = self.shows[indexPath.row].showTitle;
+        NSURL *imageURL = [NSURL URLWithString:self.shows[indexPath.row].showImage];
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
     
-    cell.TVShowsImage.image = [UIImage imageWithData:imageData];
-    //cell.showsTitleDescription.text = self.shows[indexPath.row].showDescription;
-    cell.showsTitleDescription.text = [self.shows[indexPath.row] getSummary];
-    cell.averageRating.text = [NSString stringWithFormat:@"%@", self.shows[indexPath.row].showAverageRating];
+        cell.TVShowsImage.image = [UIImage imageWithData:imageData];
+        //cell.showsTitleDescription.text = self.shows[indexPath.row].showDescription;
+        cell.showsTitleDescription.text = [self.shows[indexPath.row] getSummary];
+        cell.averageRating.text = [NSString stringWithFormat:@"%@", self.shows[indexPath.row].showAverageRating];
     
-    cell.layer.cornerRadius = 10;
-    
+        cell.layer.cornerRadius = 10;
+            return cell;
+        
+    }
         return cell;
     
 }
@@ -92,6 +97,7 @@
 {
     //DetailsViewController *detailsViewController = [[DetailsViewController alloc] init];
     //detailsViewController.detailsViewInfoLabel.text = self.showDescription[indexPath.row];
+
     
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -100,9 +106,9 @@
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         DetailsViewController *detailsVC = segue.destinationViewController;
-        //detailsVC.labelValue = self.shows[indexPath.row].showDescription;
         detailsVC.labelValue = [self.shows[indexPath.row] getSummary];//Read summary from a private property
         detailsVC.navigationItemTitle = self.shows[indexPath.row].showTitle;
+        
     }
     
 }
@@ -113,19 +119,6 @@
 {
     UIView* footer = [UIView new];
     return footer;
-}
-
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewAutomaticDimension;
-    
-}
-
-//custom cell height
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewAutomaticDimension;
-    
 }
 
 //- (void)parseLocalJSONFileWithName:(NSString *)fileName
@@ -163,12 +156,17 @@
 //}
 - (void)parseRemoteJSONWithSearchText: (NSString *)userSearchText
 {
+    
     [self.shows removeAllObjects];
     
-    userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    self.tableViewActivityindicator.hidden = NO;
+    [self.tableViewActivityindicator startAnimating];
     
-    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    NSLog(@"query : %@", userSearchText);
+    
         NSString *userSearchQuery = [NSString stringWithFormat:@"http://api.tvmaze.com/search/shows?q=%@", userSearchText];
+    
         NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
         NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
         NSURLSession *session = [NSURLSession sharedSession];
@@ -283,14 +281,15 @@
                 
 
                 [self.tableView reloadData];
-
+                self.tableViewActivityindicator.hidden = YES;
+                [self.tableViewActivityindicator stopAnimating];
+                
             });
         }];
         [dataTask resume];
     
-    //});
-    
 }
 
-
 @end
+
+

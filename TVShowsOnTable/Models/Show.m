@@ -23,7 +23,6 @@
         
         self.showTitle = ST;
         self.showImage = SI;
-        //self.showDescription = SD;
         self.showAverageRating = SAR;
         
     }

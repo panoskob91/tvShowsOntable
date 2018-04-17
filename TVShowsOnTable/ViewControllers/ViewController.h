@@ -13,7 +13,6 @@
 #import "Movie.h"
 #import "NSString_stripHtml.h"
 
-
 @interface ViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -21,6 +20,7 @@
 //@property (strong, nonatomic) NSMutableArray<Show *> *shows;
 @property (strong, nonatomic) NSMutableArray<Movie *> *shows;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *tableViewActivityindicator;
 
 
 //- (void)parseLocalJSONFileWithName: (NSString *)fileName;
