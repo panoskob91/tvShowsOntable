@@ -197,26 +197,35 @@
             </objects>
             <point key="canvasLocation" x="-826" y="132"/>
         </scene>
-        <!--View Controller-->
+        <!--Pick Show TypeVC-->
         <scene sceneID="ta5-Ye-464">
             <objects>
-                <viewController id="dca-Ic-wB3" sceneMemberID="viewController">
+                <viewController id="dca-Ic-wB3" customClass="PickShowTypeVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Im-kt-5dk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="reE-ek-zft">
-                                <rect key="frame" x="41" y="414" width="110" height="94"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="reE-ek-zft">
+                                <rect key="frame" x="41" y="328.5" width="57" height="30"/>
                                 <state key="normal" title="TVShow"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDV-m9-oHb">
-                                <rect key="frame" x="219" y="446" width="94" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDV-m9-oHb">
+                                <rect key="frame" x="219" y="328.5" width="41" height="30"/>
                                 <state key="normal" title="Movie"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aDV-m9-oHb" firstAttribute="centerY" secondItem="71v-jf-lgi" secondAttribute="centerY" id="2ke-PS-iTs"/>
+                            <constraint firstItem="71v-jf-lgi" firstAttribute="bottom" secondItem="reE-ek-zft" secondAttribute="bottom" constant="308.5" id="8h6-hq-19i"/>
+                            <constraint firstItem="reE-ek-zft" firstAttribute="top" secondItem="71v-jf-lgi" secondAttribute="top" constant="308.5" id="BSw-rL-1d0"/>
+                            <constraint firstItem="aDV-m9-oHb" firstAttribute="leading" secondItem="reE-ek-zft" secondAttribute="trailing" constant="121" id="EPw-qs-ZkT"/>
+                            <constraint firstItem="71v-jf-lgi" firstAttribute="trailing" secondItem="aDV-m9-oHb" secondAttribute="trailing" constant="115" id="IXx-VN-qxt"/>
+                            <constraint firstItem="aDV-m9-oHb" firstAttribute="top" secondItem="71v-jf-lgi" secondAttribute="top" constant="308.5" id="LJY-sg-6ha"/>
+                            <constraint firstItem="71v-jf-lgi" firstAttribute="bottom" secondItem="aDV-m9-oHb" secondAttribute="bottom" constant="308.5" id="deJ-zn-1Es"/>
+                            <constraint firstItem="reE-ek-zft" firstAttribute="leading" secondItem="71v-jf-lgi" secondAttribute="leading" constant="41" id="hkd-ZS-hfm"/>
+                            <constraint firstItem="reE-ek-zft" firstAttribute="centerY" secondItem="71v-jf-lgi" secondAttribute="centerY" id="iDj-4L-HRX"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="71v-jf-lgi"/>
                     </view>
                 </viewController>
