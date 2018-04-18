@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--SearchVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SearchVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,7 +121,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Nxe-ZI-V42"/>
+                    <navigationItem key="navigationItem" id="Nxe-ZI-V42">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="13S-f5-3UU">
+                            <connections>
+                                <segue destination="dca-Ic-wB3" kind="presentation" id="i1L-Ne-vv1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="uIQ-Xa-RkO" id="vkv-aq-A7l"/>
                         <outlet property="searchDisplayController" destination="pRa-R1-ARr" id="X8q-O4-WIE"/>
@@ -189,7 +195,34 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bzw-rO-t5d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-665" y="132"/>
+            <point key="canvasLocation" x="-826" y="132"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ta5-Ye-464">
+            <objects>
+                <viewController id="dca-Ic-wB3" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2Im-kt-5dk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="reE-ek-zft">
+                                <rect key="frame" x="41" y="414" width="110" height="94"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="TVShow"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDV-m9-oHb">
+                                <rect key="frame" x="219" y="446" width="94" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Movie"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="71v-jf-lgi"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q1B-0k-336" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-185" y="132"/>
         </scene>
     </scenes>
 </document>

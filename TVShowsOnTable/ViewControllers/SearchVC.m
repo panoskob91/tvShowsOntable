@@ -5,11 +5,12 @@
 //  Created by Panagiotis Kompotis on 02/04/2018.
 //  Copyright © 2018 AFSE. All rights reserved.
 //
-#import "ViewController.h"
+#import "SearchVC.h"
 #import "TVSeries.h"
 #import "Movie.h"
 
-@interface ViewController ()
+
+@interface SearchVC ()
 
 @property (strong, nonatomic) NSMutableArray *showTitle;
 @property (strong, nonatomic) NSMutableArray *showDescription;
@@ -17,7 +18,7 @@
 
 @end
 
-@implementation ViewController
+@implementation SearchVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,8 +32,9 @@
     self.searchBar.tintColor = [UIColor blackColor];
     self.searchBar.backgroundColor = [UIColor grayColor];
     self.searchBar.placeholder = @"Search";
-    
     self.searchBar.delegate = self;
+    
+    self.searchedText = [[NSString alloc] init];
     
     self.tableViewActivityindicator.hidden = YES;
     
@@ -163,9 +165,7 @@
     [self.tableViewActivityindicator startAnimating];
     
     userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSLog(@"query : %@", userSearchText);
-    
-        NSString *userSearchQuery = [NSString stringWithFormat:@"http://api.tvmaze.com/search/shows?q=%@", userSearchText];
+    NSString *userSearchQuery = [NSString stringWithFormat:@"http://api.tvmaze.com/search/shows?q=%@", userSearchText];
     
         NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
         NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];

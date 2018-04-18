@@ -13,10 +13,10 @@
 #import "Movie.h"
 #import "NSString_stripHtml.h"
 
-@interface ViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface SearchVC : UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) NSString *searchedText;
+@property (strong, nonatomic) NSString *searchedText;
 //@property (strong, nonatomic) NSMutableArray<Show *> *shows;
 @property (strong, nonatomic) NSMutableArray<Movie *> *shows;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;

@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A3303E820872DE60062E1ED /* UIColor+rgb.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3303E720872DE60062E1ED /* UIColor+rgb.m */; };
 		1A3E0CC82080B641006DB87A /* NSString_stripHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3E0CC62080B641006DB87A /* NSString_stripHtml.m */; };
 		1A3F8DC5207E0070000F4C8A /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F8DC4207E0070000F4C8A /* Movie.m */; };
 		1A3F8DC8207E009C000F4C8A /* TVSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F8DC7207E009C000F4C8A /* TVSeries.m */; };
 		1A47C1882072058200D63753 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C1872072058200D63753 /* AppDelegate.m */; };
-		1A47C18B2072058200D63753 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C18A2072058200D63753 /* ViewController.m */; };
+		1A47C18B2072058200D63753 /* SearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C18A2072058200D63753 /* SearchVC.m */; };
 		1A47C18E2072058200D63753 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A47C18C2072058200D63753 /* Main.storyboard */; };
 		1A47C1902072058200D63753 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A47C18F2072058200D63753 /* Assets.xcassets */; };
 		1A47C1932072058200D63753 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A47C1912072058200D63753 /* LaunchScreen.storyboard */; };
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A3303E620872DE60062E1ED /* UIColor+rgb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+rgb.h"; sourceTree = "<group>"; };
+		1A3303E720872DE60062E1ED /* UIColor+rgb.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+rgb.m"; sourceTree = "<group>"; };
 		1A3E0CC62080B641006DB87A /* NSString_stripHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_stripHtml.m; sourceTree = "<group>"; };
 		1A3E0CC72080B641006DB87A /* NSString_stripHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_stripHtml.h; sourceTree = "<group>"; };
 		1A3F8DC3207E0070000F4C8A /* Movie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
@@ -51,8 +54,8 @@
 		1A47C1832072058200D63753 /* TVShowsOnTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShowsOnTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A47C1862072058200D63753 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1A47C1872072058200D63753 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1A47C1892072058200D63753 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		1A47C18A2072058200D63753 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1A47C1892072058200D63753 /* SearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchVC.h; sourceTree = "<group>"; };
+		1A47C18A2072058200D63753 /* SearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchVC.m; sourceTree = "<group>"; };
 		1A47C18D2072058200D63753 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1A47C18F2072058200D63753 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A47C1922072058200D63753 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -98,9 +101,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A3303E420872D1C0062E1ED /* UI storyboard(s) */ = {
+			isa = PBXGroup;
+			children = (
+				1A47C18C2072058200D63753 /* Main.storyboard */,
+				1A47C1912072058200D63753 /* LaunchScreen.storyboard */,
+			);
+			path = "UI storyboard(s)";
+			sourceTree = "<group>";
+		};
+		1A3303E520872DAF0062E1ED /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				1A3303E620872DE60062E1ED /* UIColor+rgb.h */,
+				1A3303E720872DE60062E1ED /* UIColor+rgb.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		1A3E0CC52080B588006DB87A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				1A3303E520872DAF0062E1ED /* Categories */,
 				1A3E0CC72080B641006DB87A /* NSString_stripHtml.h */,
 				1A3E0CC62080B641006DB87A /* NSString_stripHtml.m */,
 			);
@@ -135,11 +157,10 @@
 				1AC5D19320736657002FB850 /* Models */,
 				1A47C1BE207230BA00D63753 /* TableCell */,
 				1A47C1BB2072308100D63753 /* ViewControllers */,
+				1A3303E420872D1C0062E1ED /* UI storyboard(s) */,
 				1A47C1862072058200D63753 /* AppDelegate.h */,
 				1A47C1872072058200D63753 /* AppDelegate.m */,
-				1A47C18C2072058200D63753 /* Main.storyboard */,
 				1A47C18F2072058200D63753 /* Assets.xcassets */,
-				1A47C1912072058200D63753 /* LaunchScreen.storyboard */,
 				1A47C1942072058300D63753 /* Info.plist */,
 				1A47C1952072058300D63753 /* main.m */,
 			);
@@ -167,8 +188,8 @@
 		1A47C1BB2072308100D63753 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1A47C1892072058200D63753 /* ViewController.h */,
-				1A47C18A2072058200D63753 /* ViewController.m */,
+				1A47C1892072058200D63753 /* SearchVC.h */,
+				1A47C18A2072058200D63753 /* SearchVC.m */,
 				1A47C1C22072321500D63753 /* DetailsViewController.m */,
 				1A47C1C12072321500D63753 /* DetailsViewController.h */,
 			);
@@ -339,7 +360,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A47C18B2072058200D63753 /* ViewController.m in Sources */,
+				1A47C18B2072058200D63753 /* SearchVC.m in Sources */,
+				1A3303E820872DE60062E1ED /* UIColor+rgb.m in Sources */,
 				1A47C1C32072321500D63753 /* DetailsViewController.m in Sources */,
 				1A3F8DC5207E0070000F4C8A /* Movie.m in Sources */,
 				1A47C1962072058300D63753 /* main.m in Sources */,
