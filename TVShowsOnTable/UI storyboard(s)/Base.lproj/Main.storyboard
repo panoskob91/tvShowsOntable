@@ -14,7 +14,7 @@
         <!--SearchVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SearchVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchVC" id="BYZ-38-t0r" customClass="SearchVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -124,7 +124,7 @@
                     <navigationItem key="navigationItem" id="Nxe-ZI-V42">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="13S-f5-3UU">
                             <connections>
-                                <segue destination="dca-Ic-wB3" kind="presentation" id="i1L-Ne-vv1"/>
+                                <action selector="pickShowVCButtonPSD:" destination="BYZ-38-t0r" id="og9-5K-NsU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -145,7 +145,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="447" y="132"/>
+            <point key="canvasLocation" x="652" y="132"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="CgQ-tT-vKV">
@@ -190,17 +190,17 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="uoE-pw-wY1"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="6uA-xt-8rN"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bzw-rO-t5d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-826" y="132"/>
+            <point key="canvasLocation" x="-436" y="132"/>
         </scene>
         <!--Pick Show TypeVC-->
         <scene sceneID="ta5-Ye-464">
             <objects>
-                <viewController id="dca-Ic-wB3" customClass="PickShowTypeVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pickShowTypeVC" id="dca-Ic-wB3" customClass="PickShowTypeVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Im-kt-5dk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -208,10 +208,16 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="reE-ek-zft">
                                 <rect key="frame" x="41" y="328.5" width="57" height="30"/>
                                 <state key="normal" title="TVShow"/>
+                                <connections>
+                                    <action selector="tvShowButtonPressed:" destination="dca-Ic-wB3" eventType="touchUpInside" id="jPe-Ac-APS"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDV-m9-oHb">
                                 <rect key="frame" x="219" y="328.5" width="41" height="30"/>
                                 <state key="normal" title="Movie"/>
+                                <connections>
+                                    <action selector="movieButtonPressed:" destination="dca-Ic-wB3" eventType="touchUpInside" id="wNh-kb-goo"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -228,10 +234,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="71v-jf-lgi"/>
                     </view>
+                    <connections>
+                        <outlet property="movieButton" destination="aDV-m9-oHb" id="xDR-aD-Qwh"/>
+                        <outlet property="tvShowButton" destination="reE-ek-zft" id="Qkm-Xh-QT9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q1B-0k-336" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-185" y="132"/>
+            <point key="canvasLocation" x="652" y="815"/>
         </scene>
     </scenes>
 </document>

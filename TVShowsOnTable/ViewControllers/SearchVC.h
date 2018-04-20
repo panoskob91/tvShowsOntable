@@ -12,8 +12,10 @@
 #import "Show.h"
 #import "Movie.h"
 #import "NSString_stripHtml.h"
+#import "PickShowTypeVC.h"
+#import "myViewDelegate.h"
 
-@interface SearchVC : UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface SearchVC : UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, myViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSString *searchedText;

@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MyClassTestDelegate.h"
+#import "myViewDelegate.h"
 
-@interface PickShowTypeVC : UIViewController <MyClassTestDelegate>
+@interface PickShowTypeVC : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIButton *tvShowButton;
+@property (strong, nonatomic) IBOutlet UIButton *movieButton;
+- (IBAction)tvShowButtonPressed:(id)sender;
+- (IBAction)movieButtonPressed:(id)sender;
+
+@property (weak, nonatomic) id<myViewDelegate> delegate;
 
 @end

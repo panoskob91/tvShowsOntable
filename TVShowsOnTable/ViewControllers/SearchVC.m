@@ -9,19 +9,23 @@
 #import "TVSeries.h"
 #import "Movie.h"
 
-
 @interface SearchVC ()
 
 @property (strong, nonatomic) NSMutableArray *showTitle;
 @property (strong, nonatomic) NSMutableArray *showDescription;
 @property (strong, nonatomic) NSMutableArray *showImage;
+- (IBAction)pickShowVCButtonPSD:(id)sender;
 
 @end
 
 @implementation SearchVC
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     
     self.title = @"Shows";
     
@@ -37,6 +41,7 @@
     self.searchedText = [[NSString alloc] init];
     
     self.tableViewActivityindicator.hidden = YES;
+    
     
 }
 
@@ -290,6 +295,43 @@
     
 }
 
+
+- (void)sendTextToSearchViewController:(NSString *)text
+{
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    NSString *alertMessage = [NSString stringWithFormat:@"%@ button pressed", text];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Ifo" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"OK Button is pressed");
+    }];
+    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"Cancel button pressed");
+    }];
+   
+    [actionCancel setValue:[UIColor redColor] forKey:@"titleTextColor"];
+    
+    [alert addAction:actionOK];
+    [alert addAction:actionCancel];
+    
+
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self presentViewController:alert animated:YES completion:nil];
+    });
+    
+}
+
+- (IBAction)pickShowVCButtonPSD:(id)sender {
+    
+    
+    PickShowTypeVC *pickShowVC = [self.storyboard instantiateViewControllerWithIdentifier:@"pickShowTypeVC"];
+    pickShowVC.delegate = self;
+    [self.navigationController presentViewController:pickShowVC animated:YES completion:NULL];
+    
+}
 @end
 
 

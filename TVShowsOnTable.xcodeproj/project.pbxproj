@@ -48,7 +48,7 @@
 		1A3303E720872DE60062E1ED /* UIColor+rgb.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+rgb.m"; sourceTree = "<group>"; };
 		1A3303E920874ABC0062E1ED /* PickShowTypeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PickShowTypeVC.h; sourceTree = "<group>"; };
 		1A3303EA20874ABC0062E1ED /* PickShowTypeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PickShowTypeVC.m; sourceTree = "<group>"; };
-		1A3303EE2087517C0062E1ED /* MyClassTestDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyClassTestDelegate.h; sourceTree = "<group>"; };
+		1A3303EE2087517C0062E1ED /* myViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myViewDelegate.h; sourceTree = "<group>"; };
 		1A3E0CC62080B641006DB87A /* NSString_stripHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_stripHtml.m; sourceTree = "<group>"; };
 		1A3E0CC72080B641006DB87A /* NSString_stripHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_stripHtml.h; sourceTree = "<group>"; };
 		1A3F8DC3207E0070000F4C8A /* Movie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 		1A3303EC208751240062E1ED /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				1A3303EE2087517C0062E1ED /* MyClassTestDelegate.h */,
+				1A3303EE2087517C0062E1ED /* myViewDelegate.h */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
