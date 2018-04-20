@@ -30,6 +30,9 @@
     self.showImageView.contentMode = UIViewContentModeScaleToFill;
     self.showImageView.clipsToBounds = YES;
     
+    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePitchGesture:)];
+    //[self.showImageView addGestureRecognizer: pinchGesture];
+    [self.view addGestureRecognizer: pinchGesture];
     
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Details", self.navigationItemTitle];
 
@@ -39,6 +42,25 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)handlePitchGesture: (UIPinchGestureRecognizer *)gestureRecogniser
+{
+    
+    UIGestureRecognizerState state = [gestureRecogniser state];
+    CGFloat initialScale = [gestureRecogniser scale];
+    
+    if  (state == UIGestureRecognizerStateBegan || state == UIGestureRecognizerStateChanged)
+    {
+        CGFloat scale = [gestureRecogniser scale];
+        [gestureRecogniser.view setTransform:CGAffineTransformScale(gestureRecogniser.view.transform, scale, scale)];
+        [gestureRecogniser setScale:1];
+    }else if (state == UIGestureRecognizerStateEnded)
+    {
+        [gestureRecogniser setScale:initialScale];
+    }
+    
+    
 }
 
 /*

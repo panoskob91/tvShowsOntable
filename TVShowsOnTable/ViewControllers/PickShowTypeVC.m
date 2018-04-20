@@ -27,14 +27,15 @@
 
 - (IBAction)tvShowButtonPressed:(id)sender {
 
-    [self.delegate sendTextToSearchViewController:@"TVShow"];//call Delegate method implemented on SearchVC
-
+    
+    [self.delegate pickShowTypeVC:self didSelectButton:sender];
+    
 }
 
 - (IBAction)movieButtonPressed:(id)sender {
 
-    [self.delegate sendTextToSearchViewController:@"Movie"];
-
+    
+    [self.delegate pickShowTypeVC:self didSelectButton:sender];
     
 }
 @end

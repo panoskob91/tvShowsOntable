@@ -12,9 +12,6 @@
 @protocol myViewDelegate<NSObject>
 
 @required
-- (void)sendTextToSearchViewController:(NSString *)text;
-
-@optional
 - (void)pickShowTypeVC: (PickShowTypeVC *)pickShowTypeVC
        didSelectButton: (UIButton *)button;
 

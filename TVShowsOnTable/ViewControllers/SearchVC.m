@@ -296,29 +296,22 @@
     
 }
 
-
-- (void)sendTextToSearchViewController:(NSString *)text
+- (void)pickShowTypeVC:(PickShowTypeVC *)pickShowTypeVC didSelectButton:(UIButton *)button
 {
-
     [self dismissViewControllerAnimated:YES completion:nil];
-    
-    NSString *alertMessage = [NSString stringWithFormat:@"button #%@# was pressed", text];
+    NSString *alertMessage = [NSString stringWithFormat:@"Button #%@# was pressed", button.currentTitle];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Button pressed info" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
-    
     UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSLog(@"OK Button is pressed");
+        NSLog(@"OK button pressed");
     }];
     UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSLog(@"Cancel button pressed");
+        NSLog(@"Cancel pressed");
     }];
-   
     [actionCancel setValue:[UIColor redColor] forKey:@"titleTextColor"];
     [actionOK setValue:[UIColor blueColor] forKey:@"titleTextColor"];
     
     [alert addAction:actionOK];
     [alert addAction:actionCancel];
-    
-
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self presentViewController:alert animated:YES completion:nil];
