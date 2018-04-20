@@ -155,24 +155,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khc-Np-g4G">
-                                <rect key="frame" x="8" y="72" width="359" height="587"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VGW-l7-H9R">
+                                <rect key="frame" x="60" y="80" width="255" height="171"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wm7-EC-QL8">
+                                <rect key="frame" x="8" y="267" width="359" height="392"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="khc-Np-g4G" firstAttribute="leading" secondItem="HBg-fs-W6W" secondAttribute="leading" constant="8" id="FMc-7d-0nG"/>
-                            <constraint firstItem="HBg-fs-W6W" firstAttribute="trailing" secondItem="khc-Np-g4G" secondAttribute="trailing" constant="8" id="Z9u-V6-fZz"/>
-                            <constraint firstAttribute="bottom" secondItem="khc-Np-g4G" secondAttribute="bottom" constant="8" id="bVj-Sg-tUx"/>
-                            <constraint firstItem="khc-Np-g4G" firstAttribute="top" secondItem="HBg-fs-W6W" secondAttribute="top" constant="8" id="gIU-Yp-7Fm"/>
+                            <constraint firstItem="HBg-fs-W6W" firstAttribute="bottom" secondItem="VGW-l7-H9R" secondAttribute="bottom" constant="416" id="2La-NR-Uhc"/>
+                            <constraint firstItem="HBg-fs-W6W" firstAttribute="trailing" secondItem="VGW-l7-H9R" secondAttribute="trailing" constant="60" id="BDm-9S-UOB"/>
+                            <constraint firstItem="Wm7-EC-QL8" firstAttribute="top" secondItem="VGW-l7-H9R" secondAttribute="bottom" constant="16" id="CYP-P9-9LI"/>
+                            <constraint firstItem="VGW-l7-H9R" firstAttribute="leading" secondItem="HBg-fs-W6W" secondAttribute="leading" constant="60" id="L7f-IJ-BE6"/>
+                            <constraint firstItem="VGW-l7-H9R" firstAttribute="top" secondItem="HBg-fs-W6W" secondAttribute="top" constant="16" id="Lrx-Qa-kkR"/>
+                            <constraint firstItem="Wm7-EC-QL8" firstAttribute="leading" secondItem="HBg-fs-W6W" secondAttribute="leading" constant="8" id="Y5S-BJ-fFd"/>
+                            <constraint firstItem="HBg-fs-W6W" firstAttribute="bottom" secondItem="Wm7-EC-QL8" secondAttribute="bottom" constant="8" id="pvG-gf-api"/>
+                            <constraint firstItem="HBg-fs-W6W" firstAttribute="trailing" secondItem="Wm7-EC-QL8" secondAttribute="trailing" constant="8" id="rSG-Yp-Vd1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HBg-fs-W6W"/>
                     </view>
                     <connections>
-                        <outlet property="detailsViewInfoLabel" destination="khc-Np-g4G" id="qsU-yq-HEZ"/>
+                        <outlet property="descriptionDetailsTextView" destination="Wm7-EC-QL8" id="cbI-wa-Zs7"/>
+                        <outlet property="showImageView" destination="VGW-l7-H9R" id="KED-ca-yHS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GUc-sD-o2U" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -114,6 +114,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         DetailsViewController *detailsVC = segue.destinationViewController;
         detailsVC.labelValue = [self.shows[indexPath.row] getSummary];//Read summary from a private property
+        detailsVC.imageURL = self.shows[indexPath.row].showImage;
         detailsVC.navigationItemTitle = self.shows[indexPath.row].showTitle;
         
     }
@@ -301,8 +302,8 @@
 
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    NSString *alertMessage = [NSString stringWithFormat:@"%@ button pressed", text];
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Ifo" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    NSString *alertMessage = [NSString stringWithFormat:@"button #%@# was pressed", text];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Button pressed info" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSLog(@"OK Button is pressed");
@@ -312,6 +313,7 @@
     }];
    
     [actionCancel setValue:[UIColor redColor] forKey:@"titleTextColor"];
+    [actionOK setValue:[UIColor blueColor] forKey:@"titleTextColor"];
     
     [alert addAction:actionOK];
     [alert addAction:actionCancel];

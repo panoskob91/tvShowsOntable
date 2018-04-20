@@ -11,8 +11,11 @@
 
 @interface DetailsViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *detailsViewInfoLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *showImageView;
+@property (strong, nonatomic) IBOutlet UITextView *descriptionDetailsTextView;
+
 @property (strong, nonatomic) NSString *labelValue;
 @property (strong, nonatomic) NSString *navigationItemTitle;
+@property (strong, nonatomic) NSString *imageURL;
 
 @end

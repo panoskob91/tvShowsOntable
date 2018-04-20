@@ -18,10 +18,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [[UINavigationBar appearance] setBarTintColor:[UIColor createColorWithRed:26 andGreen:255 andBlue:26 andAlpha:1]];
-    
-    NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName : [UIColor createColorWithRed:104 andGreen:104 andBlue:104 andAlpha:1]};
-    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
+//    [[UINavigationBar appearance] setBarTintColor:[UIColor createColorWithRed:26 andGreen:255 andBlue:26 andAlpha:1]];
+//    
+//    NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName : [UIColor createColorWithRed:104 andGreen:100 andBlue:104 andAlpha:1]};
+//    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
     
     return YES;
 }
