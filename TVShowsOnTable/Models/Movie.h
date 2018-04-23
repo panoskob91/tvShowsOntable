@@ -15,14 +15,16 @@
 
 
 #pragma mark -Initialisers
-- (instancetype)initWithMovie: (NSString *)movieName
+- (instancetype) initWithMovie: (NSString *)movieName
                    andSummary:(NSString *)movieSummary
                 andShowObject:(Show *)showObject;
 
-- (instancetype)initWithMovieName: (NSString *)movieName
-                  andMovieSummary: (NSString *)movieSummary;
+- (instancetype) initWithDictionary: (NSDictionary *)dict andShowObject: (Show *)showObject;
 
+- (instancetype) initWithMovieName: (NSString *)movieName
+                   andMovieSummary: (NSString *)movieSummary;
 
 - (NSString *)getSummary;
+- (NSMutableArray<Movie *> *)parseRemoteJSONWithSearchText:(NSString *)userSearchText;
 
 @end

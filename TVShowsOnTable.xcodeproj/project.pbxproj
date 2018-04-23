@@ -311,6 +311,7 @@
 		1A47C17B2072058200D63753 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = AFSE;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = AFSE;
 				TargetAttributes = {

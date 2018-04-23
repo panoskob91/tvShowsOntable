@@ -23,4 +23,6 @@
                      andImage: (NSString *)SI
              andAverageRating: (NSNumber *)SAR;
 
+- (instancetype)initWithDictionary: (NSDictionary *)dict;
+
 @end

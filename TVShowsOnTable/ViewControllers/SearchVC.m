@@ -5,6 +5,7 @@
 //  Created by Panagiotis Kompotis on 02/04/2018.
 //  Copyright © 2018 AFSE. All rights reserved.
 //
+
 #import "SearchVC.h"
 #import "TVSeries.h"
 #import "Movie.h"
@@ -20,7 +21,7 @@
 
 @implementation SearchVC
 
-
+#pragma mark -ViewController lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -51,6 +52,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -SearchBar delegate functions
 //- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 //{
 //    self.searchedText = self.searchBar.text;
@@ -58,14 +60,28 @@
 //
 //}
 
-
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    
+    //Movie *movieObject = [[Movie alloc] init];
     self.searchedText = self.searchBar.text;
-    [self parseRemoteJSONWithSearchText:self.searchedText];
+    [self fetchRemoteJSONWithSearchText:self.searchedText];
+    //self.shows = [movieObject parseRemoteJSONWithSearchText: self.searchedText];
+    //NSLog(@"shows %@", self.shows);
     [searchBar resignFirstResponder];
 }
 
+#pragma mark -IBActions
+- (IBAction)pickShowVCButtonPSD:(id)sender {
+    
+    
+    PickShowTypeVC *pickShowVC = [self.storyboard instantiateViewControllerWithIdentifier:@"pickShowTypeVC"];
+    pickShowVC.delegate = self;
+    [self.navigationController presentViewController:pickShowVC animated:YES completion:NULL];
+    
+}
+
+#pragma mark -UITableView Data source functions
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -76,6 +92,15 @@
     return self.shows.count;
     
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //DetailsViewController *detailsViewController = [[DetailsViewController alloc] init];
+    //detailsViewController.detailsViewInfoLabel.text = self.showDescription[indexPath.row];
+    
+    
+}
+#pragma mark -UITTableView delegate functions
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TVShowsCell"];
@@ -99,14 +124,7 @@
     
 }
 
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //DetailsViewController *detailsViewController = [[DetailsViewController alloc] init];
-    //detailsViewController.detailsViewInfoLabel.text = self.showDescription[indexPath.row];
-
-    
-}
+#pragma mark -Segues managments
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"detailsSegue"])
@@ -121,7 +139,7 @@
     
 }
 
-
+#pragma mark -UITableView footer
 //remove bottom lines
 - (UIView * )tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
@@ -129,6 +147,7 @@
     return footer;
 }
 
+#pragma mark -Local JSON parsing
 //- (void)parseLocalJSONFileWithName:(NSString *)fileName
 //{
 //    
@@ -162,13 +181,13 @@
 //    });
 //    
 //}
-- (void)parseRemoteJSONWithSearchText: (NSString *)userSearchText
+
+#pragma mark -Parsing remote JSON form TVMaze API with user input userSearchText
+- (void)fetchRemoteJSONWithSearchText: (NSString *)userSearchText
 {
     
     [self.shows removeAllObjects];
-    
-    self.tableViewActivityindicator.hidden = NO;
-    [self.tableViewActivityindicator startAnimating];
+    [self activityIndicatorHandlerWhenActivityIndicatorIs:NO];
     
     userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSString *userSearchQuery = [NSString stringWithFormat:@"http://api.tvmaze.com/search/shows?q=%@", userSearchText];
@@ -180,102 +199,14 @@
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             if (httpResponse.statusCode == 200)
             {
-                
                 NSError *parseError = nil;
                 NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
                 
                 for (NSDictionary *dict in responseDictionary)
                 {
                     
-                    Show *showInfo;
-                    NSDictionary *showsReturned = dict[@"show"];
-                    NSString *title = showsReturned[@"name"];
-                    NSDictionary *image = showsReturned[@"image"];
-                    NSDictionary *averageRatingDictionary = showsReturned[@"rating"];
-                    
-                    NSString *showTitle = [[NSString alloc] init];
-                    NSString *showImage = [[NSString alloc] init];
-                    NSNumber *showAverageRating = [[NSNumber alloc] init];
-                    NSString *showDescription = [[NSString alloc] init];
-                    
-                    if (title)
-                    {
-                        
-                        showTitle = title;
-                        
-                    }else if (!title){
-                        
-                        showTitle = @"";
-                        
-                    }
-                    if (averageRatingDictionary[@"average"] == [NSNull null])
-                    {
-                        
-                        showAverageRating = (NSNumber *)@"";
-                        
-                        
-                    }else if (averageRatingDictionary[@"average"] != [NSNull null]){
-                        
-                        showAverageRating = averageRatingDictionary[@"average"];
-                        showAverageRating = @(showAverageRating.floatValue);
-                       
-                        
-                    }
-                    
-                    if ([showsReturned[@"summary"] isEqual:[NSNull null]] ||
-                        [showsReturned[@"summary"] isEqualToString:@""])
-                    {
-                       
-                        showDescription = @"No summary available";
-                        
-                    }else if (![showsReturned[@"summary"] isEqualToString:@""] ||
-                              ![showsReturned[@"summary"] isEqual:[NSNull null]]){
-                        
-                        showDescription = showsReturned[@"summary"];
-                        
-                    }
-                    
-                    if ([image isEqual:[NSNull null]])
-                    {
-                        
-                        showImage = @"http://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
-                        
-                    }else{
-                    
-                    NSString *originalImage = image[@"original"];
-                    NSString *mediumImage = image[@"medium"];
-                    
-                    
-                    if ((![originalImage isEqual:[NSNull null]]) && (![mediumImage isEqual:[NSNull null]]))
-                    {
-                        
-                        showImage = originalImage;
-                        
-                    }else if ((![originalImage isEqual:[NSNull null]]) && ([mediumImage isEqual:[NSNull null]]))
-                    {
-                        
-                        showImage = originalImage;
-                        
-                    }else if ([originalImage isEqual:[NSNull null]] && (![mediumImage isEqual:[NSNull null]]))
-                    {
-                        
-                        showImage = mediumImage;
-                        
-                    }else if ([originalImage isEqual:[NSNull null]] && [mediumImage isEqual:[NSNull null]])
-                    {
-                        
-                        showImage = @"http://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
-                    
-                    }
-                }
-                    
-                    showDescription = [showDescription stripHtml];
-                    
-                    showInfo = [[Show alloc] initWithTitle:showTitle
-                                                  andImage:showImage
-                                          andAverageRating:showAverageRating];
-                    
-                    Movie *movie = [[Movie alloc] initWithMovie:showTitle andSummary:showDescription andShowObject:showInfo];
+                    Show *showInfo = [[Show alloc] initWithDictionary:dict];
+                    Movie *movie = [[Movie alloc] initWithDictionary:dict andShowObject:showInfo];
                     
                     [self.shows addObject:movie];
                 }
@@ -285,10 +216,8 @@
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-
                 [self.tableView reloadData];
-                self.tableViewActivityindicator.hidden = YES;
-                [self.tableViewActivityindicator stopAnimating];
+                [self activityIndicatorHandlerWhenActivityIndicatorIs:YES];
                 
             });
         }];
@@ -296,6 +225,20 @@
     
 }
 
+- (void) activityIndicatorHandlerWhenActivityIndicatorIs:
+(BOOL)activityIndicatorIsHidden
+{
+    if (activityIndicatorIsHidden == YES)
+    {
+        self.tableViewActivityindicator.hidden = YES;
+        [self.tableViewActivityindicator stopAnimating];
+    }else{
+        self.tableViewActivityindicator.hidden = NO;
+        [self.tableViewActivityindicator startAnimating];
+    }
+}
+
+#pragma mark -Custom delegates methods
 - (void)pickShowTypeVC:(PickShowTypeVC *)pickShowTypeVC didSelectButton:(UIButton *)button
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -319,14 +262,6 @@
     
 }
 
-- (IBAction)pickShowVCButtonPSD:(id)sender {
-    
-    
-    PickShowTypeVC *pickShowVC = [self.storyboard instantiateViewControllerWithIdentifier:@"pickShowTypeVC"];
-    pickShowVC.delegate = self;
-    [self.navigationController presentViewController:pickShowVC animated:YES completion:NULL];
-    
-}
 @end
 
 
