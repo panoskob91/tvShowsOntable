@@ -6,6 +6,7 @@
 //  Copyright © 2018 AFSE. All rights reserved.
 //
 
+//Parent class
 #import "Show.h"
 
 @interface Movie : Show

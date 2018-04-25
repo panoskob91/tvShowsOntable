@@ -16,7 +16,6 @@
 @property (strong, nonatomic) NSMutableArray *showTitle;
 @property (strong, nonatomic) NSMutableArray *showDescription;
 @property (strong, nonatomic) NSMutableArray *showImage;
-//@property (strong, nonatomic) NSMutableArray<Movie *> *shows;
 @property (strong, nonatomic) NSMutableArray<Show *> *shows;
 @property (strong, nonatomic) NSMutableArray<Movie *> *movies;
 
@@ -78,7 +77,6 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    
     self.searchedText = self.searchBar.text;
     [self fetchNewRemoteJSONWithSearchText:self.searchedText];
     [searchBar resignFirstResponder];
@@ -86,12 +84,9 @@
 
 #pragma mark -IBActions
 - (IBAction)pickShowVCButtonPSD:(id)sender {
-    
-    
     PickShowTypeVC *pickShowVC = [self.storyboard instantiateViewControllerWithIdentifier:@"pickShowTypeVC"];
     pickShowVC.delegate = self;
     [self.navigationController presentViewController:pickShowVC animated:YES completion:NULL];
-    
 }
 
 #pragma mark -UITableView Data source functions
@@ -103,7 +98,8 @@
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSArray <NSString *> *secttionTitles = @[@"Tv series", @"Movies"];
-    if (section ==0)
+    
+    if (section == 0)
     {
         return secttionTitles[0];
     }
@@ -130,7 +126,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+
     DetailsViewController *detailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"detailsVC"];
     detailsVC.imageURL = self.shows[indexPath.row].showImage;
     //detailsVC.labelValue = [self.shows[indexPath.row] getSummary];
@@ -143,7 +139,14 @@
 #pragma mark -UITTableView delegate functions
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TVShowsCell"];
+//    TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tVShowsCell"];
+///Users/panagiotis/Documents/TVShowsOnTable/tvshows/TVShowsOnTable
+//    [tableView registerNib:[UINib nibWithNibName:@“DGCustomTvSerieTableCell” bundle:nil] forCellReuseIdentifier:cellTableIdentifier];
+//    cell = [tableView dequeueReusableCellWithIdentifier:cellTableIdentifier];
+//
+  
+    [tableView registerNib:[UINib nibWithNibName:@"ShowsCell" bundle:nil] forCellReuseIdentifier:@"tVShowsCell"];
+     TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tVShowsCell"];
     
     if (indexPath.row <= self.shows.count && self.shows.count != 0){
         if (indexPath.section == 0) {
@@ -294,7 +297,6 @@
             
             for (NSDictionary *dict in responseDictionary[@"results"])
             {
-                
                 
                 if ([dict[@"media_type"] isEqualToString:@"tv"])
                 {

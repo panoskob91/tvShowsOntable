@@ -11,6 +11,7 @@
 		1A3303EB20874ABC0062E1ED /* PickShowTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3303EA20874ABC0062E1ED /* PickShowTypeVC.m */; };
 		1A36078E208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A36078D208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m */; };
 		1A360790208F211700572AB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A36078F208F211700572AB8 /* Assets.xcassets */; };
+		1A360794209069FE00572AB8 /* ShowsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A360793209069FE00572AB8 /* ShowsCell.xib */; };
 		1A3E0CC82080B641006DB87A /* NSString_stripHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3E0CC62080B641006DB87A /* NSString_stripHtml.m */; };
 		1A3F8DC5207E0070000F4C8A /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F8DC4207E0070000F4C8A /* Movie.m */; };
 		1A3F8DC8207E009C000F4C8A /* TVSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F8DC7207E009C000F4C8A /* TVSeries.m */; };
@@ -53,6 +54,7 @@
 		1A36078C208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+AFSEAlertGenerator.h"; sourceTree = "<group>"; };
 		1A36078D208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+AFSEAlertGenerator.m"; sourceTree = "<group>"; };
 		1A36078F208F211700572AB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1A360793209069FE00572AB8 /* ShowsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowsCell.xib; sourceTree = "<group>"; };
 		1A3E0CC62080B641006DB87A /* NSString_stripHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_stripHtml.m; sourceTree = "<group>"; };
 		1A3E0CC72080B641006DB87A /* NSString_stripHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_stripHtml.h; sourceTree = "<group>"; };
 		1A3F8DC3207E0070000F4C8A /* Movie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
@@ -144,6 +146,14 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		1A36079520907B3D00572AB8 /* XIB Files */ = {
+			isa = PBXGroup;
+			children = (
+				1A360793209069FE00572AB8 /* ShowsCell.xib */,
+			);
+			path = "XIB Files";
+			sourceTree = "<group>";
+		};
 		1A3E0CC52080B588006DB87A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +194,7 @@
 				1A47C1BE207230BA00D63753 /* TableCell */,
 				1A47C1BB2072308100D63753 /* ViewControllers */,
 				1A3303E420872D1C0062E1ED /* UI storyboard(s) */,
+				1A36079520907B3D00572AB8 /* XIB Files */,
 				1A36078F208F211700572AB8 /* Assets.xcassets */,
 				1A47C1862072058200D63753 /* AppDelegate.h */,
 				1A47C1872072058200D63753 /* AppDelegate.m */,
@@ -361,6 +372,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A360794209069FE00572AB8 /* ShowsCell.xib in Resources */,
 				1AF62F3D2074C95A005FC411 /* showData.json in Resources */,
 				1A47C1932072058200D63753 /* LaunchScreen.storyboard in Resources */,
 				1A360790208F211700572AB8 /* Assets.xcassets in Resources */,

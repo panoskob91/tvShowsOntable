@@ -7,12 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+
+//Table cell class
 #import "TVShowsCell.h"
+//View controllers
 #import "DetailsViewController.h"
+#import "PickShowTypeVC.h"
+//Model header file
 #import "Show.h"
 #import "Movie.h"
+//Helpers
 #import "NSString_stripHtml.h"
-#import "PickShowTypeVC.h"
+//Categories and protocols
 #import "myViewDelegate.h"
 
 @interface SearchVC : UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, myViewDelegate>
