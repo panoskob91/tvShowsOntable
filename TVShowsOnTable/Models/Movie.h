@@ -19,12 +19,19 @@
                    andSummary:(NSString *)movieSummary
                 andShowObject:(Show *)showObject;
 
-- (instancetype) initWithDictionary: (NSDictionary *)dict andShowObject: (Show *)showObject;
+- (instancetype) initWithDictionary: (NSDictionary *)dict
+                      andShowObject: (Show *)showObject;
+
+//Must be inside results
+- (instancetype) initWithDictionaryFromTvDb: (NSDictionary *)dict
+                              andShowObject: (Show *)showObject;
+
+- (instancetype) initWithResponseDictionaryFromTvDb: (NSDictionary *)dict;
 
 - (instancetype) initWithMovieName: (NSString *)movieName
                    andMovieSummary: (NSString *)movieSummary;
-
+#pragma mark -Getters
 - (NSString *)getSummary;
-- (NSMutableArray<Movie *> *)parseRemoteJSONWithSearchText:(NSString *)userSearchText;
+- (NSNumber *)getShowId;
 
 @end

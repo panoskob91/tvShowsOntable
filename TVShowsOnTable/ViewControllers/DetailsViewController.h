@@ -11,11 +11,15 @@
 
 @interface DetailsViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UIImageView *showImageView;
-@property (strong, nonatomic) IBOutlet UITextView *descriptionDetailsTextView;
-
 @property (strong, nonatomic) NSString *labelValue;
 @property (strong, nonatomic) NSString *navigationItemTitle;
 @property (strong, nonatomic) NSString *imageURL;
+@property (strong, nonatomic) NSNumber *dataToBePassedOnDetailsVC;
+
+#pragma mark -Getters
+- (NSNumber *) getTheShowID;
+
+#pragma mark -Setters
+- (void) setTheShowID: (NSNumber *)SID;
 
 @end

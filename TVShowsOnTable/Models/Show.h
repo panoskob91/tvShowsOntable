@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSNumber *showAverageRating;
 
 
+
 #pragma mark -Initialisers
 
 - (instancetype)initWithTitle: (NSString *)ST
@@ -24,5 +25,10 @@
              andAverageRating: (NSNumber *)SAR;
 
 - (instancetype)initWithDictionary: (NSDictionary *)dict;
+//Must be inside results
+- (instancetype)initWithDictionaryForTvDb: (NSDictionary *)dict;
+
+#pragma mark -Private properties getters
+- (NSNumber *)getShowId;
 
 @end

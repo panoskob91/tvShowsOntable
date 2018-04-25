@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *showTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *showsTitleDescription;
 @property (weak, nonatomic) IBOutlet UILabel *averageRating;
+@property (strong, nonatomic) IBOutlet UIImageView *showTypeImageView;
 
 @end

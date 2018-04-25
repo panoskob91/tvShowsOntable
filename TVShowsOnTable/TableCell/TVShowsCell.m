@@ -8,6 +8,7 @@
 
 #import "TVShowsCell.h"
 
+
 @implementation TVShowsCell
 
 - (void)awakeFromNib {

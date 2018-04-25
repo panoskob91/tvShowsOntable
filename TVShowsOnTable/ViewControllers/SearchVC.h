@@ -16,12 +16,6 @@
 #import "myViewDelegate.h"
 
 @interface SearchVC : UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, myViewDelegate>
-#pragma mark -IBoutlets
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-//@property (strong, nonatomic) NSMutableArray<Show *> *shows;
-@property (strong, nonatomic) NSMutableArray<Movie *> *shows;
-@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *tableViewActivityindicator;
 
 #pragma mark -SearchVC property
 @property (strong, nonatomic) NSString *searchedText;
@@ -33,7 +27,7 @@
 
  @param userSearchText Takes user input as a parameters
  */
-- (void) fetchRemoteJSONWithSearchText: (NSString *)userSearchText;
+//- (void) fetchRemoteJSONWithSearchText: (NSString *)userSearchText;
 
 @end
 

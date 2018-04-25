@@ -13,6 +13,7 @@
 @interface Movie ()
 
 @property (strong, nonatomic) NSString *summary;
+@property (strong, nonatomic) NSNumber *showId;
 
 @end
 
@@ -86,159 +87,96 @@
     return self;
 }
 
-- (NSString *)getSummary
+- (instancetype) initWithDictionaryFromTvDb:(NSDictionary *)dict andShowObject:(Show *)showObject
+{
+    self = [super init];
+    
+    if (self)
+    {
+        //Title
+        if ([dict[@"media_type"] isEqualToString:@"tv"])
+        {
+            self.movie = dict[@"name"];
+        }
+        else if ([dict[@"media_type"] isEqualToString:@"movie"])
+        {
+            self.movie = dict[@"title"];
+        }
+        //Summary
+        if ([dict[@"overview"] isEqual:[NSNull null]])
+        {
+            
+            self.summary = @"No summary available";
+            
+        }else
+        {
+            self.summary = dict[@"overview"];
+        }
+        
+        self.showTitle = showObject.showTitle;
+        self.showImage = showObject.showImage;
+        self.showAverageRating = showObject.showAverageRating;
+        self.showId = [showObject getShowId];
+        
+    }
+    return self;
+}
+
+- (instancetype) initWithResponseDictionaryFromTvDb:(NSDictionary *)dict
+{
+    self = [super init];
+    
+    if (self)
+    {
+        //Title
+        if ([dict[@"media_type"] isEqualToString:@"tv"])
+        {
+            self.movie = dict[@"name"];
+        }
+        else if ([dict[@"media_type"] isEqualToString:@"movie"])
+        {
+            self.movie = dict[@"title"];
+        }
+        //Summary
+        if ([dict[@"overview"] isEqual:[NSNull null]])
+        {
+            
+            self.summary = @"No summary available";
+            
+        }
+        else
+        {
+            self.summary = dict[@"overview"];
+        }
+        //Image
+        if (![dict[@"poster_path"] isEqual:[NSNull null]])
+        {
+            self.showImage = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w185/%@", dict[@"poster_path"]];
+        }
+        //Average rating
+        if (![dict[@"vote_average"] isEqual:[NSNull null]])
+        {
+            self.showAverageRating = dict[@"vote_average"];
+            self.showAverageRating = @(self.showAverageRating.floatValue);
+        }
+        else
+        {
+            self.showAverageRating = (NSNumber *)@"";
+            self.showAverageRating = @(self.showAverageRating.floatValue);
+        }
+        
+    }
+    return self;
+}
+
+#pragma mark -Getters
+- (NSString *) getSummary
 {
     return self.summary;
 }
-
-- (NSMutableArray<Movie *> *)parseRemoteJSONWithSearchText:(NSString *)userSearchText
+- (NSNumber *) getShowId
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SearchVC *searchVC = [storyboard instantiateViewControllerWithIdentifier:@"SearchVC"];
-    
-    //[showsArray removeAllObjects];
-    NSMutableArray<Movie *> *showsArray = [[NSMutableArray alloc] init];
-    searchVC.tableViewActivityindicator.hidden = NO;
-    [searchVC.tableViewActivityindicator startAnimating];
-    
-    userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSString *userSearchQuery = [NSString stringWithFormat:@"http://api.tvmaze.com/search/shows?q=%@", userSearchText];
-    
-    NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
-    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
-        
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if (httpResponse.statusCode == 200)
-        {
-            
-            NSError *parseError = nil;
-            NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-            
-            for (NSDictionary *dict in responseDictionary)
-            {
-                
-                Show *showInfo;
-                NSDictionary *showsReturned = dict[@"show"];
-                NSString *title = showsReturned[@"name"];
-                NSDictionary *image = showsReturned[@"image"];
-                NSDictionary *averageRatingDictionary = showsReturned[@"rating"];
-                
-                NSString *showTitle = [[NSString alloc] init];
-                NSString *showImage = [[NSString alloc] init];
-                NSNumber *showAverageRating = [[NSNumber alloc] init];
-                NSString *showDescription = [[NSString alloc] init];
-                
-                if (title)
-                {
-                    
-                    showTitle = title;
-                    
-                }else if (!title){
-                    
-                    showTitle = @"";
-                    
-                }
-                if (averageRatingDictionary[@"average"] == [NSNull null])
-                {
-                    
-                    showAverageRating = (NSNumber *)@"";
-                    
-                    
-                }else if (averageRatingDictionary[@"average"] != [NSNull null]){
-                    
-                    showAverageRating = averageRatingDictionary[@"average"];
-                    showAverageRating = @(showAverageRating.floatValue);
-                    
-                    
-                }
-                
-                if ([showsReturned[@"summary"] isEqual:[NSNull null]] ||
-                    [showsReturned[@"summary"] isEqualToString:@""])
-                {
-                    
-                    showDescription = @"No summary available";
-                    
-                }else if (![showsReturned[@"summary"] isEqualToString:@""] ||
-                          ![showsReturned[@"summary"] isEqual:[NSNull null]]){
-                    
-                    showDescription = showsReturned[@"summary"];
-                    
-                }
-                
-                if ([image isEqual:[NSNull null]])
-                {
-                    
-                    showImage = @"http://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
-                    
-                }else{
-                    
-                    NSString *originalImage = image[@"original"];
-                    NSString *mediumImage = image[@"medium"];
-                    
-                    
-                    if ((![originalImage isEqual:[NSNull null]]) && (![mediumImage isEqual:[NSNull null]]))
-                    {
-                        
-                        showImage = originalImage;
-                        
-                    }else if ((![originalImage isEqual:[NSNull null]]) && ([mediumImage isEqual:[NSNull null]]))
-                    {
-                        
-                        showImage = originalImage;
-                        
-                    }else if ([originalImage isEqual:[NSNull null]] && (![mediumImage isEqual:[NSNull null]]))
-                    {
-                        
-                        showImage = mediumImage;
-                        
-                    }else if ([originalImage isEqual:[NSNull null]] && [mediumImage isEqual:[NSNull null]])
-                    {
-                        
-                        showImage = @"http://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
-                        
-                    }
-                }
-                
-                showDescription = [showDescription stripHtml];
-                
-                showInfo = [[Show alloc] initWithTitle:showTitle
-                                              andImage:showImage
-                                      andAverageRating:showAverageRating];
-                
-                Movie *movie = [[Movie alloc] initWithMovie:showTitle andSummary:showDescription andShowObject:showInfo];
-                [showsArray addObject:movie];
-            }
-            
-        }
-        else{
-            NSLog(@"ERROR %@", error);
-        }
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//
-//            [searchVC.tableView reloadData];
-//            searchVC.tableViewActivityindicator.hidden = YES;
-//            [searchVC.tableViewActivityindicator stopAnimating];
-//            [self updateUIElements];
-//
-//        });
-       
-      
-    }];
-    [dataTask resume];
-    
-    return showsArray;
-}
-
-- (void) updateUIElements
-{
-    
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                SearchVC *searchVC = [storyboard instantiateViewControllerWithIdentifier:@"SearchVC"];
-                [searchVC.tableView reloadData];
-                searchVC.tableViewActivityindicator.hidden = YES;
-                [searchVC.tableViewActivityindicator stopAnimating];
+    return self.showId;
 }
 
 

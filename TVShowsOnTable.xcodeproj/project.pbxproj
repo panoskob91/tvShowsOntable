@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		1A3303E820872DE60062E1ED /* UIColor+rgb.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3303E720872DE60062E1ED /* UIColor+rgb.m */; };
 		1A3303EB20874ABC0062E1ED /* PickShowTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3303EA20874ABC0062E1ED /* PickShowTypeVC.m */; };
+		1A36078E208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A36078D208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m */; };
+		1A360790208F211700572AB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A36078F208F211700572AB8 /* Assets.xcassets */; };
 		1A3E0CC82080B641006DB87A /* NSString_stripHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3E0CC62080B641006DB87A /* NSString_stripHtml.m */; };
 		1A3F8DC5207E0070000F4C8A /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F8DC4207E0070000F4C8A /* Movie.m */; };
 		1A3F8DC8207E009C000F4C8A /* TVSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F8DC7207E009C000F4C8A /* TVSeries.m */; };
 		1A47C1882072058200D63753 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C1872072058200D63753 /* AppDelegate.m */; };
 		1A47C18B2072058200D63753 /* SearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C18A2072058200D63753 /* SearchVC.m */; };
 		1A47C18E2072058200D63753 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A47C18C2072058200D63753 /* Main.storyboard */; };
-		1A47C1902072058200D63753 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A47C18F2072058200D63753 /* Assets.xcassets */; };
 		1A47C1932072058200D63753 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A47C1912072058200D63753 /* LaunchScreen.storyboard */; };
 		1A47C1962072058300D63753 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C1952072058300D63753 /* main.m */; };
 		1A47C1A02072058300D63753 /* TVShowsOnTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C19F2072058300D63753 /* TVShowsOnTableTests.m */; };
@@ -49,6 +50,9 @@
 		1A3303E920874ABC0062E1ED /* PickShowTypeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PickShowTypeVC.h; sourceTree = "<group>"; };
 		1A3303EA20874ABC0062E1ED /* PickShowTypeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PickShowTypeVC.m; sourceTree = "<group>"; };
 		1A3303EE2087517C0062E1ED /* myViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myViewDelegate.h; sourceTree = "<group>"; };
+		1A36078C208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+AFSEAlertGenerator.h"; sourceTree = "<group>"; };
+		1A36078D208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+AFSEAlertGenerator.m"; sourceTree = "<group>"; };
+		1A36078F208F211700572AB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A3E0CC62080B641006DB87A /* NSString_stripHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_stripHtml.m; sourceTree = "<group>"; };
 		1A3E0CC72080B641006DB87A /* NSString_stripHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_stripHtml.h; sourceTree = "<group>"; };
 		1A3F8DC3207E0070000F4C8A /* Movie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
@@ -61,7 +65,6 @@
 		1A47C1892072058200D63753 /* SearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchVC.h; sourceTree = "<group>"; };
 		1A47C18A2072058200D63753 /* SearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchVC.m; sourceTree = "<group>"; };
 		1A47C18D2072058200D63753 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1A47C18F2072058200D63753 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A47C1922072058200D63753 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A47C1942072058300D63753 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A47C1952072058300D63753 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -119,6 +122,8 @@
 			children = (
 				1A3303E620872DE60062E1ED /* UIColor+rgb.h */,
 				1A3303E720872DE60062E1ED /* UIColor+rgb.m */,
+				1A36078C208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.h */,
+				1A36078D208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -179,9 +184,9 @@
 				1A47C1BE207230BA00D63753 /* TableCell */,
 				1A47C1BB2072308100D63753 /* ViewControllers */,
 				1A3303E420872D1C0062E1ED /* UI storyboard(s) */,
+				1A36078F208F211700572AB8 /* Assets.xcassets */,
 				1A47C1862072058200D63753 /* AppDelegate.h */,
 				1A47C1872072058200D63753 /* AppDelegate.m */,
-				1A47C18F2072058200D63753 /* Assets.xcassets */,
 				1A47C1942072058300D63753 /* Info.plist */,
 				1A47C1952072058300D63753 /* main.m */,
 			);
@@ -358,7 +363,7 @@
 			files = (
 				1AF62F3D2074C95A005FC411 /* showData.json in Resources */,
 				1A47C1932072058200D63753 /* LaunchScreen.storyboard in Resources */,
-				1A47C1902072058200D63753 /* Assets.xcassets in Resources */,
+				1A360790208F211700572AB8 /* Assets.xcassets in Resources */,
 				1A47C18E2072058200D63753 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,6 +393,7 @@
 				1A3303E820872DE60062E1ED /* UIColor+rgb.m in Sources */,
 				1A47C1C32072321500D63753 /* DetailsViewController.m in Sources */,
 				1A3F8DC5207E0070000F4C8A /* Movie.m in Sources */,
+				1A36078E208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m in Sources */,
 				1A47C1962072058300D63753 /* main.m in Sources */,
 				1A47C1BA2072076E00D63753 /* TVShowsCell.m in Sources */,
 				1AC5D19820736690002FB850 /* Show.m in Sources */,

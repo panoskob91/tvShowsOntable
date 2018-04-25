@@ -9,6 +9,12 @@
 #import "Show.h"
 #import "SearchVC.h"
 
+@interface Show ()
+
+@property (strong, nonatomic) NSNumber *showId;
+
+@end
+
 @implementation Show
 
 #pragma mark -Class initialisers
@@ -52,7 +58,6 @@
         }else if (![showAverageRating isEqual:[NSNull null]]){
             
             self.showAverageRating = @(showAverageRating.floatValue);
-            
         }
         
         NSString *showTitle = showsDict[@"name"];
@@ -103,6 +108,56 @@
     }
     
     return self;
+}
+
+//Must be inside results
+- (instancetype) initWithDictionaryForTvDb:(NSDictionary *)dict
+{
+    self = [super init];
+    
+    if (self)
+    {
+        //Show Id
+        if (![dict[@"id"] isEqual:[NSNull null]])
+        {
+            self.showId = dict[@"id"];
+        }
+        
+        //Show title
+        if ([dict[@"media_type"] isEqualToString:@"tv"])
+        {
+            self.showTitle = dict[@"name"];
+        }
+        else if ([dict[@"media_type"] isEqualToString:@"movie"])
+        {
+            self.showTitle = dict[@"title"];
+        }
+        
+        //Average rating
+        if (![dict[@"vote_average"] isEqual:[NSNull null]])
+        {
+            self.showAverageRating = dict[@"vote_average"];
+            self.showAverageRating = @(self.showAverageRating.floatValue);
+        }
+        else
+        {
+            self.showAverageRating = (NSNumber *)@"";
+            self.showAverageRating = @(self.showAverageRating.floatValue);
+        }
+        
+        //Show image
+        if (![dict[@"poster_path"] isEqual:[NSNull null]])
+        {
+            self.showImage = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w185/%@", dict[@"poster_path"]];
+        }
+    }
+    return self;
+}
+
+#pragma mark -Private properties getters
+- (NSNumber *) getShowId
+{
+    return self.showId;
 }
 
 @end

@@ -9,13 +9,27 @@
 #import "SearchVC.h"
 #import "TVSeries.h"
 #import "Movie.h"
+#import "UIAlertController+AFSEAlertGenerator.h"
 
 @interface SearchVC ()
 
 @property (strong, nonatomic) NSMutableArray *showTitle;
 @property (strong, nonatomic) NSMutableArray *showDescription;
 @property (strong, nonatomic) NSMutableArray *showImage;
+//@property (strong, nonatomic) NSMutableArray<Movie *> *shows;
+@property (strong, nonatomic) NSMutableArray<Show *> *shows;
+@property (strong, nonatomic) NSMutableArray<Movie *> *movies;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *tableViewActivityindicator;
 - (IBAction)pickShowVCButtonPSD:(id)sender;
+
+/**
+ TV maze API parsing function. GET Request type used. Data is stored in a Show Class array object
+  @param userSearchText Takes user input as a parameters
+ */
+- (void) fetchRemoteJSONWithSearchText: (NSString *)userSearchText;
 
 @end
 
@@ -24,26 +38,20 @@
 #pragma mark -ViewController lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
+    [self setupSearchBar];
     self.title = @"Shows";
     
     //Initialise shows array
     self.shows = [[NSMutableArray alloc] init];
-    
-    self.searchBar.barTintColor = [UIColor whiteColor];
-    self.searchBar.tintColor = [UIColor blackColor];
-    self.searchBar.backgroundColor = [UIColor grayColor];
-    self.searchBar.placeholder = @"Search";
-    self.searchBar.delegate = self;
-    
+    //Initialise searched text
     self.searchedText = [[NSString alloc] init];
+    //Initialise movies array
+    self.movies = [[NSMutableArray alloc] init];
     
     self.tableViewActivityindicator.hidden = YES;
-    
-    
 }
 
 
@@ -52,6 +60,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) setupSearchBar
+{
+    self.searchBar.barTintColor = [UIColor whiteColor];
+    self.searchBar.tintColor = [UIColor blackColor];
+    self.searchBar.backgroundColor = [UIColor grayColor];
+    self.searchBar.placeholder = @"Search";
+    self.searchBar.delegate = self;
+}
 #pragma mark -SearchBar delegate functions
 //- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 //{
@@ -63,11 +79,8 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     
-    //Movie *movieObject = [[Movie alloc] init];
     self.searchedText = self.searchBar.text;
-    [self fetchRemoteJSONWithSearchText:self.searchedText];
-    //self.shows = [movieObject parseRemoteJSONWithSearchText: self.searchedText];
-    //NSLog(@"shows %@", self.shows);
+    [self fetchNewRemoteJSONWithSearchText:self.searchedText];
     [searchBar resignFirstResponder];
 }
 
@@ -84,20 +97,47 @@
 #pragma mark -UITableView Data source functions
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
+}
+
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSArray <NSString *> *secttionTitles = @[@"Tv series", @"Movies"];
+    if (section ==0)
+    {
+        return secttionTitles[0];
+    }
+    else
+    {
+        return secttionTitles[1];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.shows.count;
+   
+    if (section == 0)
+    {
+        return self.shows.count;
+    }
+    else if (section == 1)
+    {
+        return self.shows.count;
+    }
     
+   return -1;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //DetailsViewController *detailsViewController = [[DetailsViewController alloc] init];
-    //detailsViewController.detailsViewInfoLabel.text = self.showDescription[indexPath.row];
     
+    DetailsViewController *detailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"detailsVC"];
+    detailsVC.imageURL = self.shows[indexPath.row].showImage;
+    //detailsVC.labelValue = [self.shows[indexPath.row] getSummary];
+    detailsVC.navigationItemTitle = self.shows[indexPath.row].showTitle;
+    NSNumber *showID = [self.shows[indexPath.row] getShowId];
+    [detailsVC setTheShowID:showID];
+    [self.navigationController pushViewController:detailsVC animated:YES];
     
 }
 #pragma mark -UITTableView delegate functions
@@ -106,44 +146,47 @@
     TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TVShowsCell"];
     
     if (indexPath.row <= self.shows.count && self.shows.count != 0){
-    
-        cell.showTitleLabel.text = self.shows[indexPath.row].showTitle;
-        NSURL *imageURL = [NSURL URLWithString:self.shows[indexPath.row].showImage];
-        NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
-    
-        cell.TVShowsImage.image = [UIImage imageWithData:imageData];
-        //cell.showsTitleDescription.text = self.shows[indexPath.row].showDescription;
-        cell.showsTitleDescription.text = [self.shows[indexPath.row] getSummary];
-        cell.averageRating.text = [NSString stringWithFormat:@"%@", self.shows[indexPath.row].showAverageRating];
-    
-        cell.layer.cornerRadius = 10;
+        if (indexPath.section == 0) {
+        
+            cell.showTitleLabel.text = self.shows[indexPath.row].showTitle;
+            NSURL *imageURL = [NSURL URLWithString:self.shows[indexPath.row].showImage];
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
+        
+            cell.TVShowsImage.image = [UIImage imageWithData:imageData];
+            cell.showTypeImageView.image = [UIImage imageNamed:@"TvSeries"];
+        
+            //cell.showsTitleDescription.text = [self.shows[indexPath.row] getSummary];
+            cell.averageRating.text = [NSString stringWithFormat:@"%@", self.shows[indexPath.row].showAverageRating];
+            
+            cell.layer.cornerRadius = 10;
+                return cell;
+        }
+        else if (indexPath.section == 1)
+        {
+            cell.showTitleLabel.text = self.movies[indexPath.row].movie;
+            NSURL *imageURL = [NSURL URLWithString:self.movies[indexPath.row].showImage];
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
+            
+            cell.TVShowsImage.image = [UIImage imageWithData:imageData];
+            cell.showTypeImageView.image = [UIImage imageNamed:@"movieImage"];
+            
+            //cell.showsTitleDescription.text = [self.shows[indexPath.row] getSummary];
+            cell.averageRating.text = [NSString stringWithFormat:@"%@", self.movies[indexPath.row].showAverageRating];
+            
+            cell.layer.cornerRadius = 10;
             return cell;
+        }
         
     }
         return cell;
-    
-}
-
-#pragma mark -Segues managments
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"detailsSegue"])
-    {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        DetailsViewController *detailsVC = segue.destinationViewController;
-        detailsVC.labelValue = [self.shows[indexPath.row] getSummary];//Read summary from a private property
-        detailsVC.imageURL = self.shows[indexPath.row].showImage;
-        detailsVC.navigationItemTitle = self.shows[indexPath.row].showTitle;
-        
-    }
-    
 }
 
 #pragma mark -UITableView footer
 //remove bottom lines
 - (UIView * )tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    UIView* footer = [UIView new];
+    //UIView* footer = [UIView new];
+    UIView* footer = [[UIView alloc] init];
     return footer;
 }
 
@@ -225,16 +268,79 @@
     
 }
 
-- (void) activityIndicatorHandlerWhenActivityIndicatorIs:
-(BOOL)activityIndicatorIsHidden
+- (void)fetchNewRemoteJSONWithSearchText: (NSString *)userSearchText
+{
+    
+    [self.shows removeAllObjects];
+    [self.movies removeAllObjects];
+    
+    [self activityIndicatorHandlerWhenActivityIndicatorIs:NO];
+    
+    
+    userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/search/multi?api_key=6b2e856adafcc7be98bdf0d8b076851c&query=%@", userSearchText];
+    
+    NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
+    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if (httpResponse.statusCode == 200)
+        {
+            NSError *parseError = nil;
+            NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+            Show *showInfo;
+            Movie *showMovie;
+            
+            for (NSDictionary *dict in responseDictionary[@"results"])
+            {
+                
+                
+                if ([dict[@"media_type"] isEqualToString:@"tv"])
+                {
+                    showInfo = [[Show alloc] initWithDictionaryForTvDb:dict];
+                    [self.shows addObject: showInfo];
+                }
+                else if ([dict[@"media_type"] isEqualToString:@"movie"])
+                {
+                    showMovie = [[Movie alloc] initWithResponseDictionaryFromTvDb:dict];
+                    [self.movies addObject: showMovie];
+                }
+                
+                //Show *showInfo = [[Show alloc] initWithDictionaryForTvDb:dict];
+                //Movie *movie = [[Movie alloc] initWithDictionaryFromTvDb:dict andShowObject:showInfo];
+                
+                //[self.shows addObject:movie];
+              
+            }
+        }
+        else{
+            NSLog(@"ERROR %@", error);
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.tableView reloadData];
+            [self activityIndicatorHandlerWhenActivityIndicatorIs:YES];
+            
+        });
+    }];
+    [dataTask resume];
+    
+}
+
+
+- (void) activityIndicatorHandlerWhenActivityIndicatorIs: (BOOL)activityIndicatorIsHidden
 {
     if (activityIndicatorIsHidden == YES)
     {
         self.tableViewActivityindicator.hidden = YES;
         [self.tableViewActivityindicator stopAnimating];
+        
     }else{
+        
         self.tableViewActivityindicator.hidden = NO;
         [self.tableViewActivityindicator startAnimating];
+        
     }
 }
 
@@ -243,7 +349,6 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     NSString *alertMessage = [NSString stringWithFormat:@"Button #%@# was pressed", button.currentTitle];
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Button pressed info" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSLog(@"OK button pressed");
     }];
@@ -253,8 +358,11 @@
     [actionCancel setValue:[UIColor redColor] forKey:@"titleTextColor"];
     [actionOK setValue:[UIColor blueColor] forKey:@"titleTextColor"];
     
-    [alert addAction:actionOK];
-    [alert addAction:actionCancel];
+    NSMutableArray<UIAlertAction*> *alertActions = [[NSMutableArray alloc] init];
+    [alertActions addObject:actionOK];
+    [alertActions addObject:actionCancel];
+    
+    UIAlertController *alert = [UIAlertController generateAlertWithTitle:@"Button pressed info" andMessage:alertMessage andActions:alertActions];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self presentViewController:alert animated:YES completion:nil];
