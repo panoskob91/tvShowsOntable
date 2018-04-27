@@ -29,6 +29,7 @@ NSString *summary;
     [self setupImageView];
     [self setupNavigationItemStyle];
     [self fetchDescriptionFromId:self.showID];//Fetch data from API call
+        
     UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)];
     [self.view addGestureRecognizer: pinchGesture];
     

@@ -93,6 +93,7 @@
     
     if (self)
     {
+        
         //Title
         if ([dict[@"media_type"] isEqualToString:@"tv"])
         {
@@ -164,7 +165,13 @@
             self.showAverageRating = (NSNumber *)@"";
             self.showAverageRating = @(self.showAverageRating.floatValue);
         }
+        //Show Id
+        if (![dict[@"id"] isEqual:[NSNull null]])
+        {
+            self.showId = dict[@"id"];
+        }
         
+        self = [super initWithDictionaryForTvDb:dict];
     }
     return self;
 }

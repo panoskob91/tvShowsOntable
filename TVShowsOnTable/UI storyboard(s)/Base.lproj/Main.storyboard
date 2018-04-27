@@ -125,6 +125,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Nxe-ZI-V42">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="qvD-2j-elG">
+                            <connections>
+                                <action selector="enableEditButtonPressed:" destination="BYZ-38-t0r" id="Yw4-e7-tYQ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" id="13S-f5-3UU">
                             <connections>
                                 <action selector="pickShowVCButtonPSD:" destination="BYZ-38-t0r" id="og9-5K-NsU"/>
@@ -132,6 +137,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="enableEditBTN" destination="qvD-2j-elG" id="bel-r2-Bv0"/>
                         <outlet property="searchBar" destination="uIQ-Xa-RkO" id="vkv-aq-A7l"/>
                         <outlet property="searchDisplayController" destination="pRa-R1-ARr" id="X8q-O4-WIE"/>
                         <outlet property="tableView" destination="qes-z9-cDf" id="tU2-J5-gbR"/>
@@ -188,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GUc-sD-o2U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1453.5999999999999" y="131.78410794602701"/>
+            <point key="canvasLocation" x="1198" y="132"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aEJ-PE-hDD">
@@ -252,7 +258,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q1B-0k-336" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="476" y="796"/>
+            <point key="canvasLocation" x="476" y="783.95802098950526"/>
         </scene>
     </scenes>
 </document>

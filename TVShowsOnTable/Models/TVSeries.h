@@ -22,6 +22,8 @@
 - (instancetype)initWithEpisodeName: (NSString *)episodeName
                   andEpisodeSummary: (NSString *)episodeSummary;
 
+- (instancetype)initWithDictionaryForTvDbAPI: (NSDictionary *)dict;
+
 - (NSString *)getSummary;
 
 @end

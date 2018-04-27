@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tVShowsCell" rowHeight="94" id="81F-62-3v6" customClass="TVShowsCell">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tVShowsCell" rowHeight="98" id="81F-62-3v6" customClass="TVShowsCell">
             <rect key="frame" x="0.0" y="0.0" width="403" height="94"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="81F-62-3v6" id="A1W-s1-svK">
@@ -23,7 +23,7 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="width" constant="77" id="2Qk-ZH-rhR"/>
-                            <constraint firstAttribute="height" constant="78" id="q8R-1x-00W"/>
+                            <constraint firstAttribute="height" constant="78" id="dtT-ol-omt"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bco-33-0jp">
@@ -36,9 +36,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eIb-Yn-zda">
-                        <rect key="frame" x="345" y="37" width="24" height="46"/>
+                        <rect key="frame" x="345" y="37" width="24" height="26"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="24" id="0gv-4v-9FJ"/>
+                            <constraint firstAttribute="height" constant="26" id="xfZ-1U-C5a"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w04-Bc-Pcp">
@@ -58,7 +59,6 @@
                     <constraint firstItem="Bco-33-0jp" firstAttribute="top" secondItem="A1W-s1-svK" secondAttribute="top" constant="8" id="8qk-sB-Paq"/>
                     <constraint firstItem="w04-Bc-Pcp" firstAttribute="leading" secondItem="nM8-oU-QOs" secondAttribute="trailing" constant="8" id="9ZV-gD-Kg0"/>
                     <constraint firstItem="eIb-Yn-zda" firstAttribute="top" secondItem="Bco-33-0jp" secondAttribute="bottom" constant="8" id="PQq-sH-rdA"/>
-                    <constraint firstAttribute="bottom" secondItem="eIb-Yn-zda" secondAttribute="bottom" constant="10.5" id="Qj2-lu-cac"/>
                     <constraint firstAttribute="trailing" secondItem="Bco-33-0jp" secondAttribute="trailing" constant="8" id="WRD-61-c0S"/>
                     <constraint firstItem="nM8-oU-QOs" firstAttribute="top" secondItem="A1W-s1-svK" secondAttribute="top" constant="8" id="aCg-8f-x9C"/>
                     <constraint firstItem="w04-Bc-Pcp" firstAttribute="top" secondItem="A1W-s1-svK" secondAttribute="top" constant="8" id="jwy-ee-vyg"/>

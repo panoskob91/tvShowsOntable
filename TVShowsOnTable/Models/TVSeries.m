@@ -43,6 +43,17 @@
     return self;
 }
 
+- (instancetype)initWithDictionaryForTvDbAPI: (NSDictionary *)dict
+{
+    self = [super init];
+    
+    if (self)
+    {
+        self = [super initWithDictionaryForTvDb:dict];
+    }
+    return self;
+}
+
 - (NSString *)getSummary
 {
     return self.summary;
