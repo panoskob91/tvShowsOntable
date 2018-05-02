@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSString *showTitle;
 @property (strong, nonatomic) NSString *showImage;
 @property (strong, nonatomic) NSNumber *showAverageRating;
+@property (strong, nonatomic) NSNumber *showGenreID;
 
 
 

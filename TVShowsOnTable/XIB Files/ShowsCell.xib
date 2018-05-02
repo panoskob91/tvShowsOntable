@@ -23,7 +23,6 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="width" constant="77" id="2Qk-ZH-rhR"/>
-                            <constraint firstAttribute="height" constant="78" id="dtT-ol-omt"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bco-33-0jp">
@@ -58,6 +57,7 @@
                 <constraints>
                     <constraint firstItem="Bco-33-0jp" firstAttribute="top" secondItem="A1W-s1-svK" secondAttribute="top" constant="8" id="8qk-sB-Paq"/>
                     <constraint firstItem="w04-Bc-Pcp" firstAttribute="leading" secondItem="nM8-oU-QOs" secondAttribute="trailing" constant="8" id="9ZV-gD-Kg0"/>
+                    <constraint firstAttribute="bottom" secondItem="nM8-oU-QOs" secondAttribute="bottom" constant="7.5" id="FWh-2f-XR6"/>
                     <constraint firstItem="eIb-Yn-zda" firstAttribute="top" secondItem="Bco-33-0jp" secondAttribute="bottom" constant="8" id="PQq-sH-rdA"/>
                     <constraint firstAttribute="trailing" secondItem="Bco-33-0jp" secondAttribute="trailing" constant="8" id="WRD-61-c0S"/>
                     <constraint firstItem="nM8-oU-QOs" firstAttribute="top" secondItem="A1W-s1-svK" secondAttribute="top" constant="8" id="aCg-8f-x9C"/>

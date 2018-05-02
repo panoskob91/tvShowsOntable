@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Show.h"
 
 @interface TVShowsCell : UITableViewCell
 
@@ -15,5 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *showsTitleDescription;
 @property (weak, nonatomic) IBOutlet UILabel *averageRating;
 @property (strong, nonatomic) IBOutlet UIImageView *showTypeImageView;
+
+
+- (void) setupCellPropertiesWithObject: (Show *)Object;
 
 @end

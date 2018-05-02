@@ -12,6 +12,10 @@
 		1A36078E208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A36078D208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m */; };
 		1A360790208F211700572AB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A36078F208F211700572AB8 /* Assets.xcassets */; };
 		1A360794209069FE00572AB8 /* ShowsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A360793209069FE00572AB8 /* ShowsCell.xib */; };
+		1A3CBA962096E9B000718417 /* AFSETvMazeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3CBA952096E9B000718417 /* AFSETvMazeViewController.m */; };
+		1A3CBA992096F7FD00718417 /* AFSETvMazeDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3CBA982096F7FD00718417 /* AFSETvMazeDetailsVC.m */; };
+		1A3CBA9C20970A0000718417 /* AFSEShowGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3CBA9B20970A0000718417 /* AFSEShowGroup.m */; };
+		1A3CBA9F2097496300718417 /* AFSEGenreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3CBA9E2097496300718417 /* AFSEGenreModel.m */; };
 		1A3E0CC82080B641006DB87A /* NSString_stripHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3E0CC62080B641006DB87A /* NSString_stripHtml.m */; };
 		1A3F8DC5207E0070000F4C8A /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F8DC4207E0070000F4C8A /* Movie.m */; };
 		1A3F8DC8207E009C000F4C8A /* TVSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F8DC7207E009C000F4C8A /* TVSeries.m */; };
@@ -55,6 +59,14 @@
 		1A36078D208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+AFSEAlertGenerator.m"; sourceTree = "<group>"; };
 		1A36078F208F211700572AB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A360793209069FE00572AB8 /* ShowsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowsCell.xib; sourceTree = "<group>"; };
+		1A3CBA942096E9B000718417 /* AFSETvMazeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSETvMazeViewController.h; sourceTree = "<group>"; };
+		1A3CBA952096E9B000718417 /* AFSETvMazeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSETvMazeViewController.m; sourceTree = "<group>"; };
+		1A3CBA972096F7FD00718417 /* AFSETvMazeDetailsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSETvMazeDetailsVC.h; sourceTree = "<group>"; };
+		1A3CBA982096F7FD00718417 /* AFSETvMazeDetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSETvMazeDetailsVC.m; sourceTree = "<group>"; };
+		1A3CBA9A20970A0000718417 /* AFSEShowGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSEShowGroup.h; sourceTree = "<group>"; };
+		1A3CBA9B20970A0000718417 /* AFSEShowGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSEShowGroup.m; sourceTree = "<group>"; };
+		1A3CBA9D2097496300718417 /* AFSEGenreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSEGenreModel.h; sourceTree = "<group>"; };
+		1A3CBA9E2097496300718417 /* AFSEGenreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSEGenreModel.m; sourceTree = "<group>"; };
 		1A3E0CC62080B641006DB87A /* NSString_stripHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_stripHtml.m; sourceTree = "<group>"; };
 		1A3E0CC72080B641006DB87A /* NSString_stripHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_stripHtml.h; sourceTree = "<group>"; };
 		1A3F8DC3207E0070000F4C8A /* Movie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
@@ -231,6 +243,10 @@
 				1A47C1C12072321500D63753 /* DetailsViewController.h */,
 				1A3303E920874ABC0062E1ED /* PickShowTypeVC.h */,
 				1A3303EA20874ABC0062E1ED /* PickShowTypeVC.m */,
+				1A3CBA942096E9B000718417 /* AFSETvMazeViewController.h */,
+				1A3CBA952096E9B000718417 /* AFSETvMazeViewController.m */,
+				1A3CBA972096F7FD00718417 /* AFSETvMazeDetailsVC.h */,
+				1A3CBA982096F7FD00718417 /* AFSETvMazeDetailsVC.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -253,6 +269,10 @@
 				1A3F8DC4207E0070000F4C8A /* Movie.m */,
 				1A3F8DC6207E009C000F4C8A /* TVSeries.h */,
 				1A3F8DC7207E009C000F4C8A /* TVSeries.m */,
+				1A3CBA9A20970A0000718417 /* AFSEShowGroup.h */,
+				1A3CBA9B20970A0000718417 /* AFSEShowGroup.m */,
+				1A3CBA9D2097496300718417 /* AFSEGenreModel.h */,
+				1A3CBA9E2097496300718417 /* AFSEGenreModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -402,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A47C18B2072058200D63753 /* SearchVC.m in Sources */,
+				1A3CBA9C20970A0000718417 /* AFSEShowGroup.m in Sources */,
 				1A3303E820872DE60062E1ED /* UIColor+rgb.m in Sources */,
 				1A47C1C32072321500D63753 /* DetailsViewController.m in Sources */,
 				1A3F8DC5207E0070000F4C8A /* Movie.m in Sources */,
@@ -412,7 +433,10 @@
 				1A47C1882072058200D63753 /* AppDelegate.m in Sources */,
 				1A3F8DC8207E009C000F4C8A /* TVSeries.m in Sources */,
 				1A3E0CC82080B641006DB87A /* NSString_stripHtml.m in Sources */,
+				1A3CBA9F2097496300718417 /* AFSEGenreModel.m in Sources */,
 				1A3303EB20874ABC0062E1ED /* PickShowTypeVC.m in Sources */,
+				1A3CBA962096E9B000718417 /* AFSETvMazeViewController.m in Sources */,
+				1A3CBA992096F7FD00718417 /* AFSETvMazeDetailsVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

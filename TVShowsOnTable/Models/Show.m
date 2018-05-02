@@ -48,6 +48,7 @@
         NSDictionary *showImage = showsDict[@"image"];
         NSDictionary *showAverageRatingDictionary = showsDict[@"rating"];
         NSNumber *showAverageRating = showAverageRatingDictionary[@"average"];
+        NSNumber *showID = showsDict[@"id"];
         
         if ([showAverageRating isEqual:[NSNull null]])
         {
@@ -67,6 +68,11 @@
             self.showTitle = showTitle;
         }else if (!showTitle){
             self.showTitle = @"";
+        }
+        //Handle id
+        if (showID)
+        {
+            self.showId = showID;
         }
         
         
@@ -150,6 +156,13 @@
         {
             self.showImage = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w185/%@", dict[@"poster_path"]];
         }
+        //Genre ID
+        NSArray *genre_ids = dict[@"genre_ids"];
+        if (genre_ids.count != 0)
+        {
+            self.showGenreID = genre_ids[0];
+        }
+        
     }
     return self;
 }

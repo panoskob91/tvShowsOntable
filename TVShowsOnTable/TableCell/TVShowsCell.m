@@ -7,7 +7,8 @@
 //
 
 #import "TVShowsCell.h"
-
+#import "Movie.h"
+#import "TVSeries.h"
 
 @implementation TVShowsCell
 
@@ -24,7 +25,21 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+}
+
+-(void) setupCellPropertiesWithObject:(Show *)Object
+{
+    self.showTitleLabel.text = Object.showTitle;
+    
+    NSURL *imageURL = [NSURL URLWithString:Object.showImage];
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
+    
+    self.TVShowsImage.image = [UIImage imageWithData:imageData];
+    
+    //cell.showsTitleDescription.text = [self.shows[indexPath.row] getSummary];
+    self.averageRating.text = [NSString stringWithFormat:@"%@", Object.showAverageRating];
+    
+    
 }
 
 @end
