@@ -29,7 +29,14 @@ NSString *summary;
     [self setupImageView];
     [self setupNavigationItemStyle];
     [self fetchDescriptionFromId:self.showID];//Fetch data from API call
-        
+    
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap)];
+    singleFingerTap.numberOfTouchesRequired = 1;
+    [self.showImageView setUserInteractionEnabled:YES];
+    [self.showImageView addGestureRecognizer:singleFingerTap];
+    
     UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)];
     [self.view addGestureRecognizer: pinchGesture];
     
@@ -38,6 +45,11 @@ NSString *summary;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)handleSingleTap
+{
+    [self performSegueWithIdentifier:@"webViewSegue" sender:self];
 }
 
 - (void)setupTextView

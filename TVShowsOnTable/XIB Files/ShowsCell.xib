@@ -67,7 +67,6 @@
                     <constraint firstItem="9Yo-CX-zYR" firstAttribute="top" secondItem="w04-Bc-Pcp" secondAttribute="bottom" constant="8" id="nDf-qo-eaQ"/>
                     <constraint firstItem="nM8-oU-QOs" firstAttribute="leading" secondItem="A1W-s1-svK" secondAttribute="leading" constant="8" id="o6y-fZ-Bda"/>
                     <constraint firstItem="Bco-33-0jp" firstAttribute="leading" secondItem="w04-Bc-Pcp" secondAttribute="trailing" constant="8" id="uqa-Jl-GHe"/>
-                    <constraint firstAttribute="bottom" secondItem="nM8-oU-QOs" secondAttribute="bottom" constant="7.5" id="w0C-ea-YfF"/>
                     <constraint firstItem="Bco-33-0jp" firstAttribute="leading" secondItem="eIb-Yn-zda" secondAttribute="leading" id="wU1-pY-bA8"/>
                 </constraints>
             </tableViewCellContentView>

@@ -364,6 +364,7 @@ NSArray *selectedCells;
     [self.movies removeAllObjects];
     [self.series removeAllObjects];
     [showsDataDictionary removeAllObjects];
+    [self.showGroupsArray removeAllObjects];
     
     [self activityIndicatorHandlerWhenActivityIndicatorIs:NO];
     
