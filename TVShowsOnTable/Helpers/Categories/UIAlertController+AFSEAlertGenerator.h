@@ -10,6 +10,8 @@
 
 @interface UIAlertController (AFSEAlertGenerator)
 
-+ (UIAlertController *)generateAlertWithTitle: (NSString *)title andMessage: (NSString *)msg andActions: (NSArray<UIAlertAction*> *)alertActions;
++ (UIAlertController *)generateAlertWithTitle: (NSString *)title
+                                   andMessage: (NSString *)msg
+                                   andActions: (NSArray<UIAlertAction*> *)alertActions;
 
 @end

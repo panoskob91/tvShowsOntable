@@ -12,14 +12,10 @@
 
 @interface AFSEShowGroup : NSObject
 
-//@property (strong, nonatomic) AFSEGenreModel *sectionTitle;
 @property (strong, nonatomic) NSNumber *sectionID;
 @property (strong, nonatomic) NSMutableArray<Show *> *dataInSection;
 
 
--(instancetype) initWithSectionID: (NSNumber *) genre_id;
-
-//-(instancetype) initWithSectionId: (NSNumber *) ID
-//                    andElement: (Show *)showObject;
+- (instancetype)initWithSectionID: (NSNumber *)genre_id;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "myViewDelegate.h"
+#import "ButtonEventHandlingDelegate.h"
 
 @interface PickShowTypeVC : UIViewController
 
@@ -16,6 +16,6 @@
 - (IBAction)tvShowButtonPressed:(id)sender;
 - (IBAction)movieButtonPressed:(id)sender;
 
-@property (weak, nonatomic) id<myViewDelegate> delegate;
+@property (weak, nonatomic) id<ButtonEventHandlingDelegate> delegate;
 
 @end

@@ -13,7 +13,7 @@
 @property (strong, nonatomic) NSNumber *genreID;
 @property (strong, nonatomic) NSString *genreName;
 
--(instancetype) initWithGenreID: (NSNumber *)GID
-                   andGenreName: (NSString *)name;
+- (instancetype)initWithGenreID:(NSNumber *)GID
+                   andGenreName:(NSString *)name;
 
 @end

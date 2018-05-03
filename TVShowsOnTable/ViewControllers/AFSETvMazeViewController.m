@@ -13,6 +13,7 @@
 #import "AFSETvMazeDetailsVC.h"
 
 @interface AFSETvMazeViewController ()
+
 @property (strong, nonatomic) IBOutlet UISearchBar *tvMazeSearchBar;
 @property (strong, nonatomic) IBOutlet UITableView *tvMazeTableView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *tvMazeActivityIndicator;
@@ -71,9 +72,9 @@
         
         NSURL *imageURL = [NSURL URLWithString:self.shows[indexPath.row].showImage];
         NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
-        cell.TVShowsImage.image = [UIImage imageWithData:imageData];
+        cell.tvShowsImage.image = [UIImage imageWithData:imageData];
         
-        cell.averageRating.text = [NSString stringWithFormat:@"%@", self.shows[indexPath.row].showAverageRating];
+        cell.showAverageRatingLabel.text = [NSString stringWithFormat:@"%@", self.shows[indexPath.row].showAverageRating];
     }
     return cell;
 }

@@ -54,7 +54,7 @@
 		1A3303E720872DE60062E1ED /* UIColor+rgb.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+rgb.m"; sourceTree = "<group>"; };
 		1A3303E920874ABC0062E1ED /* PickShowTypeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PickShowTypeVC.h; sourceTree = "<group>"; };
 		1A3303EA20874ABC0062E1ED /* PickShowTypeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PickShowTypeVC.m; sourceTree = "<group>"; };
-		1A3303EE2087517C0062E1ED /* myViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myViewDelegate.h; sourceTree = "<group>"; };
+		1A3303EE2087517C0062E1ED /* ButtonEventHandlingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ButtonEventHandlingDelegate.h; sourceTree = "<group>"; };
 		1A36078C208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+AFSEAlertGenerator.h"; sourceTree = "<group>"; };
 		1A36078D208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+AFSEAlertGenerator.m"; sourceTree = "<group>"; };
 		1A36078F208F211700572AB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 		1A3303EC208751240062E1ED /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				1A3303EE2087517C0062E1ED /* myViewDelegate.h */,
+				1A3303EE2087517C0062E1ED /* ButtonEventHandlingDelegate.h */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";

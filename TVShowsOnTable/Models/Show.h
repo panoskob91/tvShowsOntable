@@ -20,13 +20,12 @@
 
 
 #pragma mark -Initialisers
-
 - (instancetype)initWithTitle: (NSString *)ST
                      andImage: (NSString *)SI
              andAverageRating: (NSNumber *)SAR;
 
 - (instancetype)initWithDictionary: (NSDictionary *)dict;
-//Must be inside results
+//dictionary, which is passed as an argument must be inside results key of API response
 - (instancetype)initWithDictionaryForTvDb: (NSDictionary *)dict;
 
 #pragma mark -Private properties getters

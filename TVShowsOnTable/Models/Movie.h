@@ -11,25 +11,24 @@
 
 @interface Movie : Show
 
-@property (strong, nonatomic) NSString *movie;
-//@property (strong, nonatomic) NSString *summary;
+@property (strong, nonatomic) NSString *movieTitle;
 
 #pragma mark -Initialisers
-- (instancetype) initWithMovie: (NSString *)movieName
+- (instancetype)initWithMovie: (NSString *)movieName
                    andSummary:(NSString *)movieSummary
                 andShowObject:(Show *)showObject;
 
-- (instancetype) initWithDictionary: (NSDictionary *)dict
-                      andShowObject: (Show *)showObject;
+- (instancetype)initWithDictionary: (NSDictionary *)dict
+                     andShowObject: (Show *)showObject;
 
-//Must be inside results
-- (instancetype) initWithDictionaryFromTvDb: (NSDictionary *)dict
-                              andShowObject: (Show *)showObject;
+//dict must be inside results
+- (instancetype)initWithDictionaryFromTvDb: (NSDictionary *)dict
+                             andShowObject: (Show *)showObject;
 
-- (instancetype) initWithResponseDictionaryFromTvDb: (NSDictionary *)dict;
+- (instancetype)initWithResponseDictionaryFromTvDb: (NSDictionary *)dict;
 
-- (instancetype) initWithMovieName: (NSString *)movieName
-                   andMovieSummary: (NSString *)movieSummary;
+- (instancetype)initWithMovieName: (NSString *)movieName
+                  andMovieSummary: (NSString *)movieSummary;
 #pragma mark -Getters
 - (NSString *)getSummary;
 - (NSNumber *)getShowId;

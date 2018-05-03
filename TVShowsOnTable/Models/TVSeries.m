@@ -10,17 +10,17 @@
 
 @implementation TVSeries
 
-- (instancetype)initWithEpisode: (NSString *)seriesEpisode
-                     andSummary: (NSString *)summary
-                  andShowObject: (Show *)showObject
+- (instancetype)initWithEpisode:(NSString *)seriesEpisode
+                     andSummary:(NSString *)summary
+                  andShowObject:(Show *)showObject
 {
     
     self = [super init];
     
     if (self)
     {
-        self.episode = seriesEpisode;
-        self.summary = summary;
+        self.tvSeriesEpisode = seriesEpisode;
+        self.tvSeriesSummary = summary;
         self.showTitle = showObject.showTitle;
         self.showImage = showObject.showImage;
         self.showAverageRating = showObject.showAverageRating;
@@ -29,21 +29,21 @@
     return self;
 }
 
-- (instancetype)initWithEpisodeName: (NSString *)episodeName
-                  andEpisodeSummary: (NSString *)episodeSummary
+- (instancetype)initWithEpisodeName:(NSString *)episodeName
+                  andEpisodeSummary:(NSString *)episodeSummary
 {
     self = [super init];
     
     if (self)
     {
-        self.episode = episodeName;
-        self.summary = episodeSummary;
+        self.tvSeriesEpisode = episodeName;
+        self.tvSeriesSummary = episodeSummary;
     }
     
     return self;
 }
 
-- (instancetype)initWithDictionaryForTvDbAPI: (NSDictionary *)dict
+- (instancetype)initWithDictionaryForTvDbAPI:(NSDictionary *)dict
 {
     self = [super init];
     
@@ -56,7 +56,7 @@
 
 - (NSString *)getSummary
 {
-    return self.summary;
+    return self.tvSeriesSummary;
 }
 
 @end

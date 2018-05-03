@@ -17,9 +17,9 @@
 @property (strong, nonatomic) NSNumber *dataToBePassedOnDetailsVC;
 
 #pragma mark -Getters
-- (NSNumber *) getTheShowID;
+- (NSNumber *)getTheShowID;
 
 #pragma mark -Setters
-- (void) setTheShowID: (NSNumber *)SID;
+- (void)setTheShowID: (NSNumber *)SID;
 
 @end

@@ -40,7 +40,7 @@ NSString *summary;
     // Dispose of any resources that can be recreated.
 }
 
-- (void) setupTextView
+- (void)setupTextView
 {
     self.descriptionDetailsTextView.text = self.labelValue;
     self.descriptionDetailsTextView.editable = NO;
@@ -48,12 +48,12 @@ NSString *summary;
     self.descriptionDetailsTextView.textColor = [UIColor blackColor];
 }
 
-- (void) setupNavigationItemStyle
+- (void)setupNavigationItemStyle
 {
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Details", self.navigationItemTitle];
 }
 
-- (void) setupImageView
+- (void)setupImageView
 {
     NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.imageURL]];
     self.showImageView.image = [UIImage imageWithData:imageData];
@@ -64,16 +64,15 @@ NSString *summary;
 
 - (void)handlePinchGesture: (UIPinchGestureRecognizer *)gestureRecogniser
 {
-    
     UIGestureRecognizerState state = [gestureRecogniser state];
     CGFloat initialScale = [gestureRecogniser scale];
-    
     if  (state == UIGestureRecognizerStateBegan || state == UIGestureRecognizerStateChanged)
     {
         CGFloat scale = [gestureRecogniser scale];
         [gestureRecogniser.view setTransform:CGAffineTransformScale(gestureRecogniser.view.transform, scale, scale)];
         [gestureRecogniser setScale:1];
-    }else if (state == UIGestureRecognizerStateEnded)
+    }
+    else if (state == UIGestureRecognizerStateEnded)
     {
         [gestureRecogniser setScale:initialScale];
     }
@@ -82,20 +81,20 @@ NSString *summary;
 }
 
 #pragma mark -Getters
-- (NSNumber *) getTheShowID
+- (NSNumber *)getTheShowID
 {
     return self.showID;
 }
 
 #pragma mark -Setters
-- (void) setTheShowID: (NSNumber *)SID
+- (void)setTheShowID:(NSNumber *)SID
 {
     self.showID = [[NSNumber alloc] init];
     self.showID = SID;
 }
 
 #pragma mark -Fetching
-- (void) fetchDescriptionFromId: (NSNumber *)showId
+- (void)fetchDescriptionFromId: (NSNumber *)showId
 {
     
     NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=6b2e856adafcc7be98bdf0d8b076851c", showId];

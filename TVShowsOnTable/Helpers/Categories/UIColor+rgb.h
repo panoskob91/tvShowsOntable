@@ -11,8 +11,8 @@
 @interface UIColor (rgb)
 
 + (UIColor *)createColorWithRed: (NSInteger)r
-                     andGreen: (NSInteger)g
-                      andBlue: (NSInteger)b
-                     andAlpha: (CGFloat)a;
+                       andGreen: (NSInteger)g
+                        andBlue: (NSInteger)b
+                       andAlpha: (CGFloat)a;
 
 @end

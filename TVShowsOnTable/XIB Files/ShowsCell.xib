@@ -23,6 +23,7 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="width" constant="77" id="2Qk-ZH-rhR"/>
+                            <constraint firstAttribute="height" constant="78" id="dLW-t8-YQr"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bco-33-0jp">
@@ -57,7 +58,6 @@
                 <constraints>
                     <constraint firstItem="Bco-33-0jp" firstAttribute="top" secondItem="A1W-s1-svK" secondAttribute="top" constant="8" id="8qk-sB-Paq"/>
                     <constraint firstItem="w04-Bc-Pcp" firstAttribute="leading" secondItem="nM8-oU-QOs" secondAttribute="trailing" constant="8" id="9ZV-gD-Kg0"/>
-                    <constraint firstAttribute="bottom" secondItem="nM8-oU-QOs" secondAttribute="bottom" constant="7.5" id="FWh-2f-XR6"/>
                     <constraint firstItem="eIb-Yn-zda" firstAttribute="top" secondItem="Bco-33-0jp" secondAttribute="bottom" constant="8" id="PQq-sH-rdA"/>
                     <constraint firstAttribute="trailing" secondItem="Bco-33-0jp" secondAttribute="trailing" constant="8" id="WRD-61-c0S"/>
                     <constraint firstItem="nM8-oU-QOs" firstAttribute="top" secondItem="A1W-s1-svK" secondAttribute="top" constant="8" id="aCg-8f-x9C"/>
@@ -67,15 +67,16 @@
                     <constraint firstItem="9Yo-CX-zYR" firstAttribute="top" secondItem="w04-Bc-Pcp" secondAttribute="bottom" constant="8" id="nDf-qo-eaQ"/>
                     <constraint firstItem="nM8-oU-QOs" firstAttribute="leading" secondItem="A1W-s1-svK" secondAttribute="leading" constant="8" id="o6y-fZ-Bda"/>
                     <constraint firstItem="Bco-33-0jp" firstAttribute="leading" secondItem="w04-Bc-Pcp" secondAttribute="trailing" constant="8" id="uqa-Jl-GHe"/>
+                    <constraint firstAttribute="bottom" secondItem="nM8-oU-QOs" secondAttribute="bottom" constant="7.5" id="w0C-ea-YfF"/>
                     <constraint firstItem="Bco-33-0jp" firstAttribute="leading" secondItem="eIb-Yn-zda" secondAttribute="leading" id="wU1-pY-bA8"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="TVShowsImage" destination="nM8-oU-QOs" id="dVq-wg-Bcj"/>
-                <outlet property="averageRating" destination="Bco-33-0jp" id="gbA-bn-TN4"/>
+                <outlet property="showAverageRatingLabel" destination="Bco-33-0jp" id="bR4-xi-L5y"/>
                 <outlet property="showTitleLabel" destination="w04-Bc-Pcp" id="ebk-aN-tJs"/>
                 <outlet property="showTypeImageView" destination="eIb-Yn-zda" id="GRZ-Zz-Sj7"/>
                 <outlet property="showsTitleDescription" destination="9Yo-CX-zYR" id="GO0-cK-FIk"/>
+                <outlet property="tvShowsImage" destination="nM8-oU-QOs" id="dVq-wg-Bcj"/>
             </connections>
             <point key="canvasLocation" x="108.5" y="-72"/>
         </tableViewCell>

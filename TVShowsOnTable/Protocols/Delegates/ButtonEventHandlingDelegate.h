@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class PickShowTypeVC;
-@protocol myViewDelegate<NSObject>
+@protocol ButtonEventHandlingDelegate<NSObject>
 
 @required
 - (void)pickShowTypeVC: (PickShowTypeVC *)pickShowTypeVC

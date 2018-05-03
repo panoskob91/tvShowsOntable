@@ -11,13 +11,13 @@
 
 @interface TVShowsCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *TVShowsImage;
+@property (weak, nonatomic) IBOutlet UIImageView *tvShowsImage;
 @property (weak, nonatomic) IBOutlet UILabel *showTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *showsTitleDescription;
-@property (weak, nonatomic) IBOutlet UILabel *averageRating;
+@property (weak, nonatomic) IBOutlet UILabel *showAverageRatingLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *showTypeImageView;
 
 
-- (void) setupCellPropertiesWithObject: (Show *)Object;
+- (void)setupCellPropertiesWithObject:(Show *)Object;
 
 @end

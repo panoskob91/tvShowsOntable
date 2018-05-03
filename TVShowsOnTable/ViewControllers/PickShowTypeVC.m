@@ -25,6 +25,7 @@
     
 }
 
+#pragma mark -IBAction methods
 - (IBAction)tvShowButtonPressed:(id)sender {
 
     

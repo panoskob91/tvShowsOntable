@@ -10,11 +10,10 @@
 
 @implementation AFSEGenreModel
 
--(instancetype) initWithGenreID:(NSNumber *)GID
+- (instancetype)initWithGenreID:(NSNumber *)GID
                    andGenreName:(NSString *)name
 {
     self = [super init];
-    
     if (self)
     {
         self.genreID = GID;

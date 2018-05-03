@@ -11,18 +11,18 @@
 
 @interface TVSeries : Show
 
-@property (strong, nonatomic) NSString *episode;
-@property (strong, nonatomic) NSString *summary;
+@property (strong, nonatomic) NSString *tvSeriesEpisode;
+@property (strong, nonatomic) NSString *tvSeriesSummary;
 
 #pragma mark -initialisers
-- (instancetype)initWithEpisode: (NSString *)seriesEpisode
-                     andSummary: (NSString *)summary
-                  andShowObject: (Show *)showObject;
+- (instancetype)initWithEpisode:(NSString *)seriesEpisode
+                     andSummary:(NSString *)summary
+                  andShowObject:(Show *)showObject;
 
-- (instancetype)initWithEpisodeName: (NSString *)episodeName
-                  andEpisodeSummary: (NSString *)episodeSummary;
+- (instancetype)initWithEpisodeName:(NSString *)episodeName
+                  andEpisodeSummary:(NSString *)episodeSummary;
 
-- (instancetype)initWithDictionaryForTvDbAPI: (NSDictionary *)dict;
+- (instancetype)initWithDictionaryForTvDbAPI:(NSDictionary *)dict;
 
 - (NSString *)getSummary;
 

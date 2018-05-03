@@ -262,7 +262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gez-iS-AIx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-593" y="815"/>
+            <point key="canvasLocation" x="-242" y="816"/>
         </scene>
         <!--Tv Maze DetailsVC-->
         <scene sceneID="GNf-Rg-3pS">
@@ -305,7 +305,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cYk-gM-HQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="224.80000000000001" y="814.54272863568224"/>
+            <point key="canvasLocation" x="577" y="816"/>
         </scene>
         <!--Item-->
         <scene sceneID="aEJ-PE-hDD">
@@ -370,7 +370,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q1B-0k-336" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1154.4000000000001" y="783.95802098950526"/>
+            <point key="canvasLocation" x="815" y="-540"/>
         </scene>
         <!--TvMazeAPI-->
         <scene sceneID="J7r-hU-mgN">
@@ -389,7 +389,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s2z-Q0-RPX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1292" y="815"/>
+            <point key="canvasLocation" x="-940" y="816"/>
         </scene>
     </scenes>
     <resources>

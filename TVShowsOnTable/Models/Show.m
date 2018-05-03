@@ -18,7 +18,6 @@
 @implementation Show
 
 #pragma mark -Class initialisers
-
 - (instancetype)initWithTitle:(NSString *)ST
                      andImage:(NSString *)SI
              andAverageRating:(NSNumber *)SAR
@@ -27,15 +26,11 @@
     
     if (self)
     {
-        
         self.showTitle = ST;
         self.showImage = SI;
         self.showAverageRating = SAR;
-        
     }
-    
     return self;
-    
 }
 
 - (instancetype)initWithDictionary: (NSDictionary *)dict
@@ -52,12 +47,8 @@
         
         if ([showAverageRating isEqual:[NSNull null]])
         {
-            
             self.showAverageRating = (NSNumber *)@"";
-            
-            
         }else if (![showAverageRating isEqual:[NSNull null]]){
-            
             self.showAverageRating = @(showAverageRating.floatValue);
         }
         
@@ -80,44 +71,31 @@
         //Handle images
         if ([showImage isEqual: [NSNull null]])
         {
-            
             self.showImage = @"http://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
-            
         }else{
-            
             NSString *originalImage = showImage[@"original"];
             NSString *mediumImage = showImage[@"medium"];
             
-            
             if ((![originalImage isEqual:[NSNull null]]) && (![mediumImage isEqual:[NSNull null]]))
             {
-                
                 self.showImage = originalImage;
-                
             }else if ((![originalImage isEqual:[NSNull null]]) && ([mediumImage isEqual:[NSNull null]]))
             {
-                
                 self.showImage = originalImage;
-                
             }else if ([originalImage isEqual:[NSNull null]] && (![mediumImage isEqual:[NSNull null]]))
             {
-                
                 self.showImage = mediumImage;
-                
             }else if ([originalImage isEqual:[NSNull null]] && [mediumImage isEqual:[NSNull null]])
             {
-                
                 self.showImage = @"http://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
-                
             }
         }
     }
-    
     return self;
 }
 
-//Must be inside results
-- (instancetype) initWithDictionaryForTvDb:(NSDictionary *)dict
+//Show initialiser. The dictionary passed as argument must be inside results child of the API response.
+- (instancetype)initWithDictionaryForTvDb:(NSDictionary *)dict
 {
     self = [super init];
     
@@ -154,7 +132,8 @@
         //Show image
         if (![dict[@"poster_path"] isEqual:[NSNull null]])
         {
-            self.showImage = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w185/%@", dict[@"poster_path"]];
+            self.showImage = [NSString stringWithFormat:
+                              @"http://image.tmdb.org/t/p/w185/%@", dict[@"poster_path"]];
         }
         //Genre ID
         NSArray *genre_ids = dict[@"genre_ids"];
@@ -168,7 +147,7 @@
 }
 
 #pragma mark -Private properties getters
-- (NSNumber *) getShowId
+- (NSNumber *)getShowId
 {
     return self.showId;
 }
