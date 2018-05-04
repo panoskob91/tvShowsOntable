@@ -251,12 +251,20 @@ NSArray *selectedCells;
 {
       [tableView registerNib:[UINib nibWithNibName:@"ShowsCell" bundle:nil] forCellReuseIdentifier:@"tVShowsCell"];
      TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tVShowsCell"];
+    Show *show = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row];
     
     if (indexPath.row <= self.shows.count
         && self.shows.count != 0)
     {
-        [cell setupCellPropertiesWithObject:
-            self.showGroupsArray[indexPath.section].dataInSection[indexPath.row]];
+        if ([show.mediaType isEqualToString:@"tv"])
+        {
+            cell.showTypeImageView.image = [UIImage imageNamed:@"TvSeries"];
+        }
+        else if ([show.mediaType isEqualToString:@"movie"])
+        {
+            cell.showTypeImageView.image = [UIImage imageNamed:@"movieImage"];
+        }
+        [cell setupCellPropertiesWithObject:show];
     }
         return cell;
 }
@@ -480,7 +488,6 @@ NSArray *selectedCells;
         }
         if(onList == NO)
         {
-            
             AFSEShowGroup *showGroup = [[AFSEShowGroup alloc] initWithSectionID:show.showGenreID];
             [showGroup.dataInSection addObject:show];
             [self.showGroupsArray addObject:showGroup];

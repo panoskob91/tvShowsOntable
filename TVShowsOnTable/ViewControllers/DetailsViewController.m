@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *showImageView;
 @property (strong, nonatomic) IBOutlet UITextView *descriptionDetailsTextView;
+@property (strong, nonatomic) IBOutlet UIImageView *mediaTypeImageView;
 
 @property (strong, nonatomic) NSNumber *showID;
 
@@ -26,10 +27,9 @@ NSString *summary;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupTextView];
-    [self setupImageView];
+    [self setupImageViews];
     [self setupNavigationItemStyle];
     [self fetchDescriptionFromId:self.showID];//Fetch data from API call
-    
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(handleSingleTap)];
@@ -77,13 +77,21 @@ NSString *summary;
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Details", self.navigationItemTitle];
 }
 
-- (void)setupImageView
+- (void)setupImageViews
 {
     NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.imageURL]];
     self.showImageView.image = [UIImage imageWithData:imageData];
     self.showImageView.layer.cornerRadius = 10;
     self.showImageView.contentMode = UIViewContentModeScaleToFill;
     self.showImageView.clipsToBounds = YES;
+    if ([self.show.mediaType isEqualToString:@"tv"])
+    {
+        self.mediaTypeImageView.image = [UIImage imageNamed:@"TvSeries"];
+    }
+    else if ([self.show.mediaType isEqualToString:@"movie"])
+    {
+        self.mediaTypeImageView.image = [UIImage imageNamed:@"movieImage"];
+    }
 }
 
 - (void)handlePinchGesture: (UIPinchGestureRecognizer *)gestureRecogniser

@@ -102,15 +102,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YpQ-52-C51">
+                                <rect key="frame" x="323" y="36" width="44" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="MQi-RM-NDT"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="HBg-fs-W6W" firstAttribute="bottom" secondItem="VGW-l7-H9R" secondAttribute="bottom" constant="416" id="2La-NR-Uhc"/>
+                            <constraint firstItem="YpQ-52-C51" firstAttribute="top" secondItem="HBg-fs-W6W" secondAttribute="top" constant="16" id="6wt-tJ-vbE"/>
                             <constraint firstItem="HBg-fs-W6W" firstAttribute="trailing" secondItem="VGW-l7-H9R" secondAttribute="trailing" constant="60" id="BDm-9S-UOB"/>
                             <constraint firstItem="Wm7-EC-QL8" firstAttribute="top" secondItem="VGW-l7-H9R" secondAttribute="bottom" constant="16" id="CYP-P9-9LI"/>
                             <constraint firstItem="VGW-l7-H9R" firstAttribute="leading" secondItem="HBg-fs-W6W" secondAttribute="leading" constant="60" id="L7f-IJ-BE6"/>
                             <constraint firstItem="VGW-l7-H9R" firstAttribute="top" secondItem="HBg-fs-W6W" secondAttribute="top" constant="16" id="Lrx-Qa-kkR"/>
+                            <constraint firstItem="YpQ-52-C51" firstAttribute="leading" secondItem="VGW-l7-H9R" secondAttribute="trailing" constant="8" id="MCl-6M-c8X"/>
                             <constraint firstItem="Wm7-EC-QL8" firstAttribute="leading" secondItem="HBg-fs-W6W" secondAttribute="leading" constant="8" id="Y5S-BJ-fFd"/>
+                            <constraint firstAttribute="trailing" secondItem="YpQ-52-C51" secondAttribute="trailing" constant="8" id="bRp-E4-nYP"/>
                             <constraint firstItem="HBg-fs-W6W" firstAttribute="bottom" secondItem="Wm7-EC-QL8" secondAttribute="bottom" constant="8" id="pvG-gf-api"/>
                             <constraint firstItem="HBg-fs-W6W" firstAttribute="trailing" secondItem="Wm7-EC-QL8" secondAttribute="trailing" constant="8" id="rSG-Yp-Vd1"/>
                         </constraints>
@@ -118,6 +127,7 @@
                     </view>
                     <connections>
                         <outlet property="descriptionDetailsTextView" destination="Wm7-EC-QL8" id="cbI-wa-Zs7"/>
+                        <outlet property="mediaTypeImageView" destination="YpQ-52-C51" id="HLs-ym-gLp"/>
                         <outlet property="showImageView" destination="VGW-l7-H9R" id="KED-ca-yHS"/>
                         <segue destination="VZv-ZF-UaK" kind="show" identifier="webViewSegue" id="fLd-pO-ybt"/>
                     </connections>
