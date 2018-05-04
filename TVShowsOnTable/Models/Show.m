@@ -128,6 +128,19 @@
             self.showAverageRating = (NSNumber *)@"";
             self.showAverageRating = @(self.showAverageRating.floatValue);
         }
+        //Handle media type
+        if (![dict[@"media_type"] isEqual:[NSNull null]])
+        {
+            if ([dict[@"media_type"] isEqualToString:@"tv"])
+            {
+                self.mediaType = dict[@"media_type"];
+            }
+            else if ([dict[@"media_type"] isEqualToString:@"movie"])
+            {
+                self.mediaType = dict[@"media_type"];
+            }
+        }
+        
         
         //Show image
         if (![dict[@"poster_path"] isEqual:[NSNull null]])

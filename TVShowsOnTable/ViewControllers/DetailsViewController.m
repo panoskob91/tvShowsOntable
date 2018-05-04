@@ -7,6 +7,7 @@
 //
 
 #import "DetailsViewController.h"
+#import "AFSEWebContentHandlerVC.h"
 
 @interface DetailsViewController ()
 
@@ -21,10 +22,9 @@
 
 NSString *summary;
 
-#pragma mark -View lifecycle
+#pragma mark -ViewController lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setupTextView];
     [self setupImageView];
     [self setupNavigationItemStyle];
@@ -47,9 +47,21 @@ NSString *summary;
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -Gesture events handler(s)
+//Image tap event handler
 - (void)handleSingleTap
 {
     [self performSegueWithIdentifier:@"webViewSegue" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"webViewSegue"])
+    {
+        AFSEWebContentHandlerVC *webHandlerVC = segue.destinationViewController;
+        webHandlerVC.show = self.show;
+        webHandlerVC.showIdentifier = self.showID;
+    }
 }
 
 - (void)setupTextView

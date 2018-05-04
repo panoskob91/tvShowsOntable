@@ -28,13 +28,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.shows = [[NSMutableArray alloc] init];
-    
-    self.tvMazeTableView.delegate = self;
-    self.tvMazeTableView.dataSource = self;
-    self.tvMazeSearchBar.delegate = self;
-    
-    self.tvMazeTableView.tableFooterView = [[UIView alloc] init];
+    [self setupTableView];
+    [self setupSearchBar];
+    [self initialiseDataStructures];
     self.tvMazeActivityIndicator.hidden = YES;
 }
 
@@ -42,7 +38,28 @@
     [super didReceiveMemoryWarning];
     
 }
+#pragma mark -Data Structure initialisations
+- (void)initialiseDataStructures
+{
+    self.shows = [[NSMutableArray alloc] init];
+}
 
+#pragma mark -TableView setup
+- (void)setupTableView
+{
+    self.tvMazeTableView.delegate = self;
+    self.tvMazeTableView.dataSource = self;
+    self.tvMazeTableView.rowHeight = 100;
+    self.tvMazeTableView.estimatedRowHeight = 140;
+    self.tvMazeTableView.tableFooterView = [[UIView alloc] init];
+}
+#pragma mark -Search bar setup
+- (void)setupSearchBar
+{
+    self.tvMazeSearchBar.delegate = self;
+}
+
+#pragma mark -SearchBarDelegate method implementations
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [self fetchRemoteJSONWithSearchText: self.tvMazeSearchBar.text];

@@ -184,7 +184,6 @@ NSArray *selectedCells;
     NSString *showTitleFromGroups = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row].showTitle;
         
         detailsVC.navigationItemTitle = showTitleFromGroups;
-    
     NSString *imageURLFromGroups = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row].showImage;
     
         detailsVC.imageURL = imageURLFromGroups;
@@ -192,6 +191,7 @@ NSArray *selectedCells;
     NSNumber *showIdFromGroups = [self.showGroupsArray[indexPath.section].dataInSection[indexPath.row] getShowId];
     showID = showIdFromGroups;
     
+    detailsVC.show = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row];
     [detailsVC setTheShowID:showID];
     [self.navigationController pushViewController:detailsVC animated:YES];
     

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Show.h"
 
 @interface DetailsViewController : UIViewController
 
@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSString *navigationItemTitle;
 @property (strong, nonatomic) NSString *imageURL;
 @property (strong, nonatomic) NSNumber *dataToBePassedOnDetailsVC;
+@property (strong, nonatomic) Show *show;
 
 #pragma mark -Getters
 - (NSNumber *)getTheShowID;

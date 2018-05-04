@@ -16,7 +16,7 @@
 @property (strong, nonatomic) NSString *showImage;
 @property (strong, nonatomic) NSNumber *showAverageRating;
 @property (strong, nonatomic) NSNumber *showGenreID;
-
+@property (strong, nonatomic) NSString *mediaType;
 
 
 #pragma mark -Initialisers
