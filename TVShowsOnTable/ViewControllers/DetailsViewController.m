@@ -8,6 +8,8 @@
 
 #import "DetailsViewController.h"
 #import "AFSEWebContentHandlerVC.h"
+#import "AFSENetworkManager.h"
+#import "AFSENetworkManager.h"
 
 @interface DetailsViewController ()
 
@@ -29,7 +31,11 @@ NSString *summary;
     [self setupTextView];
     [self setupImageViews];
     [self setupNavigationItemStyle];
-    [self fetchDescriptionFromId:self.showID];//Fetch data from API call
+    
+    AFSENetworkManager *networkManager = [[AFSENetworkManager alloc] init];
+    networkManager.networkingDelegate = self;
+    [networkManager fetchDescriptionFromId:self.showID andMediaType:self.show.mediaType];
+    
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(handleSingleTap)];
@@ -44,7 +50,19 @@ NSString *summary;
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+}
+
+#pragma mark -Networking delegate methods
+- (void)networkAPICallDidCompleteWithResponse:(NSArray<Show *> *)shows
+{
+    
+}
+- (void)APIFetchedWithResponseDescriptionProperty:(NSString *)showSummary
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.descriptionDetailsTextView.text = showSummary;
+    });
 }
 
 #pragma mark -Gesture events handler(s)
@@ -123,46 +141,6 @@ NSString *summary;
 {
     self.showID = [[NSNumber alloc] init];
     self.showID = SID;
-}
-
-#pragma mark -Fetching
-- (void)fetchDescriptionFromId: (NSNumber *)showId
-{
-    
-    NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=6b2e856adafcc7be98bdf0d8b076851c", showId];
-    NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
-    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
-    NSURLSession *session = [NSURLSession sharedSession];
-    summary = [[NSString alloc] init];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if (httpResponse.statusCode == 200)
-        {
-            NSError *parseError = nil;
-            NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-
-            NSString *responseSummary = responseDictionary[@"overview"];
-            if ([responseSummary isEqual:[NSNull null]]
-                || [responseSummary isEqualToString:@""])
-            {
-                summary = @"No summary available";
-            }
-            else
-            {
-                summary = responseSummary;
-            }
-            
-        }
-        else{
-            NSLog(@"ERROR %@", error);
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            self.descriptionDetailsTextView.text = summary;
-        
-        });
-    }];
-    [dataTask resume];
 }
 
 @end

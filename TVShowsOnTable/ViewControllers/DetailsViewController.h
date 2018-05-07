@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AFSENetworkingDelegate.h"
 #import "Show.h"
 
-@interface DetailsViewController : UIViewController
+@interface DetailsViewController : UIViewController<AFSENetworkingDelegate>
 
 @property (strong, nonatomic) NSString *labelValue;
 @property (strong, nonatomic) NSString *navigationItemTitle;

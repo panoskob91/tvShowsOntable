@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 //Categories and protocols
 #import "ButtonEventHandlingDelegate.h"
+#import "AFSENetworkingDelegate.h"
 
-
-@interface SearchVC : UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ButtonEventHandlingDelegate>
+@interface SearchVC : UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ButtonEventHandlingDelegate, AFSENetworkingDelegate>
 
 #pragma mark -SearchVC properties
 @property (strong, nonatomic) NSString *searchedText;

@@ -12,6 +12,8 @@
 #import "Show.h"
 #import "Movie.h"
 #import "TVSeries.h"
+#import "AFSENetworkManager.h"
+
 //Helpers
 #import "NSString_stripHtml.h"
 //Categories and protocols
@@ -33,6 +35,7 @@
 @property (strong, nonatomic) NSMutableArray<Show *> *shows;
 @property (strong, nonatomic) NSMutableArray<Movie *> *movies;
 @property (strong, nonatomic) NSMutableArray<TVSeries *> *series;
+@property (strong, nonatomic) NSArray<Show *> *showsArray;
 @property (strong, nonatomic) NSMutableArray<AFSEShowGroup *> *showGroupsArray;
 @property (strong, nonatomic) NSMutableArray<AFSEGenreModel *> *movieGenres;
 @property (strong, nonatomic) NSMutableArray<AFSEGenreModel *> *tvGenres;
@@ -72,6 +75,14 @@ NSArray *selectedCells;
     self.tableViewActivityindicator.hidden = YES;
 }
 
+- (void)networkAPICallDidCompleteWithResponse:(NSArray<Show *> *)shows
+{
+    self.showsArray = [[NSArray alloc] initWithArray:shows];
+    [self groupItemsBasedOnGenreIdWithDataFromArray:self.showsArray];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -130,7 +141,10 @@ NSArray *selectedCells;
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     self.searchedText = self.searchBar.text;
-    [self fetchNewRemoteJSONWithSearchText:self.searchedText];
+    //[self fetchNewRemoteJSONWithSearchText:self.searchedText];
+    AFSENetworkManager *networkManager = [[AFSENetworkManager alloc] init];
+    networkManager.networkingDelegate = self;
+    [networkManager fetchAPICallWithSearchText:self.searchedText];
     [searchBar resignFirstResponder];
 }
 
@@ -224,7 +238,7 @@ NSArray *selectedCells;
     if (sourceIndexPath.section == destinationIndexPath.section)
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            Show* objectToBeMoved = self.showGroupsArray[sourceIndexPath.section].dataInSection[sourceIndexPath.row];
+            Show *objectToBeMoved = self.showGroupsArray[sourceIndexPath.section].dataInSection[sourceIndexPath.row];
             [self.showGroupsArray[sourceIndexPath.section].dataInSection removeObjectAtIndex:sourceIndexPath.row];
             [self.showGroupsArray[sourceIndexPath.section].dataInSection insertObject:objectToBeMoved atIndex:destinationIndexPath.row];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -254,7 +268,7 @@ NSArray *selectedCells;
     Show *show = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row];
     
     if (indexPath.row <= self.shows.count
-        && self.shows.count != 0)
+        && self.showsArray.count != 0)
     {
         if ([show.mediaType isEqualToString:@"tv"])
         {
@@ -368,66 +382,67 @@ NSArray *selectedCells;
 - (void)fetchNewRemoteJSONWithSearchText: (NSString *)userSearchText
 {
     
-    [self.shows removeAllObjects];
-    [self.movies removeAllObjects];
-    [self.series removeAllObjects];
-    [showsDataDictionary removeAllObjects];
-    [self.showGroupsArray removeAllObjects];
-    
-    [self activityIndicatorHandlerWhenActivityIndicatorIs:NO];
-    
-    
-    userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/search/multi?api_key=6b2e856adafcc7be98bdf0d8b076851c&query=%@", userSearchText];
-    
-    NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
-    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if (httpResponse.statusCode == 200)
-        {
-            NSError *parseError = nil;
-            NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-            
-            Show *showInfo;
-            Movie *showMovie;
-            TVSeries *tvSerie;
-            
-            for (NSDictionary *dict in responseDictionary[@"results"])
-            {
-                
-                if ([dict[@"media_type"] isEqualToString:@"tv"])
-                {
-                    showInfo = [[Show alloc] initWithDictionaryForTvDb:dict];
-                    tvSerie = [[TVSeries alloc] initWithDictionaryForTvDbAPI:dict];
-                    [self.series addObject:tvSerie];
-                    //[self.shows addObject:tvSerie];
-                    [self.shows addObject:showInfo];
-                }
-                else if ([dict[@"media_type"] isEqualToString:@"movie"])
-                {
-                    
-                    showMovie = [[Movie alloc] initWithResponseDictionaryFromTvDb:dict];
-                    [self.movies addObject: showMovie];
-                    [self.shows addObject:showMovie];
-                }
-            }
-            
-            [self groupItemsBasedOnGenreId];
-            
-            [showsDataDictionary setValue:self.series forKey:@"Series"];
-            [showsDataDictionary setValue:self.movies forKey:@"Movies"];
-        }
-        else{
-            NSLog(@"ERROR %@", error);
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-            [self activityIndicatorHandlerWhenActivityIndicatorIs:YES];
-        });
-    }];
-    [dataTask resume];
+//    [self.shows removeAllObjects];
+//    [self.movies removeAllObjects];
+//    [self.series removeAllObjects];
+//    [showsDataDictionary removeAllObjects];
+//    [self.showGroupsArray removeAllObjects];
+//
+//    [self activityIndicatorHandlerWhenActivityIndicatorIs:NO];
+//
+//
+//    userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+//    NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/search/multi?api_key=6b2e856adafcc7be98bdf0d8b076851c&query=%@", userSearchText];
+//
+//    NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
+//    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
+//        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+//        if (httpResponse.statusCode == 200)
+//        {
+//            NSError *parseError = nil;
+//            NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+//
+//            Show *showInfo;
+//            Movie *showMovie;
+//            TVSeries *tvSerie;
+//
+//            for (NSDictionary *dict in responseDictionary[@"results"])
+//            {
+//
+//                if ([dict[@"media_type"] isEqualToString:@"tv"])
+//                {
+//                    showInfo = [[Show alloc] initWithDictionaryForTvDb:dict];
+//                    tvSerie = [[TVSeries alloc] initWithDictionaryForTvDbAPI:dict];
+//                    [self.series addObject:tvSerie];
+//                    [self.shows addObject:tvSerie];
+//                    //[self.shows addObject:showInfo];
+//
+//                }
+//                else if ([dict[@"media_type"] isEqualToString:@"movie"])
+//                {
+//                    showMovie = [[Movie alloc] initWithResponseDictionaryFromTvDb:dict];
+//                    [self.movies addObject: showMovie];
+//                    [self.shows addObject:showMovie];
+//
+//                }
+//            }
+//
+//            [self groupItemsBasedOnGenreIdWithDataFromArray:self.shows];
+//
+//            [showsDataDictionary setValue:self.series forKey:@"Series"];
+//            [showsDataDictionary setValue:self.movies forKey:@"Movies"];
+//        }
+//        else{
+//            NSLog(@"ERROR %@", error);
+//        }
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.tableView reloadData];
+//            [self activityIndicatorHandlerWhenActivityIndicatorIs:YES];
+//        });
+//    }];
+//    [dataTask resume];
     
 }
 
@@ -470,12 +485,12 @@ NSArray *selectedCells;
     
 }
 #pragma mark -Group shows on genre
-- (void)groupItemsBasedOnGenreId
+- (void)groupItemsBasedOnGenreIdWithDataFromArray:(NSArray *) shows
 {
     self.showGroupsArray = [[NSMutableArray alloc] init];
     BOOL onList = NO;
     
-    for (Show *show in self.shows)
+    for (Show *show in shows)
     {
         for (int i = 0; i < self.showGroupsArray.count; i++)
         {

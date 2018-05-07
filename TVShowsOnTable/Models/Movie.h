@@ -32,5 +32,4 @@
 #pragma mark -Getters
 - (NSString *)getSummary;
 - (NSNumber *)getShowId;
-
 @end

@@ -31,6 +31,7 @@
 		1A47C1BA2072076E00D63753 /* TVShowsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C1B92072076E00D63753 /* TVShowsCell.m */; };
 		1A47C1C32072321500D63753 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C1C22072321500D63753 /* DetailsViewController.m */; };
 		1AC5D19820736690002FB850 /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC5D19720736690002FB850 /* Show.m */; };
+		1ADBBA3A20A02F7D008588D1 /* AFSENetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADBBA3920A02F7D008588D1 /* AFSENetworkManager.m */; };
 		1AF62F3D2074C95A005FC411 /* showData.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AF62F3A2074B167005FC411 /* showData.json */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +100,9 @@
 		1A47C1C22072321500D63753 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		1AC5D19620736690002FB850 /* Show.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Show.h; path = TVShowsOnTable/Models/Show.h; sourceTree = SOURCE_ROOT; };
 		1AC5D19720736690002FB850 /* Show.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Show.m; path = TVShowsOnTable/Models/Show.m; sourceTree = SOURCE_ROOT; };
+		1ADBBA3720A02E30008588D1 /* AFSENetworkingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSENetworkingDelegate.h; sourceTree = "<group>"; };
+		1ADBBA3820A02F7D008588D1 /* AFSENetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSENetworkManager.h; sourceTree = "<group>"; };
+		1ADBBA3920A02F7D008588D1 /* AFSENetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSENetworkManager.m; sourceTree = "<group>"; };
 		1AF62F3A2074B167005FC411 /* showData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = showData.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				1A3303EE2087517C0062E1ED /* ButtonEventHandlingDelegate.h */,
+				1ADBBA3720A02E30008588D1 /* AFSENetworkingDelegate.h */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -290,6 +295,8 @@
 				1A3CBA9B20970A0000718417 /* AFSEShowGroup.m */,
 				1A3CBA9D2097496300718417 /* AFSEGenreModel.h */,
 				1A3CBA9E2097496300718417 /* AFSEGenreModel.m */,
+				1ADBBA3820A02F7D008588D1 /* AFSENetworkManager.h */,
+				1ADBBA3920A02F7D008588D1 /* AFSENetworkManager.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -446,6 +453,7 @@
 				1A36078E208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m in Sources */,
 				1A47C1962072058300D63753 /* main.m in Sources */,
 				1A47C1BA2072076E00D63753 /* TVShowsCell.m in Sources */,
+				1ADBBA3A20A02F7D008588D1 /* AFSENetworkManager.m in Sources */,
 				1AC5D19820736690002FB850 /* Show.m in Sources */,
 				1A47C1882072058200D63753 /* AppDelegate.m in Sources */,
 				1A3F8DC8207E009C000F4C8A /* TVSeries.m in Sources */,

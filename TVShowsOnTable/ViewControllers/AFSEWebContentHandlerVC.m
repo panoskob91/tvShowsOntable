@@ -15,8 +15,8 @@
 @property (strong, nonatomic) IBOutlet WKWebView *webView;
 
 @property (strong, nonatomic) NSNumber *showID;
-@property (strong, nonatomic) NSString *youtubeMovieVideoKey;
-@property (strong, nonatomic) NSString *youtubeTVVideoKey;
+
+@property (strong, nonatomic) NSString *youtubeVideoKey;
 
 @end
 
@@ -27,36 +27,22 @@
     
     self.showID = [[NSNumber alloc] init];
     self.showID = self.showIdentifier;
-    self.youtubeMovieVideoKey = [[NSString alloc] init];
-    self.youtubeTVVideoKey = [[NSString alloc] init];
+
+    //NSLog(@"show item media type = %@", self.show.mediaType);
+    //NSLog(@"SHOWID = %@", self.showID);
     
-    NSLog(@"show item media type = %@", self.show.mediaType);
-    NSLog(@"SHOWID = %@", self.showID);
-    
-    [self getYoutubeVieoIdWithShowID:self.showID
-                    andMediaTypeName:self.show.mediaType];
+    [self getYoutubeVideoKeyWithShowID:self.showID andMediaType:self.show.mediaType];
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-     
-- (void)getYoutubeVieoIdWithShowID:(NSNumber *)showId andMediaTypeName:(NSString *)mediatype
+
+#pragma mark -Fetching
+-(void)getYoutubeVideoKeyWithShowID:(NSNumber *)showId andMediaType:(NSString *)mediaType
 {
-    if ([mediatype isEqualToString:@"movie"])
-    {
-        [self getYoutubeMovieIdFromAPIWithShowID:showId];
-    }
-    else if ([mediatype isEqualToString:@"tv"])
-    {
-        [self getYoutubeTVVideoKeyWithShowID:showId];
-    }
-}
-#pragma mark -Parsing methods
--(void)getYoutubeTVVideoKeyWithShowID:(NSNumber *)showId
-{
-    NSString *query = [NSString stringWithFormat:@"http://api.themoviedb.org/3/tv/%@/videos?api_key=6b2e856adafcc7be98bdf0d8b076851c", showId];
+    NSString *query = [NSString stringWithFormat:@"http://api.themoviedb.org/3/%@/%@/videos?api_key=6b2e856adafcc7be98bdf0d8b076851c",mediaType, showId];
     NSURL *searchURL = [NSURL URLWithString:query];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -74,7 +60,7 @@
                 {
                     if ([result[@"type"] isEqualToString:@"Trailer"])
                     {
-                        self.youtubeTVVideoKey = result[@"key"];
+                        self.youtubeVideoKey = result[@"key"];
                     }
                 }
             }
@@ -84,48 +70,10 @@
             NSLog(@"ERROR %@", error);
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self playVideoOnYoutubeWithKey:self.youtubeTVVideoKey];
+            [self playVideoOnYoutubeWithKey:self.youtubeVideoKey];
         });
     }];
     [dataTask resume];
-}
-
-
-- (void)getYoutubeMovieIdFromAPIWithShowID:(NSNumber *)showID
-{
-    NSString *query = [NSString stringWithFormat:@"http://api.themoviedb.org/3/movie/%@/videos?api_key=6b2e856adafcc7be98bdf0d8b076851c", showID];
-    
-    NSURL *searchURL = [NSURL URLWithString:query];
-    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if (httpResponse.statusCode == 200)
-        {
-            NSError *parseError = nil;
-            NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-        
-            if (![responseDictionary[@"results"] isEqual:[NSNull null]])
-            {
-                NSDictionary *resultsDictionary = responseDictionary[@"results"];
-                for (NSDictionary *result in resultsDictionary)
-                {
-                    if ([result[@"type"] isEqualToString:@"Trailer"])
-                    {
-                        self.youtubeMovieVideoKey = result[@"key"];
-                    }
-                }
-            }
-        }
-        else{
-            NSLog(@"ERROR %@", error);
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self playVideoOnYoutubeWithKey:self.youtubeMovieVideoKey];
-        });
-    }];
-    [dataTask resume];
-    
 }
 
 - (void)playVideoOnYoutubeWithKey:(NSString *)youtubeVideoKey
