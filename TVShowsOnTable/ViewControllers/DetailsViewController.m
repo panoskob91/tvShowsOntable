@@ -29,7 +29,20 @@ NSString *summary;
     [self setupTextView];
     [self setupImageViews];
     [self setupNavigationItemStyle];
-    [self fetchDescriptionFromId:self.showID];//Fetch data from API call
+    
+    [self fetchDescriptionFromId:self.showID
+                    andMediaType:self.show.mediaType
+     andSuccessCompletionHandler:^(NSString *description) {
+        
+         dispatch_async(dispatch_get_main_queue(), ^{
+            self.descriptionDetailsTextView.text = summary;
+        });
+         
+    }
+    andFailureCompletionBlock:^(NSError *error) {
+        NSLog(@"Fetching error : %@", error);
+    }];
+    
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(handleSingleTap)];
@@ -127,9 +140,12 @@ NSString *summary;
 
 #pragma mark -Fetching
 - (void)fetchDescriptionFromId: (NSNumber *)showId
+                  andMediaType:(NSString *)mediaType
+   andSuccessCompletionHandler:(void (^)(NSString *description))successCompletionBlock
+     andFailureCompletionBlock:(void (^)(NSError *error))failureCompletionBlock
 {
     
-    NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=6b2e856adafcc7be98bdf0d8b076851c", showId];
+    NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/%@/%@?api_key=6b2e856adafcc7be98bdf0d8b076851c",mediaType, showId];
     NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -151,16 +167,17 @@ NSString *summary;
             {
                 summary = responseSummary;
             }
-            
+            successCompletionBlock(summary);
         }
         else{
             NSLog(@"ERROR %@", error);
+            failureCompletionBlock(error);
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            self.descriptionDetailsTextView.text = summary;
-        
-        });
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            
+//            self.descriptionDetailsTextView.text = summary;
+//        
+//        });
     }];
     [dataTask resume];
 }

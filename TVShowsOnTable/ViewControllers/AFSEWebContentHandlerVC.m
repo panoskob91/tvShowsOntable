@@ -42,19 +42,38 @@
     [super didReceiveMemoryWarning];
 }
      
-- (void)getYoutubeVieoIdWithShowID:(NSNumber *)showId andMediaTypeName:(NSString *)mediatype
+- (void)getYoutubeVieoIdWithShowID:(NSNumber *)showId andMediaTypeName:(NSString *)mediaType
 {
-    if ([mediatype isEqualToString:@"movie"])
+    if ([mediaType isEqualToString:@"movie"])
     {
-        [self getYoutubeMovieIdFromAPIWithShowID:showId];
+        //[self getYoutubeMovieIdFromAPIWithShowID:showId];
+        [self getYoutubeMovieIdFromAPIWithShowID:showId andSuccesCompletionBlock:^(NSString *youtubeKey) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+               [self playVideoOnYoutubeWithKey:youtubeKey];
+            });
+        } andFailureCompletionBlock:^(NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
     }
-    else if ([mediatype isEqualToString:@"tv"])
+    else if ([mediaType isEqualToString:@"tv"])
     {
-        [self getYoutubeTVVideoKeyWithShowID:showId];
+        //[self getYoutubeTVVideoKeyWithShowID:showId];
+        [self getYoutubeTVVideoKeyWithShowID:showId andSuccesCompletionHandler:^(NSString *youtubeKey) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self playVideoOnYoutubeWithKey:youtubeKey];
+            });
+        } andFailureCompletionBlock:^(NSError *error) {
+            NSLog(@"failiure with error: %@", error);
+        }];
+        
     }
 }
 #pragma mark -Parsing methods
 -(void)getYoutubeTVVideoKeyWithShowID:(NSNumber *)showId
+           andSuccesCompletionHandler:(void (^)(NSString *youtubeKey))succesCompletioBlock
+            andFailureCompletionBlock:(void (^)(NSError *error))failureCompletionBlock
 {
     NSString *query = [NSString stringWithFormat:@"http://api.themoviedb.org/3/tv/%@/videos?api_key=6b2e856adafcc7be98bdf0d8b076851c", showId];
     NSURL *searchURL = [NSURL URLWithString:query];
@@ -66,7 +85,7 @@
         {
             NSError *parseError = nil;
             NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-            
+
             if (![responseDictionary[@"results"] isEqual:[NSNull null]])
             {
                 NSDictionary *resultsDictionary = responseDictionary[@"results"];
@@ -75,16 +94,19 @@
                     if ([result[@"type"] isEqualToString:@"Trailer"])
                     {
                         self.youtubeTVVideoKey = result[@"key"];
+                        succesCompletioBlock(result[@"key"]);
                     }
                 }
+                
             }
             
         }
         else{
             NSLog(@"ERROR %@", error);
+            failureCompletionBlock(error);
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self playVideoOnYoutubeWithKey:self.youtubeTVVideoKey];
+            //[self playVideoOnYoutubeWithKey:self.youtubeTVVideoKey];
         });
     }];
     [dataTask resume];
@@ -92,6 +114,8 @@
 
 
 - (void)getYoutubeMovieIdFromAPIWithShowID:(NSNumber *)showID
+                  andSuccesCompletionBlock:(void (^)(NSString *youtubeKey))successCompletionBlock
+                 andFailureCompletionBlock:(void (^)(NSError *error))failureCompletionBlock
 {
     NSString *query = [NSString stringWithFormat:@"http://api.themoviedb.org/3/movie/%@/videos?api_key=6b2e856adafcc7be98bdf0d8b076851c", showID];
     
@@ -113,15 +137,17 @@
                     if ([result[@"type"] isEqualToString:@"Trailer"])
                     {
                         self.youtubeMovieVideoKey = result[@"key"];
+                        successCompletionBlock(result[@"key"]);
                     }
                 }
             }
         }
         else{
             NSLog(@"ERROR %@", error);
+            failureCompletionBlock(error);
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self playVideoOnYoutubeWithKey:self.youtubeMovieVideoKey];
+            //[self playVideoOnYoutubeWithKey:self.youtubeMovieVideoKey];
         });
     }];
     [dataTask resume];
