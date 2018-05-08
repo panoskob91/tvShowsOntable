@@ -9,6 +9,7 @@
 #import "AFSEWebContentHandlerVC.h"
 #import <WebKit/WebKit.h>
 #import "UIAlertController+AFSEAlertGenerator.h"
+#import "AFSENetworkManager.h"
 
 @interface AFSEWebContentHandlerVC ()
 
@@ -27,16 +28,30 @@
     
     self.showID = [[NSNumber alloc] init];
     self.showID = self.showIdentifier;
-
     //NSLog(@"show item media type = %@", self.show.mediaType);
     //NSLog(@"SHOWID = %@", self.showID);
+    //[self getYoutubeVideoKeyWithShowID:self.showID andMediaType:self.show.mediaType];
     
-    [self getYoutubeVideoKeyWithShowID:self.showID andMediaType:self.show.mediaType];
+    AFSENetworkManager *networkManager = [[AFSENetworkManager alloc] init];
+    networkManager.networkingDelegate = self;
+    [networkManager getYoutubeVideoKeyWithShowID:self.showID andMediaType:self.show.mediaType];
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)networkAPICallDidCompleteWithResponse:(NSArray<Show *> *)shows
+{
+    
+}
+- (void)networkCallDidCompleteAndYoutubeKeyGenerated:(NSString *)youtubeKey
+{
+//    NSLog(@"youtubeKey is : %@", youtubeKey);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self playVideoOnYoutubeWithKey:youtubeKey];
+    });
 }
 
 #pragma mark -Fetching

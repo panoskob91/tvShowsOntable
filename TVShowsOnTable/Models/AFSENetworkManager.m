@@ -51,12 +51,19 @@
                 
             }
             
-            [self.networkingDelegate networkAPICallDidCompleteWithResponse:self.shows];
+            if ([self.networkingDelegate respondsToSelector:@selector(networkAPICallDidCompleteWithResponse:)])
+            {
+                [self.networkingDelegate networkAPICallDidCompleteWithResponse:self.shows];
+            }
             
         }
         else{
             NSLog(@"ERROR %@", error);
-            NSLog(@"status code = %ld", (long)httpResponse.statusCode);
+            if ([self.networkingDelegate respondsToSelector:@selector(networkAPICallDidCompleteWithResponse:)])
+            {
+                [self.networkingDelegate networkAPICallDidCompleteWithResponse:self.shows];
+            }
+            
         }
     }];
     [dataTask resume];
@@ -90,8 +97,52 @@
             {
                 summary = responseSummary;
             }
-            [self.networkingDelegate APIFetchedWithResponseDescriptionProperty:summary];
+            if ([self.networkingDelegate respondsToSelector:@selector(APIFetchedWithResponseDescriptionProperty:)])
+            {
+                [self.networkingDelegate APIFetchedWithResponseDescriptionProperty:summary];
+            }
             
+            
+        }
+        else{
+            NSLog(@"ERROR %@", error);
+        }
+        
+    }];
+    [dataTask resume];
+}
+
+- (void)getYoutubeVideoKeyWithShowID:(NSNumber *)showId andMediaType:(NSString *)mediaType
+{
+    self.youtubeKey = [[NSString alloc] init];
+    
+    NSString *query = [NSString stringWithFormat:@"http://api.themoviedb.org/3/%@/%@/videos?api_key=6b2e856adafcc7be98bdf0d8b076851c",mediaType, showId];
+    NSURL *searchURL = [NSURL URLWithString:query];
+    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if (httpResponse.statusCode == 200)
+        {
+            NSError *parseError = nil;
+            NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+            if (![responseDictionary[@"results"] isEqual:[NSNull null]])
+            {
+                
+                NSDictionary *resultsDictionary = responseDictionary[@"results"];
+                for (NSDictionary* result in resultsDictionary)
+                {
+                    if ([result[@"type"] isEqualToString:@"Trailer"])
+                    {
+                        //youtubeVideoKey = result[@"key"];
+                        self.youtubeKey = result[@"key"];
+                    }
+                }
+            }
+            if ([self.networkingDelegate respondsToSelector:@selector(networkCallDidCompleteAndYoutubeKeyGenerated:)])
+            {
+                [self.networkingDelegate networkCallDidCompleteAndYoutubeKeyGenerated:self.youtubeKey];
+            }
         }
         else{
             NSLog(@"ERROR %@", error);

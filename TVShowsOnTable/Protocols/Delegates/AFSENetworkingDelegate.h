@@ -11,8 +11,9 @@
 
 @protocol AFSENetworkingDelegate <NSObject>
 
--(void)networkAPICallDidCompleteWithResponse:(NSArray<Show *> *)shows;
+- (void)networkAPICallDidCompleteWithResponse:(NSArray<Show *> *)shows;
 @optional
--(void)APIFetchedWithResponseDescriptionProperty:(NSString *)showSummary;
+- (void)APIFetchedWithResponseDescriptionProperty:(NSString *)showSummary;
+- (void)networkCallDidCompleteAndYoutubeKeyGenerated:(NSString *)youtubeKey;
 
 @end

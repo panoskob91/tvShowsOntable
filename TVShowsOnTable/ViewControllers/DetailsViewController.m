@@ -34,7 +34,8 @@ NSString *summary;
     
     AFSENetworkManager *networkManager = [[AFSENetworkManager alloc] init];
     networkManager.networkingDelegate = self;
-    [networkManager fetchDescriptionFromId:self.showID andMediaType:self.show.mediaType];
+    [networkManager fetchDescriptionFromId:self.showID
+                              andMediaType:self.show.mediaType];
     
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self

@@ -13,9 +13,11 @@
 
 @property (nonatomic, weak) id <AFSENetworkingDelegate> networkingDelegate;
 @property (strong, nonatomic) NSMutableArray<Show *> *shows;
+@property (strong, nonatomic) NSString *youtubeKey;
 
 -(void)fetchAPICallWithSearchText:(NSString *)searchText;
 -(void)fetchDescriptionFromId:(NSNumber *)showId
                   andMediaType:(NSString *)mediaType;
+-(void)getYoutubeVideoKeyWithShowID:(NSNumber *)showId andMediaType:(NSString *)mediaType;
 
 @end

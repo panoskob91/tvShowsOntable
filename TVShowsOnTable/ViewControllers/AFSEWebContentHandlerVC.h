@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Show.h"
+#import "AFSENetworkingDelegate.h"
 
-@interface AFSEWebContentHandlerVC : UIViewController
+@interface AFSEWebContentHandlerVC : UIViewController<AFSENetworkingDelegate>
 
 @property (strong, nonatomic) NSNumber *showIdentifier;
 @property (strong, nonatomic) Show *show;
