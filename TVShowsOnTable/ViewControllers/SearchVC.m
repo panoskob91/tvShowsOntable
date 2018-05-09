@@ -64,8 +64,10 @@ NSArray *selectedCells;
     [self setupTableView];
     [self setupSearchBar];
     [self initialiseTheNeededArrays];
-    [self getMovieGenreNameAndGenreId];
-    [self getTVGenreNameAndGenreId];
+    //[self getMovieGenreNameAndGenreId];
+    //[self getTVGenreNameAndGenreId];
+    [self getGenreNameAndGenreIdFromMediaType:@"movie"];
+    [self getGenreNameAndGenreIdFromMediaType:@"tv"];
     
     self.title = @"Shows";
     self.contentIsEditable = true;
@@ -133,7 +135,7 @@ NSArray *selectedCells;
     //[self fetchNewRemoteJSONWithSearchText:self.searchedText];
     
     [self fetchNewRemoteJSONWithSearchText:self.searchedText andSuccessCompletionBlock:^(NSArray<Show *> *shows) {
-        NSLog(@"shows : %@", shows);
+//        NSLog(@"shows : %@", shows);
     } andFailureBlock:^(NSError *error) {
         NSLog(@"ERROR : %@", error);
     }];
@@ -285,12 +287,12 @@ NSArray *selectedCells;
 }
 
 #pragma mark -Get TV genre id and name
--(void)getTVGenreNameAndGenreId
+-(void)getGenreNameAndGenreIdFromMediaType:(NSString *)mediaType
 {
     [self.tvGenres removeAllObjects];
     [self.tvGenresDictionary removeAllObjects];
     
-    NSString *moviesGenreQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/genre/tv/list?api_key=6b2e856adafcc7be98bdf0d8b076851c&language=en-US"];
+    NSString *moviesGenreQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/genre/%@/list?api_key=6b2e856adafcc7be98bdf0d8b076851c&language=en-US", mediaType];
     
     NSURL *searchURL = [NSURL URLWithString:moviesGenreQuery];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
@@ -316,7 +318,6 @@ NSArray *selectedCells;
                 [self.tvGenres addObject:genreModel];
             }
         }
-        
         else{
             NSLog(@"ERROR %@", error);
         }
@@ -327,47 +328,47 @@ NSArray *selectedCells;
     [dataTask resume];
 }
 
-#pragma mark -Get Movie genre id and name
-- (void)getMovieGenreNameAndGenreId
-{
-    [self.movieGenres removeAllObjects];
-    [self.movieGenresDictionary removeAllObjects];
-    
-    NSString *moviesGenreQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/genre/movie/list?api_key=6b2e856adafcc7be98bdf0d8b076851c&language=en-US"];
-    
-    NSURL *searchURL = [NSURL URLWithString:moviesGenreQuery];
-    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if (httpResponse.statusCode == 200)
-        {
-            NSError *parseError = nil;
-            NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-            AFSEGenreModel *genreModel;
-            for (NSDictionary *dict in responseDictionary[@"genres"])
-            {
-                if (dict[@"id"]) {
-                    if (dict[@"name"]){
-                    genreModel = [[AFSEGenreModel alloc] initWithGenreID:dict[@"id"]
-                                                            andGenreName:dict[@"name"]];
-                    }
-                }
-                NSString *genreKey = [NSString stringWithFormat:@"%@", genreModel.genreID];
-                [self.movieGenresDictionary setValue:genreModel.genreName forKey:genreKey];
-                [self.showGenresDictionary setValue:genreModel.genreName forKey:genreKey];
-                [self.movieGenres addObject:genreModel];
-            }
-        }
-        else{
-            NSLog(@"ERROR %@", error);
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }];
-    [dataTask resume];
-}
+//#pragma mark -Get Movie genre id and name
+//- (void)getMovieGenreNameAndGenreId
+//{
+//    [self.movieGenres removeAllObjects];
+//    [self.movieGenresDictionary removeAllObjects];
+//
+//    NSString *moviesGenreQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/genre/movie/list?api_key=6b2e856adafcc7be98bdf0d8b076851c&language=en-US"];
+//
+//    NSURL *searchURL = [NSURL URLWithString:moviesGenreQuery];
+//    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
+//        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+//        if (httpResponse.statusCode == 200)
+//        {
+//            NSError *parseError = nil;
+//            NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+//            AFSEGenreModel *genreModel;
+//            for (NSDictionary *dict in responseDictionary[@"genres"])
+//            {
+//                if (dict[@"id"]) {
+//                    if (dict[@"name"]){
+//                    genreModel = [[AFSEGenreModel alloc] initWithGenreID:dict[@"id"]
+//                                                            andGenreName:dict[@"name"]];
+//                    }
+//                }
+//                NSString *genreKey = [NSString stringWithFormat:@"%@", genreModel.genreID];
+//                [self.movieGenresDictionary setValue:genreModel.genreName forKey:genreKey];
+//                [self.showGenresDictionary setValue:genreModel.genreName forKey:genreKey];
+//                [self.movieGenres addObject:genreModel];
+//            }
+//        }
+//        else{
+//            NSLog(@"ERROR %@", error);
+//        }
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.tableView reloadData];
+//        });
+//    }];
+//    [dataTask resume];
+//}
 
 
 #pragma mark -Fetch API
