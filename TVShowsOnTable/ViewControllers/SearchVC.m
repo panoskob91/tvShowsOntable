@@ -130,7 +130,14 @@ NSArray *selectedCells;
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     self.searchedText = self.searchBar.text;
-    [self fetchNewRemoteJSONWithSearchText:self.searchedText];
+    //[self fetchNewRemoteJSONWithSearchText:self.searchedText];
+    
+    [self fetchNewRemoteJSONWithSearchText:self.searchedText andSuccessCompletionBlock:^(NSArray<Show *> *shows) {
+        NSLog(@"shows : %@", shows);
+    } andFailureBlock:^(NSError *error) {
+        NSLog(@"ERROR : %@", error);
+    }];
+    
     [searchBar resignFirstResponder];
 }
 
@@ -352,7 +359,6 @@ NSArray *selectedCells;
                 [self.movieGenres addObject:genreModel];
             }
         }
-        
         else{
             NSLog(@"ERROR %@", error);
         }
@@ -366,6 +372,8 @@ NSArray *selectedCells;
 
 #pragma mark -Fetch API
 - (void)fetchNewRemoteJSONWithSearchText: (NSString *)userSearchText
+               andSuccessCompletionBlock:(void (^)(NSArray<Show *> *shows))successCompletionBlock
+                         andFailureBlock:(void (^)(NSError *error))failureCompletionBlock
 {
     
     [self.shows removeAllObjects];
@@ -375,7 +383,6 @@ NSArray *selectedCells;
     [self.showGroupsArray removeAllObjects];
     
     [self activityIndicatorHandlerWhenActivityIndicatorIs:NO];
-    
     
     userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/search/multi?api_key=6b2e856adafcc7be98bdf0d8b076851c&query=%@", userSearchText];
@@ -418,9 +425,12 @@ NSArray *selectedCells;
             
             [showsDataDictionary setValue:self.series forKey:@"Series"];
             [showsDataDictionary setValue:self.movies forKey:@"Movies"];
+            
+            successCompletionBlock(self.shows);
         }
         else{
             NSLog(@"ERROR %@", error);
+            failureCompletionBlock(error);
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
