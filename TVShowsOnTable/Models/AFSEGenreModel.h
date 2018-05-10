@@ -10,9 +10,26 @@
 
 @interface AFSEGenreModel : NSObject
 
+
+/**
+ Show genre Id, as provided by The movie db API
+ */
 @property (strong, nonatomic) NSNumber *genreID;
+
+/**
+ Show genre name
+ */
 @property (strong, nonatomic) NSString *genreName;
 
+
+
+/**
+ Class initialiser
+
+ @param GID Genre ID
+ @param name Genre name
+ @return Initialised AFSEGenreModel object
+ */
 - (instancetype)initWithGenreID:(NSNumber *)GID
                    andGenreName:(NSString *)name;
 
