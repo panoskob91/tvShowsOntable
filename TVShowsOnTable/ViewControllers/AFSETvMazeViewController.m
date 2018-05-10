@@ -69,7 +69,7 @@
 {
     AFSETvMazeDetailsVC *tvMazeDetailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"tvMazeDetailsVC"];
     tvMazeDetailsVC.detailsText = [self.shows[indexPath.row] getSummary];
-    tvMazeDetailsVC.imageURL = self.shows[indexPath.row].showImage;
+    tvMazeDetailsVC.imageURL = self.shows[indexPath.row].showImageUrlPath;
     
     [self.navigationController pushViewController:tvMazeDetailsVC animated:YES];
     
@@ -87,7 +87,7 @@
     if (indexPath.row <= self.shows.count && self.shows.count != 0){
         cell.showTitleLabel.text = self.shows[indexPath.row].showTitle;
         
-        NSURL *imageURL = [NSURL URLWithString:self.shows[indexPath.row].showImage];
+        NSURL *imageURL = [NSURL URLWithString:self.shows[indexPath.row].showImageUrlPath];
         NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
         cell.tvShowsImage.image = [UIImage imageWithData:imageData];
         

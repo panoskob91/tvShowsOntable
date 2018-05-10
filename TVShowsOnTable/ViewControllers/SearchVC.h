@@ -14,6 +14,10 @@
 @interface SearchVC : UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ButtonEventHandlingDelegate, AFSENetworkingDelegate>
 
 #pragma mark -SearchVC properties
+
+/**
+ User typed text
+ */
 @property (strong, nonatomic) NSString *searchedText;
 
 @end

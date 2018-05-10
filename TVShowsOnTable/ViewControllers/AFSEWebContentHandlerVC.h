@@ -12,7 +12,14 @@
 
 @interface AFSEWebContentHandlerVC : UIViewController<AFSENetworkingDelegate>
 
+/**
+ Property holding the show Id when passed from the previous view controller
+ */
 @property (strong, nonatomic) NSNumber *showIdentifier;
+
+/**
+ A Show object passed from previous view controller needed from fetching needed information from the movie db API
+ */
 @property (strong, nonatomic) Show *show;
 
 @end

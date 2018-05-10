@@ -33,7 +33,7 @@
         self.movieTitle = movieName;
         self.summary = movieSummary;
         self.showTitle = showObject.showTitle;
-        self.showImage = showObject.showImage;
+        self.showImageUrlPath = showObject.showImageUrlPath;
         self.showAverageRating = showObject.showAverageRating;
         
     }
@@ -77,7 +77,7 @@
         }
         
         self.showTitle = showObject.showTitle;
-        self.showImage = showObject.showImage;
+        self.showImageUrlPath = showObject.showImageUrlPath;
         self.showAverageRating = showObject.showAverageRating;
         
     }
@@ -110,7 +110,7 @@
             self.summary = dict[@"overview"];
         }
         self.showTitle = showObject.showTitle;
-        self.showImage = showObject.showImage;
+        self.showImageUrlPath = showObject.showImageUrlPath;
         self.showAverageRating = showObject.showAverageRating;
         self.showId = [showObject getShowId];
     }
@@ -144,7 +144,7 @@
         //Image
         if (![dict[@"poster_path"] isEqual:[NSNull null]])
         {
-            self.showImage = [NSString stringWithFormat:
+            self.showImageUrlPath = [NSString stringWithFormat:
                               @"http://image.tmdb.org/t/p/w185/%@", dict[@"poster_path"]];
         }
         //Average rating

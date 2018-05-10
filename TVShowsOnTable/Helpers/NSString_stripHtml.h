@@ -9,5 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (stripHtml)
+
+/**
+ Function for removing HTML tags on strings
+
+ @return NSString without HTMl tags
+ */
 - (NSString *)stripHtml;
 @end

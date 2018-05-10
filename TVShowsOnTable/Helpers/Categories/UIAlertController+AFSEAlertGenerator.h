@@ -10,6 +10,14 @@
 
 @interface UIAlertController (AFSEAlertGenerator)
 
+/**
+ Class method for generating alerts
+
+ @param title Alert title
+ @param msg Alert message
+ @param alertActions Allert needed actions
+ @return UIAlertController object
+ */
 + (UIAlertController *)generateAlertWithTitle: (NSString *)title
                                    andMessage: (NSString *)msg
                                    andActions: (NSArray<UIAlertAction*> *)alertActions;

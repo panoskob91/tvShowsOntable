@@ -27,7 +27,7 @@
     if (self)
     {
         self.showTitle = ST;
-        self.showImage = SI;
+        self.showImageUrlPath = SI;
         self.showAverageRating = SAR;
     }
     return self;
@@ -66,28 +66,26 @@
             self.showId = showID;
         }
         
-        
-        
         //Handle images
         if ([showImage isEqual: [NSNull null]])
         {
-            self.showImage = @"http://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
+            self.showImageUrlPath = @"http://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
         }else{
             NSString *originalImage = showImage[@"original"];
             NSString *mediumImage = showImage[@"medium"];
             
             if ((![originalImage isEqual:[NSNull null]]) && (![mediumImage isEqual:[NSNull null]]))
             {
-                self.showImage = originalImage;
+                self.showImageUrlPath = originalImage;
             }else if ((![originalImage isEqual:[NSNull null]]) && ([mediumImage isEqual:[NSNull null]]))
             {
-                self.showImage = originalImage;
+                self.showImageUrlPath = originalImage;
             }else if ([originalImage isEqual:[NSNull null]] && (![mediumImage isEqual:[NSNull null]]))
             {
-                self.showImage = mediumImage;
+                self.showImageUrlPath = mediumImage;
             }else if ([originalImage isEqual:[NSNull null]] && [mediumImage isEqual:[NSNull null]])
             {
-                self.showImage = @"http://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
+                self.showImageUrlPath = @"http://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
             }
         }
     }
@@ -141,18 +139,17 @@
             }
         }
         
-        
         //Show image
         if (![dict[@"poster_path"] isEqual:[NSNull null]])
         {
-            self.showImage = [NSString stringWithFormat:
+            self.showImageUrlPath = [NSString stringWithFormat:
                               @"http://image.tmdb.org/t/p/w185/%@", dict[@"poster_path"]];
         }
         //Genre ID
         NSArray *genre_ids = dict[@"genre_ids"];
         if (genre_ids.count != 0)
         {
-            self.showGenreID = genre_ids[0];
+            self.showGenreID = genre_ids.firstObject;
         }
         
     }

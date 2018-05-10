@@ -10,6 +10,15 @@
 
 @interface UIColor (rgb)
 
+/**
+ UIColor category. A class method is defined with which, it is not needed to divide each argument by 255 in order to generate UIColor
+
+ @param r Red
+ @param g Green
+ @param b Blue
+ @param a Alpha
+ @return UIColor
+ */
 + (UIColor *)createColorWithRed: (NSInteger)r
                        andGreen: (NSInteger)g
                         andBlue: (NSInteger)b

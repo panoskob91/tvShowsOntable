@@ -198,7 +198,7 @@ NSArray *selectedCells;
     NSString *showTitleFromGroups = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row].showTitle;
         
         detailsVC.navigationItemTitle = showTitleFromGroups;
-    NSString *imageURLFromGroups = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row].showImage;
+    NSString *imageURLFromGroups = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row].showImageUrlPath;
     
         detailsVC.imageURL = imageURLFromGroups;
     

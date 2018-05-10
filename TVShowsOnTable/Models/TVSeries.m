@@ -22,7 +22,7 @@
         self.tvSeriesEpisode = seriesEpisode;
         self.tvSeriesSummary = summary;
         self.showTitle = showObject.showTitle;
-        self.showImage = showObject.showImage;
+        self.showImageUrlPath = showObject.showImageUrlPath;
         self.showAverageRating = showObject.showAverageRating;
     }
     

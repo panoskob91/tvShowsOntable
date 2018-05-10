@@ -31,7 +31,7 @@
 {
     self.showTitleLabel.text = Object.showTitle;
     
-    NSURL *imageURL = [NSURL URLWithString:Object.showImage];
+    NSURL *imageURL = [NSURL URLWithString:Object.showImageUrlPath];
     NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
 
     self.tvShowsImage.image = [UIImage imageWithData:imageData];

@@ -12,10 +12,23 @@
 
 @interface AFSEShowGroup : NSObject
 
+/**
+ The genre Id of each section
+ */
 @property (strong, nonatomic) NSNumber *sectionID;
+
+/**
+ An array of Show elements holding the data of each section on this object
+ */
 @property (strong, nonatomic) NSMutableArray<Show *> *dataInSection;
 
 
+/**
+ Convinient object initialiser
+
+ @param genre_id Genre's id, as returned from the movie db REST API
+ @return AFSEShowGroup object initialised
+ */
 - (instancetype)initWithSectionID: (NSNumber *)genre_id;
 
 @end

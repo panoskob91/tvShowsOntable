@@ -10,7 +10,14 @@
 
 @interface AFSETvMazeDetailsVC : UIViewController
 
+/**
+ TVMaze API imageURL holder
+ */
 @property (strong, nonatomic) NSString *imageURL;
+
+/**
+ TVMaze API details text holder
+ */
 @property (strong, nonatomic) NSString *detailsText;
 
 @end
