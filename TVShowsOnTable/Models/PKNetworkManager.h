@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "AFSENetworkingDelegate.h"
 
+#define THE_MOVIE_DB_API_KEY @"6b2e856adafcc7be98bdf0d8b076851c"
+
 @interface PKNetworkManager : NSObject
 
 

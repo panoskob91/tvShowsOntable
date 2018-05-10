@@ -15,11 +15,10 @@
 
 - (void)fetchAPICallWithSearchText:(NSString *)userSearchText
 {
-
     self.shows = [[NSMutableArray alloc] init];
     
     userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/search/multi?api_key=6b2e856adafcc7be98bdf0d8b076851c&query=%@", userSearchText];
+    NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/search/multi?api_key=%@&query=%@", THE_MOVIE_DB_API_KEY, userSearchText];
     
     NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
@@ -34,8 +33,8 @@
             Show *showInfo;
             TVSeries *tvSerie;
             Movie *showMovie;
-            
-            for (NSDictionary *dict in responseDictionary[@"results"])
+            NSDictionary *resultsArray = responseDictionary[@"results"];
+            for (NSDictionary *dict in resultsArray)
             {
                 if ([dict[@"media_type"] isEqualToString:@"tv"])
                 {
@@ -50,12 +49,10 @@
                 }
                 
             }
-            
             if ([self.networkingDelegate respondsToSelector:@selector(networkAPICallDidCompleteWithResponse:)])
             {
                 [self.networkingDelegate networkAPICallDidCompleteWithResponse:self.shows];
             }
-            
         }
         else{
             NSLog(@"ERROR %@", error);
@@ -63,7 +60,6 @@
             {
                 [self.networkingDelegate networkAPICallDidCompleteWithResponse:self.shows];
             }
-            
         }
     }];
     [dataTask resume];
@@ -72,8 +68,7 @@
 - (void)fetchDescriptionFromId:(NSNumber *)showId
                   andMediaType:(NSString *)mediaType
 {
-    
-    NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/%@/%@?api_key=6b2e856adafcc7be98bdf0d8b076851c",mediaType, showId];
+    NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/%@/%@?api_key=%@",mediaType, showId, THE_MOVIE_DB_API_KEY];
     NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -101,8 +96,6 @@
             {
                 [self.networkingDelegate APIFetchedWithResponseDescriptionProperty:summary];
             }
-            
-            
         }
         else{
             NSLog(@"ERROR %@", error);
