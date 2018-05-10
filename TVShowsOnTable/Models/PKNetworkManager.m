@@ -6,12 +6,12 @@
 //  Copyright © 2018 AFSE. All rights reserved.
 //
 
-#import "AFSENetworkManager.h"
+#import "PKNetworkManager.h"
 #import "Movie.h"
 #import "TVSeries.h"
 
 
-@implementation AFSENetworkManager
+@implementation PKNetworkManager
 
 - (void)fetchAPICallWithSearchText:(NSString *)userSearchText
 {

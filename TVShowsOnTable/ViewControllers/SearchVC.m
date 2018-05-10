@@ -12,7 +12,7 @@
 #import "Show.h"
 #import "Movie.h"
 #import "TVSeries.h"
-#import "AFSENetworkManager.h"
+#import "PKNetworkManager.h"
 
 //Helpers
 #import "NSString_stripHtml.h"
@@ -142,7 +142,7 @@ NSArray *selectedCells;
 {
     self.searchedText = self.searchBar.text;
     //[self fetchNewRemoteJSONWithSearchText:self.searchedText];
-    AFSENetworkManager *networkManager = [[AFSENetworkManager alloc] init];
+    PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     networkManager.networkingDelegate = self;
     [networkManager fetchAPICallWithSearchText:self.searchedText];
     [searchBar resignFirstResponder];

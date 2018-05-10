@@ -31,7 +31,7 @@
 		1A47C1BA2072076E00D63753 /* TVShowsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C1B92072076E00D63753 /* TVShowsCell.m */; };
 		1A47C1C32072321500D63753 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C1C22072321500D63753 /* DetailsViewController.m */; };
 		1AC5D19820736690002FB850 /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC5D19720736690002FB850 /* Show.m */; };
-		1ADBBA3A20A02F7D008588D1 /* AFSENetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADBBA3920A02F7D008588D1 /* AFSENetworkManager.m */; };
+		1ADBBA3A20A02F7D008588D1 /* PKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADBBA3920A02F7D008588D1 /* PKNetworkManager.m */; };
 		1AF62F3D2074C95A005FC411 /* showData.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AF62F3A2074B167005FC411 /* showData.json */; };
 /* End PBXBuildFile section */
 
@@ -101,8 +101,8 @@
 		1AC5D19620736690002FB850 /* Show.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Show.h; path = TVShowsOnTable/Models/Show.h; sourceTree = SOURCE_ROOT; };
 		1AC5D19720736690002FB850 /* Show.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Show.m; path = TVShowsOnTable/Models/Show.m; sourceTree = SOURCE_ROOT; };
 		1ADBBA3720A02E30008588D1 /* AFSENetworkingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSENetworkingDelegate.h; sourceTree = "<group>"; };
-		1ADBBA3820A02F7D008588D1 /* AFSENetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSENetworkManager.h; sourceTree = "<group>"; };
-		1ADBBA3920A02F7D008588D1 /* AFSENetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSENetworkManager.m; sourceTree = "<group>"; };
+		1ADBBA3820A02F7D008588D1 /* PKNetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKNetworkManager.h; sourceTree = "<group>"; };
+		1ADBBA3920A02F7D008588D1 /* PKNetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKNetworkManager.m; sourceTree = "<group>"; };
 		1AF62F3A2074B167005FC411 /* showData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = showData.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -295,8 +295,8 @@
 				1A3CBA9B20970A0000718417 /* AFSEShowGroup.m */,
 				1A3CBA9D2097496300718417 /* AFSEGenreModel.h */,
 				1A3CBA9E2097496300718417 /* AFSEGenreModel.m */,
-				1ADBBA3820A02F7D008588D1 /* AFSENetworkManager.h */,
-				1ADBBA3920A02F7D008588D1 /* AFSENetworkManager.m */,
+				1ADBBA3820A02F7D008588D1 /* PKNetworkManager.h */,
+				1ADBBA3920A02F7D008588D1 /* PKNetworkManager.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -372,7 +372,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = AFSE;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = AFSE;
 				TargetAttributes = {
 					1A47C1822072058200D63753 = {
@@ -453,7 +453,7 @@
 				1A36078E208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m in Sources */,
 				1A47C1962072058300D63753 /* main.m in Sources */,
 				1A47C1BA2072076E00D63753 /* TVShowsCell.m in Sources */,
-				1ADBBA3A20A02F7D008588D1 /* AFSENetworkManager.m in Sources */,
+				1ADBBA3A20A02F7D008588D1 /* PKNetworkManager.m in Sources */,
 				1AC5D19820736690002FB850 /* Show.m in Sources */,
 				1A47C1882072058200D63753 /* AppDelegate.m in Sources */,
 				1A3F8DC8207E009C000F4C8A /* TVSeries.m in Sources */,
@@ -531,6 +531,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -538,6 +539,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -586,6 +588,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -593,6 +596,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

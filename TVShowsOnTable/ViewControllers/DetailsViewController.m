@@ -8,8 +8,7 @@
 
 #import "DetailsViewController.h"
 #import "AFSEWebContentHandlerVC.h"
-#import "AFSENetworkManager.h"
-#import "AFSENetworkManager.h"
+#import "PKNetworkManager.h"
 
 @interface DetailsViewController ()
 
@@ -32,7 +31,7 @@ NSString *summary;
     [self setupImageViews];
     [self setupNavigationItemStyle];
     
-    AFSENetworkManager *networkManager = [[AFSENetworkManager alloc] init];
+    PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     networkManager.networkingDelegate = self;
     [networkManager fetchDescriptionFromId:self.showID
                               andMediaType:self.show.mediaType];

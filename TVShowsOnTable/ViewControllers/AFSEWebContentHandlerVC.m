@@ -9,7 +9,7 @@
 #import "AFSEWebContentHandlerVC.h"
 #import <WebKit/WebKit.h>
 #import "UIAlertController+AFSEAlertGenerator.h"
-#import "AFSENetworkManager.h"
+#import "PKNetworkManager.h"
 
 @interface AFSEWebContentHandlerVC ()
 
@@ -32,7 +32,7 @@
     //NSLog(@"SHOWID = %@", self.showID);
     //[self getYoutubeVideoKeyWithShowID:self.showID andMediaType:self.show.mediaType];
     
-    AFSENetworkManager *networkManager = [[AFSENetworkManager alloc] init];
+    PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     networkManager.networkingDelegate = self;
     [networkManager getYoutubeVideoKeyWithShowID:self.showID andMediaType:self.show.mediaType];
     
