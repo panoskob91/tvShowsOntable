@@ -24,7 +24,7 @@
 
 
 /**
- Class initialiser
+ Object initialiser
 
  @param GID Genre ID
  @param name Genre name
