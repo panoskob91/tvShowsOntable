@@ -28,6 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.tvMazeTableView registerNib:[UINib nibWithNibName:@"ShowsCell" bundle:nil] forCellReuseIdentifier:@"tVShowsCell"];
     [self setupTableView];
     [self setupSearchBar];
     [self initialiseDataStructures];
@@ -82,7 +83,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.tvMazeTableView registerNib:[UINib nibWithNibName:@"ShowsCell" bundle:nil] forCellReuseIdentifier:@"tVShowsCell"];
     TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tVShowsCell"];
     if (indexPath.row <= self.shows.count && self.shows.count != 0){
         cell.showTitleLabel.text = self.shows[indexPath.row].showTitle;

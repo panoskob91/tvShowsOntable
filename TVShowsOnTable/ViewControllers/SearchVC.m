@@ -14,6 +14,8 @@
 #import "TVSeries.h"
 #import "PKNetworkManager.h"
 
+#import "PKMovieCellViewModel.h"
+
 //Helpers
 #import "NSString_stripHtml.h"
 //Categories and protocols
@@ -36,6 +38,9 @@
 @property (strong, nonatomic) NSMutableArray<Movie *> *movies;
 @property (strong, nonatomic) NSMutableArray<TVSeries *> *series;
 @property (strong, nonatomic) NSArray<Show *> *showsArray;
+
+@property (strong, nonatomic) NSArray<PKMovieCellViewModel *> *viewModels;
+
 @property (strong, nonatomic) NSMutableArray<AFSEShowGroup *> *showGroupsArray;
 @property (strong, nonatomic) NSMutableArray<AFSEGenreModel *> *movieGenres;
 @property (strong, nonatomic) NSMutableArray<AFSEGenreModel *> *tvGenres;
@@ -488,6 +493,8 @@ NSArray *selectedCells;
 - (void)groupItemsBasedOnGenreIdWithDataFromArray:(NSArray *) shows
 {
     self.showGroupsArray = [[NSMutableArray alloc] init];
+    self.viewModels = [[NSMutableArray alloc] init];
+    
     BOOL onList = NO;
     
     for (Show *show in shows)
@@ -496,6 +503,7 @@ NSArray *selectedCells;
         {
             if ([show.showGenreID isEqual:self.showGroupsArray[i].sectionID])
             {
+                //PKMovieCellViewModel *viewModel = [PKMovieCellViewModel alloc] initWithMovieModel:<#(Movie *)#>
                 [self.showGroupsArray[i].dataInSection addObject:show];
                 onList = YES;
                 break;
