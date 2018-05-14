@@ -12,6 +12,10 @@
 
 @interface DetailsViewController : UIViewController<AFSENetworkingDelegate>
 
+@property (strong, nonatomic) IBOutlet UIImageView *showImageView;
+@property (strong, nonatomic) IBOutlet UITextView *descriptionDetailsTextView;
+@property (strong, nonatomic) IBOutlet UIImageView *mediaTypeImageView;
+
 /**
  Placeholder for show description
  */

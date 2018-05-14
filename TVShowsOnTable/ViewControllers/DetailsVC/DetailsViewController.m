@@ -9,12 +9,10 @@
 #import "DetailsViewController.h"
 #import "AFSEWebContentHandlerVC.h"
 #import "PKNetworkManager.h"
+#import "PKDetailsVCViewModel.h"
 
 @interface DetailsViewController ()
 
-@property (strong, nonatomic) IBOutlet UIImageView *showImageView;
-@property (strong, nonatomic) IBOutlet UITextView *descriptionDetailsTextView;
-@property (strong, nonatomic) IBOutlet UIImageView *mediaTypeImageView;
 
 @property (strong, nonatomic) NSNumber *showID;
 
@@ -27,14 +25,17 @@ NSString *summary;
 #pragma mark -ViewController lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupTextView];
-    [self setupImageViews];
-    [self setupNavigationItemStyle];
+    //[self setupTextView];
+    //[self setupImageViews];
+    [self setupNavigationItem];
     
     PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     networkManager.networkingDelegate = self;
     [networkManager fetchDescriptionFromId:self.showID
                               andMediaType:self.show.mediaType];
+    
+    PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show];
+    [detailsVCViewModel setupImageViewsFromVC:self WithObject:detailsVCViewModel];
     
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -42,9 +43,6 @@ NSString *summary;
     singleFingerTap.numberOfTouchesRequired = 1;
     [self.showImageView setUserInteractionEnabled:YES];
     [self.showImageView addGestureRecognizer:singleFingerTap];
-    
-    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)];
-    [self.view addGestureRecognizer: pinchGesture];
     
 }
 
@@ -61,7 +59,9 @@ NSString *summary;
 - (void)APIFetchedWithResponseDescriptionProperty:(NSString *)showSummary
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.descriptionDetailsTextView.text = showSummary;
+        //self.descriptionDetailsTextView.text = showSummary;
+        PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show];
+        [detailsVCViewModel setupDetailsTextViewFromVC:self WithString:showSummary];
     });
 }
 
@@ -82,53 +82,35 @@ NSString *summary;
     }
 }
 
-- (void)setupTextView
-{
-    self.descriptionDetailsTextView.text = self.labelValue;
-    self.descriptionDetailsTextView.editable = NO;
-    [self.descriptionDetailsTextView setFont:[UIFont fontWithName:@"Helvetica" size:17]];
-    self.descriptionDetailsTextView.textColor = [UIColor blackColor];
-}
+//- (void)setupTextView
+//{
+//    self.descriptionDetailsTextView.text = self.labelValue;
+//    self.descriptionDetailsTextView.editable = NO;
+//    [self.descriptionDetailsTextView setFont:[UIFont fontWithName:@"Helvetica" size:17]];
+//    self.descriptionDetailsTextView.textColor = [UIColor blackColor];
+//}
 
-- (void)setupNavigationItemStyle
+- (void)setupNavigationItem
 {
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Details", self.navigationItemTitle];
 }
 
-- (void)setupImageViews
-{
-    NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.imageURL]];
-    self.showImageView.image = [UIImage imageWithData:imageData];
-    self.showImageView.layer.cornerRadius = 10;
-    self.showImageView.contentMode = UIViewContentModeScaleToFill;
-    self.showImageView.clipsToBounds = YES;
-    if ([self.show.mediaType isEqualToString:@"tv"])
-    {
-        self.mediaTypeImageView.image = [UIImage imageNamed:@"TvSeries"];
-    }
-    else if ([self.show.mediaType isEqualToString:@"movie"])
-    {
-        self.mediaTypeImageView.image = [UIImage imageNamed:@"movieImage"];
-    }
-}
-
-- (void)handlePinchGesture: (UIPinchGestureRecognizer *)gestureRecogniser
-{
-    UIGestureRecognizerState state = [gestureRecogniser state];
-    CGFloat initialScale = [gestureRecogniser scale];
-    if  (state == UIGestureRecognizerStateBegan || state == UIGestureRecognizerStateChanged)
-    {
-        CGFloat scale = [gestureRecogniser scale];
-        [gestureRecogniser.view setTransform:CGAffineTransformScale(gestureRecogniser.view.transform, scale, scale)];
-        [gestureRecogniser setScale:1];
-    }
-    else if (state == UIGestureRecognizerStateEnded)
-    {
-        [gestureRecogniser setScale:initialScale];
-    }
-    
-    
-}
+//- (void)setupImageViews
+//{
+//    NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.imageURL]];
+//    self.showImageView.image = [UIImage imageWithData:imageData];
+//    self.showImageView.layer.cornerRadius = 10;
+//    self.showImageView.contentMode = UIViewContentModeScaleToFill;
+//    self.showImageView.clipsToBounds = YES;
+//    if ([self.show.mediaType isEqualToString:@"tv"])
+//    {
+//        self.mediaTypeImageView.image = [UIImage imageNamed:@"TvSeries"];
+//    }
+//    else if ([self.show.mediaType isEqualToString:@"movie"])
+//    {
+//        self.mediaTypeImageView.image = [UIImage imageNamed:@"movieImage"];
+//    }
+//}
 
 #pragma mark -Getters
 - (NSNumber *)getTheShowID

@@ -19,7 +19,7 @@
     self.tvShowsImage.clipsToBounds = YES;
     self.showsTitleDescription.numberOfLines = 2;
     self.showTitleLabel.adjustsFontSizeToFitWidth = YES;
-    
+    self.showTitleLabel.numberOfLines = 0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

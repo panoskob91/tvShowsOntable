@@ -33,6 +33,7 @@
 		1A67FF2020A5E10E00C4B256 /* PKMovieCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A67FF1F20A5E10E00C4B256 /* PKMovieCellViewModel.m */; };
 		1A67FF2320A5E12D00C4B256 /* PKTVTableViewCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A67FF2220A5E12D00C4B256 /* PKTVTableViewCellViewModel.m */; };
 		1A7BD8B020A9660B00BF4C7B /* PKShowTableCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7BD8AF20A9660B00BF4C7B /* PKShowTableCellViewModel.m */; };
+		1A7BD8B520A9934A00BF4C7B /* PKDetailsVCViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7BD8B420A9934A00BF4C7B /* PKDetailsVCViewModel.m */; };
 		1AC5D19820736690002FB850 /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC5D19720736690002FB850 /* Show.m */; };
 		1ADBBA3A20A02F7D008588D1 /* PKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADBBA3920A02F7D008588D1 /* PKNetworkManager.m */; };
 		1AF62F3D2074C95A005FC411 /* showData.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AF62F3A2074B167005FC411 /* showData.json */; };
@@ -107,6 +108,8 @@
 		1A67FF2220A5E12D00C4B256 /* PKTVTableViewCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKTVTableViewCellViewModel.m; sourceTree = "<group>"; };
 		1A7BD8AE20A9660B00BF4C7B /* PKShowTableCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKShowTableCellViewModel.h; sourceTree = "<group>"; };
 		1A7BD8AF20A9660B00BF4C7B /* PKShowTableCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKShowTableCellViewModel.m; sourceTree = "<group>"; };
+		1A7BD8B320A9934A00BF4C7B /* PKDetailsVCViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKDetailsVCViewModel.h; sourceTree = "<group>"; };
+		1A7BD8B420A9934A00BF4C7B /* PKDetailsVCViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKDetailsVCViewModel.m; sourceTree = "<group>"; };
 		1AC5D19620736690002FB850 /* Show.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Show.h; path = TVShowsOnTable/Models/Show.h; sourceTree = SOURCE_ROOT; };
 		1AC5D19720736690002FB850 /* Show.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Show.m; path = TVShowsOnTable/Models/Show.m; sourceTree = SOURCE_ROOT; };
 		1ADBBA3720A02E30008588D1 /* AFSENetworkingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSENetworkingDelegate.h; sourceTree = "<group>"; };
@@ -266,18 +269,11 @@
 		1A47C1BB2072308100D63753 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1A47C1892072058200D63753 /* SearchVC.h */,
-				1A47C18A2072058200D63753 /* SearchVC.m */,
-				1A47C1C22072321500D63753 /* DetailsViewController.m */,
-				1A47C1C12072321500D63753 /* DetailsViewController.h */,
-				1A3303E920874ABC0062E1ED /* PickShowTypeVC.h */,
-				1A3303EA20874ABC0062E1ED /* PickShowTypeVC.m */,
-				1A3CBA942096E9B000718417 /* AFSETvMazeViewController.h */,
-				1A3CBA952096E9B000718417 /* AFSETvMazeViewController.m */,
-				1A3CBA972096F7FD00718417 /* AFSETvMazeDetailsVC.h */,
-				1A3CBA982096F7FD00718417 /* AFSETvMazeDetailsVC.m */,
-				1A0E8D4F209B0A5A007F817B /* AFSEWebContentHandlerVC.h */,
-				1A0E8D50209B0A5A007F817B /* AFSEWebContentHandlerVC.m */,
+				1A7BD8B620A99F4300BF4C7B /* SearchVC */,
+				1A7BD8B920A99FDC00BF4C7B /* PIckShowTypeVC */,
+				1A7BD8B820A99FC800BF4C7B /* WebHanlerVC */,
+				1A7BD8B720A99F6B00BF4C7B /* DetailsVC */,
+				1A7BD8B220A992D300BF4C7B /* TVMazeViewControllers */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -285,8 +281,16 @@
 		1A47C1BE207230BA00D63753 /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
+				1A7BD8B120A9912300BF4C7B /* TableCellViewModels */,
 				1A47C1B92072076E00D63753 /* TVShowsCell.m */,
 				1A47C1B82072076E00D63753 /* TVShowsCell.h */,
+			);
+			path = TableCell;
+			sourceTree = "<group>";
+		};
+		1A7BD8B120A9912300BF4C7B /* TableCellViewModels */ = {
+			isa = PBXGroup;
+			children = (
 				1A67FF1E20A5E10E00C4B256 /* PKMovieCellViewModel.h */,
 				1A67FF1F20A5E10E00C4B256 /* PKMovieCellViewModel.m */,
 				1A67FF2120A5E12D00C4B256 /* PKTVTableViewCellViewModel.h */,
@@ -294,7 +298,56 @@
 				1A7BD8AE20A9660B00BF4C7B /* PKShowTableCellViewModel.h */,
 				1A7BD8AF20A9660B00BF4C7B /* PKShowTableCellViewModel.m */,
 			);
-			path = TableCell;
+			path = TableCellViewModels;
+			sourceTree = "<group>";
+		};
+		1A7BD8B220A992D300BF4C7B /* TVMazeViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1A3CBA942096E9B000718417 /* AFSETvMazeViewController.h */,
+				1A3CBA952096E9B000718417 /* AFSETvMazeViewController.m */,
+				1A3CBA972096F7FD00718417 /* AFSETvMazeDetailsVC.h */,
+				1A3CBA982096F7FD00718417 /* AFSETvMazeDetailsVC.m */,
+			);
+			path = TVMazeViewControllers;
+			sourceTree = "<group>";
+		};
+		1A7BD8B620A99F4300BF4C7B /* SearchVC */ = {
+			isa = PBXGroup;
+			children = (
+				1A47C1892072058200D63753 /* SearchVC.h */,
+				1A47C18A2072058200D63753 /* SearchVC.m */,
+			);
+			path = SearchVC;
+			sourceTree = "<group>";
+		};
+		1A7BD8B720A99F6B00BF4C7B /* DetailsVC */ = {
+			isa = PBXGroup;
+			children = (
+				1A47C1C12072321500D63753 /* DetailsViewController.h */,
+				1A47C1C22072321500D63753 /* DetailsViewController.m */,
+				1A7BD8B320A9934A00BF4C7B /* PKDetailsVCViewModel.h */,
+				1A7BD8B420A9934A00BF4C7B /* PKDetailsVCViewModel.m */,
+			);
+			path = DetailsVC;
+			sourceTree = "<group>";
+		};
+		1A7BD8B820A99FC800BF4C7B /* WebHanlerVC */ = {
+			isa = PBXGroup;
+			children = (
+				1A0E8D4F209B0A5A007F817B /* AFSEWebContentHandlerVC.h */,
+				1A0E8D50209B0A5A007F817B /* AFSEWebContentHandlerVC.m */,
+			);
+			path = WebHanlerVC;
+			sourceTree = "<group>";
+		};
+		1A7BD8B920A99FDC00BF4C7B /* PIckShowTypeVC */ = {
+			isa = PBXGroup;
+			children = (
+				1A3303E920874ABC0062E1ED /* PickShowTypeVC.h */,
+				1A3303EA20874ABC0062E1ED /* PickShowTypeVC.m */,
+			);
+			path = PIckShowTypeVC;
 			sourceTree = "<group>";
 		};
 		1AC5D19320736657002FB850 /* Models */ = {
@@ -475,6 +528,7 @@
 				1AC5D19820736690002FB850 /* Show.m in Sources */,
 				1A47C1882072058200D63753 /* AppDelegate.m in Sources */,
 				1A3F8DC8207E009C000F4C8A /* TVSeries.m in Sources */,
+				1A7BD8B520A9934A00BF4C7B /* PKDetailsVCViewModel.m in Sources */,
 				1A3E0CC82080B641006DB87A /* NSString_stripHtml.m in Sources */,
 				1A0E8D51209B0A5A007F817B /* AFSEWebContentHandlerVC.m in Sources */,
 				1A3CBA9F2097496300718417 /* AFSEGenreModel.m in Sources */,

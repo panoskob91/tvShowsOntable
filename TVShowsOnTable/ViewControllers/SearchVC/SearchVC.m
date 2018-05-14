@@ -14,7 +14,9 @@
 #import "TVSeries.h"
 #import "PKNetworkManager.h"
 
+//View models
 #import "PKMovieCellViewModel.h"
+#import "PKShowTableCellViewModel.h"
 
 //Helpers
 #import "NSString_stripHtml.h"
@@ -49,6 +51,7 @@
 @property (strong, nonatomic) NSMutableDictionary *showGenresDictionary;
 @property (nonatomic, assign) BOOL contentIsEditable;
 
+//IBOutlets
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *tableViewActivityindicator;
@@ -74,6 +77,8 @@ NSArray *selectedCells;
     [self initialiseTheNeededArrays];
     [self getMovieGenreNameAndGenreId];
     [self getTVGenreNameAndGenreId];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"ShowsCell" bundle:nil] forCellReuseIdentifier:@"tVShowsCell"];
     
     self.title = @"Shows";
     self.contentIsEditable = true;
@@ -199,18 +204,16 @@ NSArray *selectedCells;
     selectedCells = [self.tableView indexPathsForSelectedRows];
     
     DetailsViewController *detailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"detailsVC"];
+    Show *show = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row];
     NSNumber *showID = [[NSNumber alloc] init];
-    NSString *showTitleFromGroups = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row].showTitle;
-        
+    NSString *showTitleFromGroups = show.showTitle;
         detailsVC.navigationItemTitle = showTitleFromGroups;
-    NSString *imageURLFromGroups = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row].showImageUrlPath;
-    
+    NSString *imageURLFromGroups = show.showImageUrlPath;
         detailsVC.imageURL = imageURLFromGroups;
-    
-    NSNumber *showIdFromGroups = [self.showGroupsArray[indexPath.section].dataInSection[indexPath.row] getShowId];
+    NSNumber *showIdFromGroups = [show getShowId];
     showID = showIdFromGroups;
     
-    detailsVC.show = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row];
+    detailsVC.show = show;
     [detailsVC setTheShowID:showID];
     [self.navigationController pushViewController:detailsVC animated:YES];
     
@@ -228,7 +231,8 @@ NSArray *selectedCells;
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (UITableViewCellEditingStyleDelete)
     {
-        [self.showGroupsArray[indexPath.section].dataInSection removeObjectAtIndex:indexPath.row];
+        NSMutableArray<Show *> *showsArray = self.showGroupsArray[indexPath.section].dataInSection;
+        [showsArray removeObjectAtIndex:indexPath.row];
     }
     [self.tableView reloadData];
 }
@@ -244,8 +248,9 @@ NSArray *selectedCells;
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             Show *objectToBeMoved = self.showGroupsArray[sourceIndexPath.section].dataInSection[sourceIndexPath.row];
-            [self.showGroupsArray[sourceIndexPath.section].dataInSection removeObjectAtIndex:sourceIndexPath.row];
-            [self.showGroupsArray[sourceIndexPath.section].dataInSection insertObject:objectToBeMoved atIndex:destinationIndexPath.row];
+            NSMutableArray<Show *> *showsInSection = self.showGroupsArray[sourceIndexPath.section].dataInSection;
+            [showsInSection removeObjectAtIndex:sourceIndexPath.row];
+            [showsInSection insertObject:objectToBeMoved atIndex:destinationIndexPath.row];
             dispatch_async(dispatch_get_main_queue(), ^{
                     [self.tableView reloadData];
                 });
@@ -259,7 +264,10 @@ NSArray *selectedCells;
         NSMutableArray<UIAlertAction*> *alertActions = [[NSMutableArray alloc] init];
         [alertActions addObject:actionOK];
         
-        UIAlertController *alert = [UIAlertController generateAlertWithTitle:@"Attention!" andMessage:@"You can not move shows between sections" andActions:alertActions];
+        NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary];
+        NSString *alertMessage = [NSString stringWithFormat:@"Sorry, you cannot move elements from section %@ to section %@",
+                                  genreNames[sourceIndexPath.section], genreNames[destinationIndexPath.section]];
+        UIAlertController *alert = [UIAlertController generateAlertWithTitle:@"Attention!" andMessage:alertMessage andActions:alertActions];
         [self presentViewController:alert animated:YES completion:nil];
     }
    
@@ -268,13 +276,14 @@ NSArray *selectedCells;
 #pragma mark -UITTableView delegate functions
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-      [tableView registerNib:[UINib nibWithNibName:@"ShowsCell" bundle:nil] forCellReuseIdentifier:@"tVShowsCell"];
-     TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tVShowsCell"];
     Show *show = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row];
+    //NSArray <Show *> *shows = [[NSArray alloc] initWithObjects:self.showGroupsArray[indexPath.section].dataInSection, nil] ;
+    PKShowTableCellViewModel *showViewModel = [[PKShowTableCellViewModel alloc] initWithShowViewModelObject:show];
+    TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:[showViewModel getCellIdentifier]];
     
-    if (indexPath.row <= self.shows.count
-        && self.showsArray.count != 0)
-    {
+//    if (indexPath.row <= shows.count
+//        && shows.count != 0)
+//    {
         if ([show.mediaType isEqualToString:@"tv"])
         {
             cell.showTypeImageView.image = [UIImage imageNamed:@"TvSeries"];
@@ -283,8 +292,9 @@ NSArray *selectedCells;
         {
             cell.showTypeImageView.image = [UIImage imageNamed:@"movieImage"];
         }
-        [cell setupCellPropertiesWithObject:show];
-    }
+        //[cell setupCellPropertiesWithObject:show];
+        [showViewModel updateView:cell];
+//    }
         return cell;
 }
 #pragma mark -UITableView footer
@@ -382,76 +392,6 @@ NSArray *selectedCells;
     [dataTask resume];
 }
 
-
-#pragma mark -Fetch API
-- (void)fetchNewRemoteJSONWithSearchText: (NSString *)userSearchText
-{
-    
-//    [self.shows removeAllObjects];
-//    [self.movies removeAllObjects];
-//    [self.series removeAllObjects];
-//    [showsDataDictionary removeAllObjects];
-//    [self.showGroupsArray removeAllObjects];
-//
-//    [self activityIndicatorHandlerWhenActivityIndicatorIs:NO];
-//
-//
-//    userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-//    NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/search/multi?api_key=6b2e856adafcc7be98bdf0d8b076851c&query=%@", userSearchText];
-//
-//    NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
-//    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
-//    NSURLSession *session = [NSURLSession sharedSession];
-//    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
-//        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-//        if (httpResponse.statusCode == 200)
-//        {
-//            NSError *parseError = nil;
-//            NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-//
-//            Show *showInfo;
-//            Movie *showMovie;
-//            TVSeries *tvSerie;
-//
-//            for (NSDictionary *dict in responseDictionary[@"results"])
-//            {
-//
-//                if ([dict[@"media_type"] isEqualToString:@"tv"])
-//                {
-//                    showInfo = [[Show alloc] initWithDictionaryForTvDb:dict];
-//                    tvSerie = [[TVSeries alloc] initWithDictionaryForTvDbAPI:dict];
-//                    [self.series addObject:tvSerie];
-//                    [self.shows addObject:tvSerie];
-//                    //[self.shows addObject:showInfo];
-//
-//                }
-//                else if ([dict[@"media_type"] isEqualToString:@"movie"])
-//                {
-//                    showMovie = [[Movie alloc] initWithResponseDictionaryFromTvDb:dict];
-//                    [self.movies addObject: showMovie];
-//                    [self.shows addObject:showMovie];
-//
-//                }
-//            }
-//
-//            [self groupItemsBasedOnGenreIdWithDataFromArray:self.shows];
-//
-//            [showsDataDictionary setValue:self.series forKey:@"Series"];
-//            [showsDataDictionary setValue:self.movies forKey:@"Movies"];
-//        }
-//        else{
-//            NSLog(@"ERROR %@", error);
-//        }
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.tableView reloadData];
-//            [self activityIndicatorHandlerWhenActivityIndicatorIs:YES];
-//        });
-//    }];
-//    [dataTask resume];
-    
-}
-
-
 - (void)activityIndicatorHandlerWhenActivityIndicatorIs: (BOOL)activityIndicatorIsHidden
 {
     if (activityIndicatorIsHidden == YES)
@@ -520,7 +460,7 @@ NSArray *selectedCells;
     }
 }
 
-- (NSArray*)matchIdsWithNamesFromDictionary: (NSDictionary *)dict
+- (NSArray *)matchIdsWithNamesFromDictionary: (NSDictionary *)dict
 {
     NSMutableArray *titleNames = [[NSMutableArray alloc] init];
     for (int i = 0; i < self.showGroupsArray.count; i++)

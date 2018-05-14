@@ -145,6 +145,11 @@
             self.showImageUrlPath = [NSString stringWithFormat:
                               @"http://image.tmdb.org/t/p/w185/%@", dict[@"poster_path"]];
         }
+        else if ([dict[@"poster_path"] isEqual:[NSNull null]])
+        {
+            //If there is no poser image fall back to default tvmaze image url
+            self.showImageUrlPath = @"http://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
+        }
         //Genre ID
         NSArray *genre_ids = dict[@"genre_ids"];
         if (genre_ids.count != 0)

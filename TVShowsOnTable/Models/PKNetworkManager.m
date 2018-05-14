@@ -36,9 +36,10 @@
             NSDictionary *resultsArray = responseDictionary[@"results"];
             for (NSDictionary *dict in resultsArray)
             {
+                showInfo = [[Show alloc] initWithDictionaryForTvDb:dict];
                 if ([dict[@"media_type"] isEqualToString:@"tv"])
                 {
-                    showInfo = [[Show alloc] initWithDictionaryForTvDb:dict];
+                    
                     tvSerie = [[TVSeries alloc] initWithDictionaryForTvDbAPI:dict];
                     [self.shows addObject:tvSerie];
                 }
@@ -63,6 +64,7 @@
         }
     }];
     [dataTask resume];
+    
 }
 
 - (void)fetchDescriptionFromId:(NSNumber *)showId
