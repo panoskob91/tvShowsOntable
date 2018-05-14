@@ -32,6 +32,7 @@
 		1A47C1C32072321500D63753 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C1C22072321500D63753 /* DetailsViewController.m */; };
 		1A67FF2020A5E10E00C4B256 /* PKMovieCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A67FF1F20A5E10E00C4B256 /* PKMovieCellViewModel.m */; };
 		1A67FF2320A5E12D00C4B256 /* PKTVTableViewCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A67FF2220A5E12D00C4B256 /* PKTVTableViewCellViewModel.m */; };
+		1A7BD8B020A9660B00BF4C7B /* PKShowTableCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7BD8AF20A9660B00BF4C7B /* PKShowTableCellViewModel.m */; };
 		1AC5D19820736690002FB850 /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC5D19720736690002FB850 /* Show.m */; };
 		1ADBBA3A20A02F7D008588D1 /* PKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADBBA3920A02F7D008588D1 /* PKNetworkManager.m */; };
 		1AF62F3D2074C95A005FC411 /* showData.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AF62F3A2074B167005FC411 /* showData.json */; };
@@ -104,6 +105,8 @@
 		1A67FF1F20A5E10E00C4B256 /* PKMovieCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKMovieCellViewModel.m; sourceTree = "<group>"; };
 		1A67FF2120A5E12D00C4B256 /* PKTVTableViewCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKTVTableViewCellViewModel.h; sourceTree = "<group>"; };
 		1A67FF2220A5E12D00C4B256 /* PKTVTableViewCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKTVTableViewCellViewModel.m; sourceTree = "<group>"; };
+		1A7BD8AE20A9660B00BF4C7B /* PKShowTableCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKShowTableCellViewModel.h; sourceTree = "<group>"; };
+		1A7BD8AF20A9660B00BF4C7B /* PKShowTableCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKShowTableCellViewModel.m; sourceTree = "<group>"; };
 		1AC5D19620736690002FB850 /* Show.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Show.h; path = TVShowsOnTable/Models/Show.h; sourceTree = SOURCE_ROOT; };
 		1AC5D19720736690002FB850 /* Show.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Show.m; path = TVShowsOnTable/Models/Show.m; sourceTree = SOURCE_ROOT; };
 		1ADBBA3720A02E30008588D1 /* AFSENetworkingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSENetworkingDelegate.h; sourceTree = "<group>"; };
@@ -288,6 +291,8 @@
 				1A67FF1F20A5E10E00C4B256 /* PKMovieCellViewModel.m */,
 				1A67FF2120A5E12D00C4B256 /* PKTVTableViewCellViewModel.h */,
 				1A67FF2220A5E12D00C4B256 /* PKTVTableViewCellViewModel.m */,
+				1A7BD8AE20A9660B00BF4C7B /* PKShowTableCellViewModel.h */,
+				1A7BD8AF20A9660B00BF4C7B /* PKShowTableCellViewModel.m */,
 			);
 			path = TableCell;
 			sourceTree = "<group>";
@@ -458,6 +463,7 @@
 				1A67FF2020A5E10E00C4B256 /* PKMovieCellViewModel.m in Sources */,
 				1A47C18B2072058200D63753 /* SearchVC.m in Sources */,
 				1A3CBA9C20970A0000718417 /* AFSEShowGroup.m in Sources */,
+				1A7BD8B020A9660B00BF4C7B /* PKShowTableCellViewModel.m in Sources */,
 				1A3303E820872DE60062E1ED /* UIColor+rgb.m in Sources */,
 				1A47C1C32072321500D63753 /* DetailsViewController.m in Sources */,
 				1A3F8DC5207E0070000F4C8A /* Movie.m in Sources */,

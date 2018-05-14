@@ -16,6 +16,10 @@
     
     if (self) {
         self.bindModel = movieObject;
+        
+        self.movieTitle = movieObject.movieTitle;
+        self.movieRating = [NSString stringWithFormat:@"%@", movieObject.showAverageRating];
+        
     }
     return self;
 }

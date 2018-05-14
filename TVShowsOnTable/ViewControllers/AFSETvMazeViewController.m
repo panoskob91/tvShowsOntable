@@ -11,6 +11,7 @@
 #import "Movie.h"
 #import "TVShowsCell.h"
 #import "AFSETvMazeDetailsVC.h"
+#import "PKShowTableCellViewModel.h"
 
 @interface AFSETvMazeViewController ()
 
@@ -83,15 +84,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tVShowsCell"];
+    
+    PKShowTableCellViewModel *showViewModel = [[PKShowTableCellViewModel alloc] initWithShowViewModelObject:self.shows[indexPath.row]];
+    TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:[showViewModel getCellIdentifier]];
+    
     if (indexPath.row <= self.shows.count && self.shows.count != 0){
-        cell.showTitleLabel.text = self.shows[indexPath.row].showTitle;
-        
-        NSURL *imageURL = [NSURL URLWithString:self.shows[indexPath.row].showImageUrlPath];
-        NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
-        cell.tvShowsImage.image = [UIImage imageWithData:imageData];
-        
-        cell.showAverageRatingLabel.text = [NSString stringWithFormat:@"%@", self.shows[indexPath.row].showAverageRating];
+        [showViewModel updateView:cell];
     }
     return cell;
 }
