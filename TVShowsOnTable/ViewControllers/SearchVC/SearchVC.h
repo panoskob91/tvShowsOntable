@@ -20,5 +20,7 @@
  */
 @property (strong, nonatomic) NSString *searchedText;
 
+- (void)updateContent;
+
 @end
 

@@ -32,7 +32,8 @@
     return self;
 }
 
-- (void)setupImageViewsFromVC:(DetailsViewController *)detailsVC WithObject:(PKDetailsVCViewModel *)viewModelObject
+- (void)setupImageViewsFromVC:(DetailsViewController *)detailsVC
+                   WithObject:(PKDetailsVCViewModel *)viewModelObject
 {
     NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:viewModelObject.imageUrlPath]];
     detailsVC.showImageView.image = [UIImage imageWithData:imageData];
@@ -43,7 +44,8 @@
     detailsVC.mediaTypeImageView.image = [UIImage imageNamed:self.showTypeImageName];
 }
 
-- (void)setupDetailsTextViewFromVC:(DetailsViewController *)detailsVC WithString:(NSString *)showSummary
+- (void)setupDetailsTextViewFromVC:(DetailsViewController *)detailsVC
+                        WithString:(NSString *)showSummary
 {
     detailsVC.descriptionDetailsTextView.text = showSummary;
     detailsVC.descriptionDetailsTextView.editable = NO;

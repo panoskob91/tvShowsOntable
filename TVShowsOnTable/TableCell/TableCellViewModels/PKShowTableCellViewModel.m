@@ -10,6 +10,7 @@
 
 @implementation PKShowTableCellViewModel
 
+#pragma mark -Initialisers
 - (instancetype)initWithShowViewModelObject:(Show *)showObject
 {
     self = [super init];
@@ -20,13 +21,27 @@
         self.showViewModelImageURL = showObject.showImageUrlPath;
         if (![showObject.showAverageRating isEqual:(NSNumber *)@""])
         {
-            self.showViewModelAveragerating = [NSString stringWithFormat:@"%@/10", showObject.showAverageRating];
+            self.showViewModelAverageRating = [NSString stringWithFormat:@"%@/10", showObject.showAverageRating];
         }
         else
         {
-            self.showViewModelAveragerating = [NSString stringWithFormat:@"%@", showObject.showAverageRating];
+            self.showViewModelAverageRating = [NSString stringWithFormat:@"%@", showObject.showAverageRating];
         }
+        self.bindModel = showObject;
         
+    }
+    return self;
+}
+
+- (instancetype)initWithShowViewModelObject:(Show *)showObject
+                         andShowGroupObject:(AFSEShowGroup *)showGroupObject
+{
+    self = [self initWithShowViewModelObject:showObject];
+    //self = [super init];
+    
+    if (self)
+    {
+        self.showGroup = showGroupObject;
         
     }
     return self;
@@ -45,13 +60,22 @@
         NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
     
     cell.tvShowsImage.image = [UIImage imageWithData:imageData];
-    if (![self.showViewModelAveragerating isEqualToString:@""])
+    if (![self.showViewModelAverageRating isEqualToString:@""])
     {
-        cell.showAverageRatingLabel.text = self.showViewModelAveragerating;
+        cell.showAverageRatingLabel.text = self.showViewModelAverageRating;
     }
     else
     {
         cell.showAverageRatingLabel.text = @"";
+    }
+    
+    if ([self.bindModel.mediaType isEqualToString:@"tv"])
+    {
+        cell.showTypeImageView.image = [UIImage imageNamed:@"TvSeries"];
+    }
+    else if ([self.bindModel.mediaType isEqualToString:@"movie"])
+    {
+        cell.showTypeImageView.image = [UIImage imageNamed:@"movieImage"];
     }
     
 }

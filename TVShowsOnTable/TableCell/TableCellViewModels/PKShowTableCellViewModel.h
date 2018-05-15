@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "Show.h"
 #import "TVShowsCell.h"
+#import "AFSEShowGroup.h"
 
 @interface PKShowTableCellViewModel : NSObject
+
+@property (strong, nonatomic) Show *bindModel;
+@property (strong, nonatomic) AFSEShowGroup *showGroup;
 
 /**
  Show's title
@@ -25,12 +29,13 @@
 /**
  Show's average rating
  */
-@property (strong, nonatomic) NSString *showViewModelAveragerating;
+@property (strong, nonatomic) NSString *showViewModelAverageRating;
 
 - (instancetype)initWithShowViewModelObject:(Show *)showObject;
+- (instancetype)initWithShowViewModelObject:(Show *)showObject
+                         andShowGroupObject:(AFSEShowGroup *)showGroupObject;
 
 - (NSString *)getCellIdentifier;
 - (void)updateView:(TVShowsCell *)cell;
-
 
 @end

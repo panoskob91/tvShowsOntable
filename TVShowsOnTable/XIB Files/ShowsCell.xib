@@ -77,7 +77,7 @@
                 <outlet property="showsTitleDescription" destination="9Yo-CX-zYR" id="GO0-cK-FIk"/>
                 <outlet property="tvShowsImage" destination="nM8-oU-QOs" id="dVq-wg-Bcj"/>
             </connections>
-            <point key="canvasLocation" x="108.5" y="-72"/>
+            <point key="canvasLocation" x="-21.5" y="-75"/>
         </tableViewCell>
     </objects>
 </document>

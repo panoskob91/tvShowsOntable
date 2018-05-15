@@ -48,8 +48,8 @@
                     showMovie = [[Movie alloc] initWithResponseDictionaryFromTvDb:dict];
                     [self.shows addObject:showMovie];
                 }
-                
             }
+            
             if ([self.networkingDelegate respondsToSelector:@selector(networkAPICallDidCompleteWithResponse:)])
             {
                 [self.networkingDelegate networkAPICallDidCompleteWithResponse:self.shows];
@@ -133,6 +133,7 @@
                         self.youtubeKey = result[@"key"];
                     }
                 }
+                
             }
             if ([self.networkingDelegate respondsToSelector:@selector(networkCallDidCompleteAndYoutubeKeyGenerated:)])
             {

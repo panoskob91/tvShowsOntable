@@ -18,7 +18,9 @@
 
 - (instancetype)initWithObject:(Show *)showObject;
 
-- (void)setupImageViewsFromVC:(DetailsViewController *)detailsVC WithObject:(PKDetailsVCViewModel *)viewModelObject;
-- (void)setupDetailsTextViewFromVC:(DetailsViewController *)detailsVC WithString:(NSString *)showSummary;
+- (void)setupImageViewsFromVC:(DetailsViewController *)detailsVC
+                   WithObject:(PKDetailsVCViewModel *)viewModelObject;
+- (void)setupDetailsTextViewFromVC:(DetailsViewController *)detailsVC
+                        WithString:(NSString *)showSummary;
 
 @end

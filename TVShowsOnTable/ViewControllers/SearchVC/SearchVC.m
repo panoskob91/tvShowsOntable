@@ -41,7 +41,10 @@
 @property (strong, nonatomic) NSMutableArray<TVSeries *> *series;
 @property (strong, nonatomic) NSArray<Show *> *showsArray;
 
-@property (strong, nonatomic) NSArray<PKMovieCellViewModel *> *viewModels;
+@property (strong, nonatomic) NSMutableArray<PKShowTableCellViewModel *> *viewModels;
+@property (strong, nonatomic) NSMutableArray<PKShowTableCellViewModel *> *sectionsArray;
+@property (strong, nonatomic) NSMutableArray<AFSEShowGroup *> *showGroups;
+@property (strong, nonatomic) NSArray<NSString *> *genreNames;
 
 @property (strong, nonatomic) NSMutableArray<AFSEShowGroup *> *showGroupsArray;
 @property (strong, nonatomic) NSMutableArray<AFSEGenreModel *> *movieGenres;
@@ -90,7 +93,7 @@ NSArray *selectedCells;
     self.showsArray = [[NSArray alloc] initWithArray:shows];
     [self groupItemsBasedOnGenreIdWithDataFromArray:self.showsArray];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
+        [self updateContent];
     });
 }
 
@@ -180,22 +183,67 @@ NSArray *selectedCells;
     
 }
 
+#pragma mark -Update ViewModels
+- (void)updateContent
+{
+    self.viewModels = [[NSMutableArray alloc] init];
+    self.showGroups = [[NSMutableArray alloc] init];
+    self.genreNames = [[NSMutableArray alloc] init];
+    
+    //for (Show *show in self.showsArray) {
+    for (int i = 0; i < self.showsArray.count; i++) {
+        for (AFSEShowGroup *showGroup in self.showGroupsArray) {
+            Show *show = self.showsArray[i];
+            if ([show.showGenreID isEqual:showGroup.sectionID])
+            {
+                PKShowTableCellViewModel *showViewModel = [[PKShowTableCellViewModel alloc] initWithShowViewModelObject:show
+                                                                                                 andShowGroupObject:showGroup];
+                [self.viewModels addObject:showViewModel];
+                
+            }
+        }
+    }
+    
+    self.showGroups = [self getShowGenresGroupArrayFromViewModelsArray:self.viewModels];
+    self.genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary
+                                                 andSourceArray:self.showGroups];
+    [self.tableView reloadData];
+}
+
+- (NSMutableArray<AFSEShowGroup *> *)getShowGenresGroupArrayFromViewModelsArray:(NSArray<PKShowTableCellViewModel *> *)viewModelArray
+{
+    NSMutableArray *outputArray = [[NSMutableArray alloc] init];
+    for (PKShowTableCellViewModel *element in viewModelArray)
+    {
+        [outputArray addObject:element.showGroup];
+    }
+    return outputArray;
+}
+
 #pragma mark -UITableView Data source functions
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary];
-    return genreNames.count;
+    //NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary];
+    //return genreNames.count;
+    //return self.viewModels.count;
+    return 1;
+//    return self.genreNames.count;
+    
 }
 
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary];
-    return genreNames[section];
+    //NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary];
+    //return genreNames[section];
+    return @"KITSOS";
+    
+    //return self.genreNames[section];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.showGroupsArray[section].dataInSection.count;
+    //return self.showGroupsArray[section].dataInSection.count;
+    return self.viewModels.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -264,9 +312,11 @@ NSArray *selectedCells;
         NSMutableArray<UIAlertAction*> *alertActions = [[NSMutableArray alloc] init];
         [alertActions addObject:actionOK];
         
-        NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary];
+        //NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary];
+        NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary andSourceArray:self.showGroupsArray];
         NSString *alertMessage = [NSString stringWithFormat:@"Sorry, you cannot move elements from section %@ to section %@",
                                   genreNames[sourceIndexPath.section], genreNames[destinationIndexPath.section]];
+
         UIAlertController *alert = [UIAlertController generateAlertWithTitle:@"Attention!" andMessage:alertMessage andActions:alertActions];
         [self presentViewController:alert animated:YES completion:nil];
     }
@@ -276,23 +326,24 @@ NSArray *selectedCells;
 #pragma mark -UITTableView delegate functions
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Show *show = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row];
+    //Show *show = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row];
     //NSArray <Show *> *shows = [[NSArray alloc] initWithObjects:self.showGroupsArray[indexPath.section].dataInSection, nil] ;
-    PKShowTableCellViewModel *showViewModel = [[PKShowTableCellViewModel alloc] initWithShowViewModelObject:show];
+    //PKShowTableCellViewModel *showViewModel = [[PKShowTableCellViewModel alloc] initWithShowViewModelObject:show];
+    PKShowTableCellViewModel *showViewModel = self.viewModels[indexPath.row];
     TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:[showViewModel getCellIdentifier]];
     
 //    if (indexPath.row <= shows.count
 //        && shows.count != 0)
 //    {
-        if ([show.mediaType isEqualToString:@"tv"])
-        {
-            cell.showTypeImageView.image = [UIImage imageNamed:@"TvSeries"];
-        }
-        else if ([show.mediaType isEqualToString:@"movie"])
-        {
-            cell.showTypeImageView.image = [UIImage imageNamed:@"movieImage"];
-        }
-        //[cell setupCellPropertiesWithObject:show];
+//        if ([show.mediaType isEqualToString:@"tv"])
+//        {
+//            cell.showTypeImageView.image = [UIImage imageNamed:@"TvSeries"];
+//        }
+//        else if ([show.mediaType isEqualToString:@"movie"])
+//        {
+//            cell.showTypeImageView.image = [UIImage imageNamed:@"movieImage"];
+//        }
+        //[cell setupCellPropertiesWithObject:show];    
         [showViewModel updateView:cell];
 //    }
         return cell;
@@ -302,7 +353,7 @@ NSArray *selectedCells;
 - (UIView * )tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     //UIView* footer = [UIView new];
-    UIView* footer = [[UIView alloc] init];
+    UIView *footer = [[UIView alloc] init];
     return footer;
 }
 
@@ -430,11 +481,10 @@ NSArray *selectedCells;
     
 }
 #pragma mark -Group shows on genre
-- (void)groupItemsBasedOnGenreIdWithDataFromArray:(NSArray *) shows
+- (void)groupItemsBasedOnGenreIdWithDataFromArray:(NSArray *)shows
 {
     self.showGroupsArray = [[NSMutableArray alloc] init];
     self.viewModels = [[NSMutableArray alloc] init];
-    
     BOOL onList = NO;
     
     for (Show *show in shows)
@@ -443,11 +493,11 @@ NSArray *selectedCells;
         {
             if ([show.showGenreID isEqual:self.showGroupsArray[i].sectionID])
             {
-                //PKMovieCellViewModel *viewModel = [PKMovieCellViewModel alloc] initWithMovieModel:<#(Movie *)#>
                 [self.showGroupsArray[i].dataInSection addObject:show];
                 onList = YES;
                 break;
             }
+            
         }
         if(onList == NO)
         {
@@ -460,16 +510,18 @@ NSArray *selectedCells;
     }
 }
 
-- (NSArray *)matchIdsWithNamesFromDictionary: (NSDictionary *)dict
+- (NSArray *)matchIdsWithNamesFromDictionary:(NSDictionary *)dict
+                              andSourceArray:(NSArray<AFSEShowGroup *> *)sourceArray
 {
     NSMutableArray *titleNames = [[NSMutableArray alloc] init];
-    for (int i = 0; i < self.showGroupsArray.count; i++)
+    //for (int i = 0; i < self.showGroupsArray.count; i++)
+    for (int i = 0; i < sourceArray.count; i++)
     {
-        
         for (NSString *key in [dict allKeys])
         {
             NSNumber *keyNumber = @([key intValue]);
-            if ([self.showGroupsArray[i].sectionID isEqual:keyNumber])
+            //if ([self.showGroupsArray[i].sectionID isEqual:keyNumber])
+            if ([sourceArray[i].sectionID isEqual:keyNumber])
             {
                 [titleNames addObject:dict[key]];
             }

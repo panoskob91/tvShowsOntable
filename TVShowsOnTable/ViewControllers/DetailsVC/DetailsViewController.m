@@ -35,7 +35,8 @@ NSString *summary;
                               andMediaType:self.show.mediaType];
     
     PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show];
-    [detailsVCViewModel setupImageViewsFromVC:self WithObject:detailsVCViewModel];
+    [detailsVCViewModel setupImageViewsFromVC:self
+                                   WithObject:detailsVCViewModel];
     
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
