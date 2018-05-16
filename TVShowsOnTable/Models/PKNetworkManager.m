@@ -68,9 +68,17 @@
 }
 
 - (void)fetchDescriptionFromId:(NSNumber *)showId
-                  andMediaType:(NSString *)mediaType
+                  andMediaType:(ShowType)mediaType
 {
-    NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/%@/%@?api_key=%@",mediaType, showId, THE_MOVIE_DB_API_KEY];
+    NSString *userSearchQuery = [[NSString alloc] init];
+    if (mediaType == ShowTypeMovie)
+    {
+        userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/%@/%@?api_key=%@",@"movie", showId, THE_MOVIE_DB_API_KEY];
+    }
+    else if (mediaType == ShowTypeTVSeries)
+    {
+        userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/%@/%@?api_key=%@",@"tv", showId, THE_MOVIE_DB_API_KEY];
+    }
     NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -107,11 +115,19 @@
     [dataTask resume];
 }
 
-- (void)getYoutubeVideoKeyWithShowID:(NSNumber *)showId andMediaType:(NSString *)mediaType
+- (void)getYoutubeVideoKeyWithShowID:(NSNumber *)showId
+                        andMediaType:(ShowType)mediaType
 {
     self.youtubeKey = [[NSString alloc] init];
+    NSString *query = [[NSString alloc] init];
+    if (mediaType == ShowTypeMovie) {
+        query = [NSString stringWithFormat:@"http://api.themoviedb.org/3/%@/%@/videos?api_key=6b2e856adafcc7be98bdf0d8b076851c",@"movie", showId];
+    }
+    else if (mediaType == ShowTypeTVSeries)
+    {
+        query = [NSString stringWithFormat:@"http://api.themoviedb.org/3/%@/%@/videos?api_key=6b2e856adafcc7be98bdf0d8b076851c",@"tv", showId];
+    }
     
-    NSString *query = [NSString stringWithFormat:@"http://api.themoviedb.org/3/%@/%@/videos?api_key=6b2e856adafcc7be98bdf0d8b076851c",mediaType, showId];
     NSURL *searchURL = [NSURL URLWithString:query];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
     NSURLSession *session = [NSURLSession sharedSession];

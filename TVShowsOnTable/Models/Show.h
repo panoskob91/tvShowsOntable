@@ -40,9 +40,9 @@ typedef enum
 /**
  Show's media type
  */
-@property (strong, nonatomic) NSString *mediaType;
+//@property (strong, nonatomic) NSString *mediaType;
 
-//@property (nonatomic) ShowType mediaType;
+@property (nonatomic) ShowType mediaType;
 
 #pragma mark -Initialisers
 

@@ -92,13 +92,13 @@
         cell.showAverageRatingLabel.text = @"";
     }
     
-    if ([self.bindModel.mediaType isEqualToString:@"tv"])
-    //if (self.bindModel.mediaType == ShowTypeTVSeries)
+    //if ([self.bindModel.mediaType isEqualToString:@"tv"])
+    if (self.bindModel.mediaType == ShowTypeTVSeries)
     {
         cell.showTypeImageView.image = [UIImage imageNamed:@"TvSeries"];
     }
-    else if ([self.bindModel.mediaType isEqualToString:@"movie"])
-    //else if (self.bindModel.mediaType == ShowTypeMovie)
+    //else if ([self.bindModel.mediaType isEqualToString:@"movie"])
+    else if (self.bindModel.mediaType == ShowTypeMovie)
     {
         cell.showTypeImageView.image = [UIImage imageNamed:@"movieImage"];
     }

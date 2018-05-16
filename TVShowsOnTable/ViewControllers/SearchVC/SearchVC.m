@@ -220,8 +220,10 @@ NSArray *selectedCells;
     //NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary];
     //return genreNames.count;
     //return self.viewModels.count;
-    return 1;
+    //return 1;
 //    return self.genreNames.count;
+    
+    return self.sections.count;
     
 }
 
@@ -229,15 +231,19 @@ NSArray *selectedCells;
 {
     //NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary];
     //return genreNames[section];
-    return @"KITSOS";
+    //return @"KITSOS";
     
 //    return self.genreNames[section];
+    
+    return [NSString stringWithFormat:@"%@", self.sections[section]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //return self.showGroupsArray[section].dataInSection.count;
-    return self.viewModels.count;
+    //return self.viewModels.count;
+    
+    return self.sections[section].count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -323,7 +329,7 @@ NSArray *selectedCells;
     //Show *show = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row];
     //NSArray <Show *> *shows = [[NSArray alloc] initWithObjects:self.showGroupsArray[indexPath.section].dataInSection, nil] ;
     //PKShowTableCellViewModel *showViewModel = [[PKShowTableCellViewModel alloc] initWithShowViewModelObject:show];
-    PKShowTableCellViewModel *showViewModel = self.viewModels[indexPath.row];
+    PKShowTableCellViewModel *showViewModel = self.sections[indexPath.section][indexPath.row];
     TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:[showViewModel getCellIdentifier]];
     
 //    if (indexPath.row <= shows.count

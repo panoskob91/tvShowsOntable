@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFSENetworkingDelegate.h"
+#import "Show.h"
 
 #define THE_MOVIE_DB_API_KEY @"6b2e856adafcc7be98bdf0d8b076851c"
 
@@ -44,7 +45,7 @@
  @param mediaType The mediaType property of Show model objects
  */
 -(void)fetchDescriptionFromId:(NSNumber *)showId
-                  andMediaType:(NSString *)mediaType;
+                  andMediaType:(ShowType)mediaType;
 
 /**
  Function fetching youtube key, for video trailer playback
@@ -53,6 +54,6 @@
  @param mediaType The mediaType property of Show type objects
  */
 -(void)getYoutubeVideoKeyWithShowID:(NSNumber *)showId
-                       andMediaType:(NSString *)mediaType;
+                       andMediaType:(ShowType)mediaType;
 
 @end
