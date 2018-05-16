@@ -14,7 +14,7 @@
 @interface PKShowTableCellViewModel : NSObject
 
 @property (strong, nonatomic) Show *bindModel;
-@property (strong, nonatomic) AFSEShowGroup *showGroup;
+//@property (strong, nonatomic) id bindModel;
 
 /**
  Show's title
@@ -31,11 +31,41 @@
  */
 @property (strong, nonatomic) NSString *showViewModelAverageRating;
 
+/**
+ Show Genre ID
+ */
+@property (strong, nonatomic) NSNumber *showViewModelGenreID;
+
+/**
+ Show GenreName
+ */
+@property (strong, nonatomic) NSString *showViewModelGenreName;
+
+@property (strong, nonatomic) NSMutableArray<PKShowTableCellViewModel *> *showViewModelList;
+
+//- (instancetype)initWIthTitle:(NSString *)title
+//                  andImageURL:(NSString *)url
+//             andAverageRating:(NSString *)avgRating
+//                   andGenreID:(NSNumber *)genreID
+//                 andBindModel:(id)bindModel;
+
 - (instancetype)initWithShowViewModelObject:(Show *)showObject;
-- (instancetype)initWithShowViewModelObject:(Show *)showObject
-                         andShowGroupObject:(AFSEShowGroup *)showGroupObject;
+
+- (instancetype)initShowViewModelWithGenreID:(NSNumber *)genreID;
+
+- (instancetype)initWithBindModel:(id)bindModel;
+
 
 - (NSString *)getCellIdentifier;
 - (void)updateView:(TVShowsCell *)cell;
 
++ (NSArray<NSString *> *)matchIdsWithNamesFromDictionary:(NSDictionary *)dict
+                                        andSourceArray:(NSArray<PKShowTableCellViewModel *> *)sourceArray;
+
++ (NSArray<PKShowTableCellViewModel *> *)groupItemsBasedOnGenreIdWithDataFromArray:(NSArray<Show *> *)shows;
+
+- (NSString *)getGenreNameBasedOnGenreIdFromDicrionary:(NSDictionary *)dict;
+
++ (NSArray<PKShowTableCellViewModel *> *)getGroupedArrayFromViewModelsArray:(NSArray<PKShowTableCellViewModel *> *)viewModels
+                                                         andGenreNamesArray:(NSArray<NSString *> *)genreNames;
 @end

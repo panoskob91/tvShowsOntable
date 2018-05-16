@@ -52,6 +52,7 @@
  @param showId The showID property of Show type objects
  @param mediaType The mediaType property of Show type objects
  */
--(void)getYoutubeVideoKeyWithShowID:(NSNumber *)showId andMediaType:(NSString *)mediaType;
+-(void)getYoutubeVideoKeyWithShowID:(NSNumber *)showId
+                       andMediaType:(NSString *)mediaType;
 
 @end

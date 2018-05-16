@@ -132,10 +132,12 @@
             if ([dict[@"media_type"] isEqualToString:@"tv"])
             {
                 self.mediaType = dict[@"media_type"];
+                //self.mediaType = ShowTypeTVSeries;
             }
             else if ([dict[@"media_type"] isEqualToString:@"movie"])
             {
                 self.mediaType = dict[@"media_type"];
+                //self.mediaType = ShowTypeMovie;
             }
         }
         

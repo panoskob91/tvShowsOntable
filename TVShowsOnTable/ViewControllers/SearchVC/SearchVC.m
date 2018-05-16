@@ -16,7 +16,7 @@
 
 //View models
 #import "PKMovieCellViewModel.h"
-#import "PKShowTableCellViewModel.h"
+
 
 //Helpers
 #import "NSString_stripHtml.h"
@@ -42,7 +42,7 @@
 @property (strong, nonatomic) NSArray<Show *> *showsArray;
 
 @property (strong, nonatomic) NSMutableArray<PKShowTableCellViewModel *> *viewModels;
-@property (strong, nonatomic) NSMutableArray<PKShowTableCellViewModel *> *sectionsArray;
+@property (strong, nonatomic) NSArray<PKShowTableCellViewModel *> *viewModelGroups;
 @property (strong, nonatomic) NSMutableArray<AFSEShowGroup *> *showGroups;
 @property (strong, nonatomic) NSArray<NSString *> *genreNames;
 
@@ -187,37 +187,31 @@ NSArray *selectedCells;
 - (void)updateContent
 {
     self.viewModels = [[NSMutableArray alloc] init];
-    self.showGroups = [[NSMutableArray alloc] init];
     self.genreNames = [[NSMutableArray alloc] init];
+    //self.sections = [[NSMutableArray alloc] init];
     
-    //for (Show *show in self.showsArray) {
+    NSMutableArray *sectionParent = [[NSMutableArray alloc] init];
+    
     for (int i = 0; i < self.showsArray.count; i++) {
-        for (AFSEShowGroup *showGroup in self.showGroupsArray) {
-            Show *show = self.showsArray[i];
-            if ([show.showGenreID isEqual:showGroup.sectionID])
-            {
-                PKShowTableCellViewModel *showViewModel = [[PKShowTableCellViewModel alloc] initWithShowViewModelObject:show
-                                                                                                 andShowGroupObject:showGroup];
-                [self.viewModels addObject:showViewModel];
-                
-            }
-        }
+        Show *show = self.showsArray[i];
+        PKShowTableCellViewModel *showViewModel = [[PKShowTableCellViewModel alloc] initWithShowViewModelObject:show];
+        showViewModel.showViewModelGenreName = [showViewModel getGenreNameBasedOnGenreIdFromDicrionary:self.showGenresDictionary];
+        
+        NSMutableArray *currentSection = [[NSMutableArray alloc] init];
+        PKShowTableCellViewModel *showCellViewModel = [[PKShowTableCellViewModel alloc] initWithShowViewModelObject:show];
+        [currentSection addObject:showCellViewModel];
+        [sectionParent addObject:currentSection];
+        self.sections = [[NSArray alloc] initWithArray:sectionParent];
+        
+        [self.viewModels addObject:showViewModel];
     }
     
-    self.showGroups = [self getShowGenresGroupArrayFromViewModelsArray:self.viewModels];
-    self.genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary
-                                                 andSourceArray:self.showGroups];
+//    NSArray *genreNamesArray = [PKShowTableCellViewModel matchIdsWithNamesFromDictionary:self.showGenresDictionary
+//                                                                          andSourceArray:self.viewModels];
+//    self.genreNames = genreNamesArray;
+//    self.viewModelGroups = [PKShowTableCellViewModel getGroupedArrayFromViewModelsArray:self.viewModels
+//                                                                     andGenreNamesArray:self.genreNames];
     [self.tableView reloadData];
-}
-
-- (NSMutableArray<AFSEShowGroup *> *)getShowGenresGroupArrayFromViewModelsArray:(NSArray<PKShowTableCellViewModel *> *)viewModelArray
-{
-    NSMutableArray *outputArray = [[NSMutableArray alloc] init];
-    for (PKShowTableCellViewModel *element in viewModelArray)
-    {
-        [outputArray addObject:element.showGroup];
-    }
-    return outputArray;
 }
 
 #pragma mark -UITableView Data source functions
@@ -237,7 +231,7 @@ NSArray *selectedCells;
     //return genreNames[section];
     return @"KITSOS";
     
-    //return self.genreNames[section];
+//    return self.genreNames[section];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

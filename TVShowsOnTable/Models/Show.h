@@ -8,10 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum
+{
+    ShowTypeMovie,
+    ShowTypeTVSeries
+}ShowType;
+
 @interface Show : NSObject
 
 #pragma mark -Class Properties
-
 /**
  Show's title
  */
@@ -37,6 +42,7 @@
  */
 @property (strong, nonatomic) NSString *mediaType;
 
+//@property (nonatomic) ShowType mediaType;
 
 #pragma mark -Initialisers
 
@@ -59,6 +65,7 @@
  @return Initialised Show object
  */
 - (instancetype)initWithDictionary: (NSDictionary *)dict;
+
 
 
 /**

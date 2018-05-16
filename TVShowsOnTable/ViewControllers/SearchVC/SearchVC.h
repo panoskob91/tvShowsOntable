@@ -10,6 +10,8 @@
 //Categories and protocols
 #import "ButtonEventHandlingDelegate.h"
 #import "AFSENetworkingDelegate.h"
+//View models
+#import "PKShowTableCellViewModel.h"
 
 @interface SearchVC : UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ButtonEventHandlingDelegate, AFSENetworkingDelegate>
 
@@ -19,7 +21,11 @@
  User typed text
  */
 @property (strong, nonatomic) NSString *searchedText;
+@property (strong, nonatomic) NSArray <NSArray <PKShowTableCellViewModel *> *> *sections;
 
+/**
+ ViewModel update UI
+ */
 - (void)updateContent;
 
 @end
