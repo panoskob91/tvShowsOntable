@@ -18,7 +18,8 @@
 @property (strong, nonatomic) NSString *imageUrlPath;
 @property (strong, nonatomic) NSString *showTypeImageName;
 
-- (instancetype)initWithObject:(Show *)showObject;
+- (instancetype)initWithObject:(Show *)showObject
+                andShowSummary:(NSString *)showSummary;
 
 - (void)setupImageViewsFromVC:(DetailsViewController *)detailsVC
                    WithObject:(PKDetailsVCViewModel *)viewModelObject;

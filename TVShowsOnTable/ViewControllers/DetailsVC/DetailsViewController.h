@@ -10,7 +10,7 @@
 #import "AFSENetworkingDelegate.h"
 #import "Show.h"
 
-@interface DetailsViewController : UIViewController<AFSENetworkingDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface DetailsViewController : UIViewController<AFSENetworkingDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *showImageView;
 @property (strong, nonatomic) IBOutlet UITextView *descriptionDetailsTextView;
@@ -48,11 +48,20 @@ Private showId property getter instance method
  */
 - (NSNumber *)getTheShowID;
 
+/**
+ showSummary getter
+ 
+ @return the summary of the show
+ */
+- (NSString *)getShowSummary;
+
 #pragma mark -Setters
 /**
  Private showId property setter instance method
  
  */
 - (void)setTheShowID: (NSNumber *)SID;
+
+
 
 @end

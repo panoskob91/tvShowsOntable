@@ -38,6 +38,8 @@
 		1A93153B20AD882D00C1A279 /* detailsVCDescription.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A93153A20AD882D00C1A279 /* detailsVCDescription.xib */; };
 		1A93153E20AD8C7A00C1A279 /* PKImagesCellDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A93153D20AD8C7A00C1A279 /* PKImagesCellDetailsVC.m */; };
 		1A93154120AD8CE100C1A279 /* PKSummaryCellDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A93154020AD8CE100C1A279 /* PKSummaryCellDetailsVC.m */; };
+		1A93154520ADC2A800C1A279 /* PKDetailsTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A93154420ADC2A800C1A279 /* PKDetailsTableVC.m */; };
+		1A93154820ADCBE400C1A279 /* PKSearchTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A93154720ADCBE400C1A279 /* PKSearchTableVC.m */; };
 		1AC5D19820736690002FB850 /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC5D19720736690002FB850 /* Show.m */; };
 		1ADBBA3A20A02F7D008588D1 /* PKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADBBA3920A02F7D008588D1 /* PKNetworkManager.m */; };
 		1AF62F3D2074C95A005FC411 /* showData.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AF62F3A2074B167005FC411 /* showData.json */; };
@@ -120,6 +122,10 @@
 		1A93153D20AD8C7A00C1A279 /* PKImagesCellDetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKImagesCellDetailsVC.m; sourceTree = "<group>"; };
 		1A93153F20AD8CE100C1A279 /* PKSummaryCellDetailsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKSummaryCellDetailsVC.h; sourceTree = "<group>"; };
 		1A93154020AD8CE100C1A279 /* PKSummaryCellDetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKSummaryCellDetailsVC.m; sourceTree = "<group>"; };
+		1A93154320ADC2A800C1A279 /* PKDetailsTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKDetailsTableVC.h; sourceTree = "<group>"; };
+		1A93154420ADC2A800C1A279 /* PKDetailsTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKDetailsTableVC.m; sourceTree = "<group>"; };
+		1A93154620ADCBE400C1A279 /* PKSearchTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKSearchTableVC.h; sourceTree = "<group>"; };
+		1A93154720ADCBE400C1A279 /* PKSearchTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKSearchTableVC.m; sourceTree = "<group>"; };
 		1AC5D19620736690002FB850 /* Show.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Show.h; path = TVShowsOnTable/Models/Show.h; sourceTree = SOURCE_ROOT; };
 		1AC5D19720736690002FB850 /* Show.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Show.m; path = TVShowsOnTable/Models/Show.m; sourceTree = SOURCE_ROOT; };
 		1ADBBA3720A02E30008588D1 /* AFSENetworkingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSENetworkingDelegate.h; sourceTree = "<group>"; };
@@ -330,6 +336,8 @@
 			children = (
 				1A47C1892072058200D63753 /* SearchVC.h */,
 				1A47C18A2072058200D63753 /* SearchVC.m */,
+				1A93154620ADCBE400C1A279 /* PKSearchTableVC.h */,
+				1A93154720ADCBE400C1A279 /* PKSearchTableVC.m */,
 			);
 			path = SearchVC;
 			sourceTree = "<group>";
@@ -341,6 +349,8 @@
 				1A47C1C22072321500D63753 /* DetailsViewController.m */,
 				1A7BD8B320A9934A00BF4C7B /* PKDetailsVCViewModel.h */,
 				1A7BD8B420A9934A00BF4C7B /* PKDetailsVCViewModel.m */,
+				1A93154320ADC2A800C1A279 /* PKDetailsTableVC.h */,
+				1A93154420ADC2A800C1A279 /* PKDetailsTableVC.m */,
 			);
 			path = DetailsVC;
 			sourceTree = "<group>";
@@ -540,6 +550,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A67FF2020A5E10E00C4B256 /* PKMovieCellViewModel.m in Sources */,
+				1A93154520ADC2A800C1A279 /* PKDetailsTableVC.m in Sources */,
 				1A47C18B2072058200D63753 /* SearchVC.m in Sources */,
 				1A93153E20AD8C7A00C1A279 /* PKImagesCellDetailsVC.m in Sources */,
 				1A3CBA9C20970A0000718417 /* AFSEShowGroup.m in Sources */,
@@ -548,6 +559,7 @@
 				1A47C1C32072321500D63753 /* DetailsViewController.m in Sources */,
 				1A3F8DC5207E0070000F4C8A /* Movie.m in Sources */,
 				1A36078E208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m in Sources */,
+				1A93154820ADCBE400C1A279 /* PKSearchTableVC.m in Sources */,
 				1A67FF2320A5E12D00C4B256 /* PKTVTableViewCellViewModel.m in Sources */,
 				1A47C1962072058300D63753 /* main.m in Sources */,
 				1A93154120AD8CE100C1A279 /* PKSummaryCellDetailsVC.m in Sources */,

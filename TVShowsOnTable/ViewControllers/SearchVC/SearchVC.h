@@ -15,8 +15,9 @@
 
 @interface SearchVC : UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ButtonEventHandlingDelegate, AFSENetworkingDelegate>
 
-#pragma mark -SearchVC properties
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+#pragma mark -SearchVC properties
 /**
  User typed text
  */
@@ -27,6 +28,7 @@
  ViewModel update UI
  */
 - (void)updateContent;
+- (NSArray <NSArray <PKShowTableCellViewModel *> *> *)getSectionsArray;
 
 @end
 

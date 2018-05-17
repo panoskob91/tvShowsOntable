@@ -14,7 +14,6 @@
 //View models
 #import "PKDetailsVCViewModel.h"
 //Cell classes
-//#import "TVShowsCell.h"
 #import "PKImagesCellDetailsVC.h"
 #import "PKSummaryCellDetailsVC.h"
 
@@ -28,72 +27,27 @@
 
 @implementation DetailsViewController
 
-NSString *summary;
-
 #pragma mark -ViewController lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavigationItem];
     
-    //Table view setup
-    self.detailsTableView.delegate = self;
-    self.detailsTableView.dataSource = self;
-    [self.detailsTableView registerNib:[UINib nibWithNibName:@"detailsVCImagesCell" bundle:nil] forCellReuseIdentifier:@"detailsVCimagesCell"];
-    [self.detailsTableView registerNib:[UINib nibWithNibName:@"detailsVCDescription" bundle:nil] forCellReuseIdentifier:@"detailsVCDetailsCell"];
-    self.detailsTableView.tableFooterView = [[UIView alloc] init];
-    //Network manages work
+    //Network manager work
     PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     networkManager.networkingDelegate = self;
     [networkManager fetchDescriptionFromId:self.showID
                               andMediaType:self.show.mediaType];
     
-    PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show];
+    PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show
+                                                                             andShowSummary:self.showSummary];
     [detailsVCViewModel setupImageViewsFromVC:self
                                    WithObject:detailsVCViewModel];
-    
-//    UITapGestureRecognizer *singleFingerTap =
-//    [[UITapGestureRecognizer alloc] initWithTarget:self
-//                                            action:@selector(handleSingleTap)];
-//    singleFingerTap.numberOfTouchesRequired = 1;
-//    [self.showImageView setUserInteractionEnabled:YES];
-//    [self.showImageView addGestureRecognizer:singleFingerTap];
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 
-}
-
-#pragma mark -Table view functions
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 2;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  
-    return UITableViewAutomaticDimension;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show];
-    
-    if (indexPath.row == 0)
-    {
-        PKImagesCellDetailsVC *imagesCell = [tableView dequeueReusableCellWithIdentifier:[detailsVCViewModel getDetailsImagesCellIdentifier]];
-        [detailsVCViewModel updateImagesCell:imagesCell];
-        
-        return imagesCell;
-    }
-    
-    PKSummaryCellDetailsVC *detailsCell = [tableView dequeueReusableCellWithIdentifier:[detailsVCViewModel getDetailsSummaryCellIdentifier]];
-    [detailsVCViewModel updateDetailsCell:detailsCell];
-    
-        return detailsCell;
-   
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,12 +67,12 @@ NSString *summary;
 
 - (void)APIFetchedWithResponseDescriptionProperty:(NSString *)showSummary
 {
-    //self.showSummary = [[NSString alloc] init];
     self.showSummary = showSummary;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         //self.descriptionDetailsTextView.text = showSummary;
-        PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show];
+        PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show
+                                                                                 andShowSummary:self.showSummary];
         [detailsVCViewModel setupDetailsTextViewFromVC:self WithString:showSummary];
     });
 }
@@ -150,6 +104,11 @@ NSString *summary;
 - (NSNumber *)getTheShowID
 {
     return self.showID;
+}
+
+- (NSString *)getShowSummary
+{
+    return self.showSummary;
 }
 
 #pragma mark -Setters

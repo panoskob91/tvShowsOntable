@@ -13,19 +13,18 @@
 @implementation PKDetailsVCViewModel
 
 - (instancetype)initWithObject:(Show *)showObject
+                andShowSummary:(NSString *)showSummary
 {
     self = [super init];
     
     if (self)
     {
-        self.showSumary = [(Movie *)showObject getSummary];
+        self.showSumary = showSummary;
         self.imageUrlPath = showObject.showImageUrlPath;
-        //if ([showObject.mediaType isEqualToString:@"movie"])
         if (showObject.mediaType == ShowTypeMovie)
         {
             self.showTypeImageName = @"movieImage";
         }
-        //else if ([showObject.mediaType isEqualToString:@"tv"])
         else if (showObject.mediaType == ShowTypeTVSeries)
         {
             self.showTypeImageName = @"TvSeries";

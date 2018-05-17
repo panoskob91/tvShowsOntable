@@ -55,7 +55,7 @@
 @property (nonatomic, assign) BOOL contentIsEditable;
 
 //IBOutlets
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *tableViewActivityindicator;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *enableEditBTN;
@@ -169,7 +169,6 @@ NSArray *selectedCells;
 }
 
 - (IBAction)enableEditButtonPressed:(UIBarButtonItem *)sender {
-    
     if (self.contentIsEditable == YES)
     {
         self.tableView.editing = YES;
@@ -180,7 +179,6 @@ NSArray *selectedCells;
         self.tableView.editing = NO;
         self.contentIsEditable = YES;
     }
-    
 }
 
 #pragma mark -Update ViewModels
@@ -205,6 +203,13 @@ NSArray *selectedCells;
     }
     self.sections = [[NSArray alloc] initWithArray:sectionParent.copy];
     [self.tableView reloadData];
+}
+
+#pragma mark -Get sections array
+
+- (NSArray <NSArray <PKShowTableCellViewModel *> *> *)getSectionsArray
+{
+    return self.sections;
 }
 
 #pragma mark -UITableView Data source functions
