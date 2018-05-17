@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tVShowsCell" rowHeight="98" id="81F-62-3v6" customClass="TVShowsCell">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tVShowsCell" rowHeight="94" id="81F-62-3v6" customClass="TVShowsCell">
             <rect key="frame" x="0.0" y="0.0" width="403" height="94"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="81F-62-3v6" id="A1W-s1-svK">
@@ -23,7 +23,7 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="width" constant="77" id="2Qk-ZH-rhR"/>
-                            <constraint firstAttribute="height" constant="78" id="dtT-ol-omt"/>
+                            <constraint firstAttribute="height" constant="78" id="dLW-t8-YQr"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bco-33-0jp">
@@ -71,11 +71,11 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="TVShowsImage" destination="nM8-oU-QOs" id="dVq-wg-Bcj"/>
-                <outlet property="averageRating" destination="Bco-33-0jp" id="gbA-bn-TN4"/>
+                <outlet property="showAverageRatingLabel" destination="Bco-33-0jp" id="bR4-xi-L5y"/>
                 <outlet property="showTitleLabel" destination="w04-Bc-Pcp" id="ebk-aN-tJs"/>
                 <outlet property="showTypeImageView" destination="eIb-Yn-zda" id="GRZ-Zz-Sj7"/>
                 <outlet property="showsTitleDescription" destination="9Yo-CX-zYR" id="GO0-cK-FIk"/>
+                <outlet property="tvShowsImage" destination="nM8-oU-QOs" id="dVq-wg-Bcj"/>
             </connections>
             <point key="canvasLocation" x="108.5" y="-72"/>
         </tableViewCell>

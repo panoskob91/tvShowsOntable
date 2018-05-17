@@ -25,17 +25,12 @@
     
 }
 
+#pragma mark -IBAction methods
 - (IBAction)tvShowButtonPressed:(id)sender {
-
-    
     [self.delegate pickShowTypeVC:self didSelectButton:sender];
-    
 }
 
 - (IBAction)movieButtonPressed:(id)sender {
-
-    
     [self.delegate pickShowTypeVC:self didSelectButton:sender];
-    
 }
 @end

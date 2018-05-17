@@ -22,18 +22,18 @@
 
 #pragma mark -Initialisers
 - (instancetype)initWithMovie: (NSString *)movieName
-                     andSummary:(NSString *)movieSummary
-                  andShowObject:(Show *)showObject
+                   andSummary:(NSString *)movieSummary
+                andShowObject:(Show *)showObject
 {
     
     self = [super init];
     
     if (self)
     {
-        self.movie = movieName;
+        self.movieTitle = movieName;
         self.summary = movieSummary;
         self.showTitle = showObject.showTitle;
-        self.showImage = showObject.showImage;
+        self.showImageUrlPath = showObject.showImageUrlPath;
         self.showAverageRating = showObject.showAverageRating;
         
     }
@@ -49,14 +49,14 @@
     
     if (self)
     {
-        self.movie = movieName;
+        self.movieTitle = movieName;
         self.summary = movieSummary;
     }
     return self;
     
 }
 
-- (instancetype) initWithDictionary: (NSDictionary *)dict andShowObject: (Show *)showObject
+- (instancetype)initWithDictionary:(NSDictionary *)dict andShowObject:(Show *)showObject
 {
     self = [super init];
     
@@ -68,26 +68,24 @@
         if ([showSummary isEqual:[NSNull null]] ||
             [showSummary isEqualToString:@""])
         {
-        
             self.summary = @"No summary available";
-        
-        }else if (![showSummary isEqualToString:@""] ||
-                  ![showSummary isEqual:[NSNull null]])
+        }else if (![showSummary isEqualToString:@""]
+                  || ![showSummary isEqual:[NSNull null]])
         {
             showSummary = [showSummary stripHtml];
             self.summary = showSummary;
-        
         }
         
         self.showTitle = showObject.showTitle;
-        self.showImage = showObject.showImage;
+        self.showImageUrlPath = showObject.showImageUrlPath;
         self.showAverageRating = showObject.showAverageRating;
         
     }
     return self;
 }
 
-- (instancetype) initWithDictionaryFromTvDb:(NSDictionary *)dict andShowObject:(Show *)showObject
+- (instancetype)initWithDictionaryFromTvDb:(NSDictionary *)dict
+                             andShowObject:(Show *)showObject
 {
     self = [super init];
     
@@ -97,33 +95,29 @@
         //Title
         if ([dict[@"media_type"] isEqualToString:@"tv"])
         {
-            self.movie = dict[@"name"];
+            self.movieTitle = dict[@"name"];
         }
         else if ([dict[@"media_type"] isEqualToString:@"movie"])
         {
-            self.movie = dict[@"title"];
+            self.movieTitle = dict[@"title"];
         }
         //Summary
         if ([dict[@"overview"] isEqual:[NSNull null]])
         {
-            
             self.summary = @"No summary available";
-            
         }else
         {
             self.summary = dict[@"overview"];
         }
-        
         self.showTitle = showObject.showTitle;
-        self.showImage = showObject.showImage;
+        self.showImageUrlPath = showObject.showImageUrlPath;
         self.showAverageRating = showObject.showAverageRating;
         self.showId = [showObject getShowId];
-        
     }
     return self;
 }
 
-- (instancetype) initWithResponseDictionaryFromTvDb:(NSDictionary *)dict
+- (instancetype)initWithResponseDictionaryFromTvDb:(NSDictionary *)dict
 {
     self = [super init];
     
@@ -132,18 +126,16 @@
         //Title
         if ([dict[@"media_type"] isEqualToString:@"tv"])
         {
-            self.movie = dict[@"name"];
+            self.movieTitle = dict[@"name"];
         }
         else if ([dict[@"media_type"] isEqualToString:@"movie"])
         {
-            self.movie = dict[@"title"];
+            self.movieTitle = dict[@"title"];
         }
         //Summary
         if ([dict[@"overview"] isEqual:[NSNull null]])
         {
-            
             self.summary = @"No summary available";
-            
         }
         else
         {
@@ -152,7 +144,8 @@
         //Image
         if (![dict[@"poster_path"] isEqual:[NSNull null]])
         {
-            self.showImage = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w185/%@", dict[@"poster_path"]];
+            self.showImageUrlPath = [NSString stringWithFormat:
+                              @"http://image.tmdb.org/t/p/w185/%@", dict[@"poster_path"]];
         }
         //Average rating
         if (![dict[@"vote_average"] isEqual:[NSNull null]])
@@ -170,18 +163,17 @@
         {
             self.showId = dict[@"id"];
         }
-        
         self = [super initWithDictionaryForTvDb:dict];
     }
     return self;
 }
 
 #pragma mark -Getters
-- (NSString *) getSummary
+- (NSString *)getSummary
 {
     return self.summary;
 }
-- (NSNumber *) getShowId
+- (NSNumber *)getShowId
 {
     return self.showId;
 }

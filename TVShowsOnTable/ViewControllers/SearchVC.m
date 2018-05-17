@@ -7,9 +7,25 @@
 //
 
 #import "SearchVC.h"
-#import "TVSeries.h"
+
+//Model header files
+#import "Show.h"
 #import "Movie.h"
+#import "TVSeries.h"
+#import "PKNetworkManager.h"
+
+//Helpers
+#import "NSString_stripHtml.h"
+//Categories and protocols
 #import "UIAlertController+AFSEAlertGenerator.h"
+//View controllers
+#import "DetailsViewController.h"
+#import "PickShowTypeVC.h"
+//Data grouping
+#import "AFSEShowGroup.h"
+#import "AFSEGenreModel.h"
+//Table cell class
+#import "TVShowsCell.h"
 
 @interface SearchVC ()
 
@@ -19,6 +35,13 @@
 @property (strong, nonatomic) NSMutableArray<Show *> *shows;
 @property (strong, nonatomic) NSMutableArray<Movie *> *movies;
 @property (strong, nonatomic) NSMutableArray<TVSeries *> *series;
+@property (strong, nonatomic) NSArray<Show *> *showsArray;
+@property (strong, nonatomic) NSMutableArray<AFSEShowGroup *> *showGroupsArray;
+@property (strong, nonatomic) NSMutableArray<AFSEGenreModel *> *movieGenres;
+@property (strong, nonatomic) NSMutableArray<AFSEGenreModel *> *tvGenres;
+@property (strong, nonatomic) NSMutableDictionary *movieGenresDictionary;
+@property (strong, nonatomic) NSMutableDictionary *tvGenresDictionary;
+@property (strong, nonatomic) NSMutableDictionary *showGenresDictionary;
 @property (nonatomic, assign) BOOL contentIsEditable;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -29,18 +52,13 @@
 - (IBAction)pickShowVCButtonPSD:(id)sender;
 - (IBAction)enableEditButtonPressed:(UIBarButtonItem *)sender;
 
-/**
- TV maze API parsing function. GET Request type used. Data is stored in a Show Class array object
-  @param userSearchText Takes user input as a parameters
- */
-- (void) fetchRemoteJSONWithSearchText: (NSString *)userSearchText;
-
 @end
 
 @implementation SearchVC
 
-NSMutableDictionary *showsData;
+NSMutableDictionary *showsDataDictionary;
 NSArray *selectedCells;
+
 
 #pragma mark -ViewController lifecycle
 - (void)viewDidLoad {
@@ -49,16 +67,25 @@ NSArray *selectedCells;
     [self setupTableView];
     [self setupSearchBar];
     [self initialiseTheNeededArrays];
+    [self getMovieGenreNameAndGenreId];
+    [self getTVGenreNameAndGenreId];
+    
     self.title = @"Shows";
     self.contentIsEditable = true;
     self.tableViewActivityindicator.hidden = YES;
-    
 }
 
+- (void)networkAPICallDidCompleteWithResponse:(NSArray<Show *> *)shows
+{
+    self.showsArray = [[NSArray alloc] initWithArray:shows];
+    [self groupItemsBasedOnGenreIdWithDataFromArray:self.showsArray];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark -View setup functions
@@ -72,7 +99,19 @@ NSArray *selectedCells;
     self.searchedText = [[NSString alloc] init];
     //Initialise movies array
     self.movies = [[NSMutableArray alloc] init];
-    showsData = [[NSMutableDictionary alloc] init];
+    //Initialise groups array
+    //self.showGroupsArray = [[NSMutableArray alloc] init];
+    showsDataDictionary = [[NSMutableDictionary alloc] init];
+    //Initialise movie genres array
+    self.movieGenres = [[NSMutableArray alloc] init];
+    //Initialise tv genres array
+    self.tvGenres = [[NSMutableArray alloc] init];
+    //Initialise movie genres dictionary
+    self.movieGenresDictionary = [[NSMutableDictionary alloc] init];
+    //Initialise tvSeries genres dictionary
+    self.tvGenresDictionary = [[NSMutableDictionary alloc] init];
+    //Initialise shows genre dictionary
+    self.showGenresDictionary = [[NSMutableDictionary alloc] init];
 }
 
 - (void) setupTableView
@@ -91,6 +130,7 @@ NSArray *selectedCells;
 
 - (void) setupSearchBar
 {
+    //Search bar style
     self.searchBar.barTintColor = [UIColor whiteColor];
     self.searchBar.tintColor = [UIColor blackColor];
     self.searchBar.backgroundColor = [UIColor grayColor];
@@ -98,17 +138,13 @@ NSArray *selectedCells;
     self.searchBar.delegate = self;
 }
 #pragma mark -SearchBar delegate functions
-//- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-//{
-//    self.searchedText = self.searchBar.text;
-//    [self parseRemoteJSONWithSearchText:self.searchedText];
-//
-//}
-
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     self.searchedText = self.searchBar.text;
-    [self fetchNewRemoteJSONWithSearchText:self.searchedText];
+    //[self fetchNewRemoteJSONWithSearchText:self.searchedText];
+    PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
+    networkManager.networkingDelegate = self;
+    [networkManager fetchAPICallWithSearchText:self.searchedText];
     [searchBar resignFirstResponder];
 }
 
@@ -137,27 +173,19 @@ NSArray *selectedCells;
 #pragma mark -UITableView Data source functions
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[showsData allKeys] count];
+    NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary];
+    return genreNames.count;
 }
 
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    NSArray *showTitles = [showsData allKeys];
-    return showTitles[section];
+    NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary];
+    return genreNames[section];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   
-    if (section == 0)
-    {
-        return self.series.count;
-    }
-    else if (section == 1)
-    {
-        return self.movies.count;
-    }
-    return -1;
+    return self.showGroupsArray[section].dataInSection.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -167,20 +195,17 @@ NSArray *selectedCells;
     
     DetailsViewController *detailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"detailsVC"];
     NSNumber *showID = [[NSNumber alloc] init];
-    if (indexPath.section == 0)
-    {
-        detailsVC.navigationItemTitle = self.series[indexPath.row].showTitle;
-        detailsVC.imageURL = self.series[indexPath.row].showImage;
-        showID = [self.series[indexPath.row] getShowId];
+    NSString *showTitleFromGroups = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row].showTitle;
         
-    }
-    else if (indexPath.section == 1)
-    {
-        detailsVC.navigationItemTitle = self.movies[indexPath.row].movie;
-        detailsVC.imageURL = self.movies[indexPath.row].showImage;
-        showID = [self.movies[indexPath.row] getShowId];
-        
-    }
+        detailsVC.navigationItemTitle = showTitleFromGroups;
+    NSString *imageURLFromGroups = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row].showImageUrlPath;
+    
+        detailsVC.imageURL = imageURLFromGroups;
+    
+    NSNumber *showIdFromGroups = [self.showGroupsArray[indexPath.section].dataInSection[indexPath.row] getShowId];
+    showID = showIdFromGroups;
+    
+    detailsVC.show = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row];
     [detailsVC setTheShowID:showID];
     [self.navigationController pushViewController:detailsVC animated:YES];
     
@@ -196,16 +221,9 @@ NSArray *selectedCells;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (UITableViewCellEditingStyleDelete){
-    
-        if (indexPath.section == 0)
-        {
-            [self.series removeObjectAtIndex: indexPath.row];
-        }
-        else if (indexPath.section == 1)
-        {
-            [self.movies removeObjectAtIndex: indexPath.row];
-        }
+    if (UITableViewCellEditingStyleDelete)
+    {
+        [self.showGroupsArray[indexPath.section].dataInSection removeObjectAtIndex:indexPath.row];
     }
     [self.tableView reloadData];
 }
@@ -217,153 +235,53 @@ NSArray *selectedCells;
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    
-    if ((sourceIndexPath.section == 0) && (destinationIndexPath.section == 0))
+    if (sourceIndexPath.section == destinationIndexPath.section)
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            TVSeries *objectToBeMoved = self.series[sourceIndexPath.row];
-            //[self.tableView beginUpdates];
-            [self.series removeObjectAtIndex:sourceIndexPath.row];
-            [self.series insertObject:objectToBeMoved atIndex:destinationIndexPath.row];
+            Show *objectToBeMoved = self.showGroupsArray[sourceIndexPath.section].dataInSection[sourceIndexPath.row];
+            [self.showGroupsArray[sourceIndexPath.section].dataInSection removeObjectAtIndex:sourceIndexPath.row];
+            [self.showGroupsArray[sourceIndexPath.section].dataInSection insertObject:objectToBeMoved atIndex:destinationIndexPath.row];
             dispatch_async(dispatch_get_main_queue(), ^{
-                //[self.tableView endUpdates];
-                [self.tableView reloadData];
+                    [self.tableView reloadData];
+                });
             });
-        });
     }
-    else if ((sourceIndexPath.section == 1) && (destinationIndexPath.section == 1))
-    {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            Movie *objectToBeMoved = self.movies[sourceIndexPath.row];
-            //[self.tableView beginUpdates];
-            [self.movies removeObjectAtIndex:sourceIndexPath.row];
-            [self.movies insertObject:objectToBeMoved atIndex:destinationIndexPath.row];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //[self.tableView endUpdates];
-                [self.tableView reloadData];
-            });
-        });
-    }
-    
     else
     {
-        UIAlertAction *actionYES = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            //if ([self.shows[sourceIndexPath.row] isKindOfClass:[TVSeries class]])
-            if (sourceIndexPath.section == 0 && destinationIndexPath.section == 1)
-            {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    Show *removedElement = (Show *)self.series[sourceIndexPath.row];
-                    //[self.tableView beginUpdates];
-                    [self.series removeObjectAtIndex:sourceIndexPath.row];
-                    [self.movies insertObject:(Movie *)removedElement atIndex:destinationIndexPath.row];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        //[self.tableView endUpdates];
-                        [self.tableView reloadData];
-                    });
-                //[self rearangeTableCellsOnTwoDifferentSectionsWhenFirstSectionIsSeries:YES
-                //                                                             fromIndex:sourceIndexPath toIndex:destinationIndexPath];
-                });
-            }
-            //else if ([self.shows[sourceIndexPath.row] isKindOfClass:[Movie class]])
-            else if (sourceIndexPath.section == 1 && destinationIndexPath.section == 0)
-            {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    Show *removedElement = (Movie *)self.movies[sourceIndexPath.row];
-                    //[self.tableView beginUpdates];
-                    [self.movies removeObjectAtIndex:sourceIndexPath.row];
-                    [self.series insertObject:(TVSeries *)removedElement atIndex:destinationIndexPath.row];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        //[self.tableView endUpdates];
-                        [self.tableView reloadData];
-                        //[self rearangeTableCellsOnTwoDifferentSectionsWhenFirstSectionIsSeries:NO
-                        //                                                             fromIndex:sourceIndexPath toIndex:destinationIndexPath];
-                    });
-                });
-            }
-            
-        }];
-        UIAlertAction *actionNO = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self.tableView reloadData];
-            
         }];
         NSMutableArray<UIAlertAction*> *alertActions = [[NSMutableArray alloc] init];
-        [alertActions addObject:actionYES];
-        [alertActions addObject:actionNO];
+        [alertActions addObject:actionOK];
         
-        UIAlertController *alert = [UIAlertController generateAlertWithTitle:@"Attention!" andMessage:@"Are you sure you want to change rows between different sections" andActions:alertActions];
+        UIAlertController *alert = [UIAlertController generateAlertWithTitle:@"Attention!" andMessage:@"You can not move shows between sections" andActions:alertActions];
         [self presentViewController:alert animated:YES completion:nil];
     }
    
 }
-
-#pragma mark -Delegate move cells helper functions
-- (void) rearangeTableCellsOnTwoDifferentSectionsWhenFirstSectionIsSeries: (BOOL)check
-                                                                fromIndex: (NSIndexPath *)sourceIndexPath
-                                                                  toIndex: (NSIndexPath *)destinationIndexPath
-{
-    if (check)
-    {
-        Show *removedElement = (Show *)self.series[sourceIndexPath.row];
-        [self.series removeObjectAtIndex:sourceIndexPath.row];
-        [self.movies insertObject:(Movie *)removedElement atIndex:destinationIndexPath.row];
-        [self.tableView reloadData];
-    }
-    else
-    {
-        Show *removedElement = (Movie *)self.movies[sourceIndexPath.row];
-        [self.movies removeObjectAtIndex:sourceIndexPath.row];
-        [self.series insertObject:(TVSeries *)removedElement atIndex:destinationIndexPath.row];
-        [self.tableView reloadData];
-    }
-}
-
 
 #pragma mark -UITTableView delegate functions
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
       [tableView registerNib:[UINib nibWithNibName:@"ShowsCell" bundle:nil] forCellReuseIdentifier:@"tVShowsCell"];
      TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tVShowsCell"];
+    Show *show = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row];
     
-    if (indexPath.row <= self.shows.count && self.shows.count != 0){
-        if (indexPath.section == 0) {
-        
-            cell.showTitleLabel.text = self.series[indexPath.row].showTitle;
-            NSURL *imageURL = [NSURL URLWithString:self.series[indexPath.row].showImage];
-            NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
-        
-            cell.TVShowsImage.image = [UIImage imageWithData:imageData];
-            cell.showTypeImageView.image = [UIImage imageNamed:@"TvSeries"];
-        
-            //cell.showsTitleDescription.text = [self.shows[indexPath.row] getSummary];
-            cell.averageRating.text = [NSString stringWithFormat:@"%@", self.series[indexPath.row].showAverageRating];
-            
-            cell.layer.cornerRadius = 10;
-                //return cell;
-        }
-        else if (indexPath.section == 1)
+    if (indexPath.row <= self.shows.count
+        && self.showsArray.count != 0)
+    {
+        if ([show.mediaType isEqualToString:@"tv"])
         {
-            cell.showTitleLabel.text = self.movies[indexPath.row].showTitle;
-            NSURL *imageURL = [NSURL URLWithString:self.movies[indexPath.row].showImage];
-            NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageURL];
-            
-            cell.TVShowsImage.image = [UIImage imageWithData:imageData];
-            cell.showTypeImageView.image = [UIImage imageNamed:@"movieImage"];
-            
-            //cell.showsTitleDescription.text = [self.shows[indexPath.row] getSummary];
-            cell.averageRating.text = [NSString stringWithFormat:@"%@", self.movies[indexPath.row].showAverageRating];
-            
-            cell.layer.cornerRadius = 10;
-            //return cell;
+            cell.showTypeImageView.image = [UIImage imageNamed:@"TvSeries"];
         }
-        
+        else if ([show.mediaType isEqualToString:@"movie"])
+        {
+            cell.showTypeImageView.image = [UIImage imageNamed:@"movieImage"];
+        }
+        [cell setupCellPropertiesWithObject:show];
     }
         return cell;
 }
-
-
-
 #pragma mark -UITableView footer
 //remove bottom lines
 - (UIView * )tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -373,99 +291,15 @@ NSArray *selectedCells;
     return footer;
 }
 
-#pragma mark -Local JSON parsing
-//- (void)parseLocalJSONFileWithName:(NSString *)fileName
-//{
-//    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"json"];
-//        NSError *error;
-//        NSString *jsonString = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
-//        NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
-//        NSArray *items = [jsonDictionary valueForKey:@"Shows"];
-//        
-//        for (NSDictionary *item in items)
-//        {
-//            Show *showInfo = [[Show alloc] init];
-//            [showInfo setShowTitle:item[@"name"]];
-//            [showInfo setShowImage:item[@"image"]];
-//            [showInfo setShowDescription:item[@"description"]];
-//            NSDictionary *rating = item[@"rating"];
-//            NSNumber *average = rating[@"average"];
-//            if (![average isEqual:[NSNull null]])
-//            {
-//                [showInfo setAverageRating:average];
-//            }else{
-//                [showInfo setAverageRating:(NSNumber *)@""];
-//            }
-//            [shows addObject:showInfo];
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self.tableView reloadData];
-//            });
-//        }
-//        
-//    });
-//    
-//}
-
-#pragma mark -Parsing remote JSON form TVMaze API with user input userSearchText
-- (void)fetchRemoteJSONWithSearchText: (NSString *)userSearchText
+#pragma mark -Get TV genre id and name
+-(void)getTVGenreNameAndGenreId
 {
+    [self.tvGenres removeAllObjects];
+    [self.tvGenresDictionary removeAllObjects];
     
-    [self.shows removeAllObjects];
-    [self activityIndicatorHandlerWhenActivityIndicatorIs:NO];
+    NSString *moviesGenreQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/genre/tv/list?api_key=6b2e856adafcc7be98bdf0d8b076851c&language=en-US"];
     
-    userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSString *userSearchQuery = [NSString stringWithFormat:@"http://api.tvmaze.com/search/shows?q=%@", userSearchText];
-    
-        NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
-        NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
-        NSURLSession *session = [NSURLSession sharedSession];
-        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
-            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-            if (httpResponse.statusCode == 200)
-            {
-                NSError *parseError = nil;
-                NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-                
-                for (NSDictionary *dict in responseDictionary)
-                {
-                    
-                    Show *showInfo = [[Show alloc] initWithDictionary:dict];
-                    Movie *movie = [[Movie alloc] initWithDictionary:dict andShowObject:showInfo];
-                    
-                    [self.shows addObject:movie];
-                }
-            }
-            else{
-                NSLog(@"ERROR %@", error);
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [self.tableView reloadData];
-                [self activityIndicatorHandlerWhenActivityIndicatorIs:YES];
-                
-            });
-        }];
-        [dataTask resume];
-    
-}
-
-- (void)fetchNewRemoteJSONWithSearchText: (NSString *)userSearchText
-{
-    
-    [self.shows removeAllObjects];
-    [self.movies removeAllObjects];
-    [self.series removeAllObjects];
-    [showsData removeAllObjects];
-    
-    [self activityIndicatorHandlerWhenActivityIndicatorIs:NO];
-    
-    
-    userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/search/multi?api_key=6b2e856adafcc7be98bdf0d8b076851c&query=%@", userSearchText];
-    
-    NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
+    NSURL *searchURL = [NSURL URLWithString:moviesGenreQuery];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
@@ -474,58 +308,154 @@ NSArray *selectedCells;
         {
             NSError *parseError = nil;
             NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-            Show *showInfo;
-            Movie *showMovie;
-            TVSeries *tvSerie;
-            
-            for (NSDictionary *dict in responseDictionary[@"results"])
+            AFSEGenreModel *genreModel;
+            for (NSDictionary *dict in responseDictionary[@"genres"])
             {
-                
-                if ([dict[@"media_type"] isEqualToString:@"tv"])
-                {
-                    showInfo = [[Show alloc] initWithDictionaryForTvDb:dict];
-                    tvSerie = [[TVSeries alloc] initWithDictionaryForTvDbAPI:dict];
-                    [self.series addObject:tvSerie];
-                    //[self.shows addObject: showInfo];
-                    [self.shows addObject:tvSerie];
+                if (dict[@"id"]) {
+                    if (dict[@"name"]){
+                        genreModel = [[AFSEGenreModel alloc] initWithGenreID:dict[@"id"]
+                                                                andGenreName:dict[@"name"]];
+                    }
                 }
-                else if ([dict[@"media_type"] isEqualToString:@"movie"])
-                {
-                    showMovie = [[Movie alloc] initWithResponseDictionaryFromTvDb:dict];
-                    [self.movies addObject: showMovie];
-                    [self.shows addObject:showMovie];
-                }
+                NSString *genreKey = [NSString stringWithFormat:@"%@", genreModel.genreID];
+                [self.tvGenresDictionary setValue:genreModel.genreName forKey:genreKey];
+                [self.showGenresDictionary setValue:genreModel.genreName forKey:genreKey];
+                [self.tvGenres addObject:genreModel];
             }
-            
-            [showsData setValue:self.series forKey:@"Series"];
-            [showsData setValue:self.movies forKey:@"Movies"];
         }
+        
         else{
             NSLog(@"ERROR %@", error);
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
-            [self activityIndicatorHandlerWhenActivityIndicatorIs:YES];
-            
         });
     }];
     [dataTask resume];
+}
+
+#pragma mark -Get Movie genre id and name
+- (void)getMovieGenreNameAndGenreId
+{
+    [self.movieGenres removeAllObjects];
+    [self.movieGenresDictionary removeAllObjects];
+    
+    NSString *moviesGenreQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/genre/movie/list?api_key=6b2e856adafcc7be98bdf0d8b076851c&language=en-US"];
+    
+    NSURL *searchURL = [NSURL URLWithString:moviesGenreQuery];
+    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if (httpResponse.statusCode == 200)
+        {
+            NSError *parseError = nil;
+            NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+            AFSEGenreModel *genreModel;
+            for (NSDictionary *dict in responseDictionary[@"genres"])
+            {
+                if (dict[@"id"]) {
+                    if (dict[@"name"]){
+                    genreModel = [[AFSEGenreModel alloc] initWithGenreID:dict[@"id"]
+                                                            andGenreName:dict[@"name"]];
+                    }
+                }
+                NSString *genreKey = [NSString stringWithFormat:@"%@", genreModel.genreID];
+                [self.movieGenresDictionary setValue:genreModel.genreName forKey:genreKey];
+                [self.showGenresDictionary setValue:genreModel.genreName forKey:genreKey];
+                [self.movieGenres addObject:genreModel];
+            }
+        }
+        
+        else{
+            NSLog(@"ERROR %@", error);
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
+    [dataTask resume];
+}
+
+
+#pragma mark -Fetch API
+- (void)fetchNewRemoteJSONWithSearchText: (NSString *)userSearchText
+{
+    
+//    [self.shows removeAllObjects];
+//    [self.movies removeAllObjects];
+//    [self.series removeAllObjects];
+//    [showsDataDictionary removeAllObjects];
+//    [self.showGroupsArray removeAllObjects];
+//
+//    [self activityIndicatorHandlerWhenActivityIndicatorIs:NO];
+//
+//
+//    userSearchText = [userSearchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+//    NSString *userSearchQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/search/multi?api_key=6b2e856adafcc7be98bdf0d8b076851c&query=%@", userSearchText];
+//
+//    NSURL *searchURL = [NSURL URLWithString:userSearchQuery];
+//    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
+//        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+//        if (httpResponse.statusCode == 200)
+//        {
+//            NSError *parseError = nil;
+//            NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+//
+//            Show *showInfo;
+//            Movie *showMovie;
+//            TVSeries *tvSerie;
+//
+//            for (NSDictionary *dict in responseDictionary[@"results"])
+//            {
+//
+//                if ([dict[@"media_type"] isEqualToString:@"tv"])
+//                {
+//                    showInfo = [[Show alloc] initWithDictionaryForTvDb:dict];
+//                    tvSerie = [[TVSeries alloc] initWithDictionaryForTvDbAPI:dict];
+//                    [self.series addObject:tvSerie];
+//                    [self.shows addObject:tvSerie];
+//                    //[self.shows addObject:showInfo];
+//
+//                }
+//                else if ([dict[@"media_type"] isEqualToString:@"movie"])
+//                {
+//                    showMovie = [[Movie alloc] initWithResponseDictionaryFromTvDb:dict];
+//                    [self.movies addObject: showMovie];
+//                    [self.shows addObject:showMovie];
+//
+//                }
+//            }
+//
+//            [self groupItemsBasedOnGenreIdWithDataFromArray:self.shows];
+//
+//            [showsDataDictionary setValue:self.series forKey:@"Series"];
+//            [showsDataDictionary setValue:self.movies forKey:@"Movies"];
+//        }
+//        else{
+//            NSLog(@"ERROR %@", error);
+//        }
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.tableView reloadData];
+//            [self activityIndicatorHandlerWhenActivityIndicatorIs:YES];
+//        });
+//    }];
+//    [dataTask resume];
     
 }
 
 
-- (void) activityIndicatorHandlerWhenActivityIndicatorIs: (BOOL)activityIndicatorIsHidden
+- (void)activityIndicatorHandlerWhenActivityIndicatorIs: (BOOL)activityIndicatorIsHidden
 {
     if (activityIndicatorIsHidden == YES)
     {
         self.tableViewActivityindicator.hidden = YES;
         [self.tableViewActivityindicator stopAnimating];
-        
     }else{
-        
         self.tableViewActivityindicator.hidden = NO;
         [self.tableViewActivityindicator startAnimating];
-        
     }
 }
 
@@ -553,6 +483,52 @@ NSArray *selectedCells;
         [self presentViewController:alert animated:YES completion:nil];
     });
     
+}
+#pragma mark -Group shows on genre
+- (void)groupItemsBasedOnGenreIdWithDataFromArray:(NSArray *) shows
+{
+    self.showGroupsArray = [[NSMutableArray alloc] init];
+    BOOL onList = NO;
+    
+    for (Show *show in shows)
+    {
+        for (int i = 0; i < self.showGroupsArray.count; i++)
+        {
+            if ([show.showGenreID isEqual:self.showGroupsArray[i].sectionID])
+            {
+                [self.showGroupsArray[i].dataInSection addObject:show];
+                onList = YES;
+                break;
+            }
+        }
+        if(onList == NO)
+        {
+            AFSEShowGroup *showGroup = [[AFSEShowGroup alloc] initWithSectionID:show.showGenreID];
+            [showGroup.dataInSection addObject:show];
+            [self.showGroupsArray addObject:showGroup];
+        }
+            onList = NO;
+        
+    }
+}
+
+- (NSArray*)matchIdsWithNamesFromDictionary: (NSDictionary *)dict
+{
+    NSMutableArray *titleNames = [[NSMutableArray alloc] init];
+    for (int i = 0; i < self.showGroupsArray.count; i++)
+    {
+        
+        for (NSString *key in [dict allKeys])
+        {
+            NSNumber *keyNumber = @([key intValue]);
+            if ([self.showGroupsArray[i].sectionID isEqual:keyNumber])
+            {
+                [titleNames addObject:dict[key]];
+            }
+        }
+    }
+    NSArray *genreTitles = [[NSArray alloc] initWithArray:titleNames];
+    return genreTitles;
 }
 
 @end

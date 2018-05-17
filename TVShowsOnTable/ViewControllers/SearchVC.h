@@ -7,33 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
-//Table cell class
-#import "TVShowsCell.h"
-//View controllers
-#import "DetailsViewController.h"
-#import "PickShowTypeVC.h"
-//Model header file
-#import "Show.h"
-#import "Movie.h"
-//Helpers
-#import "NSString_stripHtml.h"
 //Categories and protocols
-#import "myViewDelegate.h"
+#import "ButtonEventHandlingDelegate.h"
+#import "AFSENetworkingDelegate.h"
 
-@interface SearchVC : UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, myViewDelegate>
+@interface SearchVC : UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ButtonEventHandlingDelegate, AFSENetworkingDelegate>
 
-#pragma mark -SearchVC property
-@property (strong, nonatomic) NSString *searchedText;
-
-//- (void)parseLocalJSONFileWithName: (NSString *)fileName;
+#pragma mark -SearchVC properties
 
 /**
- TV maze API parsing function. GET Request type used. Data is stored in a Show Class array object
-
- @param userSearchText Takes user input as a parameters
+ User typed text
  */
-//- (void) fetchRemoteJSONWithSearchText: (NSString *)userSearchText;
+@property (strong, nonatomic) NSString *searchedText;
 
 @end
 

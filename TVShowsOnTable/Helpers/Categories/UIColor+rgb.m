@@ -11,9 +11,9 @@
 @implementation UIColor (rgb)
 
 + (UIColor *)createColorWithRed:(NSInteger)r
-                     andGreen: (NSInteger)g
-                      andBlue: (NSInteger)b
-                     andAlpha: (CGFloat)a
+                       andGreen: (NSInteger)g
+                        andBlue: (NSInteger)b
+                       andAlpha: (CGFloat)a
 {
     CGFloat red =  r / 255;
     CGFloat green = g / 255;
