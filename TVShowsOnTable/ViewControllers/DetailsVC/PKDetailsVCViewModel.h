@@ -23,4 +23,8 @@
 - (void)setupDetailsTextViewFromVC:(DetailsViewController *)detailsVC
                         WithString:(NSString *)showSummary;
 
+- (NSString *)getDetailsImagesCellIdentifier;
+- (NSString *)getDetailsSummaryCellIdentifier;
+- (NSString *)getMediaTypeImageIndicatorNameFromObject:(Show *)showObject;
+
 @end

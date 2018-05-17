@@ -6,15 +6,23 @@
 //  Copyright © 2018 AFSE. All rights reserved.
 //
 
+//ViewControllers
 #import "DetailsViewController.h"
 #import "AFSEWebContentHandlerVC.h"
+//Networking
 #import "PKNetworkManager.h"
+//View models
 #import "PKDetailsVCViewModel.h"
+//Cell classes
+//#import "TVShowsCell.h"
+#import "PKImagesCellDetailsVC.h"
+#import "PKSummaryCellDetailsVC.h"
 
 @interface DetailsViewController ()
 
-
 @property (strong, nonatomic) NSNumber *showID;
+
+@property (strong, nonatomic) NSString *showSummary;
 
 @end
 
@@ -29,6 +37,13 @@ NSString *summary;
     //[self setupImageViews];
     [self setupNavigationItem];
     
+    //Table view setup
+    self.detailsTableView.delegate = self;
+    self.detailsTableView.dataSource = self;
+    [self.detailsTableView registerNib:[UINib nibWithNibName:@"detailsVCImagesCell" bundle:nil] forCellReuseIdentifier:@"detailsVCimagesCell"];
+    [self.detailsTableView registerNib:[UINib nibWithNibName:@"detailsVCDescription" bundle:nil] forCellReuseIdentifier:@"detailsVCDetailsCell"];
+    self.detailsTableView.tableFooterView = [[UIView alloc] init];
+    
     PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     networkManager.networkingDelegate = self;
     [networkManager fetchDescriptionFromId:self.showID
@@ -38,18 +53,52 @@ NSString *summary;
     [detailsVCViewModel setupImageViewsFromVC:self
                                    WithObject:detailsVCViewModel];
     
-    UITapGestureRecognizer *singleFingerTap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(handleSingleTap)];
-    singleFingerTap.numberOfTouchesRequired = 1;
-    [self.showImageView setUserInteractionEnabled:YES];
-    [self.showImageView addGestureRecognizer:singleFingerTap];
+//    UITapGestureRecognizer *singleFingerTap =
+//    [[UITapGestureRecognizer alloc] initWithTarget:self
+//                                            action:@selector(handleSingleTap)];
+//    singleFingerTap.numberOfTouchesRequired = 1;
+//    [self.showImageView setUserInteractionEnabled:YES];
+//    [self.showImageView addGestureRecognizer:singleFingerTap];
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  
+    return UITableViewAutomaticDimension;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show];
+    
+    if (indexPath.row == 0)
+    {
+        PKImagesCellDetailsVC *imagesCell = [tableView dequeueReusableCellWithIdentifier:[detailsVCViewModel getDetailsImagesCellIdentifier]];
+        NSURL *imageURL = [NSURL URLWithString:self.show.showImageUrlPath];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        imagesCell.mainImageDetailsVC.image = [UIImage imageWithData:imageData];
+        NSString *mediaTypeImageindicatorName = [detailsVCViewModel getMediaTypeImageIndicatorNameFromObject:self.show];
+        imagesCell.mediaTypeImageIndicator.image = [UIImage imageNamed:mediaTypeImageindicatorName];
+        
+        return imagesCell;
+    }
+    
+        PKSummaryCellDetailsVC *detailsCell = [tableView dequeueReusableCellWithIdentifier:[detailsVCViewModel getDetailsSummaryCellIdentifier]];
+        detailsCell.detailsCellDescriptionLabel.text = self.showSummary;
+        
+        return detailsCell;
+   
 }
 
 #pragma mark -Networking delegate methods
@@ -59,6 +108,9 @@ NSString *summary;
 }
 - (void)APIFetchedWithResponseDescriptionProperty:(NSString *)showSummary
 {
+    //self.showSummary = [[NSString alloc] init];
+    self.showSummary = showSummary;
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         //self.descriptionDetailsTextView.text = showSummary;
         PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show];

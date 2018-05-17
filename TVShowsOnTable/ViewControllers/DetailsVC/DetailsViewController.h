@@ -10,11 +10,14 @@
 #import "AFSENetworkingDelegate.h"
 #import "Show.h"
 
-@interface DetailsViewController : UIViewController<AFSENetworkingDelegate>
+@interface DetailsViewController : UIViewController<AFSENetworkingDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UIImageView *showImageView;
 @property (strong, nonatomic) IBOutlet UITextView *descriptionDetailsTextView;
 @property (strong, nonatomic) IBOutlet UIImageView *mediaTypeImageView;
+
+@property (strong, nonatomic) IBOutlet UITableView *detailsTableView;
+
 
 /**
  Placeholder for show description

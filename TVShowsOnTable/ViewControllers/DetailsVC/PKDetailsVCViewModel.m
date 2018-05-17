@@ -55,4 +55,29 @@
     detailsVC.descriptionDetailsTextView.textColor = [UIColor blackColor];
 }
 
+
+- (NSString *)getDetailsImagesCellIdentifier
+{
+    return @"detailsVCimagesCell";
+}
+
+- (NSString *)getDetailsSummaryCellIdentifier
+{
+    return @"detailsVCDetailsCell";
+}
+
+- (NSString *)getMediaTypeImageIndicatorNameFromObject:(Show *)showObject
+{
+    NSString *imageName = [[NSString alloc] init];
+    if (showObject.mediaType == ShowTypeTVSeries)
+    {
+        imageName = @"TvSeries";
+    }
+    else if (showObject.mediaType == ShowTypeMovie)
+    {
+        imageName = @"movieImage";
+    }
+    return imageName;
+}
+
 @end
