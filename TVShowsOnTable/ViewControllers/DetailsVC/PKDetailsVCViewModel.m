@@ -55,7 +55,7 @@
     detailsVC.descriptionDetailsTextView.textColor = [UIColor blackColor];
 }
 
-
+#pragma mark -Cell functions
 - (NSString *)getDetailsImagesCellIdentifier
 {
     return @"detailsVCimagesCell";
@@ -65,7 +65,20 @@
 {
     return @"detailsVCDetailsCell";
 }
+- (void)updateImagesCell:(PKImagesCellDetailsVC *)cell
+{
+    NSURL *imageURL = [NSURL URLWithString:self.imageUrlPath];
+    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+    cell.mainImageDetailsVC.image = [UIImage imageWithData:imageData];
+    cell.mediaTypeImageIndicator.image = [UIImage imageNamed:self.showTypeImageName];
+}
 
+- (void)updateDetailsCell:(PKSummaryCellDetailsVC *)cell
+{
+    cell.detailsCellDescriptionLabel.text = self.showSumary;
+}
+
+#pragma mark -Image indicator based on media type
 - (NSString *)getMediaTypeImageIndicatorNameFromObject:(Show *)showObject
 {
     NSString *imageName = [[NSString alloc] init];

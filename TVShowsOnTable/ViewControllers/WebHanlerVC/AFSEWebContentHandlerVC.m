@@ -28,9 +28,6 @@
     
     self.showID = [[NSNumber alloc] init];
     self.showID = self.showIdentifier;
-    //NSLog(@"show item media type = %@", self.show.mediaType);
-    //NSLog(@"SHOWID = %@", self.showID);
-    //[self getYoutubeVideoKeyWithShowID:self.showID andMediaType:self.show.mediaType];
     
     PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     networkManager.networkingDelegate = self;
@@ -48,7 +45,6 @@
 }
 - (void)networkCallDidCompleteAndYoutubeKeyGenerated:(NSString *)youtubeKey
 {
-//    NSLog(@"youtubeKey is : %@", youtubeKey);
     dispatch_async(dispatch_get_main_queue(), ^{
         [self playVideoOnYoutubeWithKey:youtubeKey];
     });

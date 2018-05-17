@@ -33,8 +33,6 @@ NSString *summary;
 #pragma mark -ViewController lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //[self setupTextView];
-    //[self setupImageViews];
     [self setupNavigationItem];
     
     //Table view setup
@@ -43,7 +41,7 @@ NSString *summary;
     [self.detailsTableView registerNib:[UINib nibWithNibName:@"detailsVCImagesCell" bundle:nil] forCellReuseIdentifier:@"detailsVCimagesCell"];
     [self.detailsTableView registerNib:[UINib nibWithNibName:@"detailsVCDescription" bundle:nil] forCellReuseIdentifier:@"detailsVCDetailsCell"];
     self.detailsTableView.tableFooterView = [[UIView alloc] init];
-    
+    //Network manages work
     PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     networkManager.networkingDelegate = self;
     [networkManager fetchDescriptionFromId:self.showID
@@ -67,6 +65,7 @@ NSString *summary;
 
 }
 
+#pragma mark -Table view functions
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 2;
@@ -85,20 +84,25 @@ NSString *summary;
     if (indexPath.row == 0)
     {
         PKImagesCellDetailsVC *imagesCell = [tableView dequeueReusableCellWithIdentifier:[detailsVCViewModel getDetailsImagesCellIdentifier]];
-        NSURL *imageURL = [NSURL URLWithString:self.show.showImageUrlPath];
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        imagesCell.mainImageDetailsVC.image = [UIImage imageWithData:imageData];
-        NSString *mediaTypeImageindicatorName = [detailsVCViewModel getMediaTypeImageIndicatorNameFromObject:self.show];
-        imagesCell.mediaTypeImageIndicator.image = [UIImage imageNamed:mediaTypeImageindicatorName];
+        [detailsVCViewModel updateImagesCell:imagesCell];
         
         return imagesCell;
     }
     
-        PKSummaryCellDetailsVC *detailsCell = [tableView dequeueReusableCellWithIdentifier:[detailsVCViewModel getDetailsSummaryCellIdentifier]];
-        detailsCell.detailsCellDescriptionLabel.text = self.showSummary;
-        
+    PKSummaryCellDetailsVC *detailsCell = [tableView dequeueReusableCellWithIdentifier:[detailsVCViewModel getDetailsSummaryCellIdentifier]];
+    [detailsVCViewModel updateDetailsCell:detailsCell];
+    
         return detailsCell;
    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0)
+    {
+        [self performSegueWithIdentifier:@"webViewSegue" sender:self];
+    }
+    
 }
 
 #pragma mark -Networking delegate methods
@@ -106,6 +110,7 @@ NSString *summary;
 {
     
 }
+
 - (void)APIFetchedWithResponseDescriptionProperty:(NSString *)showSummary
 {
     //self.showSummary = [[NSString alloc] init];
@@ -125,6 +130,7 @@ NSString *summary;
     [self performSegueWithIdentifier:@"webViewSegue" sender:self];
 }
 
+#pragma mark -Segue setup
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"webViewSegue"])
@@ -135,35 +141,10 @@ NSString *summary;
     }
 }
 
-//- (void)setupTextView
-//{
-//    self.descriptionDetailsTextView.text = self.labelValue;
-//    self.descriptionDetailsTextView.editable = NO;
-//    [self.descriptionDetailsTextView setFont:[UIFont fontWithName:@"Helvetica" size:17]];
-//    self.descriptionDetailsTextView.textColor = [UIColor blackColor];
-//}
-
 - (void)setupNavigationItem
 {
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Details", self.navigationItemTitle];
 }
-
-//- (void)setupImageViews
-//{
-//    NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:self.imageURL]];
-//    self.showImageView.image = [UIImage imageWithData:imageData];
-//    self.showImageView.layer.cornerRadius = 10;
-//    self.showImageView.contentMode = UIViewContentModeScaleToFill;
-//    self.showImageView.clipsToBounds = YES;
-//    if ([self.show.mediaType isEqualToString:@"tv"])
-//    {
-//        self.mediaTypeImageView.image = [UIImage imageNamed:@"TvSeries"];
-//    }
-//    else if ([self.show.mediaType isEqualToString:@"movie"])
-//    {
-//        self.mediaTypeImageView.image = [UIImage imageNamed:@"movieImage"];
-//    }
-//}
 
 #pragma mark -Getters
 - (NSNumber *)getTheShowID

@@ -121,11 +121,11 @@
     self.youtubeKey = [[NSString alloc] init];
     NSString *query = [[NSString alloc] init];
     if (mediaType == ShowTypeMovie) {
-        query = [NSString stringWithFormat:@"http://api.themoviedb.org/3/%@/%@/videos?api_key=6b2e856adafcc7be98bdf0d8b076851c",@"movie", showId];
+        query = [NSString stringWithFormat:@"http://api.themoviedb.org/3/%@/%@/videos?api_key=%@",@"movie", showId, THE_MOVIE_DB_API_KEY];
     }
     else if (mediaType == ShowTypeTVSeries)
     {
-        query = [NSString stringWithFormat:@"http://api.themoviedb.org/3/%@/%@/videos?api_key=6b2e856adafcc7be98bdf0d8b076851c",@"tv", showId];
+        query = [NSString stringWithFormat:@"http://api.themoviedb.org/3/%@/%@/videos?api_key=%@",@"tv", showId, THE_MOVIE_DB_API_KEY];
     }
     
     NSURL *searchURL = [NSURL URLWithString:query];

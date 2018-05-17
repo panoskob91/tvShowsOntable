@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "DetailsViewController.h"
 #import "Show.h"
+#import "PKSummaryCellDetailsVC.h"
+#import "PKImagesCellDetailsVC.h"
 
 @interface PKDetailsVCViewModel : NSObject
 
@@ -26,5 +28,6 @@
 - (NSString *)getDetailsImagesCellIdentifier;
 - (NSString *)getDetailsSummaryCellIdentifier;
 - (NSString *)getMediaTypeImageIndicatorNameFromObject:(Show *)showObject;
-
+- (void)updateDetailsCell:(PKSummaryCellDetailsVC *)cell;
+- (void)updateImagesCell:(PKImagesCellDetailsVC *)cell;
 @end
