@@ -44,9 +44,8 @@
 @property (strong, nonatomic) NSMutableArray<PKShowTableCellViewModel *> *viewModels;
 @property (strong, nonatomic) NSMutableArray<PKShowTableCellViewModel *> *viewModelGroups;
 @property (strong, nonatomic) NSMutableArray<AFSEShowGroup *> *showGroups;
-@property (strong, nonatomic) NSMutableArray<NSString *> *genreNames;
 
-@property (strong, nonatomic) NSMutableArray<AFSEShowGroup *> *showGroupsArray;
+//@property (strong, nonatomic) NSMutableArray<AFSEShowGroup *> *showGroupsArray;
 @property (strong, nonatomic) NSMutableArray<AFSEGenreModel *> *movieGenres;
 @property (strong, nonatomic) NSMutableArray<AFSEGenreModel *> *tvGenres;
 @property (strong, nonatomic) NSMutableDictionary *movieGenresDictionary;
@@ -130,8 +129,8 @@ NSArray *selectedCells;
 - (void) setupTableView
 {
     //Set the delegate and dataSource
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+    //self.tableView.delegate = self;
+    //self.tableView.dataSource = self;
     
     self.tableView.allowsMultipleSelection = YES;
     
@@ -185,7 +184,7 @@ NSArray *selectedCells;
 - (void)updateContent
 {
     self.viewModels = [[NSMutableArray alloc] init];
-    self.genreNames = [[NSMutableArray alloc] init];
+    self.genreNames = [[NSArray alloc] init];
     self.sections = [[NSMutableArray alloc] init];
     self.viewModelGroups = [[NSMutableArray alloc] init];
     
@@ -202,156 +201,42 @@ NSArray *selectedCells;
         [sectionParent addObject:currentSection];
     }
     self.sections = [[NSArray alloc] initWithArray:sectionParent.copy];
+    self.genreNames = [self getGenreNamesFromSectionsArrrayAndFromGenresDictionary:self.showGenresDictionary];
     [self.tableView reloadData];
 }
 
-#pragma mark -Get sections array
+
+#pragma mark -Geters
+- (NSArray<NSString *> *)getGenreNamesFromSectionsArrrayAndFromGenresDictionary:(NSDictionary *)dict
+{
+    NSMutableArray *genreTitles = [[NSMutableArray alloc] init];
+    for (NSArray<PKShowTableCellViewModel *> *sectionItemArray in self.sections)
+    {
+        for (PKShowTableCellViewModel *sectionItem in sectionItemArray) {
+            for (NSString *dictionaryKey in dict) {
+                NSNumber *genreDictionaryKeyValue = @([dictionaryKey integerValue]);
+                if ([sectionItem.showViewModelGenreID isEqual:genreDictionaryKeyValue] &&
+                    ![genreTitles containsObject:dict[dictionaryKey]])
+                {
+                    [genreTitles addObject:dict[dictionaryKey]];
+                    break;
+                }
+
+            }
+        }
+    }
+    NSArray *genreNames = [[NSArray alloc] initWithArray:genreTitles];
+    return genreNames;
+}
 
 - (NSArray <NSArray <PKShowTableCellViewModel *> *> *)getSectionsArray
 {
     return self.sections;
 }
 
-#pragma mark -UITableView Data source functions
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSArray<Show *> *)getShowsArray
 {
-    //NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary];
-    //return genreNames.count;
-    //return self.viewModels.count;
-    //return 1;
-//    return self.genreNames.count;
-    
-    return self.sections.count;
-    
-}
-
-- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    //NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary];
-    //return genreNames[section];
-    //return @"KITSOS";
-    
-//    return self.genreNames[section];
-    return [NSString stringWithFormat:@"%@", self.sections[section]];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    //return self.showGroupsArray[section].dataInSection.count;
-    //return self.viewModels.count;
-    
-    return self.sections[section].count;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-    selectedCells = [self.tableView indexPathsForSelectedRows];
-    
-    DetailsViewController *detailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"detailsVC"];
-    Show *show = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row];
-    NSNumber *showID = [[NSNumber alloc] init];
-    NSString *showTitleFromGroups = show.showTitle;
-        detailsVC.navigationItemTitle = showTitleFromGroups;
-    NSString *imageURLFromGroups = show.showImageUrlPath;
-        detailsVC.imageURL = imageURLFromGroups;
-    NSNumber *showIdFromGroups = [show getShowId];
-    showID = showIdFromGroups;
-    
-    detailsVC.show = show;
-    [detailsVC setTheShowID:showID];
-    [self.navigationController pushViewController:detailsVC animated:YES];
-    
-}
-
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (UITableViewCellEditingStyleDelete)
-    {
-        NSMutableArray<Show *> *showsArray = self.showGroupsArray[indexPath.section].dataInSection;
-        [showsArray removeObjectAtIndex:indexPath.row];
-    }
-    [self.tableView reloadData];
-}
-
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
-{
-    if (sourceIndexPath.section == destinationIndexPath.section)
-    {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            Show *objectToBeMoved = self.showGroupsArray[sourceIndexPath.section].dataInSection[sourceIndexPath.row];
-            NSMutableArray<Show *> *showsInSection = self.showGroupsArray[sourceIndexPath.section].dataInSection;
-            [showsInSection removeObjectAtIndex:sourceIndexPath.row];
-            [showsInSection insertObject:objectToBeMoved atIndex:destinationIndexPath.row];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.tableView reloadData];
-                });
-            });
-    }
-    else
-    {
-        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self.tableView reloadData];
-        }];
-        NSMutableArray<UIAlertAction*> *alertActions = [[NSMutableArray alloc] init];
-        [alertActions addObject:actionOK];
-        
-        //NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary];
-        NSArray *genreNames = [self matchIdsWithNamesFromDictionary:self.showGenresDictionary andSourceArray:self.showGroupsArray];
-        NSString *alertMessage = [NSString stringWithFormat:@"Sorry, you cannot move elements from section %@ to section %@",
-                                  genreNames[sourceIndexPath.section], genreNames[destinationIndexPath.section]];
-
-        UIAlertController *alert = [UIAlertController generateAlertWithTitle:@"Attention!" andMessage:alertMessage andActions:alertActions];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-   
-}
-
-#pragma mark -UITTableView delegate functions
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //Show *show = self.showGroupsArray[indexPath.section].dataInSection[indexPath.row];
-    //NSArray <Show *> *shows = [[NSArray alloc] initWithObjects:self.showGroupsArray[indexPath.section].dataInSection, nil] ;
-    //PKShowTableCellViewModel *showViewModel = [[PKShowTableCellViewModel alloc] initWithShowViewModelObject:show];
-    PKShowTableCellViewModel *showViewModel = self.sections[indexPath.section][indexPath.row];
-    TVShowsCell *cell = [tableView dequeueReusableCellWithIdentifier:[showViewModel getCellIdentifier]];
-    
-//    if (indexPath.row <= shows.count
-//        && shows.count != 0)
-//    {
-//        if ([show.mediaType isEqualToString:@"tv"])
-//        {
-//            cell.showTypeImageView.image = [UIImage imageNamed:@"TvSeries"];
-//        }
-//        else if ([show.mediaType isEqualToString:@"movie"])
-//        {
-//            cell.showTypeImageView.image = [UIImage imageNamed:@"movieImage"];
-//        }
-        //[cell setupCellPropertiesWithObject:show];    
-        [showViewModel updateView:cell];
-//    }
-        return cell;
-}
-#pragma mark -UITableView footer
-//remove bottom lines
-- (UIView * )tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    //UIView* footer = [UIView new];
-    UIView *footer = [[UIView alloc] init];
-    return footer;
+    return self.showsArray;
 }
 
 #pragma mark -Get TV genre id and name

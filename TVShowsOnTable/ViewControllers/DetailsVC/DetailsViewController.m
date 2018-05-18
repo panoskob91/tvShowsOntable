@@ -50,14 +50,6 @@
 
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 0)
-    {
-        [self performSegueWithIdentifier:@"webViewSegue" sender:self];
-    }
-    
-}
 
 #pragma mark -Networking delegate methods
 - (void)networkAPICallDidCompleteWithResponse:(NSArray<Show *> *)shows
@@ -82,17 +74,6 @@
 - (void)handleSingleTap
 {
     [self performSegueWithIdentifier:@"webViewSegue" sender:self];
-}
-
-#pragma mark -Segue setup
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"webViewSegue"])
-    {
-        AFSEWebContentHandlerVC *webHandlerVC = segue.destinationViewController;
-        webHandlerVC.show = self.show;
-        webHandlerVC.showIdentifier = self.showID;
-    }
 }
 
 - (void)setupNavigationItem

@@ -13,7 +13,7 @@
 //View models
 #import "PKShowTableCellViewModel.h"
 
-@interface SearchVC : UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ButtonEventHandlingDelegate, AFSENetworkingDelegate>
+@interface SearchVC : UIViewController<UISearchBarDelegate, ButtonEventHandlingDelegate, AFSENetworkingDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -22,13 +22,36 @@
  User typed text
  */
 @property (strong, nonatomic) NSString *searchedText;
-@property (strong, nonatomic) NSArray <NSArray <PKShowTableCellViewModel *> *> *sections;
 
+/**
+ The sections of the table view
+ */
+@property (strong, nonatomic) NSArray <NSMutableArray <PKShowTableCellViewModel *> *> *sections;
+
+/**
+ Array holding grouped elements
+ */
+@property (strong, nonatomic) NSMutableArray<AFSEShowGroup *> *showGroupsArray;
+
+/**
+ Genre names to be used as section titles
+ */
+@property (strong, nonatomic) NSArray<NSString *> *genreNames;
 /**
  ViewModel update UI
  */
 - (void)updateContent;
+#pragma mark -Getters
+
+/**
+ Returns sections
+
+ @return Array of arrays of type PKShowTableCellViewModel
+ */
 - (NSArray <NSArray <PKShowTableCellViewModel *> *> *)getSectionsArray;
 
+- (NSArray<Show *> *)getShowsArray;
+
+- (NSArray<NSString *> *)getGenreNamesFromSectionsArrrayAndFromGenresDictionary:(NSDictionary *)dict;
 @end
 

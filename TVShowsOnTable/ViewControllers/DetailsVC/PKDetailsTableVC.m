@@ -8,6 +8,7 @@
 
 #import "PKDetailsTableVC.h"
 #import "PKDetailsVCViewModel.h"
+#import "AFSEWebContentHandlerVC.h"
 
 @interface PKDetailsTableVC ()
 
@@ -36,6 +37,15 @@
     return 2;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0)
+    {
+        [self performSegueWithIdentifier:@"webViewSegue" sender:self];
+    }
+    
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -62,6 +72,16 @@
     
 }
 
+#pragma mark -Segue setup
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"webViewSegue"])
+    {
+        AFSEWebContentHandlerVC *webHandlerVC = segue.destinationViewController;
+        webHandlerVC.show = self.show;
+        webHandlerVC.showIdentifier = [self getTheShowID];
+    }
+}
 
 
 @end
