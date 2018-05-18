@@ -14,6 +14,7 @@
     [super awakeFromNib];
     //self.detailTextLabel.numberOfLines = 0;
     self.detailsCellDescriptionLabel.textColor = [UIColor blackColor];
+    self.detailsCellDescriptionLabel.font = [UIFont fontWithName:@"Helvetica" size:25];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

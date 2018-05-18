@@ -9,7 +9,16 @@
 #import "PKNetworkManager.h"
 #import "Movie.h"
 #import "TVSeries.h"
+#import "AFSEGenreModel.h"
 
+@interface PKNetworkManager ()
+
+@property (strong, nonatomic) NSDictionary *tvGenresDictionary;
+@property (strong, nonatomic) NSDictionary *movieGenresDictionary;
+
+@property (strong, nonatomic) NSMutableDictionary *totalGenresDictionary;
+
+@end
 
 @implementation PKNetworkManager
 
@@ -162,6 +171,128 @@
         
     }];
     [dataTask resume];
+}
+
+-(void)getTVGenreNameAndGenreIdWithSuccessBlock:(void (^)(NSDictionary *tvDictionary))sBlock
+{
+    NSMutableDictionary *tvGenresDictionary = [[NSMutableDictionary alloc] init];
+
+    NSString *moviesGenreQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/genre/tv/list?api_key=%@&language=en-US", THE_MOVIE_DB_API_KEY];
+    
+    NSURL *searchURL = [NSURL URLWithString:moviesGenreQuery];
+    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if (httpResponse.statusCode == 200)
+        {
+            NSError *parseError = nil;
+            NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+            AFSEGenreModel *genreModel;
+            for (NSDictionary *dict in responseDictionary[@"genres"])
+            {
+                if (dict[@"id"] &&
+                    dict[@"name"])
+                {
+                    genreModel = [[AFSEGenreModel alloc] initWithGenreID:dict[@"id"]
+                                                            andGenreName:dict[@"name"]];
+                    
+                }
+                NSString *genreKey = [NSString stringWithFormat:@"%@", genreModel.genreID];
+                [tvGenresDictionary setValue:genreModel.genreName forKey:genreKey];
+            }
+            //sBlock(tvGenresDictionary);
+        }
+        
+        else
+        {
+            NSLog(@"ERROR %@", error);
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.tvGenresDictionary = [[NSDictionary alloc] init];
+        });
+    }];
+    [dataTask resume];
+    
+}
+
+- (void)getGenreNameAndIdsWithMediaType:(ShowType)mediaType
+                              andWithSucessBlock:(void(^)(NSDictionary *dictionary))sBlock
+{
+    NSMutableDictionary *genresDictionary = [[NSMutableDictionary alloc] init];
+    NSString *moviesGenreQuery = [[NSString alloc] init];
+    if (mediaType == ShowTypeMovie)
+    {
+        moviesGenreQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/genre/%@/list?api_key=%@&language=en-US", @"movie",THE_MOVIE_DB_API_KEY];
+    }
+    else if (mediaType == ShowTypeTVSeries)
+    {
+        moviesGenreQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/genre/%@/list?api_key=%@&language=en-US", @"tv", THE_MOVIE_DB_API_KEY];
+    }
+    
+    
+    NSURL *searchURL = [NSURL URLWithString:moviesGenreQuery];
+    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if (httpResponse.statusCode == 200)
+        {
+            NSError *parseError = nil;
+            NSMutableDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+            //AFSEGenreModel *genreModel;
+            for (NSDictionary *dict in responseDictionary[@"genres"])
+            {
+                if (dict[@"id"] &&
+                    dict[@"name"])
+                {
+                    [genresDictionary setObject:dict[@"name"] forKey:dict[@"id"]];
+                }
+                //NSString *genreKey = [NSString stringWithFormat:@"%@", genreModel.genreID];
+                //[genresDictionary setValue:genreModel.genreName forKey:genreKey];
+            }
+            sBlock(genresDictionary);
+        }
+        
+        else
+        {
+            NSLog(@"ERROR %@", error);
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //self.tvGenresDictionary = [[NSDictionary alloc] initWithDictionary:movieGenresDictionary];
+        });
+    }];
+    [dataTask resume];
+}
+
+- (void)getGenreNameAndIDSWithCompletionBlock:(void(^)(NSDictionary *dictionary))cBlock
+{
+    self.totalGenresDictionary = [[NSMutableDictionary alloc] init];
+    
+    [self getGenreNameAndIdsWithMediaType:ShowTypeTVSeries
+                       andWithSucessBlock:^(NSDictionary *dictionary) {
+                           for (NSString *key in dictionary)
+                           {
+                               [self.totalGenresDictionary setObject:dictionary[key] forKey:key];
+                           }
+                           
+                           [self getGenreNameAndIdsWithMediaType:ShowTypeMovie andWithSucessBlock:^(NSDictionary *dictionary)
+                           {
+                               self.movieGenresDictionary = dictionary;
+                               for (NSString *key in dictionary)
+                               {
+                                   if(![self.totalGenresDictionary objectForKey:@"id"])
+                                   {
+                                       [self.totalGenresDictionary setObject:dictionary[key] forKey:key];
+                                   }
+                               }
+                                cBlock(self.totalGenresDictionary);
+                           }];
+                           
+                           NSLog(@"KITSOSS!!!!");
+                           //NSLog(self.totalGenresDictionary.count);
+    }];
+    
 }
 
 @end

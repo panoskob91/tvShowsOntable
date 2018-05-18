@@ -80,6 +80,11 @@ NSArray *selectedCells;
     [self getMovieGenreNameAndGenreId];
     [self getTVGenreNameAndGenreId];
     
+    PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
+    [networkManager getGenreNameAndIDSWithCompletionBlock:^(NSDictionary *dictionary) {
+        NSLog(@"returned dictionary = %@", dictionary);
+    }];
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"ShowsCell" bundle:nil] forCellReuseIdentifier:@"tVShowsCell"];
     
     self.title = @"Shows";
@@ -87,17 +92,19 @@ NSArray *selectedCells;
     self.tableViewActivityindicator.hidden = YES;
 }
 
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
 - (void)networkAPICallDidCompleteWithResponse:(NSArray<Show *> *)shows
 {
     self.showsArray = [[NSArray alloc] initWithArray:shows];
     [self groupItemsBasedOnGenreIdWithDataFromArray:self.showsArray];
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self activityIndicatorHandlerWhenActivityIndicatorIsHidden:YES];
         [self updateContent];
     });
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 #pragma mark -View setup functions
@@ -153,9 +160,9 @@ NSArray *selectedCells;
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     self.searchedText = self.searchBar.text;
-    //[self fetchNewRemoteJSONWithSearchText:self.searchedText];
     PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     networkManager.networkingDelegate = self;
+    [self activityIndicatorHandlerWhenActivityIndicatorIsHidden:NO];
     [networkManager fetchAPICallWithSearchText:self.searchedText];
     [searchBar resignFirstResponder];
 }
@@ -210,6 +217,7 @@ NSArray *selectedCells;
 - (NSArray<NSString *> *)getGenreNamesFromSectionsArrrayAndFromGenresDictionary:(NSDictionary *)dict
 {
     NSMutableArray *genreTitles = [[NSMutableArray alloc] init];
+
     for (NSArray<PKShowTableCellViewModel *> *sectionItemArray in self.sections)
     {
         for (PKShowTableCellViewModel *sectionItem in sectionItemArray) {
@@ -259,11 +267,12 @@ NSArray *selectedCells;
             AFSEGenreModel *genreModel;
             for (NSDictionary *dict in responseDictionary[@"genres"])
             {
-                if (dict[@"id"]) {
-                    if (dict[@"name"]){
+                if (dict[@"id"] &&
+                    dict[@"name"])
+                {
                         genreModel = [[AFSEGenreModel alloc] initWithGenreID:dict[@"id"]
                                                                 andGenreName:dict[@"name"]];
-                    }
+
                 }
                 NSString *genreKey = [NSString stringWithFormat:@"%@", genreModel.genreID];
                 [self.tvGenresDictionary setValue:genreModel.genreName forKey:genreKey];
@@ -302,11 +311,11 @@ NSArray *selectedCells;
             AFSEGenreModel *genreModel;
             for (NSDictionary *dict in responseDictionary[@"genres"])
             {
-                if (dict[@"id"]) {
-                    if (dict[@"name"]){
-                    genreModel = [[AFSEGenreModel alloc] initWithGenreID:dict[@"id"]
+                if (dict[@"id"] &&
+                    dict[@"name"])
+                {
+                        genreModel = [[AFSEGenreModel alloc] initWithGenreID:dict[@"id"]
                                                             andGenreName:dict[@"name"]];
-                    }
                 }
                 NSString *genreKey = [NSString stringWithFormat:@"%@", genreModel.genreID];
                 [self.movieGenresDictionary setValue:genreModel.genreName forKey:genreKey];
@@ -325,7 +334,7 @@ NSArray *selectedCells;
     [dataTask resume];
 }
 
-- (void)activityIndicatorHandlerWhenActivityIndicatorIs: (BOOL)activityIndicatorIsHidden
+- (void)activityIndicatorHandlerWhenActivityIndicatorIsHidden: (BOOL)activityIndicatorIsHidden
 {
     if (activityIndicatorIsHidden == YES)
     {

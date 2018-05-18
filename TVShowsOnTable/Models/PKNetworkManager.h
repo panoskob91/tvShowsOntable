@@ -56,4 +56,6 @@
 -(void)getYoutubeVideoKeyWithShowID:(NSNumber *)showId
                        andMediaType:(ShowType)mediaType;
 
+- (void)getGenreNameAndIDSWithCompletionBlock:(void(^)(NSDictionary *dictionary))sBlock;
+
 @end
