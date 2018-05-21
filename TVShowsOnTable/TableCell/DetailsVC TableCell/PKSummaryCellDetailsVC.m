@@ -7,6 +7,7 @@
 //
 
 #import "PKSummaryCellDetailsVC.h"
+#import "UIColor+rgb.h"
 
 @implementation PKSummaryCellDetailsVC
 
@@ -14,7 +15,12 @@
     [super awakeFromNib];
     //self.detailTextLabel.numberOfLines = 0;
     self.detailsCellDescriptionLabel.textColor = [UIColor blackColor];
-    self.detailsCellDescriptionLabel.font = [UIFont fontWithName:@"Helvetica" size:25];
+    //self.detailsCellDescriptionLabel.font = [UIFont fontWithName:@"Helvetica" size:25];
+    self.detailsCellDescriptionLabel.font = [UIFont fontWithName:@"TimeBurner" size:17];
+    self.detailsCellDescriptionLabel.textColor = [UIColor createColorWithRed:0
+                                                                    andGreen:0
+                                                                     andBlue:0
+                                                                    andAlpha:1];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

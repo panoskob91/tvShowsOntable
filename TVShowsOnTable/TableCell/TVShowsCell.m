@@ -20,6 +20,9 @@
     self.showsTitleDescription.numberOfLines = 2;
     self.showTitleLabel.adjustsFontSizeToFitWidth = YES;
     self.showTitleLabel.numberOfLines = 0;
+    //self.showTitleLabel.font = [UIFont fontWithName:@"MJ Granada" size:13];
+    self.showTitleLabel.font = [UIFont fontWithName:@"ADAM.CG PRO" size:20];
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

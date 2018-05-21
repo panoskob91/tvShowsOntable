@@ -288,8 +288,6 @@
                                }
                                 cBlock(self.totalGenresDictionary);
                            }];
-                           
-                           NSLog(@"KITSOSS!!!!");
                            //NSLog(self.totalGenresDictionary.count);
     }];
     

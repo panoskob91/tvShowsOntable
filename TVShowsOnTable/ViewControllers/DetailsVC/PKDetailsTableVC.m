@@ -39,8 +39,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show
+                                                                             andShowSummary:[self getShowSummary]];
+    PKImagesCellDetailsVC *imagesCell = [tableView dequeueReusableCellWithIdentifier:[detailsVCViewModel getDetailsImagesCellIdentifier]];
+    
     if (indexPath.row == 0)
     {
+        imagesCell.backgroundColor = [UIColor greenColor];
         [self performSegueWithIdentifier:@"webViewSegue" sender:self];
     }
     

@@ -77,12 +77,14 @@ NSArray *selectedCells;
     [self setupTableView];
     [self setupSearchBar];
     [self initialiseTheNeededArrays];
-    [self getMovieGenreNameAndGenreId];
-    [self getTVGenreNameAndGenreId];
+    //[self getMovieGenreNameAndGenreId];
+    //[self getTVGenreNameAndGenreId];
     
     PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     [networkManager getGenreNameAndIDSWithCompletionBlock:^(NSDictionary *dictionary) {
-        NSLog(@"returned dictionary = %@", dictionary);
+        //NSLog(@"returned dictionary = %@", dictionary);
+        //self.showGenresDictionary = dictionary.copy
+        self.showGenresDictionary = [[NSMutableDictionary alloc] initWithDictionary:dictionary];
     }];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ShowsCell" bundle:nil] forCellReuseIdentifier:@"tVShowsCell"];
@@ -217,19 +219,27 @@ NSArray *selectedCells;
 - (NSArray<NSString *> *)getGenreNamesFromSectionsArrrayAndFromGenresDictionary:(NSDictionary *)dict
 {
     NSMutableArray *genreTitles = [[NSMutableArray alloc] init];
-
     for (NSArray<PKShowTableCellViewModel *> *sectionItemArray in self.sections)
     {
         for (PKShowTableCellViewModel *sectionItem in sectionItemArray) {
-            for (NSString *dictionaryKey in dict) {
-                NSNumber *genreDictionaryKeyValue = @([dictionaryKey integerValue]);
-                if ([sectionItem.showViewModelGenreID isEqual:genreDictionaryKeyValue] &&
-                    ![genreTitles containsObject:dict[dictionaryKey]])
-                {
-                    [genreTitles addObject:dict[dictionaryKey]];
-                    break;
-                }
+            if (sectionItem.showViewModelGenreID)
+            {
+                for (NSString *dictionaryKey in dict) {
+                    NSNumber *genreDictionaryKeyValue = @([dictionaryKey integerValue]);
+                    if ([sectionItem.showViewModelGenreID isEqual:genreDictionaryKeyValue])
+                                                                                    // &&
+                                                                                    //![genreTitles containsObject:dict[dictionaryKey]]
+                    {
+                        [genreTitles addObject:dict[dictionaryKey]];
+                        break;
+                    }
 
+                }
+            
+            }
+            else
+            {
+                [genreTitles addObject:@"Other"];
             }
         }
     }
