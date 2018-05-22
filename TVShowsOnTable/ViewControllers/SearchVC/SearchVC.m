@@ -137,10 +137,6 @@ NSArray *selectedCells;
 
 - (void) setupTableView
 {
-    //Set the delegate and dataSource
-    //self.tableView.delegate = self;
-    //self.tableView.dataSource = self;
-    
     self.tableView.allowsMultipleSelection = YES;
     
     //TableView visuals
@@ -221,14 +217,18 @@ NSArray *selectedCells;
     NSMutableArray *genreTitles = [[NSMutableArray alloc] init];
     for (NSArray<PKShowTableCellViewModel *> *sectionItemArray in self.sections)
     {
-        for (PKShowTableCellViewModel *sectionItem in sectionItemArray) {
-            if (sectionItem.showViewModelGenreID)
+        //Take first child element as a reference because all child elements have the same genre ID
+        PKShowTableCellViewModel *firstChildElement = sectionItemArray[0];
+        //for (PKShowTableCellViewModel *sectionItem in sectionItemArray) {
+        //    if (sectionItem.showViewModelGenreID)
+            if (firstChildElement.showViewModelGenreID)
             {
                 for (NSString *dictionaryKey in dict) {
                     NSNumber *genreDictionaryKeyValue = @([dictionaryKey integerValue]);
-                    if ([sectionItem.showViewModelGenreID isEqual:genreDictionaryKeyValue])
+                    //if ([sectionItem.showViewModelGenreID isEqual:genreDictionaryKeyValue])
                                                                                     // &&
                                                                                     //![genreTitles containsObject:dict[dictionaryKey]]
+                    if ([firstChildElement.showViewModelGenreID isEqual:genreDictionaryKeyValue])
                     {
                         [genreTitles addObject:dict[dictionaryKey]];
                         break;
@@ -240,7 +240,7 @@ NSArray *selectedCells;
                 [genreTitles addObject:@"Other"];
             }
         }
-    }
+    //}
     NSArray *genreNames = [[NSArray alloc] initWithArray:genreTitles];
     return genreNames;
 }
@@ -388,18 +388,27 @@ NSArray *selectedCells;
     
     for (Show *show in shows)
     {
+        
         for (int i = 0; i < self.showGroupsArray.count; i++)
         {
-            if ([show.showGenreID isEqual:self.showGroupsArray[i].sectionID])
+            if (show.showGenreID == nil)
+            {
+                [self.showGroupsArray[i].dataInSection addObject:show];
+                onList = YES;
+            }
+           else if ([show.showGenreID isEqual:self.showGroupsArray[i].sectionID] &&
+                show.showGenreID != nil)
             {
                 [self.showGroupsArray[i].dataInSection addObject:show];
                 onList = YES;
                 break;
             }
+        
             
         }
         if(onList == NO)
         {
+
             AFSEShowGroup *showGroup = [[AFSEShowGroup alloc] initWithSectionID:show.showGenreID];
             [showGroup.dataInSection addObject:show];
             [self.showGroupsArray addObject:showGroup];
@@ -407,6 +416,7 @@ NSArray *selectedCells;
             onList = NO;
         
     }
+
 }
 
 - (NSArray *)matchIdsWithNamesFromDictionary:(NSDictionary *)dict
