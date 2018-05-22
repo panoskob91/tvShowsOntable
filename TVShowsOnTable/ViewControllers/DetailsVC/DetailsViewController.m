@@ -12,7 +12,7 @@
 //Networking
 #import "PKNetworkManager.h"
 //View models
-#import "PKDetailsVCViewModel.h"
+
 //Cell classes
 #import "PKImagesCellDetailsVC.h"
 #import "PKSummaryCellDetailsVC.h"
@@ -38,11 +38,6 @@
     [networkManager fetchDescriptionFromId:self.showID
                               andMediaType:self.show.mediaType];
     
-    PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show
-                                                                             andShowSummary:self.showSummary];
-    [detailsVCViewModel setupImageViewsFromVC:self
-                                   WithObject:detailsVCViewModel];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,12 +55,9 @@
 - (void)APIFetchedWithResponseDescriptionProperty:(NSString *)showSummary
 {
     self.showSummary = showSummary;
-    PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show
-                                                                             andShowSummary:self.showSummary];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        //self.descriptionDetailsTextView.text = showSummary;
-        [detailsVCViewModel setupDetailsTextViewFromVC:self WithString:showSummary];
+        [self.detailsTableView reloadData];
     });
 }
 

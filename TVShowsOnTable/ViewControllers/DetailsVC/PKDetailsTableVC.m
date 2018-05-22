@@ -7,7 +7,6 @@
 //
 
 #import "PKDetailsTableVC.h"
-#import "PKDetailsVCViewModel.h"
 #import "AFSEWebContentHandlerVC.h"
 #import "PKDetailsImagesCellVM.h"
 #import "PKDetailsTableCellVM.h"
@@ -41,9 +40,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show
-                                                                             andShowSummary:[self getShowSummary]];
-    PKImagesCellDetailsVC *imagesCell = [tableView dequeueReusableCellWithIdentifier:[detailsVCViewModel getDetailsImagesCellIdentifier]];
+    PKDetailsImagesCellVM *imagesCellViewModel = [[PKDetailsImagesCellVM alloc] initWithMainImageURLPath:self.show.showBackdropImageURLPath
+                                                                                           andShowObject:self.show];
+    PKImagesCellDetailsVC *imagesCell = [tableView dequeueReusableCellWithIdentifier:[imagesCellViewModel getImagesCellIdentifier]];
     
     if (indexPath.row == 0)
     {
@@ -61,7 +60,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     
     PKDetailsImagesCellVM *imagesCellViewModel = [[PKDetailsImagesCellVM alloc] initWithMainImageURLPath:self.show.showBackdropImageURLPath
                                                                                            andShowObject:self.show];

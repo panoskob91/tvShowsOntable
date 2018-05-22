@@ -35,7 +35,6 @@
 		1A67FF2020A5E10E00C4B256 /* PKMovieCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A67FF1F20A5E10E00C4B256 /* PKMovieCellViewModel.m */; };
 		1A67FF2320A5E12D00C4B256 /* PKTVTableViewCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A67FF2220A5E12D00C4B256 /* PKTVTableViewCellViewModel.m */; };
 		1A7BD8B020A9660B00BF4C7B /* PKShowTableCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7BD8AF20A9660B00BF4C7B /* PKShowTableCellViewModel.m */; };
-		1A7BD8B520A9934A00BF4C7B /* PKDetailsVCViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7BD8B420A9934A00BF4C7B /* PKDetailsVCViewModel.m */; };
 		1A93153920AD86F700C1A279 /* detailsVCImagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A93153820AD86F700C1A279 /* detailsVCImagesCell.xib */; };
 		1A93153B20AD882D00C1A279 /* detailsVCDescription.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A93153A20AD882D00C1A279 /* detailsVCDescription.xib */; };
 		1A93153E20AD8C7A00C1A279 /* PKImagesCellDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A93153D20AD8C7A00C1A279 /* PKImagesCellDetailsVC.m */; };
@@ -128,8 +127,6 @@
 		1A67FF2220A5E12D00C4B256 /* PKTVTableViewCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKTVTableViewCellViewModel.m; sourceTree = "<group>"; };
 		1A7BD8AE20A9660B00BF4C7B /* PKShowTableCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKShowTableCellViewModel.h; sourceTree = "<group>"; };
 		1A7BD8AF20A9660B00BF4C7B /* PKShowTableCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKShowTableCellViewModel.m; sourceTree = "<group>"; };
-		1A7BD8B320A9934A00BF4C7B /* PKDetailsVCViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKDetailsVCViewModel.h; sourceTree = "<group>"; };
-		1A7BD8B420A9934A00BF4C7B /* PKDetailsVCViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKDetailsVCViewModel.m; sourceTree = "<group>"; };
 		1A93153820AD86F700C1A279 /* detailsVCImagesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = detailsVCImagesCell.xib; sourceTree = "<group>"; };
 		1A93153A20AD882D00C1A279 /* detailsVCDescription.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = detailsVCDescription.xib; sourceTree = "<group>"; };
 		1A93153C20AD8C7A00C1A279 /* PKImagesCellDetailsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKImagesCellDetailsVC.h; sourceTree = "<group>"; };
@@ -188,6 +185,7 @@
 				1A93154020AD8CE100C1A279 /* PKSummaryCellDetailsVC.m */,
 				1A098A3420B3EAE400A60A48 /* PKDetailsTableCellVM.h */,
 				1A098A3520B3EAE400A60A48 /* PKDetailsTableCellVM.m */,
+				1A93153A20AD882D00C1A279 /* detailsVCDescription.xib */,
 			);
 			path = DetailsCell;
 			sourceTree = "<group>";
@@ -199,6 +197,7 @@
 				1A93153D20AD8C7A00C1A279 /* PKImagesCellDetailsVC.m */,
 				1A098A3920B3F83E00A60A48 /* PKDetailsImagesCellVM.h */,
 				1A098A3A20B3F83E00A60A48 /* PKDetailsImagesCellVM.m */,
+				1A93153820AD86F700C1A279 /* detailsVCImagesCell.xib */,
 			);
 			path = ImagesCell;
 			sourceTree = "<group>";
@@ -248,16 +247,6 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		1A36079520907B3D00572AB8 /* XIB Files */ = {
-			isa = PBXGroup;
-			children = (
-				1A360793209069FE00572AB8 /* ShowsCell.xib */,
-				1A93153820AD86F700C1A279 /* detailsVCImagesCell.xib */,
-				1A93153A20AD882D00C1A279 /* detailsVCDescription.xib */,
-			);
-			path = "XIB Files";
-			sourceTree = "<group>";
-		};
 		1A3E0CC52080B588006DB87A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,7 +289,6 @@
 				1A47C1BE207230BA00D63753 /* TableCell */,
 				1A47C1BB2072308100D63753 /* ViewControllers */,
 				1A3303E420872D1C0062E1ED /* UI storyboard(s) */,
-				1A36079520907B3D00572AB8 /* XIB Files */,
 				1A36078F208F211700572AB8 /* Assets.xcassets */,
 				1A47C1862072058200D63753 /* AppDelegate.h */,
 				1A47C1872072058200D63753 /* AppDelegate.m */,
@@ -347,6 +335,7 @@
 				1A7BD8B120A9912300BF4C7B /* TableCellViewModels */,
 				1A47C1B92072076E00D63753 /* TVShowsCell.m */,
 				1A47C1B82072076E00D63753 /* TVShowsCell.h */,
+				1A360793209069FE00572AB8 /* ShowsCell.xib */,
 			);
 			path = TableCell;
 			sourceTree = "<group>";
@@ -391,8 +380,6 @@
 			children = (
 				1A47C1C12072321500D63753 /* DetailsViewController.h */,
 				1A47C1C22072321500D63753 /* DetailsViewController.m */,
-				1A7BD8B320A9934A00BF4C7B /* PKDetailsVCViewModel.h */,
-				1A7BD8B420A9934A00BF4C7B /* PKDetailsVCViewModel.m */,
 				1A93154320ADC2A800C1A279 /* PKDetailsTableVC.h */,
 				1A93154420ADC2A800C1A279 /* PKDetailsTableVC.m */,
 			);
@@ -633,7 +620,6 @@
 				1AC5D19820736690002FB850 /* Show.m in Sources */,
 				1A47C1882072058200D63753 /* AppDelegate.m in Sources */,
 				1A3F8DC8207E009C000F4C8A /* TVSeries.m in Sources */,
-				1A7BD8B520A9934A00BF4C7B /* PKDetailsVCViewModel.m in Sources */,
 				1A3E0CC82080B641006DB87A /* NSString_stripHtml.m in Sources */,
 				1A0E8D51209B0A5A007F817B /* AFSEWebContentHandlerVC.m in Sources */,
 				1A3CBA9F2097496300718417 /* AFSEGenreModel.m in Sources */,
