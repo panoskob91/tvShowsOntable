@@ -152,6 +152,16 @@
             //If there is no poser image fall back to default tvmaze image url
             self.showImageUrlPath = @"http://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
         }
+        
+        //Backdrop Image URL
+        if (![dict[@"backdrop_path"] isEqual:[NSNull null]])
+        {
+            self.showBackdropImageURLPath = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w185/%@", dict[@"backdrop_path"]];
+        }
+        else if ([dict[@"backdrop_path"] isEqual:[NSNull null]])
+        {
+            self.showBackdropImageURLPath = @"http://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
+        }
         //Genre ID
         NSArray *genre_ids = dict[@"genre_ids"];
         if (genre_ids.count != 0)

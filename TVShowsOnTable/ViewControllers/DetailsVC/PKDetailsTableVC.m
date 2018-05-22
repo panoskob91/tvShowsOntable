@@ -9,6 +9,8 @@
 #import "PKDetailsTableVC.h"
 #import "PKDetailsVCViewModel.h"
 #import "AFSEWebContentHandlerVC.h"
+#import "PKDetailsImagesCellVM.h"
+#import "PKDetailsTableCellVM.h"
 
 @interface PKDetailsTableVC ()
 
@@ -59,19 +61,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show
-                                                                             andShowSummary:[self getShowSummary]];
+
+    
+    PKDetailsImagesCellVM *imagesCellViewModel = [[PKDetailsImagesCellVM alloc] initWithMainImageURLPath:self.show.showBackdropImageURLPath
+                                                                                           andShowObject:self.show];
+    PKDetailsTableCellVM *detailsCellViewModel = [[PKDetailsTableCellVM alloc] initWithShowSummary:[self getShowSummary]
+                                                                                      andBindModel:self.show];
     
     if (indexPath.row == 0)
     {
-        PKImagesCellDetailsVC *imagesCell = [tableView dequeueReusableCellWithIdentifier:[detailsVCViewModel getDetailsImagesCellIdentifier]];
-        [detailsVCViewModel updateImagesCell:imagesCell];
+        PKImagesCellDetailsVC *imagesCell = [tableView dequeueReusableCellWithIdentifier:[imagesCellViewModel getImagesCellIdentifier]];
+        [imagesCellViewModel updateImagesCell:imagesCell];
         
         return imagesCell;
     }
     
-    PKSummaryCellDetailsVC *detailsCell = [tableView dequeueReusableCellWithIdentifier:[detailsVCViewModel getDetailsSummaryCellIdentifier]];
-    [detailsVCViewModel updateDetailsCell:detailsCell];
+    
+    PKSummaryCellDetailsVC *detailsCell = [tableView dequeueReusableCellWithIdentifier:[detailsCellViewModel getDetailsCellIdentifier]];
+    [detailsCellViewModel updateDetailsCell:detailsCell];
     
     return detailsCell;
     

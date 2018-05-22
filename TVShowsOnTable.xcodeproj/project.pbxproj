@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A098A3620B3EAE400A60A48 /* PKDetailsTableCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A098A3520B3EAE400A60A48 /* PKDetailsTableCellVM.m */; };
+		1A098A3B20B3F83E00A60A48 /* PKDetailsImagesCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A098A3A20B3F83E00A60A48 /* PKDetailsImagesCellVM.m */; };
 		1A0E8D51209B0A5A007F817B /* AFSEWebContentHandlerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0E8D50209B0A5A007F817B /* AFSEWebContentHandlerVC.m */; };
 		1A0E8D54209B0DD1007F817B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0E8D53209B0DD1007F817B /* WebKit.framework */; };
 		1A3303E820872DE60062E1ED /* UIColor+rgb.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3303E720872DE60062E1ED /* UIColor+rgb.m */; };
@@ -71,6 +73,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A098A3420B3EAE400A60A48 /* PKDetailsTableCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKDetailsTableCellVM.h; sourceTree = "<group>"; };
+		1A098A3520B3EAE400A60A48 /* PKDetailsTableCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKDetailsTableCellVM.m; sourceTree = "<group>"; };
+		1A098A3920B3F83E00A60A48 /* PKDetailsImagesCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKDetailsImagesCellVM.h; sourceTree = "<group>"; };
+		1A098A3A20B3F83E00A60A48 /* PKDetailsImagesCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKDetailsImagesCellVM.m; sourceTree = "<group>"; };
 		1A0E8D4F209B0A5A007F817B /* AFSEWebContentHandlerVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSEWebContentHandlerVC.h; sourceTree = "<group>"; };
 		1A0E8D50209B0A5A007F817B /* AFSEWebContentHandlerVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSEWebContentHandlerVC.m; sourceTree = "<group>"; };
 		1A0E8D53209B0DD1007F817B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -175,6 +181,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A098A3720B3F7E200A60A48 /* DetailsCell */ = {
+			isa = PBXGroup;
+			children = (
+				1A93153F20AD8CE100C1A279 /* PKSummaryCellDetailsVC.h */,
+				1A93154020AD8CE100C1A279 /* PKSummaryCellDetailsVC.m */,
+				1A098A3420B3EAE400A60A48 /* PKDetailsTableCellVM.h */,
+				1A098A3520B3EAE400A60A48 /* PKDetailsTableCellVM.m */,
+			);
+			path = DetailsCell;
+			sourceTree = "<group>";
+		};
+		1A098A3820B3F7FF00A60A48 /* ImagesCell */ = {
+			isa = PBXGroup;
+			children = (
+				1A93153C20AD8C7A00C1A279 /* PKImagesCellDetailsVC.h */,
+				1A93153D20AD8C7A00C1A279 /* PKImagesCellDetailsVC.m */,
+				1A098A3920B3F83E00A60A48 /* PKDetailsImagesCellVM.h */,
+				1A098A3A20B3F83E00A60A48 /* PKDetailsImagesCellVM.m */,
+			);
+			path = ImagesCell;
+			sourceTree = "<group>";
+		};
 		1A0E8D52209B0DD1007F817B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,10 +420,8 @@
 		1A93154220AD90DB00C1A279 /* DetailsVC TableCell */ = {
 			isa = PBXGroup;
 			children = (
-				1A93153C20AD8C7A00C1A279 /* PKImagesCellDetailsVC.h */,
-				1A93153D20AD8C7A00C1A279 /* PKImagesCellDetailsVC.m */,
-				1A93153F20AD8CE100C1A279 /* PKSummaryCellDetailsVC.h */,
-				1A93154020AD8CE100C1A279 /* PKSummaryCellDetailsVC.m */,
+				1A098A3820B3F7FF00A60A48 /* ImagesCell */,
+				1A098A3720B3F7E200A60A48 /* DetailsCell */,
 			);
 			path = "DetailsVC TableCell";
 			sourceTree = "<group>";
@@ -596,6 +622,7 @@
 				1A3303E820872DE60062E1ED /* UIColor+rgb.m in Sources */,
 				1A47C1C32072321500D63753 /* DetailsViewController.m in Sources */,
 				1A3F8DC5207E0070000F4C8A /* Movie.m in Sources */,
+				1A098A3620B3EAE400A60A48 /* PKDetailsTableCellVM.m in Sources */,
 				1A36078E208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m in Sources */,
 				1A93154820ADCBE400C1A279 /* PKSearchTableVC.m in Sources */,
 				1A67FF2320A5E12D00C4B256 /* PKTVTableViewCellViewModel.m in Sources */,
@@ -610,6 +637,7 @@
 				1A3E0CC82080B641006DB87A /* NSString_stripHtml.m in Sources */,
 				1A0E8D51209B0A5A007F817B /* AFSEWebContentHandlerVC.m in Sources */,
 				1A3CBA9F2097496300718417 /* AFSEGenreModel.m in Sources */,
+				1A098A3B20B3F83E00A60A48 /* PKDetailsImagesCellVM.m in Sources */,
 				1A3303EB20874ABC0062E1ED /* PickShowTypeVC.m in Sources */,
 				1A3CBA962096E9B000718417 /* AFSETvMazeViewController.m in Sources */,
 				1A3CBA992096F7FD00718417 /* AFSETvMazeDetailsVC.m in Sources */,

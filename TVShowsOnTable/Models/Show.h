@@ -27,6 +27,12 @@ typedef enum
  */
 @property (strong, nonatomic) NSString *showImageUrlPath;
 
+
+/**
+ Backdrop image url
+ */
+@property (strong, nonatomic) NSString *showBackdropImageURLPath;
+
 /**
  Show's average rating
  */

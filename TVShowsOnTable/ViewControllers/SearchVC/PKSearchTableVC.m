@@ -9,6 +9,7 @@
 //View controllers
 #import "PKSearchTableVC.h"
 #import "DetailsViewController.h"
+#import "PKDetailsTableVC.h"
 //View models
 #import "PKShowTableCellViewModel.h"
 //categories
@@ -47,7 +48,9 @@ NSArray *showsSelectedCells;
     [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
     showsSelectedCells = [self.tableView indexPathsForSelectedRows];
 
-    DetailsViewController *detailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"detailsVC"];
+    //DetailsViewController *detailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"detailsVC"];
+    PKDetailsTableVC *detailsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"detailsVC"];
+    
     Show *show = self.sections[indexPath.section][indexPath.row].bindModel;
     NSNumber *showID = [[NSNumber alloc] init];
     NSString *showTitleFromGroups = show.showTitle;

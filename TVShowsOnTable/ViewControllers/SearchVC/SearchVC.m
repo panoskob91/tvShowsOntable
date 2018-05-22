@@ -233,9 +233,7 @@ NSArray *selectedCells;
                         [genreTitles addObject:dict[dictionaryKey]];
                         break;
                     }
-
                 }
-            
             }
             else
             {

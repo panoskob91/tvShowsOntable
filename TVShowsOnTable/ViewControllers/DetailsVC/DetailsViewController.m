@@ -60,11 +60,11 @@
 - (void)APIFetchedWithResponseDescriptionProperty:(NSString *)showSummary
 {
     self.showSummary = showSummary;
+    PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show
+                                                                             andShowSummary:self.showSummary];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         //self.descriptionDetailsTextView.text = showSummary;
-        PKDetailsVCViewModel *detailsVCViewModel = [[PKDetailsVCViewModel alloc] initWithObject:self.show
-                                                                                 andShowSummary:self.showSummary];
         [detailsVCViewModel setupDetailsTextViewFromVC:self WithString:showSummary];
     });
 }
