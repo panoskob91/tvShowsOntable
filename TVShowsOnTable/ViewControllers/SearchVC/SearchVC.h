@@ -13,9 +13,11 @@
 //View models
 #import "PKShowTableCellViewModel.h"
 
-@interface SearchVC : UIViewController<UISearchBarDelegate, ButtonEventHandlingDelegate, AFSENetworkingDelegate>
+#import "MasterTableVC.h"
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface SearchVC : MasterTableVC<UISearchBarDelegate, ButtonEventHandlingDelegate, AFSENetworkingDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *searchTableView;
 
 #pragma mark -SearchVC properties
 /**
@@ -23,10 +25,11 @@
  */
 @property (strong, nonatomic) NSString *searchedText;
 
-/**
- The sections of the table view
- */
-@property (strong, nonatomic) NSArray <NSMutableArray <PKShowTableCellViewModel *> *> *sections;
+//
+///**
+// The sections of the table view
+// */
+//@property (strong, nonatomic) NSArray <NSMutableArray <PKShowTableCellViewModel *> *> *sections;
 
 /**
  Array holding grouped elements
@@ -36,7 +39,7 @@
 /**
  Genre names to be used as section titles
  */
-@property (strong, nonatomic) NSArray<NSString *> *genreNames;
+//@property (strong, nonatomic) NSArray<NSString *> *genreNames;
 /**
  ViewModel update UI
  */

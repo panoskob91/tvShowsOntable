@@ -31,8 +31,10 @@
 
  @param imagesCell Cell connected with PKImageseCellDetailsVC
  */
-- (void)updateImagesCell:(PKImagesCellDetailsVC *)imagesCell;
+//- (void)updateImagesCell:(PKImagesCellDetailsVC *)imagesCell;
+- (void)updateView:(PKImagesCellDetailsVC *)cell ;
 
-- (NSString *)getImagesCellIdentifier;
+//- (NSString *)getImagesCellIdentifier;
+- (NSString *)getCellIdentifier;
 
 @end

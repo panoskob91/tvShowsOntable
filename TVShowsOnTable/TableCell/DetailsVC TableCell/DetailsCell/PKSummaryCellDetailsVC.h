@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TVShowsCell.h"
 
-@interface PKSummaryCellDetailsVC : UITableViewCell
+@interface PKSummaryCellDetailsVC : TVShowsCell
 
 @property (strong, nonatomic) IBOutlet UILabel *detailsCellDescriptionLabel;
 

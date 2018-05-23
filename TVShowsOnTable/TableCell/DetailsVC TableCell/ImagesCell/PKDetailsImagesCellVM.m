@@ -32,19 +32,33 @@
     return self;
 }
 
-- (void)updateImagesCell:(PKImagesCellDetailsVC *)imagesCell
+//- (void)updateImagesCell:(PKImagesCellDetailsVC *)imagesCell
+//{
+//    NSURL *mainImageURL = [NSURL URLWithString:self.mainImageUrlPath];
+//    NSData *mainImageData = [NSData dataWithContentsOfURL:mainImageURL];
+//
+//    imagesCell.mainImageDetailsVC.image = [UIImage imageWithData:mainImageData];
+//    imagesCell.mediaTypeImageIndicator.image = [UIImage imageNamed:self.mediaTypeIndicatorImageName];
+//
+//}
+
+//- (NSString *)getImagesCellIdentifier
+//{
+//    return @"detailsVCimagesCell";
+//}
+
+- (NSString *)getCellIdentifier
+{
+    return @"detailsVCimagesCell";
+}
+
+- (void)updateView:(PKImagesCellDetailsVC *)cell
 {
     NSURL *mainImageURL = [NSURL URLWithString:self.mainImageUrlPath];
     NSData *mainImageData = [NSData dataWithContentsOfURL:mainImageURL];
     
-    imagesCell.mainImageDetailsVC.image = [UIImage imageWithData:mainImageData];
-    imagesCell.mediaTypeImageIndicator.image = [UIImage imageNamed:self.mediaTypeIndicatorImageName];
-    
-}
-
-- (NSString *)getImagesCellIdentifier
-{
-    return @"detailsVCimagesCell";
+    cell.mainImageDetailsVC.image = [UIImage imageWithData:mainImageData];
+    cell.mediaTypeImageIndicator.image = [UIImage imageNamed:self.mediaTypeIndicatorImageName];
 }
 
 @end

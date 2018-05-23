@@ -54,7 +54,6 @@
 @property (nonatomic, assign) BOOL contentIsEditable;
 
 //IBOutlets
-
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *tableViewActivityindicator;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *enableEditBTN;
@@ -82,8 +81,6 @@ NSArray *selectedCells;
     
     PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     [networkManager getGenreNameAndIDSWithCompletionBlock:^(NSDictionary *dictionary) {
-        //NSLog(@"returned dictionary = %@", dictionary);
-        //self.showGenresDictionary = dictionary.copy
         self.showGenresDictionary = [[NSMutableDictionary alloc] initWithDictionary:dictionary];
     }];
     
@@ -189,7 +186,7 @@ NSArray *selectedCells;
 - (void)updateContent
 {
     self.viewModels = [[NSMutableArray alloc] init];
-    self.genreNames = [[NSArray alloc] init];
+    self.sectionNames = [[NSArray alloc] init];
     self.sections = [[NSMutableArray alloc] init];
     self.viewModelGroups = [[NSMutableArray alloc] init];
     
@@ -206,8 +203,8 @@ NSArray *selectedCells;
         [sectionParent addObject:currentSection];
     }
     self.sections = [[NSArray alloc] initWithArray:sectionParent.copy];
-    self.genreNames = [self getGenreNamesFromSectionsArrrayAndFromGenresDictionary:self.showGenresDictionary];
-    [self.tableView reloadData];
+    self.sectionNames = [self getGenreNamesFromSectionsArrrayAndFromGenresDictionary:self.showGenresDictionary];
+    [super updateContent];
 }
 
 

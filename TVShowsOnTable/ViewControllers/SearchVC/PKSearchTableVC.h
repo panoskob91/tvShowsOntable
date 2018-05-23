@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "SearchVC.h"
 
-@interface PKSearchTableVC : SearchVC <UITableViewDataSource, UITableViewDelegate>
+@interface PKSearchTableVC : UIViewController// : SearchVC <UITableViewDataSource, UITableViewDelegate>
 
 @end

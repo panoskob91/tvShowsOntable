@@ -11,6 +11,8 @@
 		1A098A3B20B3F83E00A60A48 /* PKDetailsImagesCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A098A3A20B3F83E00A60A48 /* PKDetailsImagesCellVM.m */; };
 		1A0E8D51209B0A5A007F817B /* AFSEWebContentHandlerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0E8D50209B0A5A007F817B /* AFSEWebContentHandlerVC.m */; };
 		1A0E8D54209B0DD1007F817B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0E8D53209B0DD1007F817B /* WebKit.framework */; };
+		1A10A89F20B45E8E005CC65E /* MasterTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A10A89E20B45E8E005CC65E /* MasterTableVC.m */; };
+		1A10A8A220B464B8005CC65E /* DetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A10A8A120B464B8005CC65E /* DetailsVC.m */; };
 		1A3303E820872DE60062E1ED /* UIColor+rgb.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3303E720872DE60062E1ED /* UIColor+rgb.m */; };
 		1A3303EB20874ABC0062E1ED /* PickShowTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3303EA20874ABC0062E1ED /* PickShowTypeVC.m */; };
 		1A36078E208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A36078D208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m */; };
@@ -79,6 +81,10 @@
 		1A0E8D4F209B0A5A007F817B /* AFSEWebContentHandlerVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSEWebContentHandlerVC.h; sourceTree = "<group>"; };
 		1A0E8D50209B0A5A007F817B /* AFSEWebContentHandlerVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSEWebContentHandlerVC.m; sourceTree = "<group>"; };
 		1A0E8D53209B0DD1007F817B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		1A10A89D20B45E8E005CC65E /* MasterTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterTableVC.h; sourceTree = "<group>"; };
+		1A10A89E20B45E8E005CC65E /* MasterTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterTableVC.m; sourceTree = "<group>"; };
+		1A10A8A020B464B8005CC65E /* DetailsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsVC.h; sourceTree = "<group>"; };
+		1A10A8A120B464B8005CC65E /* DetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsVC.m; sourceTree = "<group>"; };
 		1A3303E620872DE60062E1ED /* UIColor+rgb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+rgb.h"; sourceTree = "<group>"; };
 		1A3303E720872DE60062E1ED /* UIColor+rgb.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+rgb.m"; sourceTree = "<group>"; };
 		1A3303E920874ABC0062E1ED /* PickShowTypeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PickShowTypeVC.h; sourceTree = "<group>"; };
@@ -183,9 +189,9 @@
 			children = (
 				1A93153F20AD8CE100C1A279 /* PKSummaryCellDetailsVC.h */,
 				1A93154020AD8CE100C1A279 /* PKSummaryCellDetailsVC.m */,
+				1A93153A20AD882D00C1A279 /* detailsVCDescription.xib */,
 				1A098A3420B3EAE400A60A48 /* PKDetailsTableCellVM.h */,
 				1A098A3520B3EAE400A60A48 /* PKDetailsTableCellVM.m */,
-				1A93153A20AD882D00C1A279 /* detailsVCDescription.xib */,
 			);
 			path = DetailsCell;
 			sourceTree = "<group>";
@@ -195,9 +201,9 @@
 			children = (
 				1A93153C20AD8C7A00C1A279 /* PKImagesCellDetailsVC.h */,
 				1A93153D20AD8C7A00C1A279 /* PKImagesCellDetailsVC.m */,
+				1A93153820AD86F700C1A279 /* detailsVCImagesCell.xib */,
 				1A098A3920B3F83E00A60A48 /* PKDetailsImagesCellVM.h */,
 				1A098A3A20B3F83E00A60A48 /* PKDetailsImagesCellVM.m */,
-				1A93153820AD86F700C1A279 /* detailsVCImagesCell.xib */,
 			);
 			path = ImagesCell;
 			sourceTree = "<group>";
@@ -319,6 +325,8 @@
 		1A47C1BB2072308100D63753 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1A10A89D20B45E8E005CC65E /* MasterTableVC.h */,
+				1A10A89E20B45E8E005CC65E /* MasterTableVC.m */,
 				1A7BD8B620A99F4300BF4C7B /* SearchVC */,
 				1A7BD8B920A99FDC00BF4C7B /* PIckShowTypeVC */,
 				1A7BD8B820A99FC800BF4C7B /* WebHandlerVC */,
@@ -382,6 +390,8 @@
 				1A47C1C22072321500D63753 /* DetailsViewController.m */,
 				1A93154320ADC2A800C1A279 /* PKDetailsTableVC.h */,
 				1A93154420ADC2A800C1A279 /* PKDetailsTableVC.m */,
+				1A10A8A020B464B8005CC65E /* DetailsVC.h */,
+				1A10A8A120B464B8005CC65E /* DetailsVC.m */,
 			);
 			path = DetailsVC;
 			sourceTree = "<group>";
@@ -619,12 +629,14 @@
 				1ADBBA3A20A02F7D008588D1 /* PKNetworkManager.m in Sources */,
 				1AC5D19820736690002FB850 /* Show.m in Sources */,
 				1A47C1882072058200D63753 /* AppDelegate.m in Sources */,
+				1A10A89F20B45E8E005CC65E /* MasterTableVC.m in Sources */,
 				1A3F8DC8207E009C000F4C8A /* TVSeries.m in Sources */,
 				1A3E0CC82080B641006DB87A /* NSString_stripHtml.m in Sources */,
 				1A0E8D51209B0A5A007F817B /* AFSEWebContentHandlerVC.m in Sources */,
 				1A3CBA9F2097496300718417 /* AFSEGenreModel.m in Sources */,
 				1A098A3B20B3F83E00A60A48 /* PKDetailsImagesCellVM.m in Sources */,
 				1A3303EB20874ABC0062E1ED /* PickShowTypeVC.m in Sources */,
+				1A10A8A220B464B8005CC65E /* DetailsVC.m in Sources */,
 				1A3CBA962096E9B000718417 /* AFSETvMazeViewController.m in Sources */,
 				1A3CBA992096F7FD00718417 /* AFSETvMazeDetailsVC.m in Sources */,
 			);

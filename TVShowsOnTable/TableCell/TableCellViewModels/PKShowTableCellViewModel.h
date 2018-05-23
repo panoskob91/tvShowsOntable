@@ -55,17 +55,17 @@
 
 - (instancetype)initWithBindModel:(id)bindModel;
 
-
 - (NSString *)getCellIdentifier;
+
 - (void)updateView:(TVShowsCell *)cell;
 
-+ (NSArray<NSString *> *)matchIdsWithNamesFromDictionary:(NSDictionary *)dict
-                                        andSourceArray:(NSArray<PKShowTableCellViewModel *> *)sourceArray;
-
-+ (NSArray<PKShowTableCellViewModel *> *)groupItemsBasedOnGenreIdWithDataFromArray:(NSArray<Show *> *)shows;
-
-- (NSString *)getGenreNameBasedOnGenreIdFromDicrionary:(NSDictionary *)dict;
-
-+ (NSArray<PKShowTableCellViewModel *> *)getGroupedArrayFromViewModelsArray:(NSArray<PKShowTableCellViewModel *> *)viewModels
-                                                         andGenreNamesArray:(NSArray<NSString *> *)genreNames;
+//+ (NSArray<NSString *> *)matchIdsWithNamesFromDictionary:(NSDictionary *)dict
+//                                        andSourceArray:(NSArray<PKShowTableCellViewModel *> *)sourceArray;
+//
+//+ (NSArray<PKShowTableCellViewModel *> *)groupItemsBasedOnGenreIdWithDataFromArray:(NSArray<Show *> *)shows;
+//
+//- (NSString *)getGenreNameBasedOnGenreIdFromDicrionary:(NSDictionary *)dict;
+//
+//+ (NSArray<PKShowTableCellViewModel *> *)getGroupedArrayFromViewModelsArray:(NSArray<PKShowTableCellViewModel *> *)viewModels
+//                                                         andGenreNamesArray:(NSArray<NSString *> *)genreNames;
 @end
