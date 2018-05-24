@@ -11,41 +11,41 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailsVCimagesCell" rowHeight="201" id="JOl-Ll-53f" customClass="PKImagesCellDetailsVC">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="212"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailsVCimagesCell" rowHeight="279" id="JOl-Ll-53f" customClass="PKImagesCellDetailsVC">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="290"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JOl-Ll-53f" id="xi8-nP-roN">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="211.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="289.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bxW-SK-Zdo">
-                        <rect key="frame" x="8" y="8" width="289" height="185"/>
+                        <rect key="frame" x="8" y="8" width="359" height="185"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="185" id="Sck-b1-a8l"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mtg-dJ-7Dx">
-                        <rect key="frame" x="327" y="8" width="40" height="40"/>
+                        <rect key="frame" x="16" y="218" width="40" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="22p-cq-BZP"/>
-                            <constraint firstAttribute="width" constant="40" id="pYc-a9-dBU"/>
+                            <constraint firstAttribute="width" constant="40" id="erV-pd-ehT"/>
+                            <constraint firstAttribute="height" constant="40" id="fkc-Gz-LIa"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="mtg-dJ-7Dx" firstAttribute="top" secondItem="bxW-SK-Zdo" secondAttribute="bottom" constant="25" id="2yd-Wz-vit"/>
                     <constraint firstItem="bxW-SK-Zdo" firstAttribute="top" secondItem="xi8-nP-roN" secondAttribute="top" constant="8" id="Dtq-UQ-828"/>
-                    <constraint firstAttribute="trailing" secondItem="mtg-dJ-7Dx" secondAttribute="trailing" constant="8" id="GVd-dw-Adr"/>
                     <constraint firstItem="bxW-SK-Zdo" firstAttribute="leading" secondItem="xi8-nP-roN" secondAttribute="leading" constant="8" id="Id3-iS-kLQ"/>
-                    <constraint firstItem="bxW-SK-Zdo" firstAttribute="top" secondItem="mtg-dJ-7Dx" secondAttribute="top" id="J0K-n3-ntR"/>
-                    <constraint firstItem="mtg-dJ-7Dx" firstAttribute="leading" secondItem="bxW-SK-Zdo" secondAttribute="trailing" constant="30" id="PjJ-ev-Tfm"/>
-                    <constraint firstAttribute="bottom" secondItem="bxW-SK-Zdo" secondAttribute="bottom" constant="18.5" id="SuO-oK-DjA"/>
+                    <constraint firstAttribute="trailing" secondItem="bxW-SK-Zdo" secondAttribute="trailing" constant="8" id="IrO-I4-ugx"/>
+                    <constraint firstAttribute="bottom" secondItem="mtg-dJ-7Dx" secondAttribute="bottom" constant="31.5" id="abl-dB-8cj"/>
+                    <constraint firstItem="mtg-dJ-7Dx" firstAttribute="leading" secondItem="xi8-nP-roN" secondAttribute="leading" constant="16" id="fwf-fn-1Vp"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="mainImageDetailsVC" destination="bxW-SK-Zdo" id="RbB-ex-Pu2"/>
                 <outlet property="mediaTypeImageIndicator" destination="mtg-dJ-7Dx" id="f8o-7o-Ej7"/>
             </connections>
-            <point key="canvasLocation" x="30.5" y="65"/>
+            <point key="canvasLocation" x="30.5" y="104"/>
         </tableViewCell>
     </objects>
 </document>

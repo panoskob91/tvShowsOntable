@@ -12,8 +12,12 @@
 #import "PKNetworkManager.h"
 
 @interface DetailsVC ()
-//TO DO: Consider adding this property to Show class
+
+//TO DO: Consider moving this property to Show class
 @property (strong, nonatomic) NSString *showSummary;
+@property (strong, nonatomic) NSString *mainImageURLControlledWithPageControll;
+
+- (IBAction)pageControlHandler:(UIPageControl *)sender;
 
 @end
 
@@ -21,6 +25,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.mainImageURLControlledWithPageControll = self.show.showBackdropImageURLPath;
     
     self.navigationItem.title = self.show.showTitle;
     PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
@@ -35,7 +41,9 @@
     NSMutableArray *sectionForParent = [NSMutableArray new];
     NSMutableArray *titleSection = [NSMutableArray new];
     
-    PKDetailsImagesCellVM *newImageVM = [[PKDetailsImagesCellVM alloc] initWithMainImageURLPath:self.show.showBackdropImageURLPath
+    //PKDetailsImagesCellVM *newImageVM = [[PKDetailsImagesCellVM alloc] initWithMainImageURLPath:self.show.showBackdropImageURLPath
+    //                                                                              andShowObject:self.show];
+    PKDetailsImagesCellVM *newImageVM = [[PKDetailsImagesCellVM alloc] initWithMainImageURLPath:self.mainImageURLControlledWithPageControll
                                                                                   andShowObject:self.show];
     PKDetailsTableCellVM *detailsTableCellVM = [[PKDetailsTableCellVM alloc] initWithShowSummary:self.showSummary
                                                                                     andBindModel:self.show];
@@ -69,4 +77,20 @@
     [super didReceiveMemoryWarning];
 }
 
+- (IBAction)pageControlHandler:(UIPageControl *)sender
+{
+    switch (sender.currentPage) {
+        case 0:
+            self.mainImageURLControlledWithPageControll = self.show.showBackdropImageURLPath;
+            NSLog(@"Backdrop Image");
+            break;
+        case 1:
+            self.mainImageURLControlledWithPageControll = self.show.showImageUrlPath;
+            NSLog(@"Poster Image");
+            break;
+        default:
+            break;
+    }
+    [self updateContent];
+}
 @end

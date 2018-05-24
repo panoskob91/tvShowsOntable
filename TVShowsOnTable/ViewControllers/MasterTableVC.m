@@ -6,6 +6,7 @@
 //  Copyright © 2018 AFSE. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "MasterTableVC.h"
 #import "DetailsVC.h"
 #import "PKDetailsImagesCellVM.h"
@@ -25,7 +26,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"detailsVCImagesCell" bundle:nil] forCellReuseIdentifier:@"detailsVCimagesCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"detailsVCDescription" bundle:nil]forCellReuseIdentifier:@"detailsVCDetailsCell"];
 }
-     
+
 
 #pragma mark - TableView Methods
 //Set number of Sections in Table View
@@ -82,7 +83,11 @@
 #pragma mark - Memory Management
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    
 }
 
 @end

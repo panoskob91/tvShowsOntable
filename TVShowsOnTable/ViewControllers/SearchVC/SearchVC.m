@@ -68,7 +68,6 @@
 NSMutableDictionary *showsDataDictionary;
 NSArray *selectedCells;
 
-
 #pragma mark -ViewController lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
