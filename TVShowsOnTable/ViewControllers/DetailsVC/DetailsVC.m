@@ -26,6 +26,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    [defaults setInteger:9001 forKey:@"HighScore"];
+//    [defaults synchronize];
+    
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults setObject:self.show forKey:@"This is an Object"];
+    [userDefaults synchronize];
+    
+    Show *showObjectFromUserDefaults = [userDefaults objectForKey:@"This is an Object"];
+    NSLog(@"Show object = %@", showObjectFromUserDefaults);
+    
     self.mainImageURLControlledWithPageControll = self.show.showBackdropImageURLPath;
     
     self.navigationItem.title = self.show.showTitle;
@@ -82,11 +93,9 @@
     switch (sender.currentPage) {
         case 0:
             self.mainImageURLControlledWithPageControll = self.show.showBackdropImageURLPath;
-            NSLog(@"Backdrop Image");
             break;
         case 1:
             self.mainImageURLControlledWithPageControll = self.show.showImageUrlPath;
-            NSLog(@"Poster Image");
             break;
         default:
             break;
