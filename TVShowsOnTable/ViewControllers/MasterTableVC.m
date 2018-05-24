@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "MasterTableVC.h"
 #import "DetailsVC.h"
+#import "SearchVC.h"
+#import "AFSEWebContentHandlerVC.h"
+
 #import "PKDetailsImagesCellVM.h"
 
 
@@ -22,9 +26,21 @@
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] init];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"ShowsCell" bundle:nil] forCellReuseIdentifier:@"tVShowsCell"];
-    [self.tableView registerNib:[UINib nibWithNibName:@"detailsVCImagesCell" bundle:nil] forCellReuseIdentifier:@"detailsVCimagesCell"];
-    [self.tableView registerNib:[UINib nibWithNibName:@"detailsVCDescription" bundle:nil]forCellReuseIdentifier:@"detailsVCDetailsCell"];
+    //NSDictionary containing cells. Key:NibName value:cellID
+    NSDictionary<NSString *, NSString *> *cellInfo = @{
+    @"ShowsCell" : @"tVShowsCell",
+    @"detailsVCImagesCell" : @"detailsVCimagesCell",
+    @"detailsVCDescription" : @"detailsVCDetailsCell"
+    };
+    
+    //Add all cells with their identifier
+    for (NSString *dictionaryKey in [cellInfo allKeys]) {
+        [self.tableView registerNib:[UINib nibWithNibName:dictionaryKey bundle:nil] forCellReuseIdentifier:cellInfo[dictionaryKey]];
+    }
+    
+//    [self.tableView registerNib:[UINib nibWithNibName:@"ShowsCell" bundle:nil] forCellReuseIdentifier:@"tVShowsCell"];
+//    [self.tableView registerNib:[UINib nibWithNibName:@"detailsVCImagesCell" bundle:nil] forCellReuseIdentifier:@"detailsVCimagesCell"];
+//    [self.tableView registerNib:[UINib nibWithNibName:@"detailsVCDescription" bundle:nil]forCellReuseIdentifier:@"detailsVCDetailsCell"];
 }
 
 
@@ -63,13 +79,26 @@
 //On select table row
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DetailsVC *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"detailsVC"];
-    destController.show = self.sections[indexPath.section][indexPath.row].bindModel;
-    destController.hidesBottomBarWhenPushed = YES;
+    if ([self isKindOfClass:[SearchVC class]])
+    {
+        DetailsVC *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"detailsVC"];
+        destController.show = self.sections[indexPath.section][indexPath.row].bindModel;
+        destController.hidesBottomBarWhenPushed = YES;
+
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+        [self.navigationController pushViewController:destController animated:YES];
+    }
+    else if ([self isKindOfClass:[DetailsVC class]])
+    {
+        AFSEWebContentHandlerVC *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"webContentHandler"];
+        webViewController.show = self.sections[indexPath.section][indexPath.row].bindModel;
+        
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        [self.navigationController pushViewController:webViewController animated:YES];
+    }
     
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    [self.navigationController pushViewController:destController animated:YES];
 }
 
 //Update the table view elements - reload table view

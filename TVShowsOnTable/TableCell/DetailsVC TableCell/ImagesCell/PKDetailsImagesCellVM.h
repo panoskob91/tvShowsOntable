@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) NSString *mainImageUrlPath;
 @property (strong, nonatomic) NSString *mediaTypeIndicatorImageName;
+@property (strong, nonatomic) id bindModel;
 
 /**
  Images cell initialiser

@@ -27,6 +27,7 @@
         {
             self.mediaTypeIndicatorImageName = @"TvSeries";
         }
+        self.bindModel = (Show *)showObject;
     }
     
     return self;

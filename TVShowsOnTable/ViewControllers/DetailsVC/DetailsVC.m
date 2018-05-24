@@ -31,11 +31,9 @@
 //    [defaults synchronize];
     
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-    [userDefaults setObject:self.show forKey:@"This is an Object"];
+    [userDefaults setObject:self.show.showTitle forKey:@"Title"];
     [userDefaults synchronize];
     
-    Show *showObjectFromUserDefaults = [userDefaults objectForKey:@"This is an Object"];
-    NSLog(@"Show object = %@", showObjectFromUserDefaults);
     
     self.mainImageURLControlledWithPageControll = self.show.showBackdropImageURLPath;
     
@@ -69,7 +67,7 @@
     [super updateContent];
 }
 
-
+#pragma mark -Network delegete
 - (void)networkAPICallDidCompleteWithResponse:(NSArray<Show *> *)shows
 {
     

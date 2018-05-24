@@ -27,7 +27,8 @@
     [super viewDidLoad];
     
     self.showID = [[NSNumber alloc] init];
-    self.showID = self.showIdentifier;
+    //self.showID = self.showIdentifier;
+    self.showID = [self.show getShowId];
     
     PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     networkManager.networkingDelegate = self;

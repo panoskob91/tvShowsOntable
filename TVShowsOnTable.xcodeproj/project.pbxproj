@@ -143,8 +143,8 @@
 		1A93154420ADC2A800C1A279 /* PKDetailsTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKDetailsTableVC.m; sourceTree = "<group>"; };
 		1A93154620ADCBE400C1A279 /* PKSearchTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKSearchTableVC.h; sourceTree = "<group>"; };
 		1A93154720ADCBE400C1A279 /* PKSearchTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKSearchTableVC.m; sourceTree = "<group>"; };
-		1AC5D19620736690002FB850 /* Show.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Show.h; path = TVShowsOnTable/Models/Show.h; sourceTree = SOURCE_ROOT; };
-		1AC5D19720736690002FB850 /* Show.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Show.m; path = TVShowsOnTable/Models/Show.m; sourceTree = SOURCE_ROOT; };
+		1AC5D19620736690002FB850 /* Show.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Show.h; path = "TVShowsOnTable/Models/Show Models/Show.h"; sourceTree = SOURCE_ROOT; };
+		1AC5D19720736690002FB850 /* Show.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Show.m; path = "TVShowsOnTable/Models/Show Models/Show.m"; sourceTree = SOURCE_ROOT; };
 		1ADBBA3720A02E30008588D1 /* AFSENetworkingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSENetworkingDelegate.h; sourceTree = "<group>"; };
 		1ADBBA3820A02F7D008588D1 /* PKNetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKNetworkManager.h; sourceTree = "<group>"; };
 		1ADBBA3920A02F7D008588D1 /* PKNetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKNetworkManager.m; sourceTree = "<group>"; };
@@ -348,6 +348,46 @@
 			path = TableCell;
 			sourceTree = "<group>";
 		};
+		1A7A2B0220B6A97D009DA8C4 /* Show Models */ = {
+			isa = PBXGroup;
+			children = (
+				1AC5D19720736690002FB850 /* Show.m */,
+				1AC5D19620736690002FB850 /* Show.h */,
+				1A3F8DC3207E0070000F4C8A /* Movie.h */,
+				1A3F8DC4207E0070000F4C8A /* Movie.m */,
+				1A3F8DC6207E009C000F4C8A /* TVSeries.h */,
+				1A3F8DC7207E009C000F4C8A /* TVSeries.m */,
+			);
+			path = "Show Models";
+			sourceTree = "<group>";
+		};
+		1A7A2B0320B6A992009DA8C4 /* Group Models */ = {
+			isa = PBXGroup;
+			children = (
+				1A3CBA9A20970A0000718417 /* AFSEShowGroup.h */,
+				1A3CBA9B20970A0000718417 /* AFSEShowGroup.m */,
+			);
+			path = "Group Models";
+			sourceTree = "<group>";
+		};
+		1A7A2B0420B6A9B7009DA8C4 /* Networking Models */ = {
+			isa = PBXGroup;
+			children = (
+				1ADBBA3820A02F7D008588D1 /* PKNetworkManager.h */,
+				1ADBBA3920A02F7D008588D1 /* PKNetworkManager.m */,
+			);
+			path = "Networking Models";
+			sourceTree = "<group>";
+		};
+		1A7A2B0520B6A9C7009DA8C4 /* Genre Models */ = {
+			isa = PBXGroup;
+			children = (
+				1A3CBA9D2097496300718417 /* AFSEGenreModel.h */,
+				1A3CBA9E2097496300718417 /* AFSEGenreModel.m */,
+			);
+			path = "Genre Models";
+			sourceTree = "<group>";
+		};
 		1A7BD8B120A9912300BF4C7B /* TableCellViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,18 +466,10 @@
 		1AC5D19320736657002FB850 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1AC5D19720736690002FB850 /* Show.m */,
-				1AC5D19620736690002FB850 /* Show.h */,
-				1A3F8DC3207E0070000F4C8A /* Movie.h */,
-				1A3F8DC4207E0070000F4C8A /* Movie.m */,
-				1A3F8DC6207E009C000F4C8A /* TVSeries.h */,
-				1A3F8DC7207E009C000F4C8A /* TVSeries.m */,
-				1A3CBA9A20970A0000718417 /* AFSEShowGroup.h */,
-				1A3CBA9B20970A0000718417 /* AFSEShowGroup.m */,
-				1A3CBA9D2097496300718417 /* AFSEGenreModel.h */,
-				1A3CBA9E2097496300718417 /* AFSEGenreModel.m */,
-				1ADBBA3820A02F7D008588D1 /* PKNetworkManager.h */,
-				1ADBBA3920A02F7D008588D1 /* PKNetworkManager.m */,
+				1A7A2B0520B6A9C7009DA8C4 /* Genre Models */,
+				1A7A2B0420B6A9B7009DA8C4 /* Networking Models */,
+				1A7A2B0320B6A992009DA8C4 /* Group Models */,
+				1A7A2B0220B6A97D009DA8C4 /* Show Models */,
 			);
 			path = Models;
 			sourceTree = "<group>";

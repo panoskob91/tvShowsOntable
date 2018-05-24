@@ -185,7 +185,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G8V-kj-xAN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-940" y="132"/>
+            <point key="canvasLocation" x="-1166" y="131"/>
         </scene>
         <!--Tv Maze View Controller-->
         <scene sceneID="sEn-Ca-Trd">
@@ -297,7 +297,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bzw-rO-t5d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-180" y="131"/>
+            <point key="canvasLocation" x="-406" y="130"/>
         </scene>
         <!--Pick Show TypeVC-->
         <scene sceneID="ta5-Ye-464">
