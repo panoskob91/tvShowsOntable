@@ -36,6 +36,10 @@
 		1A47C1C32072321500D63753 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47C1C22072321500D63753 /* DetailsViewController.m */; };
 		1A67FF2020A5E10E00C4B256 /* PKMovieCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A67FF1F20A5E10E00C4B256 /* PKMovieCellViewModel.m */; };
 		1A67FF2320A5E12D00C4B256 /* PKTVTableViewCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A67FF2220A5E12D00C4B256 /* PKTVTableViewCellViewModel.m */; };
+		1A7A2B0920B6CE90009DA8C4 /* PKLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7A2B0820B6CE90009DA8C4 /* PKLoginVC.m */; };
+		1A7A2B0C20B6CEDE009DA8C4 /* LoginWidgetVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7A2B0B20B6CEDE009DA8C4 /* LoginWidgetVM.m */; };
+		1A7A2B1020B6D435009DA8C4 /* LoginWidget.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A7A2B0F20B6D435009DA8C4 /* LoginWidget.xib */; };
+		1A7A2B1320B700C9009DA8C4 /* PKLoginWidgetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7A2B1220B700C9009DA8C4 /* PKLoginWidgetView.m */; };
 		1A7BD8B020A9660B00BF4C7B /* PKShowTableCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7BD8AF20A9660B00BF4C7B /* PKShowTableCellViewModel.m */; };
 		1A93153920AD86F700C1A279 /* detailsVCImagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A93153820AD86F700C1A279 /* detailsVCImagesCell.xib */; };
 		1A93153B20AD882D00C1A279 /* detailsVCDescription.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A93153A20AD882D00C1A279 /* detailsVCDescription.xib */; };
@@ -131,6 +135,13 @@
 		1A67FF1F20A5E10E00C4B256 /* PKMovieCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKMovieCellViewModel.m; sourceTree = "<group>"; };
 		1A67FF2120A5E12D00C4B256 /* PKTVTableViewCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKTVTableViewCellViewModel.h; sourceTree = "<group>"; };
 		1A67FF2220A5E12D00C4B256 /* PKTVTableViewCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKTVTableViewCellViewModel.m; sourceTree = "<group>"; };
+		1A7A2B0720B6CE90009DA8C4 /* PKLoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKLoginVC.h; sourceTree = "<group>"; };
+		1A7A2B0820B6CE90009DA8C4 /* PKLoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKLoginVC.m; sourceTree = "<group>"; };
+		1A7A2B0A20B6CEDE009DA8C4 /* LoginWidgetVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginWidgetVM.h; sourceTree = "<group>"; };
+		1A7A2B0B20B6CEDE009DA8C4 /* LoginWidgetVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginWidgetVM.m; sourceTree = "<group>"; };
+		1A7A2B0F20B6D435009DA8C4 /* LoginWidget.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginWidget.xib; sourceTree = "<group>"; };
+		1A7A2B1120B700C9009DA8C4 /* PKLoginWidgetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKLoginWidgetView.h; sourceTree = "<group>"; };
+		1A7A2B1220B700C9009DA8C4 /* PKLoginWidgetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKLoginWidgetView.m; sourceTree = "<group>"; };
 		1A7BD8AE20A9660B00BF4C7B /* PKShowTableCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKShowTableCellViewModel.h; sourceTree = "<group>"; };
 		1A7BD8AF20A9660B00BF4C7B /* PKShowTableCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKShowTableCellViewModel.m; sourceTree = "<group>"; };
 		1A93153820AD86F700C1A279 /* detailsVCImagesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = detailsVCImagesCell.xib; sourceTree = "<group>"; };
@@ -327,6 +338,7 @@
 			children = (
 				1A10A89D20B45E8E005CC65E /* MasterTableVC.h */,
 				1A10A89E20B45E8E005CC65E /* MasterTableVC.m */,
+				1A7A2B0620B6CD60009DA8C4 /* Login */,
 				1A7BD8B620A99F4300BF4C7B /* SearchVC */,
 				1A7BD8B920A99FDC00BF4C7B /* PIckShowTypeVC */,
 				1A7BD8B820A99FC800BF4C7B /* WebHandlerVC */,
@@ -386,6 +398,20 @@
 				1A3CBA9E2097496300718417 /* AFSEGenreModel.m */,
 			);
 			path = "Genre Models";
+			sourceTree = "<group>";
+		};
+		1A7A2B0620B6CD60009DA8C4 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1A7A2B0720B6CE90009DA8C4 /* PKLoginVC.h */,
+				1A7A2B0820B6CE90009DA8C4 /* PKLoginVC.m */,
+				1A7A2B0A20B6CEDE009DA8C4 /* LoginWidgetVM.h */,
+				1A7A2B0B20B6CEDE009DA8C4 /* LoginWidgetVM.m */,
+				1A7A2B0F20B6D435009DA8C4 /* LoginWidget.xib */,
+				1A7A2B1120B700C9009DA8C4 /* PKLoginWidgetView.h */,
+				1A7A2B1220B700C9009DA8C4 /* PKLoginWidgetView.m */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		1A7BD8B120A9912300BF4C7B /* TableCellViewModels */ = {
@@ -614,6 +640,7 @@
 				1AE2496920B2AE3900FF7095 /* timeburnerbold.ttf in Resources */,
 				1A47C18E2072058200D63753 /* Main.storyboard in Resources */,
 				1AE2496D20B2B42800FF7095 /* ADAM.CG PRO.otf in Resources */,
+				1A7A2B1020B6D435009DA8C4 /* LoginWidget.xib in Resources */,
 				1AE2496020B2A35F00FF7095 /* MJ Granada.ttf in Resources */,
 				1AE2496320B2AA4500FF7095 /* DELIGHT LETTERING SCRIPT-DEMO.ttf in Resources */,
 				1AE2496B20B2B0BF00FF7095 /* Flighter_PERSONAL_USE_ONLY.ttf in Resources */,
@@ -643,6 +670,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A67FF2020A5E10E00C4B256 /* PKMovieCellViewModel.m in Sources */,
+				1A7A2B1320B700C9009DA8C4 /* PKLoginWidgetView.m in Sources */,
 				1A93154520ADC2A800C1A279 /* PKDetailsTableVC.m in Sources */,
 				1A47C18B2072058200D63753 /* SearchVC.m in Sources */,
 				1A93153E20AD8C7A00C1A279 /* PKImagesCellDetailsVC.m in Sources */,
@@ -657,10 +685,12 @@
 				1A67FF2320A5E12D00C4B256 /* PKTVTableViewCellViewModel.m in Sources */,
 				1A47C1962072058300D63753 /* main.m in Sources */,
 				1A93154120AD8CE100C1A279 /* PKSummaryCellDetailsVC.m in Sources */,
+				1A7A2B0920B6CE90009DA8C4 /* PKLoginVC.m in Sources */,
 				1A47C1BA2072076E00D63753 /* TVShowsCell.m in Sources */,
 				1ADBBA3A20A02F7D008588D1 /* PKNetworkManager.m in Sources */,
 				1AC5D19820736690002FB850 /* Show.m in Sources */,
 				1A47C1882072058200D63753 /* AppDelegate.m in Sources */,
+				1A7A2B0C20B6CEDE009DA8C4 /* LoginWidgetVM.m in Sources */,
 				1A10A89F20B45E8E005CC65E /* MasterTableVC.m in Sources */,
 				1A3F8DC8207E009C000F4C8A /* TVSeries.m in Sources */,
 				1A3E0CC82080B641006DB87A /* NSString_stripHtml.m in Sources */,

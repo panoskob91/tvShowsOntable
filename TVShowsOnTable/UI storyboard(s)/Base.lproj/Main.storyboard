@@ -185,7 +185,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G8V-kj-xAN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1166" y="131"/>
+            <point key="canvasLocation" x="-1321" y="130"/>
         </scene>
         <!--Tv Maze View Controller-->
         <scene sceneID="sEn-Ca-Trd">
@@ -292,12 +292,31 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="6uA-xt-8rN"/>
+                        <segue destination="agH-mx-nVS" kind="relationship" relationship="rootViewController" id="Pec-Ir-79X"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bzw-rO-t5d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-406" y="130"/>
+            <point key="canvasLocation" x="-561" y="129"/>
+        </scene>
+        <!--LoginVC-->
+        <scene sceneID="spq-Y5-DTE">
+            <objects>
+                <viewController id="agH-mx-nVS" customClass="PKLoginVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gnp-F2-gzq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="UIA-qc-b0e"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Rha-Cy-HjK"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="searchSegue" id="UBf-ae-veI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wxs-lY-FOD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="108" y="131.78410794602701"/>
         </scene>
         <!--Pick Show TypeVC-->
         <scene sceneID="ta5-Ye-464">
