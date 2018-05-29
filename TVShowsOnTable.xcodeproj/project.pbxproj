@@ -403,13 +403,13 @@
 		1A7A2B0620B6CD60009DA8C4 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				1A7A2B1120B700C9009DA8C4 /* PKLoginWidgetView.h */,
+				1A7A2B1220B700C9009DA8C4 /* PKLoginWidgetView.m */,
+				1A7A2B0F20B6D435009DA8C4 /* LoginWidget.xib */,
 				1A7A2B0720B6CE90009DA8C4 /* PKLoginVC.h */,
 				1A7A2B0820B6CE90009DA8C4 /* PKLoginVC.m */,
 				1A7A2B0A20B6CEDE009DA8C4 /* LoginWidgetVM.h */,
 				1A7A2B0B20B6CEDE009DA8C4 /* LoginWidgetVM.m */,
-				1A7A2B0F20B6D435009DA8C4 /* LoginWidget.xib */,
-				1A7A2B1120B700C9009DA8C4 /* PKLoginWidgetView.h */,
-				1A7A2B1220B700C9009DA8C4 /* PKLoginWidgetView.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";

@@ -26,21 +26,17 @@
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] init];
     
-    //NSDictionary containing cells. Key:NibName value:cellID
+    //NSDictionary containing cells. Key:NibName, value:cellID
     NSDictionary<NSString *, NSString *> *cellInfo = @{
-    @"ShowsCell" : @"tVShowsCell",
-    @"detailsVCImagesCell" : @"detailsVCimagesCell",
-    @"detailsVCDescription" : @"detailsVCDetailsCell"
-    };
+                                                       @"ShowsCell" : @"tVShowsCell",
+                                                       @"detailsVCImagesCell" : @"detailsVCimagesCell",
+                                                       @"detailsVCDescription" : @"detailsVCDetailsCell"
+                                                       };
     
     //Add all cells with their identifier
     for (NSString *dictionaryKey in [cellInfo allKeys]) {
         [self.tableView registerNib:[UINib nibWithNibName:dictionaryKey bundle:nil] forCellReuseIdentifier:cellInfo[dictionaryKey]];
     }
-    
-//    [self.tableView registerNib:[UINib nibWithNibName:@"ShowsCell" bundle:nil] forCellReuseIdentifier:@"tVShowsCell"];
-//    [self.tableView registerNib:[UINib nibWithNibName:@"detailsVCImagesCell" bundle:nil] forCellReuseIdentifier:@"detailsVCimagesCell"];
-//    [self.tableView registerNib:[UINib nibWithNibName:@"detailsVCDescription" bundle:nil]forCellReuseIdentifier:@"detailsVCDetailsCell"];
 }
 
 

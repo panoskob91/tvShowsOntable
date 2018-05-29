@@ -13,10 +13,12 @@
 
 @property (strong, nonatomic) NSString *usernameText;
 @property (strong, nonatomic) NSString *passwordText;
+@property (strong, nonatomic) NSString *loginAvatarImageURL;
+@property (strong, nonatomic) id bindModel;
 
 - (instancetype)initWithUsername:(NSString *)username
                      andPassword:(NSString *)password;
 
-- (void)setupView:(PKLoginWidgetView *)loginView;
+- (void)updateView:(PKLoginWidgetView *)loginView;
 
 @end

@@ -17,5 +17,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
 @property (strong, nonatomic) IBOutlet UIButton *registerButton;
 @property (strong, nonatomic) IBOutlet UIImageView *loginWidgetImage;
+- (IBAction)loginButtonPressed:(UIButton *)sender;
+- (IBAction)registerButtonPressed:(UIButton *)sender;
+
+@property (strong, nonatomic) NSMutableDictionary<NSString *, NSString *> *usernamePasswordPairs;
 
 @end

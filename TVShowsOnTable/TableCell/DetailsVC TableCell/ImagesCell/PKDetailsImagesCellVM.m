@@ -13,6 +13,7 @@
 #pragma mark -Initialiser
 - (instancetype)initWithMainImageURLPath:(NSString *)mainImageURL
                            andShowObject:(Show *)showObject
+                 //andRatingImageNameArray:(NSArray<NSString *> *)ratingImageNames
 {
     self = [super init];
     
@@ -27,26 +28,12 @@
         {
             self.mediaTypeIndicatorImageName = @"TvSeries";
         }
+        //self.ratingImageIndicatorNames = ratingImageNames
         self.bindModel = (Show *)showObject;
     }
     
     return self;
 }
-
-//- (void)updateImagesCell:(PKImagesCellDetailsVC *)imagesCell
-//{
-//    NSURL *mainImageURL = [NSURL URLWithString:self.mainImageUrlPath];
-//    NSData *mainImageData = [NSData dataWithContentsOfURL:mainImageURL];
-//
-//    imagesCell.mainImageDetailsVC.image = [UIImage imageWithData:mainImageData];
-//    imagesCell.mediaTypeImageIndicator.image = [UIImage imageNamed:self.mediaTypeIndicatorImageName];
-//
-//}
-
-//- (NSString *)getImagesCellIdentifier
-//{
-//    return @"detailsVCimagesCell";
-//}
 
 - (NSString *)getCellIdentifier
 {

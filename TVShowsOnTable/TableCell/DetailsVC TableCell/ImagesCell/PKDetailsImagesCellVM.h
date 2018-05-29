@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) NSString *mainImageUrlPath;
 @property (strong, nonatomic) NSString *mediaTypeIndicatorImageName;
+@property (strong, nonatomic) NSArray<NSString *> *ratingImageIndicatorNames;
 @property (strong, nonatomic) id bindModel;
 
 /**
@@ -25,6 +26,7 @@
  */
 - (instancetype)initWithMainImageURLPath:(NSString *)mainImageURL
                            andShowObject:(Show *)showObject;
+                 //andRatingImageNameArray:(NSArray<NSString *> *)ratingImageNames;
 
 
 /**

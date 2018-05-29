@@ -13,7 +13,7 @@
 
 @interface DetailsVC ()
 
-//TO DO: Consider moving this property to Show class
+//TO DO: Consider moving showSummary property to Show class
 @property (strong, nonatomic) NSString *showSummary;
 @property (strong, nonatomic) NSString *mainImageURLControlledWithPageControll;
 
@@ -34,7 +34,6 @@
     [userDefaults setObject:self.show.showTitle forKey:@"Title"];
     [userDefaults synchronize];
     
-    
     self.mainImageURLControlledWithPageControll = self.show.showBackdropImageURLPath;
     
     self.navigationItem.title = self.show.showTitle;
@@ -43,6 +42,41 @@
     [networkManager fetchDescriptionFromId:[self.show getShowId] andMediaType:self.show.mediaType];
     
     //[self updateContent];
+    //Round rating
+    NSInteger value = [self roundNumber:self.show.showAverageRating];
+    NSLog(@"RESULT = %ld", (long)value / 2);
+    
+}
+
+- (NSInteger)roundNumber:(NSNumber *)inputNumber
+{
+    NSString *stringFromNumber = [NSString stringWithFormat:@"%@", inputNumber];
+    NSUInteger dotCharacterIndex = 0;
+    NSInteger roundedNumber = inputNumber.integerValue;
+    
+    //Find dot position
+    for (NSUInteger charIndex = 0; charIndex < stringFromNumber.length; charIndex++) {
+        unichar currentCharacter = [stringFromNumber characterAtIndex:charIndex];
+        
+        if (currentCharacter == '.')
+        {
+            dotCharacterIndex = charIndex;
+        }
+    }
+if (dotCharacterIndex != 0)
+{
+    if ([stringFromNumber characterAtIndex:dotCharacterIndex + 1] >= '5')
+    {
+        NSNumber *rounded = @(ceil(inputNumber.floatValue));
+        roundedNumber = rounded.integerValue;
+    }
+    else
+    {
+        NSNumber *rounded = @(floor(inputNumber.floatValue));
+        roundedNumber = rounded.integerValue;
+    }
+}
+    return roundedNumber;
 }
 
 - (void)updateContent
@@ -50,8 +84,6 @@
     NSMutableArray *sectionForParent = [NSMutableArray new];
     NSMutableArray *titleSection = [NSMutableArray new];
     
-    //PKDetailsImagesCellVM *newImageVM = [[PKDetailsImagesCellVM alloc] initWithMainImageURLPath:self.show.showBackdropImageURLPath
-    //                                                                              andShowObject:self.show];
     PKDetailsImagesCellVM *newImageVM = [[PKDetailsImagesCellVM alloc] initWithMainImageURLPath:self.mainImageURLControlledWithPageControll
                                                                                   andShowObject:self.show];
     PKDetailsTableCellVM *detailsTableCellVM = [[PKDetailsTableCellVM alloc] initWithShowSummary:self.showSummary
