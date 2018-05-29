@@ -24,24 +24,14 @@
     return self;
 }
 
-
-//- (NSString *)getDetailsCellIdentifier
-//{
-//    return @"detailsVCDetailsCell";
-//}
-
 - (NSString *)getCellIdentifier
 {
     return @"detailsVCDetailsCell";
 }
 
-//- (void)updateDetailsCell:(PKSummaryCellDetailsVC *)detailsCell
-//{
-//    detailsCell.detailsCellDescriptionLabel.text = self.showDetailsDescription;
-//}
-
 - (void)updateView:(PKSummaryCellDetailsVC *)detailsCell
 {
+    detailsCell.userInteractionEnabled = NO;
     detailsCell.detailsCellDescriptionLabel.text = self.showDetailsDescription;
 }
 

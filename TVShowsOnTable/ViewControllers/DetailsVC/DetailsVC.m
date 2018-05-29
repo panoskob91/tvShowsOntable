@@ -42,9 +42,7 @@
     [networkManager fetchDescriptionFromId:[self.show getShowId] andMediaType:self.show.mediaType];
     
     //[self updateContent];
-    //Round rating
-    NSInteger value = [self roundNumber:self.show.showAverageRating];
-    NSLog(@"RESULT = %ld", (long)value / 2);
+    
     
 }
 
@@ -79,13 +77,40 @@ if (dotCharacterIndex != 0)
     return roundedNumber;
 }
 
+- (NSArray<NSString *> *)populateRatingImagesArray
+{
+    NSMutableArray<NSString *> *rating = [[NSMutableArray alloc] init];
+    NSInteger ratingValue = [self roundNumber:self.show.showAverageRating];
+    
+    for (int i = 0; i < 5; i++)
+    {
+        if (i < ratingValue / 2)
+        {
+            [rating addObject:@"filled-star"];
+        }
+        else
+        {
+            [rating addObject:@"empty-star"];
+        }
+    }
+    NSArray<NSString *> *starRatings = [[NSArray alloc] initWithArray:rating];
+    return starRatings;
+    
+}
+
 - (void)updateContent
 {
     NSMutableArray *sectionForParent = [NSMutableArray new];
     NSMutableArray *titleSection = [NSMutableArray new];
     
+    NSArray<NSString *> *ratingImages = [self populateRatingImagesArray];
+    
+//    PKDetailsImagesCellVM *newImageVM = [[PKDetailsImagesCellVM alloc] initWithMainImageURLPath:self.mainImageURLControlledWithPageControll
+//                                                                                  andShowObject:self.show];
     PKDetailsImagesCellVM *newImageVM = [[PKDetailsImagesCellVM alloc] initWithMainImageURLPath:self.mainImageURLControlledWithPageControll
-                                                                                  andShowObject:self.show];
+                                                                                  andShowObject:self.show
+                                                                        andRatingImageNameArray:ratingImages];
+    
     PKDetailsTableCellVM *detailsTableCellVM = [[PKDetailsTableCellVM alloc] initWithShowSummary:self.showSummary
                                                                                     andBindModel:self.show];
     

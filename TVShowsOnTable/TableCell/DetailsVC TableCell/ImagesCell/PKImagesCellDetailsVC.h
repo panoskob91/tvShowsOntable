@@ -13,5 +13,13 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *mainImageDetailsVC;
 @property (strong, nonatomic) IBOutlet UIImageView *mediaTypeImageIndicator;
+@property (strong, nonatomic) IBOutlet UILabel *ratingLabel;
+
+//Rating Images
+@property (strong, nonatomic) IBOutlet UIImageView *ratingImage0;
+@property (strong, nonatomic) IBOutlet UIImageView *ratingImage1;
+@property (strong, nonatomic) IBOutlet UIImageView *ratingImage2;
+@property (strong, nonatomic) IBOutlet UIImageView *ratingImage3;
+@property (strong, nonatomic) IBOutlet UIImageView *ratingImage4;
 
 @end

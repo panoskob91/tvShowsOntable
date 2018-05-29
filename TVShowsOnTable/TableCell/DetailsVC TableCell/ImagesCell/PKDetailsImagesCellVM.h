@@ -25,8 +25,8 @@
  @return DetailsImagesCellViewModel object
  */
 - (instancetype)initWithMainImageURLPath:(NSString *)mainImageURL
-                           andShowObject:(Show *)showObject;
-                 //andRatingImageNameArray:(NSArray<NSString *> *)ratingImageNames;
+                           andShowObject:(Show *)showObject
+                 andRatingImageNameArray:(NSArray<NSString *> *)ratingImageNames;
 
 
 /**

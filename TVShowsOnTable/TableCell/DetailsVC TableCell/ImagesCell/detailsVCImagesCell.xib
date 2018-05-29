@@ -25,25 +25,80 @@
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mtg-dJ-7Dx">
-                        <rect key="frame" x="16" y="218" width="40" height="40"/>
+                        <rect key="frame" x="16" y="226.5" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="erV-pd-ehT"/>
                             <constraint firstAttribute="height" constant="40" id="fkc-Gz-LIa"/>
                         </constraints>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k5z-HC-1bW">
+                        <rect key="frame" x="76" y="226.5" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="Nxi-A2-v5K"/>
+                            <constraint firstAttribute="width" constant="40" id="o5g-VR-hdH"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tQM-LV-0oU">
+                        <rect key="frame" x="131" y="226.5" width="40" height="40"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e4H-sO-SDp">
+                        <rect key="frame" x="186" y="226.5" width="40" height="40"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Unm-Gy-rlD">
+                        <rect key="frame" x="241" y="226.5" width="40" height="40"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bVI-dc-tzT">
+                        <rect key="frame" x="296" y="226.5" width="40" height="40"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DvM-3t-3c9">
+                        <rect key="frame" x="144.5" y="201" width="86" height="17.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="86" id="X9D-25-DgM"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="mtg-dJ-7Dx" firstAttribute="top" secondItem="bxW-SK-Zdo" secondAttribute="bottom" constant="25" id="2yd-Wz-vit"/>
+                    <constraint firstItem="k5z-HC-1bW" firstAttribute="bottom" secondItem="bVI-dc-tzT" secondAttribute="bottom" id="00k-Ts-3YI"/>
+                    <constraint firstItem="k5z-HC-1bW" firstAttribute="leading" secondItem="mtg-dJ-7Dx" secondAttribute="trailing" constant="20" id="44Q-0J-LH5"/>
+                    <constraint firstItem="e4H-sO-SDp" firstAttribute="height" secondItem="Unm-Gy-rlD" secondAttribute="height" id="CFl-IV-e22"/>
                     <constraint firstItem="bxW-SK-Zdo" firstAttribute="top" secondItem="xi8-nP-roN" secondAttribute="top" constant="8" id="Dtq-UQ-828"/>
                     <constraint firstItem="bxW-SK-Zdo" firstAttribute="leading" secondItem="xi8-nP-roN" secondAttribute="leading" constant="8" id="Id3-iS-kLQ"/>
                     <constraint firstAttribute="trailing" secondItem="bxW-SK-Zdo" secondAttribute="trailing" constant="8" id="IrO-I4-ugx"/>
-                    <constraint firstAttribute="bottom" secondItem="mtg-dJ-7Dx" secondAttribute="bottom" constant="31.5" id="abl-dB-8cj"/>
+                    <constraint firstItem="DvM-3t-3c9" firstAttribute="centerX" secondItem="xi8-nP-roN" secondAttribute="centerX" id="J98-D6-alj"/>
+                    <constraint firstItem="k5z-HC-1bW" firstAttribute="bottom" secondItem="tQM-LV-0oU" secondAttribute="bottom" id="KMW-ku-tEK"/>
+                    <constraint firstItem="mtg-dJ-7Dx" firstAttribute="top" secondItem="DvM-3t-3c9" secondAttribute="bottom" constant="8" id="KRq-K7-C0u"/>
+                    <constraint firstItem="tQM-LV-0oU" firstAttribute="leading" secondItem="k5z-HC-1bW" secondAttribute="trailing" constant="15" id="L89-qx-vtf"/>
+                    <constraint firstItem="mtg-dJ-7Dx" firstAttribute="bottom" secondItem="k5z-HC-1bW" secondAttribute="bottom" id="Mmy-SJ-gM7"/>
+                    <constraint firstItem="k5z-HC-1bW" firstAttribute="height" secondItem="tQM-LV-0oU" secondAttribute="height" id="NOv-wh-g6u"/>
+                    <constraint firstItem="k5z-HC-1bW" firstAttribute="bottom" secondItem="e4H-sO-SDp" secondAttribute="bottom" id="SG0-fw-caO"/>
+                    <constraint firstItem="bVI-dc-tzT" firstAttribute="leading" secondItem="Unm-Gy-rlD" secondAttribute="trailing" constant="15" id="UDE-HA-mEV"/>
+                    <constraint firstItem="Unm-Gy-rlD" firstAttribute="leading" secondItem="e4H-sO-SDp" secondAttribute="trailing" constant="15" id="Wug-CC-Umw"/>
+                    <constraint firstAttribute="bottom" secondItem="mtg-dJ-7Dx" secondAttribute="bottom" constant="23" id="abl-dB-8cj"/>
+                    <constraint firstItem="e4H-sO-SDp" firstAttribute="leading" secondItem="tQM-LV-0oU" secondAttribute="trailing" constant="15" id="aeJ-19-C8b"/>
+                    <constraint firstAttribute="trailing" secondItem="bVI-dc-tzT" secondAttribute="trailing" constant="39" id="co6-Y7-XMT"/>
+                    <constraint firstItem="k5z-HC-1bW" firstAttribute="width" secondItem="tQM-LV-0oU" secondAttribute="width" id="dpr-DU-UQS"/>
                     <constraint firstItem="mtg-dJ-7Dx" firstAttribute="leading" secondItem="xi8-nP-roN" secondAttribute="leading" constant="16" id="fwf-fn-1Vp"/>
+                    <constraint firstItem="tQM-LV-0oU" firstAttribute="height" secondItem="e4H-sO-SDp" secondAttribute="height" id="ixO-zN-98O"/>
+                    <constraint firstItem="Unm-Gy-rlD" firstAttribute="width" secondItem="bVI-dc-tzT" secondAttribute="width" id="lKl-7h-VeX"/>
+                    <constraint firstItem="k5z-HC-1bW" firstAttribute="bottom" secondItem="Unm-Gy-rlD" secondAttribute="bottom" id="oBk-H2-FHd"/>
+                    <constraint firstItem="Unm-Gy-rlD" firstAttribute="height" secondItem="bVI-dc-tzT" secondAttribute="height" id="oe8-7K-Gcj"/>
+                    <constraint firstItem="tQM-LV-0oU" firstAttribute="width" secondItem="e4H-sO-SDp" secondAttribute="width" id="uan-kr-AFI"/>
+                    <constraint firstItem="DvM-3t-3c9" firstAttribute="top" secondItem="bxW-SK-Zdo" secondAttribute="bottom" constant="8" id="yoZ-ky-eUt"/>
+                    <constraint firstItem="e4H-sO-SDp" firstAttribute="width" secondItem="Unm-Gy-rlD" secondAttribute="width" id="zx4-Ng-ASH"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="mainImageDetailsVC" destination="bxW-SK-Zdo" id="RbB-ex-Pu2"/>
                 <outlet property="mediaTypeImageIndicator" destination="mtg-dJ-7Dx" id="f8o-7o-Ej7"/>
+                <outlet property="ratingImage0" destination="k5z-HC-1bW" id="hhV-lr-wl7"/>
+                <outlet property="ratingImage1" destination="tQM-LV-0oU" id="xjj-8A-Ktw"/>
+                <outlet property="ratingImage2" destination="e4H-sO-SDp" id="No3-kG-qg9"/>
+                <outlet property="ratingImage3" destination="Unm-Gy-rlD" id="Nqs-2P-aGE"/>
+                <outlet property="ratingImage4" destination="bVI-dc-tzT" id="OVq-D8-7KG"/>
+                <outlet property="ratingLabel" destination="DvM-3t-3c9" id="8x2-G7-cjU"/>
             </connections>
             <point key="canvasLocation" x="30.5" y="104"/>
         </tableViewCell>

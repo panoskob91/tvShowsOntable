@@ -13,7 +13,7 @@
 #pragma mark -Initialiser
 - (instancetype)initWithMainImageURLPath:(NSString *)mainImageURL
                            andShowObject:(Show *)showObject
-                 //andRatingImageNameArray:(NSArray<NSString *> *)ratingImageNames
+                 andRatingImageNameArray:(NSArray<NSString *> *)ratingImageNames
 {
     self = [super init];
     
@@ -28,7 +28,7 @@
         {
             self.mediaTypeIndicatorImageName = @"TvSeries";
         }
-        //self.ratingImageIndicatorNames = ratingImageNames
+        self.ratingImageIndicatorNames = ratingImageNames;
         self.bindModel = (Show *)showObject;
     }
     
@@ -47,6 +47,13 @@
     
     cell.mainImageDetailsVC.image = [UIImage imageWithData:mainImageData];
     cell.mediaTypeImageIndicator.image = [UIImage imageNamed:self.mediaTypeIndicatorImageName];
+    
+    cell.ratingImage0.image = [UIImage imageNamed:self.ratingImageIndicatorNames[0]];
+    cell.ratingImage1.image = [UIImage imageNamed:self.ratingImageIndicatorNames[1]];
+    cell.ratingImage2.image = [UIImage imageNamed:self.ratingImageIndicatorNames[2]];
+    cell.ratingImage3.image = [UIImage imageNamed:self.ratingImageIndicatorNames[3]];
+    cell.ratingImage4.image = [UIImage imageNamed:self.ratingImageIndicatorNames[4]];
+    
 }
 
 @end

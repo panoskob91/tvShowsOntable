@@ -16,6 +16,7 @@
     self.mainImageDetailsVC.clipsToBounds = YES;
     self.mediaTypeImageIndicator.layer.cornerRadius = 10;
     self.mediaTypeImageIndicator.clipsToBounds = YES;
+    self.ratingLabel.font = [UIFont fontWithName:@"TimeBurner" size:20];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
