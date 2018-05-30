@@ -53,7 +53,6 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    //return @"pkompotis";
     return self.sectionNames[section];
 }
 
@@ -93,6 +92,63 @@
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         
         [self.navigationController pushViewController:webViewController animated:YES];
+    }
+    
+}
+//Enable editing
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+//Enable row moving
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+//Move row
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+                                                  toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    NSInteger sourceSection = sourceIndexPath.section;
+    NSInteger destinationSection = destinationIndexPath.section;
+    
+    NSInteger sourceRow = sourceIndexPath.row;
+    NSInteger destinationRow = destinationIndexPath.row;
+    if (sourceSection == destinationSection)
+    {
+        //This if statment ensures that the rows won't be moved when the row is the same
+        if (sourceRow != destinationRow)
+        {
+            PKShowTableCellViewModel *sourceObject = self.sections[sourceIndexPath.section][sourceIndexPath.row];
+            PKShowTableCellViewModel *destinationObject = self.sections[destinationIndexPath.section][destinationIndexPath.row];
+            
+            //[self.sections[sourceIndexPath.section] removeObject:sourceObject];
+            [self.sections[sourceSection] removeObjectAtIndex:sourceRow];
+            [self.sections[sourceSection] insertObject:destinationObject atIndex:sourceRow];
+            //[self.sections[destinationIndexPath.section] removeObject:destinationObject];
+            [self.sections[sourceSection] removeObjectAtIndex:destinationRow];
+            [self.sections[sourceSection] insertObject:sourceObject atIndex:destinationRow];
+            
+            [self.tableView reloadData];
+        }
+        [self.tableView reloadData];
+    }
+    else
+    {
+        [self.tableView reloadData];
+    }
+}
+//Delete row
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+                                           forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        PKShowTableCellViewModel *objectToBeRemoved = self.sections[indexPath.section][indexPath.row];
+        [self.sections[indexPath.section] removeObject:objectToBeRemoved];
+        //Call reload data, because when update content is called it is also called from subclasses, so it is overrided.
+        [self.tableView reloadData];
     }
     
 }

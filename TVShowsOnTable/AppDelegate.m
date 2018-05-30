@@ -17,15 +17,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-//    [[UINavigationBar appearance] setBarTintColor:[UIColor createColorWithRed:26 andGreen:255 andBlue:26 andAlpha:1]];
-//    
-//    NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName : [UIColor createColorWithRed:104 andGreen:100 andBlue:104 andAlpha:1]};
-//    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
-    
     return YES;
 }
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

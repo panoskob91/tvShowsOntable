@@ -12,5 +12,7 @@
 @interface PKSummaryCellDetailsVC : TVShowsCell
 
 @property (strong, nonatomic) IBOutlet UILabel *detailsCellDescriptionLabel;
+@property (strong, nonatomic) IBOutlet UITextView *detailsCellTextView;
+
 
 @end

@@ -22,6 +22,7 @@
 #import "NSString_stripHtml.h"
 //Categories and protocols
 #import "UIAlertController+AFSEAlertGenerator.h"
+
 //View controllers
 #import "DetailsViewController.h"
 #import "PickShowTypeVC.h"
@@ -68,15 +69,13 @@
 NSMutableDictionary *showsDataDictionary;
 NSArray *selectedCells;
 
-#pragma mark -ViewController lifecycle
+#pragma mark - ViewController lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setupTableView];
     [self setupSearchBar];
     [self initialiseTheNeededArrays];
-    //[self getMovieGenreNameAndGenreId];
-    //[self getTVGenreNameAndGenreId];
     
     PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     [networkManager getGenreNameAndIDSWithCompletionBlock:^(NSDictionary *dictionary) {
@@ -88,6 +87,12 @@ NSArray *selectedCells;
     self.title = @"Shows";
     self.contentIsEditable = true;
     self.tableViewActivityindicator.hidden = YES;
+    
+    self.navigationController.navigationBar.layer.backgroundColor = [[UIColor blueColor] CGColor];
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor lightTextColor];
+    self.navigationItem.leftBarButtonItem.tintColor = [UIColor lightTextColor];
+   
 }
 
 

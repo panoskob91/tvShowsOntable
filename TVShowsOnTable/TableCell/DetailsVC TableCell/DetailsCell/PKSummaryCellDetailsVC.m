@@ -21,6 +21,8 @@
                                                                     andGreen:0
                                                                      andBlue:0
                                                                     andAlpha:1];
+    self.detailsCellTextView.textColor = [UIColor blackColor];
+    self.detailsCellTextView.backgroundColor = [UIColor redColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

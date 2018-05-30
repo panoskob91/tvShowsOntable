@@ -13,7 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) NSArray <NSArray <PKShowTableCellViewModel *>*> *sections;
+@property (strong, nonatomic) NSArray <NSMutableArray <PKShowTableCellViewModel *>*> *sections;
 @property (strong, nonatomic) NSArray<NSString *> *sectionNames;
 
 -(void)updateContent;

@@ -42,8 +42,6 @@
     [networkManager fetchDescriptionFromId:[self.show getShowId] andMediaType:self.show.mediaType];
     
     //[self updateContent];
-    
-    
 }
 
 - (NSInteger)roundNumber:(NSNumber *)inputNumber
