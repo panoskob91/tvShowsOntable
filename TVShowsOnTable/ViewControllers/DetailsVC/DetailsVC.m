@@ -42,6 +42,11 @@
     [networkManager fetchDescriptionFromId:[self.show getShowId] andMediaType:self.show.mediaType];
     
     //[self updateContent];
+    self.navigationController.navigationBar.layer.backgroundColor = [[UIColor lightGrayColor] CGColor];
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    //self.navigationController.navigationBar.translucent = NO;
 }
 
 - (NSInteger)roundNumber:(NSNumber *)inputNumber
@@ -122,7 +127,7 @@ if (dotCharacterIndex != 0)
     [super updateContent];
 }
 
-#pragma mark -Network delegete
+#pragma mark - Network delegete
 - (void)networkAPICallDidCompleteWithResponse:(NSArray<Show *> *)shows
 {
     

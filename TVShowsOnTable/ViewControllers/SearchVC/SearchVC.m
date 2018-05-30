@@ -110,7 +110,7 @@ NSArray *selectedCells;
     });
 }
 
-#pragma mark -View setup functions
+#pragma mark - View setup functions
 - (void) initialiseTheNeededArrays
 {
     //Initialise shows array
@@ -155,7 +155,7 @@ NSArray *selectedCells;
     self.searchBar.placeholder = @"Search";
     self.searchBar.delegate = self;
 }
-#pragma mark -SearchBar delegate functions
+#pragma mark - SearchBar delegate functions
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     self.searchedText = self.searchBar.text;
@@ -166,7 +166,7 @@ NSArray *selectedCells;
     [searchBar resignFirstResponder];
 }
 
-#pragma mark -IBActions
+#pragma mark - IBActions
 - (IBAction)pickShowVCButtonPSD:(id)sender {
     PickShowTypeVC *pickShowVC = [self.storyboard instantiateViewControllerWithIdentifier:@"pickShowTypeVC"];
     pickShowVC.delegate = self;
@@ -186,7 +186,7 @@ NSArray *selectedCells;
     }
 }
 
-#pragma mark -Update ViewModels
+#pragma mark - Update ViewModels
 - (void)updateContent
 {
     self.viewModels = [[NSMutableArray alloc] init];
@@ -212,7 +212,7 @@ NSArray *selectedCells;
 }
 
 
-#pragma mark -Geters
+#pragma mark - Geters
 - (NSArray<NSString *> *)getGenreNamesFromSectionsArrrayAndFromGenresDictionary:(NSDictionary *)dict
 {
     NSMutableArray *genreTitles = [[NSMutableArray alloc] init];
@@ -256,7 +256,7 @@ NSArray *selectedCells;
     return self.showsArray;
 }
 
-#pragma mark -Get TV genre id and name
+#pragma mark - Get TV genre id and name
 -(void)getTVGenreNameAndGenreId
 {
     [self.tvGenres removeAllObjects];
@@ -300,7 +300,7 @@ NSArray *selectedCells;
     [dataTask resume];
 }
 
-#pragma mark -Get Movie genre id and name
+#pragma mark - Get Movie genre id and name
 - (void)getMovieGenreNameAndGenreId
 {
     [self.movieGenres removeAllObjects];
@@ -355,7 +355,7 @@ NSArray *selectedCells;
     }
 }
 
-#pragma mark -Custom delegates methods
+#pragma mark - Custom delegates methods
 - (void)pickShowTypeVC:(PickShowTypeVC *)pickShowTypeVC didSelectButton:(UIButton *)button
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -380,7 +380,7 @@ NSArray *selectedCells;
     });
     
 }
-#pragma mark -Group shows on genre
+#pragma mark - Group shows on genre
 - (void)groupItemsBasedOnGenreIdWithDataFromArray:(NSArray *)shows
 {
     self.showGroupsArray = [[NSMutableArray alloc] init];
