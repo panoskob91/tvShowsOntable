@@ -22,6 +22,8 @@
 
 @implementation PKNetworkManager
 
+#pragma mark - Fetch API and initialise Show objects
+
 - (void)fetchAPICallWithSearchText:(NSString *)userSearchText
 {
     self.shows = [[NSMutableArray alloc] init];
@@ -75,7 +77,7 @@
     [dataTask resume];
     
 }
-
+#pragma mark - Fetch show description
 - (void)fetchDescriptionFromId:(NSNumber *)showId
                   andMediaType:(ShowType)mediaType
 {
@@ -124,6 +126,7 @@
     [dataTask resume];
 }
 
+#pragma mark - Fetch youtube key
 - (void)getYoutubeVideoKeyWithShowID:(NSNumber *)showId
                         andMediaType:(ShowType)mediaType
 {
@@ -172,7 +175,7 @@
     }];
     [dataTask resume];
 }
-
+#pragma mark - Fetch genres
 -(void)getTVGenreNameAndGenreIdWithSuccessBlock:(void (^)(NSDictionary *tvDictionary))sBlock
 {
     NSMutableDictionary *tvGenresDictionary = [[NSMutableDictionary alloc] init];
@@ -216,6 +219,8 @@
     
 }
 
+#pragma mark - Fetch genre names and ids
+
 - (void)getGenreNameAndIdsWithMediaType:(ShowType)mediaType
                               andWithSucessBlock:(void(^)(NSDictionary *dictionary))sBlock
 {
@@ -229,8 +234,6 @@
     {
         moviesGenreQuery = [NSString stringWithFormat:@"https://api.themoviedb.org/3/genre/%@/list?api_key=%@&language=en-US", @"tv", THE_MOVIE_DB_API_KEY];
     }
-    
-    
     NSURL *searchURL = [NSURL URLWithString:moviesGenreQuery];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:searchURL];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -264,7 +267,7 @@
     }];
     [dataTask resume];
 }
-
+#pragma mark - Get genre info (name and ID)
 - (void)getGenreNameAndIDSWithCompletionBlock:(void(^)(NSDictionary *dictionary))cBlock
 {
     self.totalGenresDictionary = [[NSMutableDictionary alloc] init];
@@ -288,7 +291,6 @@
                                }
                                 cBlock(self.totalGenresDictionary);
                            }];
-                           //NSLog(self.totalGenresDictionary.count);
     }];
     
 }

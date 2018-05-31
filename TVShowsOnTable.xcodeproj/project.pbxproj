@@ -482,10 +482,10 @@
 		1AC5D19320736657002FB850 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1A7A2B0220B6A97D009DA8C4 /* Show Models */,
 				1A7A2B0520B6A9C7009DA8C4 /* Genre Models */,
 				1A7A2B0420B6A9B7009DA8C4 /* Networking Models */,
 				1A7A2B0320B6A992009DA8C4 /* Group Models */,
-				1A7A2B0220B6A97D009DA8C4 /* Show Models */,
 			);
 			path = Models;
 			sourceTree = "<group>";

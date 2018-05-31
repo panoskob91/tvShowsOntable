@@ -11,7 +11,7 @@
 #import "TVSeries.h"
 
 @implementation TVShowsCell
-
+#pragma mark - Cell outlets style
 - (void)awakeFromNib {
     [super awakeFromNib];
    

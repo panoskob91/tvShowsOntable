@@ -20,7 +20,7 @@
 @implementation Movie
 
 
-#pragma mark -Initialisers
+#pragma mark - Initialisers
 - (instancetype)initWithMovie: (NSString *)movieName
                    andSummary:(NSString *)movieSummary
                 andShowObject:(Show *)showObject
@@ -168,7 +168,7 @@
     return self;
 }
 
-#pragma mark -Getters
+#pragma mark - Getters
 - (NSString *)getSummary
 {
     return self.summary;

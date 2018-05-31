@@ -76,30 +76,26 @@ NSArray *selectedCells;
     [self setupTableView];
     [self setupSearchBar];
     [self initialiseTheNeededArrays];
+    //[self setupStatusBarAndNavigationBarStyle];
     
     PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     [networkManager getGenreNameAndIDSWithCompletionBlock:^(NSDictionary *dictionary) {
         self.showGenresDictionary = [[NSMutableDictionary alloc] initWithDictionary:dictionary];
     }];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"ShowsCell" bundle:nil] forCellReuseIdentifier:@"tVShowsCell"];
+    //[self.tableView registerNib:[UINib nibWithNibName:@"ShowsCell" bundle:nil] forCellReuseIdentifier:@"tVShowsCell"];
     
     self.title = @"Shows";
     self.contentIsEditable = true;
     self.tableViewActivityindicator.hidden = YES;
     
-    self.navigationController.navigationBar.layer.backgroundColor = [[UIColor blueColor] CGColor];
-    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor lightTextColor];
-    self.navigationItem.leftBarButtonItem.tintColor = [UIColor lightTextColor];
-   
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
+#pragma mark - Networking delegate protocol methods
 - (void)networkAPICallDidCompleteWithResponse:(NSArray<Show *> *)shows
 {
     self.showsArray = [[NSArray alloc] initWithArray:shows];
@@ -155,6 +151,16 @@ NSArray *selectedCells;
     self.searchBar.placeholder = @"Search";
     self.searchBar.delegate = self;
 }
+
+- (void)setupStatusBarAndNavigationBarStyle
+{
+    self.navigationController.navigationBar.layer.backgroundColor = [[UIColor blueColor] CGColor];
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor lightTextColor];
+    self.navigationItem.leftBarButtonItem.tintColor = [UIColor lightTextColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+}
+
 #pragma mark - SearchBar delegate functions
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {

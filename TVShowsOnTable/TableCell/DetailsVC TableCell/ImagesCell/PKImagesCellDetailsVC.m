@@ -9,7 +9,7 @@
 #import "PKImagesCellDetailsVC.h"
 
 @implementation PKImagesCellDetailsVC
-
+#pragma mark - Stlyle cell outlets
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.mainImageDetailsVC.layer.cornerRadius = 10;

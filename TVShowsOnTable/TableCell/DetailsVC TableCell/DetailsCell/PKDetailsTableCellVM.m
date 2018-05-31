@@ -10,7 +10,7 @@
 
 @implementation PKDetailsTableCellVM
 
-#pragma mark -Initialisers
+#pragma mark - Initialisers
 - (instancetype)initWithShowSummary:(NSString *)summary
                        andBindModel:(id)bindModel
 {
@@ -23,18 +23,17 @@
     }
     return self;
 }
-
+#pragma mark - Getters
 - (NSString *)getCellIdentifier
 {
     return @"detailsVCDetailsCell";
 }
-
+#pragma mark - Updates
 - (void)updateView:(PKSummaryCellDetailsVC *)detailsCell
 {
     detailsCell.userInteractionEnabled = NO;
     detailsCell.detailsCellDescriptionLabel.text = self.showDetailsDescription;
     detailsCell.detailsCellTextView.text = self.showDetailsDescription;
-
 }
 
 @end

@@ -68,6 +68,6 @@
             
         [[NSNotificationCenter defaultCenter] postNotificationName:@"Credentials" object:self userInfo:self.usernamePasswordPairs];
     }
-    
 }
+
 @end

@@ -10,7 +10,7 @@
 #import "UIColor+rgb.h"
 
 @implementation PKSummaryCellDetailsVC
-
+#pragma mark - Style cell outlets
 - (void)awakeFromNib {
     [super awakeFromNib];
     //self.detailTextLabel.numberOfLines = 0;

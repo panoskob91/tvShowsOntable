@@ -42,6 +42,7 @@
 
  @param Object Object of which cell properties will be set
  */
+//TO-DO: Consider removing this function
 - (void)setupCellPropertiesWithObject:(Show *)Object;
 
 @end

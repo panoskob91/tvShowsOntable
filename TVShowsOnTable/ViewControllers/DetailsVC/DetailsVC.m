@@ -7,24 +7,32 @@
 //
 
 #import "DetailsVC.h"
+#import "SearchVC.h"
+
 #import "PKDetailsImagesCellVM.h"
 #import "PKDetailsTableCellVM.h"
 #import "PKNetworkManager.h"
 
 @interface DetailsVC ()
 
+#pragma mark - Class private Properties
 //TO DO: Consider moving showSummary property to Show class
 @property (strong, nonatomic) NSString *showSummary;
 @property (strong, nonatomic) NSString *mainImageURLControlledWithPageControll;
 
+#pragma mark - Outlets
 - (IBAction)pageControlHandler:(UIPageControl *)sender;
 
 @end
 
 @implementation DetailsVC
 
+#pragma mark - ViewController lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupNavigationBarWihBackgroundColor:[UIColor lightGrayColor]
+                     andNavigationBarTintColor:[UIColor whiteColor]
+                             andStatusBarStyle:UIStatusBarStyleLightContent];
     
 //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //    [defaults setInteger:9001 forKey:@"HighScore"];
@@ -42,13 +50,22 @@
     [networkManager fetchDescriptionFromId:[self.show getShowId] andMediaType:self.show.mediaType];
     
     //[self updateContent];
-    self.navigationController.navigationBar.layer.backgroundColor = [[UIColor lightGrayColor] CGColor];
-    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
     
     //self.navigationController.navigationBar.translucent = NO;
 }
 
+#pragma mark - View helper functions
+- (void)setupNavigationBarWihBackgroundColor:(UIColor *)backgroundColor
+                   andNavigationBarTintColor:(UIColor *)tintColor
+                           andStatusBarStyle:(UIStatusBarStyle)statusBarStyle
+{
+    self.navigationController.navigationBar.layer.backgroundColor = [backgroundColor CGColor];
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
+    self.navigationController.navigationBar.tintColor = tintColor;
+}
+
+#pragma mark - Star rating system setup
 - (NSInteger)roundNumber:(NSNumber *)inputNumber
 {
     NSString *stringFromNumber = [NSString stringWithFormat:@"%@", inputNumber];
@@ -64,19 +81,19 @@
             dotCharacterIndex = charIndex;
         }
     }
-if (dotCharacterIndex != 0)
-{
-    if ([stringFromNumber characterAtIndex:dotCharacterIndex + 1] >= '5')
+    if (dotCharacterIndex != 0)
     {
-        NSNumber *rounded = @(ceil(inputNumber.floatValue));
-        roundedNumber = rounded.integerValue;
+        if ([stringFromNumber characterAtIndex:dotCharacterIndex + 1] >= '5')
+        {
+            NSNumber *rounded = @(ceil(inputNumber.floatValue));
+            roundedNumber = rounded.integerValue;
+        }
+        else
+        {
+            NSNumber *rounded = @(floor(inputNumber.floatValue));
+            roundedNumber = rounded.integerValue;
+        }
     }
-    else
-    {
-        NSNumber *rounded = @(floor(inputNumber.floatValue));
-        roundedNumber = rounded.integerValue;
-    }
-}
     return roundedNumber;
 }
 
@@ -146,6 +163,7 @@ if (dotCharacterIndex != 0)
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - IBActions
 - (IBAction)pageControlHandler:(UIPageControl *)sender
 {
     switch (sender.currentPage) {

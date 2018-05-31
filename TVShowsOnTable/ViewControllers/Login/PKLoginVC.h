@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PKLoginVC : UIViewController
+@interface PKLoginVC : UIViewController<UITextFieldDelegate>
 
 @end

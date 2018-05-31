@@ -56,5 +56,6 @@
 - (NSArray<Show *> *)getShowsArray;
 
 - (NSArray<NSString *> *)getGenreNamesFromSectionsArrrayAndFromGenresDictionary:(NSDictionary *)dict;
+
 @end
 

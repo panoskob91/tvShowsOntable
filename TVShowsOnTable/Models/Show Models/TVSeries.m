@@ -9,7 +9,7 @@
 #import "TVSeries.h"
 
 @implementation TVSeries
-
+#pragma mark - Initialisers
 - (instancetype)initWithEpisode:(NSString *)seriesEpisode
                      andSummary:(NSString *)summary
                   andShowObject:(Show *)showObject
@@ -53,7 +53,7 @@
     }
     return self;
 }
-
+#pragma mark - Getters
 - (NSString *)getSummary
 {
     return self.tvSeriesSummary;

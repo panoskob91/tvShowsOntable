@@ -28,12 +28,18 @@
     
     //Add Login widget on screen
     PKLoginWidgetView *loginSubView = [[NSBundle mainBundle] loadNibNamed:@"LoginWidget" owner:self options:nil][0];
+    //Set delegates
+    loginSubView.usernameTextField.delegate = self;
+    loginSubView.passwordTextField.delegate = self;
+//    NSLog(@"usernameTextFiels memory address %p", loginSubView.usernameTextField);
+//    NSLog(@"passwordTextField memory address %p", loginSubView.passwordTextField);
+//
     CGFloat loginPageWidth = self.view.frame.size.width;
     CGFloat loginPageHeight = self.view.frame.size.height;
     CGFloat loginSubViewWidth = loginSubView.frame.size.width;
-    CGFloat loginSubHeight = loginSubView.frame.size.height;
-
-    loginSubView.frame = CGRectMake(loginPageWidth / 2 - loginSubViewWidth / 2, loginPageHeight / 2 - loginSubHeight / 2, loginSubView.frame.size.width, loginSubView.frame.size.height);
+    CGFloat loginSubVIEWHeight = loginSubView.frame.size.height;
+    
+    loginSubView.frame = CGRectMake(loginPageWidth / 2 - loginSubViewWidth / 2, loginPageHeight / 2 - loginSubVIEWHeight / 2, loginSubView.frame.size.width, loginSubView.frame.size.height);
     [self.view addSubview:loginSubView];
 
     loginSubView.layer.opacity = 0.5;
@@ -69,6 +75,16 @@
 {
     SearchVC *searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SearchVC"];
     [self.navigationController pushViewController:searchVC animated:YES];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (void)dealloc

@@ -7,21 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
-
+//ViewControllers
 #import "MasterTableVC.h"
 #import "DetailsVC.h"
 #import "SearchVC.h"
 #import "AFSEWebContentHandlerVC.h"
-
+//ViewModels
 #import "PKDetailsImagesCellVM.h"
-
+//Categories
+#import "UIAlertController+AFSEAlertGenerator.h"
 
 @interface MasterTableVC ()
 
 @end
 
 @implementation MasterTableVC
-
+#pragma mark - ViewController lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -98,12 +99,22 @@
 //Enable editing
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    //Ensure that only SearchVC cells are editable
+    if ([self isKindOfClass:[SearchVC class]])
+    {
+        return YES;
+    }
+    return NO;
 }
 //Enable row moving
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    //Ensure that only SearchVC cells are movable
+    if ([self isKindOfClass:[SearchVC class]])
+    {
+        return YES;
+    }
+    return NO;
 }
 
 //Move row
@@ -132,12 +143,24 @@
             
             [self.tableView reloadData];
         }
+        
         [self.tableView reloadData];
     }
     else
     {
+        NSString *alertMessage = @"Sorry. You cannot move shows bettween different sections";
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [actionOK setValue:[UIColor blueColor] forKey:@"titleTextColor"];
+        
+        NSMutableArray<UIAlertAction *> *alertActions = [[NSMutableArray alloc] initWithObjects:actionOK, nil];
+        
+        [self createAndShowAlertWithTitle:@"Alert!"
+                               andMessage:alertMessage
+                                andAlerts:alertActions];
+        
         [self.tableView reloadData];
     }
+   
 }
 //Delete row
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
@@ -150,9 +173,38 @@
         //Call reload data, because when update content is called it is also called from subclasses, so it is overrided.
         [self.tableView reloadData];
     }
-    
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] init];
+    //view.backgroundColor = [UIColor grayColor];
+    
+    UILabel *headerLabel = [[UILabel alloc] init];
+    headerLabel.text = self.sectionNames[section];
+    //headerLabel.font = [UIFont fontWithName:@"TimeBurner" size:15];
+    //headerLabel.frame = CGRectMake(45, 5, view.frame.size.width / 2, 35);
+    headerLabel.textColor = [UIColor blackColor];
+    [view addSubview:headerLabel];
+
+    return view;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 45;
+}
+
+#pragma mark - Helper functions
+- (void)createAndShowAlertWithTitle:(NSString *)title
+                         andMessage:(NSString *)alertMessage
+                          andAlerts:(NSArray<UIAlertAction *> *)alertActions
+{
+    UIAlertController *alert = [UIAlertController generateAlertWithTitle:title andMessage:alertMessage andActions:alertActions];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - Updates
 //Update the table view elements - reload table view
 -(void)updateContent
 {

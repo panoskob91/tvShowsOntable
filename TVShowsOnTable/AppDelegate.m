@@ -15,8 +15,12 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    //Style navigationBar
+    [self setupNavigationBar];
+    //Define statusBar style
+    [self setStatusBarStyleWithApplication:application];
+    
     return YES;
 }
 
@@ -46,5 +50,18 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - Helper functions
+- (void)setupNavigationBar
+{
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(CGFloat)12/255 green:(CGFloat)22/255 blue:(CGFloat)230/255 alpha:1]];
+    NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                               [UIColor whiteColor],NSForegroundColorAttributeName, nil];
+    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+}
+- (void)setStatusBarStyleWithApplication:(UIApplication *)application
+{
+    application.statusBarStyle = UIStatusBarStyleLightContent;
+}
 
 @end
