@@ -7,7 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Movie.h"
+#import "Show.h"
 @interface Favorite : NSObject
+
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSMutableArray<Show *> *movies;
+
+- (instancetype)initWithName:(NSString *)name
+              andMoviesArray:(NSMutableArray<Show *> *)movies;
+
+- (instancetype)initWithName:(NSString *)name;
 
 @end
