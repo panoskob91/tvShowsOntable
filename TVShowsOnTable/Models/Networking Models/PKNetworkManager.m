@@ -22,6 +22,19 @@
 
 @implementation PKNetworkManager
 
+#pragma mark - Initialisers
+
+- (instancetype)initWithFavoritesObject:(List *)favorite
+{
+    self = [super init];
+    if (self)
+    {
+        self.favorite = favorite;
+    }
+    return self;
+}
+
+
 #pragma mark - Fetch API and initialise Show objects
 
 - (void)fetchAPICallWithSearchText:(NSString *)userSearchText

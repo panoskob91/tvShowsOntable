@@ -38,7 +38,8 @@
 {
     detailsCell.userInteractionEnabled = NO;
     detailsCell.detailsCellDescriptionLabel.text = self.showDetailsDescription;
-    detailsCell.detailsCellTextView.text = self.showDetailsDescription;
+    //detailsCell.detailsCellTextView.text = self.showDetailsDescription;
+    
 }
 
 @end

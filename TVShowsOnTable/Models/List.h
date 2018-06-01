@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Movie.h"
 #import "Show.h"
-@interface Favorite : NSObject
+@interface List : NSObject
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSMutableArray<Show *> *movies;

@@ -13,7 +13,8 @@
 		1A0E8D54209B0DD1007F817B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0E8D53209B0DD1007F817B /* WebKit.framework */; };
 		1A10A89F20B45E8E005CC65E /* MasterTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A10A89E20B45E8E005CC65E /* MasterTableVC.m */; };
 		1A10A8A220B464B8005CC65E /* DetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A10A8A120B464B8005CC65E /* DetailsVC.m */; };
-		1A22529220C1768100B0106E /* Favorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A22529120C1768100B0106E /* Favorite.m */; };
+		1A22529220C1768100B0106E /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A22529120C1768100B0106E /* List.m */; };
+		1A22529620C18B4900B0106E /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A22529520C18B4900B0106E /* Session.m */; };
 		1A3303E820872DE60062E1ED /* UIColor+rgb.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3303E720872DE60062E1ED /* UIColor+rgb.m */; };
 		1A3303EB20874ABC0062E1ED /* PickShowTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3303EA20874ABC0062E1ED /* PickShowTypeVC.m */; };
 		1A36078E208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A36078D208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m */; };
@@ -88,8 +89,10 @@
 		1A10A89E20B45E8E005CC65E /* MasterTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterTableVC.m; sourceTree = "<group>"; };
 		1A10A8A020B464B8005CC65E /* DetailsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsVC.h; sourceTree = "<group>"; };
 		1A10A8A120B464B8005CC65E /* DetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsVC.m; sourceTree = "<group>"; };
-		1A22529020C1768100B0106E /* Favorite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Favorite.h; sourceTree = "<group>"; };
-		1A22529120C1768100B0106E /* Favorite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Favorite.m; sourceTree = "<group>"; };
+		1A22529020C1768100B0106E /* List.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = List.h; sourceTree = "<group>"; };
+		1A22529120C1768100B0106E /* List.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = List.m; sourceTree = "<group>"; };
+		1A22529420C18B4900B0106E /* Session.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
+		1A22529520C18B4900B0106E /* Session.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		1A3303E620872DE60062E1ED /* UIColor+rgb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+rgb.h"; sourceTree = "<group>"; };
 		1A3303E720872DE60062E1ED /* UIColor+rgb.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+rgb.m"; sourceTree = "<group>"; };
 		1A3303E920874ABC0062E1ED /* PickShowTypeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PickShowTypeVC.h; sourceTree = "<group>"; };
@@ -222,6 +225,15 @@
 				1A0E8D53209B0DD1007F817B /* WebKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1A22529320C18B3700B0106E /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				1A22529420C18B4900B0106E /* Session.h */,
+				1A22529520C18B4900B0106E /* Session.m */,
+			);
+			path = Singleton;
 			sourceTree = "<group>";
 		};
 		1A3303E420872D1C0062E1ED /* UI storyboard(s) */ = {
@@ -485,12 +497,13 @@
 		1AC5D19320736657002FB850 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1A22529320C18B3700B0106E /* Singleton */,
 				1A7A2B0220B6A97D009DA8C4 /* Show Models */,
 				1A7A2B0520B6A9C7009DA8C4 /* Genre Models */,
 				1A7A2B0420B6A9B7009DA8C4 /* Networking Models */,
 				1A7A2B0320B6A992009DA8C4 /* Group Models */,
-				1A22529020C1768100B0106E /* Favorite.h */,
-				1A22529120C1768100B0106E /* Favorite.m */,
+				1A22529020C1768100B0106E /* List.h */,
+				1A22529120C1768100B0106E /* List.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -672,6 +685,7 @@
 				1A7BD8B020A9660B00BF4C7B /* PKShowTableCellViewModel.m in Sources */,
 				1A3303E820872DE60062E1ED /* UIColor+rgb.m in Sources */,
 				1A47C1C32072321500D63753 /* DetailsViewController.m in Sources */,
+				1A22529620C18B4900B0106E /* Session.m in Sources */,
 				1A3F8DC5207E0070000F4C8A /* Movie.m in Sources */,
 				1A098A3620B3EAE400A60A48 /* PKDetailsTableCellVM.m in Sources */,
 				1A36078E208F162900572AB8 /* UIAlertController+AFSEAlertGenerator.m in Sources */,
@@ -689,7 +703,7 @@
 				1A3E0CC82080B641006DB87A /* NSString_stripHtml.m in Sources */,
 				1A0E8D51209B0A5A007F817B /* AFSEWebContentHandlerVC.m in Sources */,
 				1A3CBA9F2097496300718417 /* AFSEGenreModel.m in Sources */,
-				1A22529220C1768100B0106E /* Favorite.m in Sources */,
+				1A22529220C1768100B0106E /* List.m in Sources */,
 				1A098A3B20B3F83E00A60A48 /* PKDetailsImagesCellVM.m in Sources */,
 				1A3303EB20874ABC0062E1ED /* PickShowTypeVC.m in Sources */,
 				1A10A8A220B464B8005CC65E /* DetailsVC.m in Sources */,

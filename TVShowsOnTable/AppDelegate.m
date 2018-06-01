@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "UIColor+rgb.h"
+#import "Session.h"
 
 @interface AppDelegate ()
 
@@ -20,13 +21,14 @@
     [self setupNavigationBar];
     //Define statusBar style
     [self setStatusBarStyleWithApplication:application];
+    [Session sharedSession];
     
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game. 
 }
 
 

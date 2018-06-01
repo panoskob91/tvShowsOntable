@@ -8,14 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "AFSENetworkingDelegate.h"
-#import "Favorite.h"
+#import "List.h"
 #import "Show.h"
 
 #define THE_MOVIE_DB_API_KEY @"6b2e856adafcc7be98bdf0d8b076851c"
 
 @interface PKNetworkManager : NSObject
 
-@property (strong, nonatomic) NSArray<Favorite *> *list;
+/**
+ Favorite movies
+ */
+@property (strong, nonatomic) List *favorite;
 
 /**
  The object responsible for networking delegation
@@ -32,6 +35,9 @@
  */
 @property (strong, nonatomic) NSString *youtubeKey;
 
+#pragma mark - Initilisers
+
+- (instancetype)initWithFavoritesObject:(List *)favorite;
 
 /**
  The movie db RESTfull API fething function. It appends API properties to an NSArray with Show type elements, which is passed then, with delegation, to the corresponding class.

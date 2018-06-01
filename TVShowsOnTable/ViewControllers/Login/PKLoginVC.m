@@ -10,7 +10,7 @@
 #import "PKLoginWidgetView.h"
 #import "SearchVC.h"
 #import "LoginWidgetVM.h"
-
+#import "Session.h"
 
 @interface PKLoginVC ()
 

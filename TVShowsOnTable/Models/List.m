@@ -6,9 +6,9 @@
 //  Copyright © 2018 AFSE. All rights reserved.
 //
 
-#import "Favorite.h"
+#import "List.h"
 
-@implementation Favorite
+@implementation List
 
 - (instancetype)initWithName:(NSString *)name
               andMoviesArray:(NSMutableArray<Show *> *)movies
