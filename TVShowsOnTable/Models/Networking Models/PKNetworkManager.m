@@ -78,6 +78,7 @@
     
 }
 #pragma mark - Fetch show description
+
 - (void)fetchDescriptionFromId:(NSNumber *)showId
                   andMediaType:(ShowType)mediaType
 {
@@ -127,6 +128,7 @@
 }
 
 #pragma mark - Fetch youtube key
+
 - (void)getYoutubeVideoKeyWithShowID:(NSNumber *)showId
                         andMediaType:(ShowType)mediaType
 {
@@ -176,6 +178,7 @@
     [dataTask resume];
 }
 #pragma mark - Fetch genres
+
 -(void)getTVGenreNameAndGenreIdWithSuccessBlock:(void (^)(NSDictionary *tvDictionary))sBlock
 {
     NSMutableDictionary *tvGenresDictionary = [[NSMutableDictionary alloc] init];
@@ -268,6 +271,7 @@
     [dataTask resume];
 }
 #pragma mark - Get genre info (name and ID)
+
 - (void)getGenreNameAndIDSWithCompletionBlock:(void(^)(NSDictionary *dictionary))cBlock
 {
     self.totalGenresDictionary = [[NSMutableDictionary alloc] init];

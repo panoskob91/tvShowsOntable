@@ -18,6 +18,7 @@
 @implementation Show
 
 #pragma mark - Class initialisers
+
 - (instancetype)initWithTitle:(NSString *)ST
                      andImage:(NSString *)SI
              andAverageRating:(NSNumber *)SAR
@@ -174,6 +175,7 @@
 }
 
 #pragma mark - Private properties getters
+
 - (NSNumber *)getShowId
 {
     return self.showId;

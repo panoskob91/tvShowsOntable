@@ -9,7 +9,9 @@
 #import "AFSEShowGroup.h"
 
 @implementation AFSEShowGroup
+
 #pragma mark - Initialisers
+
 - (instancetype)initWithSectionID:(NSNumber *)genre_id
 {
     self = [super init];

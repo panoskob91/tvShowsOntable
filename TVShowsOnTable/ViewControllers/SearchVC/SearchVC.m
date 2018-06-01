@@ -70,6 +70,7 @@ NSMutableDictionary *showsDataDictionary;
 NSArray *selectedCells;
 
 #pragma mark - ViewController lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -96,6 +97,7 @@ NSArray *selectedCells;
     [super didReceiveMemoryWarning];
 }
 #pragma mark - Networking delegate protocol methods
+
 - (void)networkAPICallDidCompleteWithResponse:(NSArray<Show *> *)shows
 {
     self.showsArray = [[NSArray alloc] initWithArray:shows];
@@ -107,6 +109,7 @@ NSArray *selectedCells;
 }
 
 #pragma mark - View setup functions
+
 - (void) initialiseTheNeededArrays
 {
     //Initialise shows array
@@ -162,6 +165,7 @@ NSArray *selectedCells;
 }
 
 #pragma mark - SearchBar delegate functions
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     self.searchedText = self.searchBar.text;
@@ -173,6 +177,7 @@ NSArray *selectedCells;
 }
 
 #pragma mark - IBActions
+
 - (IBAction)pickShowVCButtonPSD:(id)sender {
     PickShowTypeVC *pickShowVC = [self.storyboard instantiateViewControllerWithIdentifier:@"pickShowTypeVC"];
     pickShowVC.delegate = self;
@@ -193,6 +198,7 @@ NSArray *selectedCells;
 }
 
 #pragma mark - Update ViewModels
+
 - (void)updateContent
 {
     self.viewModels = [[NSMutableArray alloc] init];
@@ -219,6 +225,7 @@ NSArray *selectedCells;
 
 
 #pragma mark - Geters
+
 - (NSArray<NSString *> *)getGenreNamesFromSectionsArrrayAndFromGenresDictionary:(NSDictionary *)dict
 {
     NSMutableArray *genreTitles = [[NSMutableArray alloc] init];
@@ -263,6 +270,7 @@ NSArray *selectedCells;
 }
 
 #pragma mark - Get TV genre id and name
+
 -(void)getTVGenreNameAndGenreId
 {
     [self.tvGenres removeAllObjects];
@@ -307,6 +315,7 @@ NSArray *selectedCells;
 }
 
 #pragma mark - Get Movie genre id and name
+
 - (void)getMovieGenreNameAndGenreId
 {
     [self.movieGenres removeAllObjects];
@@ -362,6 +371,7 @@ NSArray *selectedCells;
 }
 
 #pragma mark - Custom delegates methods
+
 - (void)pickShowTypeVC:(PickShowTypeVC *)pickShowTypeVC didSelectButton:(UIButton *)button
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -386,7 +396,9 @@ NSArray *selectedCells;
     });
     
 }
+
 #pragma mark - Group shows on genre
+
 - (void)groupItemsBasedOnGenreIdWithDataFromArray:(NSArray *)shows
 {
     self.showGroupsArray = [[NSMutableArray alloc] init];
@@ -445,6 +457,26 @@ NSArray *selectedCells;
     }
     NSArray *genreTitles = [[NSArray alloc] initWithArray:titleNames];
     return genreTitles;
+}
+
+#pragma mark - TableView ovverides
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor colorWithRed:0 / 255 green:102 / 255 blue:204 / 255 alpha:0.45];
+    
+    UILabel *headerLabel = [[UILabel alloc] init];
+    headerLabel.text = self.sectionNames[section];
+    headerLabel.font = [UIFont fontWithName:@"TimeBurner" size:20];
+    CGFloat labelWidth = 0.9 * self.view.frame.size.width;
+    labelWidth = floor(labelWidth);
+    headerLabel.frame = CGRectMake(10, 5, labelWidth, 35);
+    headerLabel.textColor = [UIColor whiteColor];
+    [view addSubview:headerLabel];
+    
+    
+    return view;
 }
 
 @end

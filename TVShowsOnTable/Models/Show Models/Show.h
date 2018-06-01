@@ -17,6 +17,7 @@ typedef enum
 @interface Show : NSObject
 
 #pragma mark -Class Properties
+
 /**
  Show's title
  */

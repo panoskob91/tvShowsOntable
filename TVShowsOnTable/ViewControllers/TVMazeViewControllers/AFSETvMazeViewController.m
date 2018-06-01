@@ -41,12 +41,14 @@
     
 }
 #pragma mark -Data Structure initialisations
+
 - (void)initialiseDataStructures
 {
     self.shows = [[NSMutableArray alloc] init];
 }
 
 #pragma mark -TableView setup
+
 - (void)setupTableView
 {
     self.tvMazeTableView.delegate = self;
@@ -56,12 +58,14 @@
     self.tvMazeTableView.tableFooterView = [[UIView alloc] init];
 }
 #pragma mark -Search bar setup
+
 - (void)setupSearchBar
 {
     self.tvMazeSearchBar.delegate = self;
 }
 
 #pragma mark -SearchBarDelegate method implementations
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [self fetchRemoteJSONWithSearchText: self.tvMazeSearchBar.text];

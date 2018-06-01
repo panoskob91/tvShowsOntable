@@ -22,7 +22,9 @@
 @end
 
 @implementation MasterTableVC
+
 #pragma mark - ViewController lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -42,6 +44,7 @@
 
 
 #pragma mark - TableView Methods
+
 //Set number of Sections in Table View
 - (NSInteger)numberOfSectionsInTableView: (UITableView *) tableView
 {
@@ -175,20 +178,23 @@
     }
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *view = [[UIView alloc] init];
-    //view.backgroundColor = [UIColor grayColor];
-    
-    UILabel *headerLabel = [[UILabel alloc] init];
-    headerLabel.text = self.sectionNames[section];
-    //headerLabel.font = [UIFont fontWithName:@"TimeBurner" size:15];
-    //headerLabel.frame = CGRectMake(45, 5, view.frame.size.width / 2, 35);
-    headerLabel.textColor = [UIColor blackColor];
-    [view addSubview:headerLabel];
-
-    return view;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    UIView *view = [[UIView alloc] init];
+//    view.backgroundColor = [UIColor colorWithRed:0 / 255 green:102 / 255 blue:204 / 255 alpha:0.45];
+//    
+//    UILabel *headerLabel = [[UILabel alloc] init];
+//    headerLabel.text = self.sectionNames[section];
+//    headerLabel.font = [UIFont fontWithName:@"TimeBurner" size:20];
+//    CGFloat labelWidth = 0.9 * self.view.frame.size.width;
+//    labelWidth = floor(labelWidth);
+//    headerLabel.frame = CGRectMake(10, 5, labelWidth, 35);
+//    headerLabel.textColor = [UIColor whiteColor];
+//    [view addSubview:headerLabel];
+//    
+//    
+//    return view;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -196,6 +202,7 @@
 }
 
 #pragma mark - Helper functions
+
 - (void)createAndShowAlertWithTitle:(NSString *)title
                          andMessage:(NSString *)alertMessage
                           andAlerts:(NSArray<UIAlertAction *> *)alertActions
@@ -205,6 +212,7 @@
 }
 
 #pragma mark - Updates
+
 //Update the table view elements - reload table view
 -(void)updateContent
 {
@@ -214,6 +222,7 @@
 }
 
 #pragma mark - Memory Management
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

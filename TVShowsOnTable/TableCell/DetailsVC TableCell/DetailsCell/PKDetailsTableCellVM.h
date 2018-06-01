@@ -17,6 +17,7 @@
 @property (strong, nonatomic) id bindModel;
 
 #pragma mark -Initialisers
+
 - (instancetype)initWithShowSummary:(NSString *)summary
                        andBindModel:(id)bindModel;
 

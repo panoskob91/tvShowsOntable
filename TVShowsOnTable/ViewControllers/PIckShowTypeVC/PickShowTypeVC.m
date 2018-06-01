@@ -26,6 +26,7 @@
 }
 
 #pragma mark -IBAction methods
+
 - (IBAction)tvShowButtonPressed:(id)sender {
     [self.delegate pickShowTypeVC:self didSelectButton:sender];
 }

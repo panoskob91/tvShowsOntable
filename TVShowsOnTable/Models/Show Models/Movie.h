@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSString *movieTitle;
 
 #pragma mark -Initialisers
+
 /**
  Object initialiser
 
@@ -67,7 +68,9 @@
  */
 - (instancetype)initWithMovieName: (NSString *)movieName
                   andMovieSummary: (NSString *)movieSummary;
+
 #pragma mark -Getters
+
 - (NSString *)getSummary;
 - (NSNumber *)getShowId;
 @end

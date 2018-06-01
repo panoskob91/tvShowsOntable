@@ -51,6 +51,7 @@
 }
 
 #pragma mark - Helper functions
+
 - (void)setupNavigationBar
 {
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(CGFloat)12/255 green:(CGFloat)22/255 blue:(CGFloat)230/255 alpha:1]];

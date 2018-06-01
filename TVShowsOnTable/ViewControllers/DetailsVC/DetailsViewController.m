@@ -28,6 +28,7 @@
 @implementation DetailsViewController
 
 #pragma mark -ViewController lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavigationItem];
@@ -47,6 +48,7 @@
 
 
 #pragma mark -Networking delegate methods
+
 - (void)networkAPICallDidCompleteWithResponse:(NSArray<Show *> *)shows
 {
     
@@ -62,6 +64,7 @@
 }
 
 #pragma mark -Gesture events handler(s)
+
 //Image tap event handler
 - (void)handleSingleTap
 {
@@ -74,6 +77,7 @@
 }
 
 #pragma mark -Getters
+
 - (NSNumber *)getTheShowID
 {
     return self.showID;
@@ -85,6 +89,7 @@
 }
 
 #pragma mark -Setters
+
 - (void)setTheShowID:(NSNumber *)SID
 {
     self.showID = [[NSNumber alloc] init];

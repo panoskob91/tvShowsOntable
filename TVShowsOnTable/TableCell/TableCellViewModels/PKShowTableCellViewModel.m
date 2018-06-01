@@ -11,6 +11,7 @@
 @implementation PKShowTableCellViewModel
 
 #pragma mark -Initialisers
+
 - (instancetype)initWIthTitle:(NSString *)title
                   andImageURL:(NSString *)url
              andAverageRating:(NSString *)avgRating
@@ -70,6 +71,7 @@
 }
 
 #pragma mark -Class Methods
+
 - (NSString *)getCellIdentifier
 {
  return @"tVShowsCell";

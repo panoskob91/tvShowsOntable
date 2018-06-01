@@ -11,6 +11,7 @@
 @implementation PKDetailsImagesCellVM
 
 #pragma mark - Initialiser
+
 - (instancetype)initWithMainImageURLPath:(NSString *)mainImageURL
                            andShowObject:(Show *)showObject
                  andRatingImageNameArray:(NSArray<NSString *> *)ratingImageNames
@@ -34,12 +35,16 @@
     
     return self;
 }
+
 #pragma mark - Getters
+
 - (NSString *)getCellIdentifier
 {
     return @"detailsVCimagesCell";
 }
+
 #pragma mark - Update functions
+
 //Function for drawing cells
 - (void)updateView:(PKImagesCellDetailsVC *)cell
 {

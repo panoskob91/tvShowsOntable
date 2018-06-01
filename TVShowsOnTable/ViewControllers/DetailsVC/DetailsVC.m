@@ -16,11 +16,13 @@
 @interface DetailsVC ()
 
 #pragma mark - Class private Properties
+
 //TO DO: Consider moving showSummary property to Show class
 @property (strong, nonatomic) NSString *showSummary;
 @property (strong, nonatomic) NSString *mainImageURLControlledWithPageControll;
 
 #pragma mark - Outlets
+
 - (IBAction)pageControlHandler:(UIPageControl *)sender;
 
 @end
@@ -28,6 +30,7 @@
 @implementation DetailsVC
 
 #pragma mark - ViewController lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavigationBarWihBackgroundColor:[UIColor lightGrayColor]
@@ -56,6 +59,7 @@
 }
 
 #pragma mark - View helper functions
+
 - (void)setupNavigationBarWihBackgroundColor:(UIColor *)backgroundColor
                    andNavigationBarTintColor:(UIColor *)tintColor
                            andStatusBarStyle:(UIStatusBarStyle)statusBarStyle
@@ -66,6 +70,7 @@
 }
 
 #pragma mark - Star rating system setup
+
 - (NSInteger)roundNumber:(NSNumber *)inputNumber
 {
     NSString *stringFromNumber = [NSString stringWithFormat:@"%@", inputNumber];
@@ -145,6 +150,7 @@
 }
 
 #pragma mark - Network delegete
+
 - (void)networkAPICallDidCompleteWithResponse:(NSArray<Show *> *)shows
 {
     
@@ -164,6 +170,7 @@
 }
 
 #pragma mark - IBActions
+
 - (IBAction)pageControlHandler:(UIPageControl *)sender
 {
     switch (sender.currentPage) {

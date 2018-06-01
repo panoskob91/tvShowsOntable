@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *searchTableView;
 
 #pragma mark -SearchVC properties
+
 /**
  User typed text
  */
@@ -44,6 +45,7 @@
  ViewModel update UI
  */
 - (void)updateContent;
+
 #pragma mark -Getters
 
 /**

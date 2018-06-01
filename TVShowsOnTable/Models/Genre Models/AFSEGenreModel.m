@@ -9,7 +9,9 @@
 #import "AFSEGenreModel.h"
 
 @implementation AFSEGenreModel
+
 #pragma mark - Initialisers
+
 - (instancetype)initWithGenreID:(NSNumber *)GID
                    andGenreName:(NSString *)name
 {

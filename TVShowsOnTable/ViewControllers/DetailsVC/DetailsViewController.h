@@ -56,6 +56,7 @@ Private showId property getter instance method
 - (NSString *)getShowSummary;
 
 #pragma mark -Setters
+
 /**
  Private showId property setter instance method
  
