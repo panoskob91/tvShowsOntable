@@ -68,9 +68,11 @@
                     <connections>
                         <outlet property="enableEditBTN" destination="qvD-2j-elG" id="bel-r2-Bv0"/>
                         <outlet property="searchBar" destination="uIQ-Xa-RkO" id="vkv-aq-A7l"/>
+                        <outlet property="searchBarBottomConstraint" destination="tBk-6L-1hd" id="ESA-Or-W5N"/>
                         <outlet property="searchDisplayController" destination="pRa-R1-ARr" id="X8q-O4-WIE"/>
                         <outlet property="tableView" destination="qes-z9-cDf" id="6HT-4q-Svf"/>
                         <outlet property="tableViewActivityindicator" destination="3yb-Wt-jSW" id="LNX-6n-YJc"/>
+                        <outlet property="tableViewTopConstraint" destination="b7m-K8-lWW" id="wZv-ox-kex"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

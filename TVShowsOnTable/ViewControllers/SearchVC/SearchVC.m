@@ -46,13 +46,15 @@
 @property (strong, nonatomic) NSMutableArray<PKShowTableCellViewModel *> *viewModelGroups;
 @property (strong, nonatomic) NSMutableArray<AFSEShowGroup *> *showGroups;
 
-//@property (strong, nonatomic) NSMutableArray<AFSEShowGroup *> *showGroupsArray;
+
 @property (strong, nonatomic) NSMutableArray<AFSEGenreModel *> *movieGenres;
 @property (strong, nonatomic) NSMutableArray<AFSEGenreModel *> *tvGenres;
 @property (strong, nonatomic) NSMutableDictionary *movieGenresDictionary;
 @property (strong, nonatomic) NSMutableDictionary *tvGenresDictionary;
 @property (strong, nonatomic) NSMutableDictionary *showGenresDictionary;
 @property (nonatomic, assign) BOOL contentIsEditable;
+@property (nonatomic, assign) BOOL tableViewDidScroll;
+@property (nonatomic) CGFloat lastContentOffset;
 
 //IBOutlets
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -61,6 +63,10 @@
 
 - (IBAction)pickShowVCButtonPSD:(id)sender;
 - (IBAction)enableEditButtonPressed:(UIBarButtonItem *)sender;
+
+//Constraints outlets
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *searchBarBottomConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstraint;
 
 @end
 
@@ -77,7 +83,9 @@ NSArray *selectedCells;
     [self setupTableView];
     [self setupSearchBar];
     [self initialiseTheNeededArrays];
-    //[self setupStatusBarAndNavigationBarStyle];
+    
+    self.tableViewDidScroll = YES;
+    self.lastContentOffset = 0;
     
     PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     [networkManager getGenreNameAndIDSWithCompletionBlock:^(NSDictionary *dictionary) {
@@ -153,15 +161,6 @@ NSArray *selectedCells;
     self.searchBar.backgroundColor = [UIColor grayColor];
     self.searchBar.placeholder = @"Search";
     self.searchBar.delegate = self;
-}
-
-- (void)setupStatusBarAndNavigationBarStyle
-{
-    self.navigationController.navigationBar.layer.backgroundColor = [[UIColor blueColor] CGColor];
-    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor lightTextColor];
-    self.navigationItem.leftBarButtonItem.tintColor = [UIColor lightTextColor];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 #pragma mark - SearchBar delegate functions
@@ -475,8 +474,36 @@ NSArray *selectedCells;
     headerLabel.textColor = [UIColor whiteColor];
     [view addSubview:headerLabel];
     
-    
     return view;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+//    if (self.tableViewDidScroll)
+//    {
+//        self.tableViewTopConstraint.constant = 0;
+//        self.tableViewDidScroll = NO;
+//    }
+    self.lastContentOffset = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+//
+//    float scrollOffsetY = scrollView.contentOffset.y;
+//    NSLog(@"%f", scrollOffsetY);
+//    if(scrollOffsetY < 0)
+//    {
+//        //Pulling down
+//        self.tableViewTopConstraint.constant = self.searchBar.frame.size.height;
+//        self.searchBarBottomConstraint.constant = self.searchBar.frame.size.height;
+//    }
+//    else if(scrollOffsetY > 0)
+//    {
+//        //Pulling up
+//        self.tableViewTopConstraint.constant = 0;
+//        self.searchBarBottomConstraint.constant = 0;
+//    }
 }
 
 @end
