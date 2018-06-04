@@ -154,6 +154,7 @@
 		1A93153D20AD8C7A00C1A279 /* PKImagesCellDetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKImagesCellDetailsVC.m; sourceTree = "<group>"; };
 		1A93153F20AD8CE100C1A279 /* PKSummaryCellDetailsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKSummaryCellDetailsVC.h; sourceTree = "<group>"; };
 		1A93154020AD8CE100C1A279 /* PKSummaryCellDetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKSummaryCellDetailsVC.m; sourceTree = "<group>"; };
+		1A9E242720C556A700B1BDC7 /* PKFavouriteHandleDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKFavouriteHandleDelegate.h; sourceTree = "<group>"; };
 		1AC5D19620736690002FB850 /* Show.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Show.h; path = "TVShowsOnTable/Models/Show Models/Show.h"; sourceTree = SOURCE_ROOT; };
 		1AC5D19720736690002FB850 /* Show.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Show.m; path = "TVShowsOnTable/Models/Show Models/Show.m"; sourceTree = SOURCE_ROOT; };
 		1ADBBA3720A02E30008588D1 /* AFSENetworkingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSENetworkingDelegate.h; sourceTree = "<group>"; };
@@ -261,6 +262,7 @@
 			children = (
 				1A3303EE2087517C0062E1ED /* ButtonEventHandlingDelegate.h */,
 				1ADBBA3720A02E30008588D1 /* AFSENetworkingDelegate.h */,
+				1A9E242720C556A700B1BDC7 /* PKFavouriteHandleDelegate.h */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";

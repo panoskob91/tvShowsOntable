@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+
+//Protocols, Delegates
+#import "PKFavouriteHandleDelegate.h"
+
 #import "AFSENetworkingDelegate.h"
 //ViewCotrollers
+
 //Mater ViewController
 #import "MasterTableVC.h"
 //#import "Show.h"

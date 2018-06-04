@@ -31,9 +31,7 @@
     //Set delegates
     loginSubView.usernameTextField.delegate = self;
     loginSubView.passwordTextField.delegate = self;
-//    NSLog(@"usernameTextFiels memory address %p", loginSubView.usernameTextField);
-//    NSLog(@"passwordTextField memory address %p", loginSubView.passwordTextField);
-//
+    
     CGFloat loginPageWidth = self.view.frame.size.width;
     CGFloat loginPageHeight = self.view.frame.size.height;
     CGFloat loginSubViewWidth = loginSubView.frame.size.width;

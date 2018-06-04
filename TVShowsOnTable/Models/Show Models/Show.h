@@ -73,8 +73,6 @@ typedef enum
  */
 - (instancetype)initWithDictionary: (NSDictionary *)dict;
 
-
-
 /**
  Object initialiser, written to work with the movie db RESTfull API
 
