@@ -36,7 +36,7 @@
 
 - (void)updateView:(PKSummaryCellDetailsVC *)detailsCell
 {
-    detailsCell.userInteractionEnabled = NO;
+    //detailsCell.userInteractionEnabled = NO;
     detailsCell.detailsCellDescriptionLabel.text = self.showDetailsDescription;
     //detailsCell.detailsCellTextView.text = self.showDetailsDescription;
     

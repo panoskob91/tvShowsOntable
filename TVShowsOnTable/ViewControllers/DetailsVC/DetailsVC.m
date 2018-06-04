@@ -8,6 +8,7 @@
 
 #import "DetailsVC.h"
 #import "SearchVC.h"
+#import "AFSEWebContentHandlerVC.h"
 
 #import "PKDetailsImagesCellVM.h"
 #import "PKDetailsTableCellVM.h"
@@ -167,6 +168,18 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - TableView overrides
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    AFSEWebContentHandlerVC *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"webContentHandler"];
+    webViewController.show = self.sections[indexPath.section][indexPath.row].bindModel;
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [self.navigationController pushViewController:webViewController animated:YES];
 }
 
 #pragma mark - IBActions

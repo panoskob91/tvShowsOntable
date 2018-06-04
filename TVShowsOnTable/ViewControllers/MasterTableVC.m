@@ -11,7 +11,7 @@
 #import "MasterTableVC.h"
 #import "DetailsVC.h"
 #import "SearchVC.h"
-#import "AFSEWebContentHandlerVC.h"
+
 //ViewModels
 #import "PKDetailsImagesCellVM.h"
 //Categories
@@ -78,26 +78,17 @@
 //On select table row
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self isKindOfClass:[SearchVC class]])
-    {
-        DetailsVC *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"detailsVC"];
-        destController.show = self.sections[indexPath.section][indexPath.row].bindModel;
-        destController.hidesBottomBarWhenPushed = YES;
 
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-        [self.navigationController pushViewController:destController animated:YES];
-    }
-    else if ([self isKindOfClass:[DetailsVC class]])
-    {
-        AFSEWebContentHandlerVC *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"webContentHandler"];
-        webViewController.show = self.sections[indexPath.section][indexPath.row].bindModel;
-        
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-        
-        [self.navigationController pushViewController:webViewController animated:YES];
-    }
-    
+//    if ([self isKindOfClass:[DetailsVC class]])
+//    {
+//        AFSEWebContentHandlerVC *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"webContentHandler"];
+//        webViewController.show = self.sections[indexPath.section][indexPath.row].bindModel;
+//        
+//        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+//        
+//        [self.navigationController pushViewController:webViewController animated:YES];
+//    }
+//    
 }
 //Enable editing
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

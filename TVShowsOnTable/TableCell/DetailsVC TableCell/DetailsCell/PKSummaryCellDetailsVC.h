@@ -11,9 +11,15 @@
 
 @interface PKSummaryCellDetailsVC : TVShowsCell
 
+//Outlets
 @property (strong, nonatomic) IBOutlet UILabel *detailsCellDescriptionLabel;
 @property (strong, nonatomic) IBOutlet UITextView *detailsCellTextView;
 @property (strong, nonatomic) IBOutlet UIButton *favoritesButton;
+@property (strong, nonatomic) IBOutlet UIView *detailsCellBackgroundView;
+
+
+//IBActions
+- (IBAction)favoriteButtonPressed:(UIButton *)sender;
 
 
 @end

@@ -18,6 +18,9 @@
 #import "PKMovieCellViewModel.h"
 
 
+//Models
+#import "Session.h"
+
 //Helpers
 #import "NSString_stripHtml.h"
 //Categories and protocols
@@ -26,10 +29,12 @@
 //View controllers
 #import "DetailsViewController.h"
 #import "PickShowTypeVC.h"
+#import "DetailsVC.h"
+
 //Data grouping
 #import "AFSEShowGroup.h"
 #import "AFSEGenreModel.h"
-//Table cell class
+//Table cell classes
 #import "TVShowsCell.h"
 
 @interface SearchVC ()
@@ -86,6 +91,8 @@ NSArray *selectedCells;
     
     self.tableViewDidScroll = YES;
     self.lastContentOffset = 0;
+    
+//    Session *testSessionObject = [Session sharedSession];
     
     PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     [networkManager getGenreNameAndIDSWithCompletionBlock:^(NSDictionary *dictionary) {
@@ -475,6 +482,16 @@ NSArray *selectedCells;
     [view addSubview:headerLabel];
     
     return view;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    DetailsVC *destController = [self.storyboard instantiateViewControllerWithIdentifier:@"detailsVC"];
+    destController.show = self.sections[indexPath.section][indexPath.row].bindModel;
+    destController.hidesBottomBarWhenPushed = YES;
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [self.navigationController pushViewController:destController animated:YES];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
