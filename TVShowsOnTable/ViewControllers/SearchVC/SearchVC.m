@@ -429,7 +429,6 @@ NSArray *selectedCells;
                 break;
             }
         
-            
         }
         if(onList == NO)
         {

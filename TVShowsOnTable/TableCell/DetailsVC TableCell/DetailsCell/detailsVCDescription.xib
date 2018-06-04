@@ -6,30 +6,29 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailsVCDetailsCell" rowHeight="111" id="78R-jr-xUC" customClass="PKSummaryCellDetailsVC">
-            <rect key="frame" x="0.0" y="0.0" width="422" height="111"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailsVCDetailsCell" id="78R-jr-xUC" customClass="PKSummaryCellDetailsVC">
+            <rect key="frame" x="0.0" y="0.0" width="416" height="111"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="78R-jr-xUC" id="1Tr-6t-fLg">
-                <rect key="frame" x="0.0" y="0.0" width="422" height="110.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="416" height="110.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMO-x4-H1c">
-                        <rect key="frame" x="28" y="19" width="366" height="35"/>
+                        <rect key="frame" x="8" y="8" width="400" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3m-UN-P5z">
-                        <rect key="frame" x="28" y="62.5" width="40" height="40"/>
+                        <rect key="frame" x="8" y="36.5" width="40" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="a0f-z1-g7Y"/>
-                            <constraint firstAttribute="width" constant="40" id="mvF-6P-Lcy"/>
+                            <constraint firstAttribute="height" constant="40" id="0lf-sB-O4i"/>
+                            <constraint firstAttribute="width" constant="40" id="eog-e8-LJ7"/>
                         </constraints>
                         <state key="normal" image="empty-star"/>
                         <connections>
@@ -38,20 +37,19 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="fMO-x4-H1c" firstAttribute="leading" secondItem="V3m-UN-P5z" secondAttribute="leading" id="4Un-H2-fEv"/>
-                    <constraint firstItem="fMO-x4-H1c" firstAttribute="top" secondItem="1Tr-6t-fLg" secondAttribute="topMargin" constant="8" id="IHP-fR-DIe"/>
-                    <constraint firstItem="fMO-x4-H1c" firstAttribute="leading" secondItem="1Tr-6t-fLg" secondAttribute="leadingMargin" constant="8" id="UQP-ma-iiK"/>
-                    <constraint firstAttribute="trailing" secondItem="V3m-UN-P5z" secondAttribute="trailing" constant="354" id="WJh-AB-DMf"/>
-                    <constraint firstItem="V3m-UN-P5z" firstAttribute="top" secondItem="fMO-x4-H1c" secondAttribute="bottom" constant="8" id="sr7-Jw-tdc"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="fMO-x4-H1c" secondAttribute="trailing" constant="8" id="tDf-uw-Nrj"/>
-                    <constraint firstAttribute="bottom" secondItem="V3m-UN-P5z" secondAttribute="bottom" constant="8" id="wLq-x8-cfN"/>
+                    <constraint firstAttribute="bottom" secondItem="V3m-UN-P5z" secondAttribute="bottom" constant="34" id="Fs2-oB-LnC"/>
+                    <constraint firstAttribute="trailing" secondItem="fMO-x4-H1c" secondAttribute="trailing" constant="8" id="Pfl-6i-Gco"/>
+                    <constraint firstItem="fMO-x4-H1c" firstAttribute="top" secondItem="1Tr-6t-fLg" secondAttribute="top" constant="8" id="dVx-VX-laF"/>
+                    <constraint firstItem="fMO-x4-H1c" firstAttribute="leading" secondItem="1Tr-6t-fLg" secondAttribute="leading" constant="8" id="daU-Gf-zid"/>
+                    <constraint firstItem="V3m-UN-P5z" firstAttribute="top" secondItem="fMO-x4-H1c" secondAttribute="bottom" constant="8" id="h1N-tm-frZ"/>
+                    <constraint firstItem="fMO-x4-H1c" firstAttribute="leading" secondItem="V3m-UN-P5z" secondAttribute="leading" id="haL-g3-YkV"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="detailsCellDescriptionLabel" destination="fMO-x4-H1c" id="Y7U-Kn-0Z6"/>
                 <outlet property="favoritesButton" destination="V3m-UN-P5z" id="5bo-Mi-Ut2"/>
             </connections>
-            <point key="canvasLocation" x="-99" y="98.5"/>
+            <point key="canvasLocation" x="-96" y="98.5"/>
         </tableViewCell>
     </objects>
     <resources>

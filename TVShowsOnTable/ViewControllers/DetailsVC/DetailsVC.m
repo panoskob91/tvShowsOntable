@@ -174,12 +174,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AFSEWebContentHandlerVC *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"webContentHandler"];
-    webViewController.show = self.sections[indexPath.section][indexPath.row].bindModel;
+    PKShowTableCellViewModel *cellViewModel = self.sections[indexPath.section][indexPath.row];
+    TVShowsCell *cell = (TVShowsCell *)[tableView dequeueReusableCellWithIdentifier:[cellViewModel getCellIdentifier]];
     
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    [self.navigationController pushViewController:webViewController animated:YES];
+    if ([cell isKindOfClass:[PKImagesCellDetailsVC class]])
+    {
+        AFSEWebContentHandlerVC *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"webContentHandler"];
+        webViewController.show = self.sections[indexPath.section][indexPath.row].bindModel;
+        
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        [self.navigationController pushViewController:webViewController animated:YES];
+    }
 }
 
 #pragma mark - IBActions

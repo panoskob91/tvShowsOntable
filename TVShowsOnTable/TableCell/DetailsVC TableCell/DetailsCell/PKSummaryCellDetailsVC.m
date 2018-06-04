@@ -9,6 +9,12 @@
 #import "PKSummaryCellDetailsVC.h"
 #import "UIColor+rgb.h"
 
+//Categories
+#import "UIAlertController+AFSEAlertGenerator.h"
+
+//Sigleton
+#import "Session.h"
+
 @interface PKSummaryCellDetailsVC ()
 
 @property (assign, nonatomic) BOOL isPressed;
@@ -31,11 +37,6 @@
     self.detailsCellTextView.textColor = [UIColor blackColor];
     self.detailsCellTextView.backgroundColor = [UIColor redColor];
     self.detailsCellDescriptionLabel.userInteractionEnabled = YES;
-
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped:)];
-//    self.detailsCellBackgroundView.tag = 1;
-//    [tap setNumberOfTapsRequired:1];
-//    [self.detailsCellBackgroundView addGestureRecognizer:tap];
     
     self.isPressed = YES;
     
@@ -47,24 +48,22 @@
     // Configure the view for the selected state
 }
 
+#pragma mark - IBActions
 
-- (void)viewWasTapped:(UITapGestureRecognizer *)tap
-{
-    NSLog(@"tapped");
+- (IBAction)favoriteButtonPressed:(UIButton *)sender {
+    UIImage *buttonImage = [[UIImage alloc] init];
     if (self.isPressed)
     {
-        //Add show to list.movies array
+        //Add Show to list.movies array
+        buttonImage = [UIImage imageNamed:@"filled-star"];
         self.isPressed = NO;
     }
     else
     {
         //Remove show from list.movies array
+        buttonImage = [UIImage imageNamed:@"empty-star"];
         self.isPressed = YES;
     }
-}
-
-
-- (IBAction)favoriteButtonPressed:(UIButton *)sender {
-    NSLog(@"Pressed");
+    [self.favoritesButton setImage:buttonImage forState:UIControlStateNormal];
 }
 @end
