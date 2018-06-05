@@ -92,8 +92,6 @@ NSArray *selectedCells;
     self.tableViewDidScroll = YES;
     self.lastContentOffset = 0;
     
-//    Session *testSessionObject = [Session sharedSession];
-    
     PKNetworkManager *networkManager = [[PKNetworkManager alloc] init];
     [networkManager getGenreNameAndIDSWithCompletionBlock:^(NSDictionary *dictionary) {
         self.showGenresDictionary = [[NSMutableDictionary alloc] initWithDictionary:dictionary];

@@ -7,6 +7,7 @@
 //
 
 #import "PKDetailsTableCellVM.h"
+#import "Session.h"
 
 @implementation PKDetailsTableCellVM
 
@@ -36,10 +37,22 @@
 
 - (void)updateView:(PKSummaryCellDetailsVC *)detailsCell
 {
-    //detailsCell.userInteractionEnabled = NO;
+    detailsCell.favouriteHandleDelegate = self;
     detailsCell.detailsCellDescriptionLabel.text = self.showDetailsDescription;
-    //detailsCell.detailsCellTextView.text = self.showDetailsDescription;
-    
+}
+
+- (void)addButtonWasPressedFromCell:(PKSummaryCellDetailsVC *)cell
+{
+    //Add show object to the list array property 
+    Session *session = [Session sharedSession];
+    [session.favorite.movies addObject:self.bindModel];
+}
+
+- (void)removeButtonWasPressedFromCell:(PKSummaryCellDetailsVC *)cell
+{
+    //Remove object from list array 
+    Session *session = [Session sharedSession];
+    [session.favorite.movies removeObject:self.bindModel];
 }
 
 @end

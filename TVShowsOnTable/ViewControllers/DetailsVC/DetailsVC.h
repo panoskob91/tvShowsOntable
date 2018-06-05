@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 //Protocols, Delegates
-#import "PKFavouriteHandleDelegate.h"
 
+//Delegates
 #import "AFSENetworkingDelegate.h"
+#import "FavoritesHandlingDelegate.h"
 //ViewCotrollers
 
 //Mater ViewController

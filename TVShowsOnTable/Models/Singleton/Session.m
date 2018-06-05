@@ -18,12 +18,6 @@
     dispatch_once(&onceToken, ^{
         session = [[self alloc] init];
     });
-    //What if ?
-    //if (session)
-    //{
-    //session = [[self alloc] init];
-    //}
-    //return session;
     
     return session;
 }

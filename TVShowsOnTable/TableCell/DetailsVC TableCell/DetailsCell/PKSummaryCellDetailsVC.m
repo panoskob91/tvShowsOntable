@@ -15,6 +15,9 @@
 //Sigleton
 #import "Session.h"
 
+//Protocols
+#import "FavoritesHandlingDelegate.h"
+
 @interface PKSummaryCellDetailsVC ()
 
 @property (assign, nonatomic) BOOL isPressed;
@@ -56,12 +59,14 @@
     {
         //Add Show to list.movies array
         buttonImage = [UIImage imageNamed:@"filled-star"];
+        [self.favouriteHandleDelegate addButtonWasPressedFromCell:self];
         self.isPressed = NO;
     }
     else
     {
         //Remove show from list.movies array
         buttonImage = [UIImage imageNamed:@"empty-star"];
+        [self.favouriteHandleDelegate removeButtonWasPressedFromCell:self];
         self.isPressed = YES;
     }
     [self.favoritesButton setImage:buttonImage forState:UIControlStateNormal];

@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "TVShowsCell.h"
 
+//Delegates
+//#import "FavoritesHandlingDelegate.h"
+
+@protocol FavoritesHandlingDelegate;
 @interface PKSummaryCellDetailsVC : TVShowsCell
 
 //Outlets
@@ -17,6 +21,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *favoritesButton;
 @property (strong, nonatomic) IBOutlet UIView *detailsCellBackgroundView;
 
+//Delgates
+@property (nonatomic, weak) id <FavoritesHandlingDelegate> favouriteHandleDelegate;
 
 //IBActions
 - (IBAction)favoriteButtonPressed:(UIButton *)sender;

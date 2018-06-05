@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "PKSummaryCellDetailsVC.h"
 #import "PKShowTableCellViewModel.h"
+#import "FavoritesHandlingDelegate.h"
 
 //@interface PKDetailsVCTableCellVM : PKShowTableCellViewModel
-@interface PKDetailsTableCellVM : NSObject
+@interface PKDetailsTableCellVM : NSObject<FavoritesHandlingDelegate>
 
 @property (strong, nonatomic) NSString *showDetailsDescription;
 @property (strong, nonatomic) id bindModel;

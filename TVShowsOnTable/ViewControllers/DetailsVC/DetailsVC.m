@@ -6,13 +6,19 @@
 //  Copyright © 2018 AFSE. All rights reserved.
 //
 
+//ViewControllers
 #import "DetailsVC.h"
 #import "SearchVC.h"
 #import "AFSEWebContentHandlerVC.h"
-
+//Singleton
+#import "Session.h"
+//ViewModels
 #import "PKDetailsImagesCellVM.h"
 #import "PKDetailsTableCellVM.h"
+//Networking
 #import "PKNetworkManager.h"
+//Cells
+#import "PKSummaryCellDetailsVC.h"
 
 @interface DetailsVC ()
 
@@ -131,8 +137,7 @@
     
     NSArray<NSString *> *ratingImages = [self populateRatingImagesArray];
     
-//    PKDetailsImagesCellVM *newImageVM = [[PKDetailsImagesCellVM alloc] initWithMainImageURLPath:self.mainImageURLControlledWithPageControll
-//                                                                                  andShowObject:self.show];
+    
     PKDetailsImagesCellVM *newImageVM = [[PKDetailsImagesCellVM alloc] initWithMainImageURLPath:self.mainImageURLControlledWithPageControll
                                                                                   andShowObject:self.show
                                                                         andRatingImageNameArray:ratingImages];
@@ -169,6 +174,9 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+#pragma mark - Favorites delegate
+
 
 #pragma mark - TableView overrides
 
