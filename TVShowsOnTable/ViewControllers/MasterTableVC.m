@@ -31,9 +31,10 @@
     
     //NSDictionary containing cells. Key:NibName, value:cellID
     NSDictionary<NSString *, NSString *> *cellInfo = @{
-                                                       @"ShowsCell" : @"tVShowsCell",
-                                                       @"detailsVCImagesCell" : @"detailsVCimagesCell",
-                                                       @"detailsVCDescription" : @"detailsVCDetailsCell"
+                                @"ShowsCell" : @"tVShowsCell",
+                      @"detailsVCImagesCell" : @"detailsVCimagesCell",
+                     @"detailsVCDescription" : @"detailsVCDetailsCell",
+                           @"FavouritesCell" : @"favouritesCell"
                                                        };
     
     //Add all cells with their identifier

@@ -22,10 +22,8 @@
 - (instancetype)initWithShowSummary:(NSString *)summary
                        andBindModel:(id)bindModel;
 
-//- (NSString *)getDetailsCellIdentifier;
 - (NSString *)getCellIdentifier;
 
-//- (void)updateDetailsCell:(PKSummaryCellDetailsVC *)detailsCell;
 - (void)updateView:(PKSummaryCellDetailsVC *)detailsCell;
 
 @end

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A02410B20C68E2900B54F76 /* PKFavouritesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A02410A20C68E2900B54F76 /* PKFavouritesVC.m */; };
+		1A02410D20C68E7900B54F76 /* FavouritesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A02410C20C68E7900B54F76 /* FavouritesCell.xib */; };
+		1A02411020C68EAB00B54F76 /* PKFavouritesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A02410F20C68EAB00B54F76 /* PKFavouritesCell.m */; };
+		1A02411320C68ED900B54F76 /* PKFavouritesCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A02411220C68ED900B54F76 /* PKFavouritesCellVM.m */; };
 		1A098A3620B3EAE400A60A48 /* PKDetailsTableCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A098A3520B3EAE400A60A48 /* PKDetailsTableCellVM.m */; };
 		1A098A3B20B3F83E00A60A48 /* PKDetailsImagesCellVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A098A3A20B3F83E00A60A48 /* PKDetailsImagesCellVM.m */; };
 		1A0E8D51209B0A5A007F817B /* AFSEWebContentHandlerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0E8D50209B0A5A007F817B /* AFSEWebContentHandlerVC.m */; };
@@ -79,6 +83,13 @@
 
 /* Begin PBXFileReference section */
 		1A02410620C674FB00B54F76 /* FavoritesHandlingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FavoritesHandlingDelegate.h; sourceTree = "<group>"; };
+		1A02410920C68E2900B54F76 /* PKFavouritesVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKFavouritesVC.h; sourceTree = "<group>"; };
+		1A02410A20C68E2900B54F76 /* PKFavouritesVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKFavouritesVC.m; sourceTree = "<group>"; };
+		1A02410C20C68E7900B54F76 /* FavouritesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouritesCell.xib; sourceTree = "<group>"; };
+		1A02410E20C68EAB00B54F76 /* PKFavouritesCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKFavouritesCell.h; sourceTree = "<group>"; };
+		1A02410F20C68EAB00B54F76 /* PKFavouritesCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKFavouritesCell.m; sourceTree = "<group>"; };
+		1A02411120C68ED900B54F76 /* PKFavouritesCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKFavouritesCellVM.h; sourceTree = "<group>"; };
+		1A02411220C68ED900B54F76 /* PKFavouritesCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKFavouritesCellVM.m; sourceTree = "<group>"; };
 		1A098A3420B3EAE400A60A48 /* PKDetailsTableCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKDetailsTableCellVM.h; sourceTree = "<group>"; };
 		1A098A3520B3EAE400A60A48 /* PKDetailsTableCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKDetailsTableCellVM.m; sourceTree = "<group>"; };
 		1A098A3920B3F83E00A60A48 /* PKDetailsImagesCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKDetailsImagesCellVM.h; sourceTree = "<group>"; };
@@ -196,6 +207,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A02410720C68DC200B54F76 /* FavouritesCell */ = {
+			isa = PBXGroup;
+			children = (
+				1A02410E20C68EAB00B54F76 /* PKFavouritesCell.h */,
+				1A02410F20C68EAB00B54F76 /* PKFavouritesCell.m */,
+				1A02410C20C68E7900B54F76 /* FavouritesCell.xib */,
+				1A02411120C68ED900B54F76 /* PKFavouritesCellVM.h */,
+				1A02411220C68ED900B54F76 /* PKFavouritesCellVM.m */,
+			);
+			path = FavouritesCell;
+			sourceTree = "<group>";
+		};
+		1A02410820C68E0E00B54F76 /* Favourites */ = {
+			isa = PBXGroup;
+			children = (
+				1A02410920C68E2900B54F76 /* PKFavouritesVC.h */,
+				1A02410A20C68E2900B54F76 /* PKFavouritesVC.m */,
+			);
+			path = Favourites;
+			sourceTree = "<group>";
+		};
 		1A098A3720B3F7E200A60A48 /* DetailsCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +379,7 @@
 		1A47C1BB2072308100D63753 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1A02410820C68E0E00B54F76 /* Favourites */,
 				1A10A89D20B45E8E005CC65E /* MasterTableVC.h */,
 				1A10A89E20B45E8E005CC65E /* MasterTableVC.m */,
 				1A7A2B0620B6CD60009DA8C4 /* Login */,
@@ -362,6 +395,7 @@
 		1A47C1BE207230BA00D63753 /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
+				1A02410720C68DC200B54F76 /* FavouritesCell */,
 				1A93154220AD90DB00C1A279 /* DetailsVC TableCell */,
 				1A7BD8B120A9912300BF4C7B /* TableCellViewModels */,
 				1A47C1B92072076E00D63753 /* TVShowsCell.m */,
@@ -650,6 +684,7 @@
 				1AE2496920B2AE3900FF7095 /* timeburnerbold.ttf in Resources */,
 				1A47C18E2072058200D63753 /* Main.storyboard in Resources */,
 				1AE2496D20B2B42800FF7095 /* ADAM.CG PRO.otf in Resources */,
+				1A02410D20C68E7900B54F76 /* FavouritesCell.xib in Resources */,
 				1A7A2B1020B6D435009DA8C4 /* LoginWidget.xib in Resources */,
 				1AE2496020B2A35F00FF7095 /* MJ Granada.ttf in Resources */,
 				1AE2496320B2AA4500FF7095 /* DELIGHT LETTERING SCRIPT-DEMO.ttf in Resources */,
@@ -695,8 +730,10 @@
 				1A47C1962072058300D63753 /* main.m in Sources */,
 				1A93154120AD8CE100C1A279 /* PKSummaryCellDetailsVC.m in Sources */,
 				1A7A2B0920B6CE90009DA8C4 /* PKLoginVC.m in Sources */,
+				1A02411020C68EAB00B54F76 /* PKFavouritesCell.m in Sources */,
 				1A47C1BA2072076E00D63753 /* TVShowsCell.m in Sources */,
 				1ADBBA3A20A02F7D008588D1 /* PKNetworkManager.m in Sources */,
+				1A02411320C68ED900B54F76 /* PKFavouritesCellVM.m in Sources */,
 				1AC5D19820736690002FB850 /* Show.m in Sources */,
 				1A47C1882072058200D63753 /* AppDelegate.m in Sources */,
 				1A7A2B0C20B6CEDE009DA8C4 /* LoginWidgetVM.m in Sources */,
@@ -707,6 +744,7 @@
 				1A3CBA9F2097496300718417 /* AFSEGenreModel.m in Sources */,
 				1A22529220C1768100B0106E /* List.m in Sources */,
 				1A098A3B20B3F83E00A60A48 /* PKDetailsImagesCellVM.m in Sources */,
+				1A02410B20C68E2900B54F76 /* PKFavouritesVC.m in Sources */,
 				1A3303EB20874ABC0062E1ED /* PickShowTypeVC.m in Sources */,
 				1A10A8A220B464B8005CC65E /* DetailsVC.m in Sources */,
 				1A3CBA962096E9B000718417 /* AFSETvMazeViewController.m in Sources */,
