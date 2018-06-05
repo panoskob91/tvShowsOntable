@@ -68,9 +68,7 @@
     if (session.favorite.movies.count == 0)
     {
         NSString *alertMessage = @"There are no favorites stored yet";
-        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSLog(@"OK button pressed");
-        }];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
         [actionOK setValue:[UIColor blueColor] forKey:@"titleTextColor"];
         
         NSMutableArray<UIAlertAction*> *alertActions = [[NSMutableArray alloc] init];

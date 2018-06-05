@@ -27,6 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.tableView.tableFooterView = [[UIView alloc] init];
     
     //NSDictionary containing cells. Key:NibName, value:cellID
