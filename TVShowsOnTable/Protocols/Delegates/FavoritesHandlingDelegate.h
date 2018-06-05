@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "List.h"
 #import "Show.h"
-#import "PKSummaryCellDetailsVC.h"
+//#import "PKSummaryCellDetailsVC.h"
+#import "TVShowsCell.h"
 
 //@class PKSummaryCellDetailsVC;
 @protocol FavoritesHandlingDelegate <NSObject>
@@ -18,7 +19,9 @@
 - (void)didAdd:(Show *)show ToList:(List *)list;
 - (void)didRemove:(Show *)show FromList:(List *)list;
 
-- (void)addButtonWasPressedFromCell:(PKSummaryCellDetailsVC *)cell;
-- (void)removeButtonWasPressedFromCell:(PKSummaryCellDetailsVC *)cell;
+//- (void)addButtonWasPressedFromCell:(PKSummaryCellDetailsVC *)cell;
+- (void)addButtonWasPressedFromCell:(TVShowsCell *)cell;
+//- (void)removeButtonWasPressedFromCell:(PKSummaryCellDetailsVC *)cell;
+- (void)removeButtonWasPressedFromCell:(TVShowsCell *)cell;
 
 @end

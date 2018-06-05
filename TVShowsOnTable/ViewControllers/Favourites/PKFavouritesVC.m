@@ -9,6 +9,7 @@
 #import "PKFavouritesVC.h"
 #import "Session.h"
 #import "PKFavouritesCellVM.h"
+#import "UIAlertController+AFSEAlertGenerator.h"
 
 @interface PKFavouritesVC ()
 
@@ -20,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    [self alertWhenNoFavoritesAreStored];
     [self updateContent];
     
 }
@@ -59,6 +60,28 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)alertWhenNoFavoritesAreStored
+{
+    Session *session = [Session sharedSession];
+    if (session.favorite.movies.count == 0)
+    {
+        NSString *alertMessage = @"There are no favorites stored yet";
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"OK button pressed");
+        }];
+        [actionOK setValue:[UIColor blueColor] forKey:@"titleTextColor"];
+        
+        NSMutableArray<UIAlertAction*> *alertActions = [[NSMutableArray alloc] init];
+        [alertActions addObject:actionOK];
+        
+        UIAlertController *alert = [UIAlertController generateAlertWithTitle:@"Alert!" andMessage:alertMessage andActions:alertActions];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self presentViewController:alert animated:YES completion:nil];
+        });
+    }
 }
 
 @end

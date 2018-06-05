@@ -39,6 +39,9 @@
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5V4-kP-dUQ">
                         <rect key="frame" x="343" y="37" width="24" height="24"/>
+                        <connections>
+                            <action selector="favoriteUnfavoriteShowWasPressed:" destination="NsE-U9-3yl" eventType="touchUpInside" id="Ru1-A8-5sU"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

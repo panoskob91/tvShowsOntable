@@ -7,6 +7,9 @@
 //
 
 #import "PKFavouritesCell.h"
+//Singleton
+#import "Session.h"
+
 
 @implementation PKFavouritesCell
 
@@ -20,4 +23,8 @@
 
 }
 
+- (IBAction)favoriteUnfavoriteShowWasPressed:(UIButton *)sender {
+    //Remove Entry
+    //[self.favoritesHandlingDelegate removeButtonWasPressedFromCell:self];
+}
 @end

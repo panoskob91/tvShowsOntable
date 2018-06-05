@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TVShowsCell.h"
+#import "FavoritesHandlingDelegate.h"
 
 @interface PKFavouritesCell : TVShowsCell
 
@@ -17,5 +18,14 @@
 @property (strong, nonatomic) IBOutlet UILabel *favouriteShowTitle;
 @property (strong, nonatomic) IBOutlet UIImageView *favoriteShowMediaTypeImageIndicator;
 @property (strong, nonatomic) IBOutlet UIButton *favoriteUnfavoriteButton;
+
+#pragma mark - Delegate propery
+@property (weak, nonatomic) id <FavoritesHandlingDelegate> favoritesHandlingDelegate;
+
+#pragma mark - IBActions
+
+- (IBAction)favoriteUnfavoriteShowWasPressed:(UIButton *)sender;
+
+
 
 @end
