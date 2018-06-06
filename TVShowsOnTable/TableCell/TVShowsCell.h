@@ -48,11 +48,19 @@
 
 #pragma mark - IBActions
 
+/**
+ handle favourite/unfavourite user actions (UI visuaks)
+
+ @param sender UIButton sending the event
+ */
 - (IBAction)favouriteUnfavouriteButtonPressed:(UIButton *)sender;
 
 
 #pragma mark - Delegate
 
+/**
+ Cell delegate. The event is received by the corresponding ViewModel.
+ */
 @property (weak, nonatomic) id <FavoritesHandlingDelegate> favouriteHandlingDelegate;
 
 
@@ -61,7 +69,5 @@
 
  @param Object Object of which cell properties will be set
  */
-//TO-DO: Consider removing this function
-- (void)setupCellPropertiesWithObject:(Show *)Object;
 
 @end

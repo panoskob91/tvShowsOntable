@@ -54,21 +54,21 @@
 #pragma mark - IBActions
 
 - (IBAction)favoriteButtonPressed:(UIButton *)sender {
-    UIImage *buttonImage = [[UIImage alloc] init];
+//    UIImage *buttonImage = [[UIImage alloc] init];
     if (self.isPressed)
     {
         //Add Show to list.movies array
-        buttonImage = [UIImage imageNamed:@"filled-star"];
+//        buttonImage = [UIImage imageNamed:@"filled-star"];
         [self.favouriteHandleDelegate addButtonWasPressedFromCell:self];
         self.isPressed = NO;
     }
     else
     {
         //Remove show from list.movies array
-        buttonImage = [UIImage imageNamed:@"empty-star"];
+//        buttonImage = [UIImage imageNamed:@"empty-star"];
         [self.favouriteHandleDelegate removeButtonWasPressedFromCell:self];
         self.isPressed = YES;
     }
-    [self.favoritesButton setImage:buttonImage forState:UIControlStateNormal];
+//    [self.favoritesButton setImage:buttonImage forState:UIControlStateNormal];
 }
 @end

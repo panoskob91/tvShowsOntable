@@ -39,20 +39,39 @@
 {
     detailsCell.favouriteHandleDelegate = self;
     detailsCell.detailsCellDescriptionLabel.text = self.showDetailsDescription;
+    Show *show = (Show *)self.bindModel;
+    if (show.isFavourite)
+    {
+        [detailsCell.favoritesButton setImage:[UIImage imageNamed:@"filled-star"] forState:UIControlStateNormal];
+    }
+    else if (!show.isFavourite)
+    {
+        [detailsCell.favoritesButton setImage:[UIImage imageNamed:@"empty-star"] forState:UIControlStateNormal];
+    }
+    
+    
 }
 
-- (void)addButtonWasPressedFromCell:(PKSummaryCellDetailsVC *)cell
-{
-    //Add show object to the list array property 
-    Session *session = [Session sharedSession];
-    [session.favorite.movies addObject:self.bindModel];
-}
+//TODO: Consider working on the behaviour of this view to reflect on the previous one, by working with the following two functions
 
-- (void)removeButtonWasPressedFromCell:(PKSummaryCellDetailsVC *)cell
-{
-    //Remove object from list array 
-    Session *session = [Session sharedSession];
-    [session.favorite.movies removeObject:self.bindModel];
-}
+//- (void)addButtonWasPressedFromCell:(PKSummaryCellDetailsVC *)cell
+//{
+//    //Add show object to the list array property
+//    Session *session = [Session sharedSession];
+//    [session.favorite.movies addObject:self.bindModel];
+//    Show *show = (Show *)self.bindModel;
+//    show.isFavourite = YES;
+//    [self updateView:cell];
+//}
+//
+//- (void)removeButtonWasPressedFromCell:(PKSummaryCellDetailsVC *)cell
+//{
+//    //Remove object from list array
+//    Session *session = [Session sharedSession];
+//    [session.favorite.movies removeObject:self.bindModel];
+//    Show *show = (Show *)self.bindModel;
+//    show.isFavourite = NO;
+//    [self updateView:cell];
+//}
 
 @end
