@@ -189,12 +189,6 @@
 //    return view;
 //}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 45;
-}
-
-
 #pragma mark - Helper functions
 
 - (void)createAndShowAlertWithTitle:(NSString *)title

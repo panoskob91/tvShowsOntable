@@ -491,6 +491,12 @@ NSArray *selectedCells;
     [self.navigationController pushViewController:destController animated:YES];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 45;
+}
+
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
 //    if (self.tableViewDidScroll)

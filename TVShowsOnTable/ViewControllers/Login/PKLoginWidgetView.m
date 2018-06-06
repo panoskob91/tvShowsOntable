@@ -42,7 +42,7 @@
             {
                 uExists = YES;
                 break;
-            }    
+            }
         }
         
         if (uExists && pExists)
@@ -51,21 +51,19 @@
         }
         
     }
-   
+    
     
 }
 
 - (IBAction)registerButtonPressed:(UIButton *)sender
 {
-    
-    
     if (![self.usernameTextField.text isEqualToString:@""] &&
         ![self.passwordTextField.text isEqualToString:@""])
     {
         [self.usernamePasswordPairs setObject:self.usernameTextField.text forKey:@"Username"];
         [self.usernamePasswordPairs setObject:self.passwordTextField.text forKey:@"Password"];
-    
-            
+        
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"Credentials" object:self userInfo:self.usernamePasswordPairs];
     }
 }
