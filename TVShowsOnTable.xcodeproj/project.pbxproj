@@ -94,6 +94,7 @@
 		1A098A3520B3EAE400A60A48 /* PKDetailsTableCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKDetailsTableCellVM.m; sourceTree = "<group>"; };
 		1A098A3920B3F83E00A60A48 /* PKDetailsImagesCellVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKDetailsImagesCellVM.h; sourceTree = "<group>"; };
 		1A098A3A20B3F83E00A60A48 /* PKDetailsImagesCellVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PKDetailsImagesCellVM.m; sourceTree = "<group>"; };
+		1A0D1D9A20C7C07C00DC05B2 /* PKIndexingProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKIndexingProtocol.h; sourceTree = "<group>"; };
 		1A0E8D4F209B0A5A007F817B /* AFSEWebContentHandlerVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSEWebContentHandlerVC.h; sourceTree = "<group>"; };
 		1A0E8D50209B0A5A007F817B /* AFSEWebContentHandlerVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSEWebContentHandlerVC.m; sourceTree = "<group>"; };
 		1A0E8D53209B0DD1007F817B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -303,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				1A3303EC208751240062E1ED /* Delegates */,
+				1A0D1D9A20C7C07C00DC05B2 /* PKIndexingProtocol.h */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";

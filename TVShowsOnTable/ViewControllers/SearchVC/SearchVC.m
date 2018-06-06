@@ -487,7 +487,7 @@ NSArray *selectedCells;
     destController.hidesBottomBarWhenPushed = YES;
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+
     [self.navigationController pushViewController:destController animated:YES];
 }
 
@@ -495,7 +495,6 @@ NSArray *selectedCells;
 {
     return 45;
 }
-
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {

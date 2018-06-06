@@ -36,10 +36,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eIb-Yn-zda">
-                        <rect key="frame" x="335" y="37" width="24" height="26"/>
+                        <rect key="frame" x="335" y="37" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="24" id="0gv-4v-9FJ"/>
-                            <constraint firstAttribute="height" constant="26" id="xfZ-1U-C5a"/>
+                            <constraint firstAttribute="height" constant="24" id="xfZ-1U-C5a"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w04-Bc-Pcp">
@@ -48,14 +48,22 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1d-D9-RSS">
+                        <rect key="frame" x="303" y="37" width="24" height="24"/>
+                        <state key="normal" image="empty-star"/>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="eIb-Yn-zda" firstAttribute="width" secondItem="u1d-D9-RSS" secondAttribute="width" id="7CL-YX-kOR"/>
                     <constraint firstItem="Bco-33-0jp" firstAttribute="top" secondItem="A1W-s1-svK" secondAttribute="top" constant="8" id="8qk-sB-Paq"/>
                     <constraint firstItem="w04-Bc-Pcp" firstAttribute="leading" secondItem="nM8-oU-QOs" secondAttribute="trailing" constant="8" id="9ZV-gD-Kg0"/>
                     <constraint firstItem="eIb-Yn-zda" firstAttribute="top" secondItem="Bco-33-0jp" secondAttribute="bottom" constant="8" id="PQq-sH-rdA"/>
+                    <constraint firstItem="eIb-Yn-zda" firstAttribute="leading" secondItem="u1d-D9-RSS" secondAttribute="trailing" constant="8" id="RSW-uV-Eao"/>
                     <constraint firstAttribute="trailing" secondItem="Bco-33-0jp" secondAttribute="trailing" constant="8" id="WRD-61-c0S"/>
+                    <constraint firstItem="eIb-Yn-zda" firstAttribute="height" secondItem="u1d-D9-RSS" secondAttribute="height" id="XBR-bp-978"/>
                     <constraint firstItem="nM8-oU-QOs" firstAttribute="top" secondItem="A1W-s1-svK" secondAttribute="top" constant="8" id="aCg-8f-x9C"/>
                     <constraint firstItem="w04-Bc-Pcp" firstAttribute="top" secondItem="A1W-s1-svK" secondAttribute="top" constant="8" id="jwy-ee-vyg"/>
+                    <constraint firstItem="eIb-Yn-zda" firstAttribute="bottom" secondItem="u1d-D9-RSS" secondAttribute="bottom" id="mC6-bU-QiV"/>
                     <constraint firstItem="nM8-oU-QOs" firstAttribute="leading" secondItem="A1W-s1-svK" secondAttribute="leading" constant="8" id="o6y-fZ-Bda"/>
                     <constraint firstItem="Bco-33-0jp" firstAttribute="leading" secondItem="w04-Bc-Pcp" secondAttribute="trailing" constant="8" id="uqa-Jl-GHe"/>
                     <constraint firstItem="Bco-33-0jp" firstAttribute="leading" secondItem="eIb-Yn-zda" secondAttribute="leading" id="wU1-pY-bA8"/>
@@ -70,4 +78,7 @@
             <point key="canvasLocation" x="-21.5" y="-75"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="empty-star" width="40" height="40"/>
+    </resources>
 </document>

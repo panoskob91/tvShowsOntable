@@ -51,6 +51,8 @@ typedef enum
 
 @property (nonatomic) ShowType mediaType;
 
+@property (assign, nonatomic) BOOL isFavourite;
+
 #pragma mark -Initialisers
 
 /**

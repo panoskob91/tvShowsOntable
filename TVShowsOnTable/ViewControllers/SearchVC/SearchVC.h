@@ -12,8 +12,10 @@
 #import "AFSENetworkingDelegate.h"
 //View models
 #import "PKShowTableCellViewModel.h"
-
+//ViewControllers
 #import "MasterTableVC.h"
+
+//Delegates
 
 @interface SearchVC : MasterTableVC<UISearchBarDelegate, ButtonEventHandlingDelegate, AFSENetworkingDelegate>
 
