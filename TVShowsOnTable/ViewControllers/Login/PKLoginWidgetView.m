@@ -56,7 +56,7 @@
             
             NSString *str = @"hi";
             NSData *hiData = [str dataUsingEncoding:NSUTF8StringEncoding];
-            NSString *hiString = [[NSString alloc] initWithData:hiData encoding:NSWindowsCP1252StringEncoding];
+//            NSString *hiString = [[NSString alloc] initWithData:hiData encoding:NSWindowsCP1252StringEncoding];
             [userFavorites addObject:hiData];
             NSString *bye = @"bye";
             NSData *byeData = [bye dataUsingEncoding:NSUTF8StringEncoding];
