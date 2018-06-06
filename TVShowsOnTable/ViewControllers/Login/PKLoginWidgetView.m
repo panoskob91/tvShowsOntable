@@ -47,9 +47,25 @@
         
         if (uExists && pExists)
         {
+            NSMutableDictionary *userData = [[NSMutableDictionary alloc] init];
+            [userData setObject:self.usernameTextField.text forKey:@"username"];
+            [userData setObject:self.passwordTextField.text forKey:@"password"];
+            NSMutableArray *userFavorites = [[NSMutableArray alloc] init];
+            
+            //[userFavorites addObject:@"hi"];
+            
+            NSString *str = @"hi";
+            NSData *hiData = [str dataUsingEncoding:NSUTF8StringEncoding];
+            NSString *hiString = [[NSString alloc] initWithData:hiData encoding:NSWindowsCP1252StringEncoding];
+            [userFavorites addObject:hiData];
+            NSString *bye = @"bye";
+            NSData *byeData = [bye dataUsingEncoding:NSUTF8StringEncoding];
+            [userFavorites addObject:byeData];
+            //[userFavorites addObject:@"bye"];
+            [userData setObject:userFavorites forKey:@"favorites"];
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"Match" object:self];
         }
-        
     }
     
     

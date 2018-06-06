@@ -43,8 +43,6 @@
         [titleSection addObject:favoritesVM];
     }
     
-    
-    
     [sectionForParent addObject:titleSection];
     
     self.sections = [[NSArray alloc] initWithArray:[sectionForParent copy]];
@@ -64,8 +62,8 @@
 
 - (void)alertWhenNoFavoritesAreStored
 {
-    Session *session = [Session sharedSession];
-    if (session.favorite.movies.count == 0)
+
+    if (self.sections.count == 0)
     {
         NSString *alertMessage = @"There are no favorites stored yet";
         UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
