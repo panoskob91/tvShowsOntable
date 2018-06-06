@@ -51,6 +51,9 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1d-D9-RSS">
                         <rect key="frame" x="303" y="37" width="24" height="24"/>
                         <state key="normal" image="empty-star"/>
+                        <connections>
+                            <action selector="favouriteUnfavouriteButtonPressed:" destination="81F-62-3v6" eventType="touchUpInside" id="l2Y-YJ-AM2"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -70,6 +73,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="favoriteButton" destination="u1d-D9-RSS" id="8Mc-t9-P8h"/>
                 <outlet property="showAverageRatingLabel" destination="Bco-33-0jp" id="bR4-xi-L5y"/>
                 <outlet property="showTitleLabel" destination="w04-Bc-Pcp" id="ebk-aN-tJs"/>
                 <outlet property="showTypeImageView" destination="eIb-Yn-zda" id="GRZ-Zz-Sj7"/>

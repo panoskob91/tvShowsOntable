@@ -9,6 +9,14 @@
 #import "TVShowsCell.h"
 #import "Movie.h"
 #import "TVSeries.h"
+#import "FavoritesHandlingDelegate.h"
+
+@interface TVShowsCell ()
+
+@property (assign, nonatomic) BOOL isPressed;
+
+@end
+
 
 @implementation TVShowsCell
 
@@ -24,7 +32,8 @@
     self.showTitleLabel.numberOfLines = 0;
     //self.showTitleLabel.font = [UIFont fontWithName:@"MJ Granada" size:13];
     self.showTitleLabel.font = [UIFont fontWithName:@"ADAM.CG PRO" size:20];
-    
+    [self.favoriteButton setImage:[UIImage imageNamed:@"empty-star"] forState:UIControlStateNormal];
+    self.isPressed = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -43,4 +52,26 @@
     self.showAverageRatingLabel.text = [NSString stringWithFormat:@"%@", Object.showAverageRating];    
 }
 
+- (IBAction)favouriteUnfavouriteButtonPressed:(UIButton *)sender
+{
+    UIImage *favouriteButtonImage = [[UIImage alloc] init];
+    if (self.isPressed)
+    {
+        //Add show to session singleton
+        //TODO: Add show to session singleton
+        [self.favouriteHandlingDelegate addButtonWasPressedFromCell:self];
+        favouriteButtonImage = [UIImage imageNamed:@"filled-star"];
+        self.isPressed = NO;
+    }
+    else
+    {
+        //Remove show from session singleton
+        //TODO: Remove show from session singleton
+        [self.favouriteHandlingDelegate removeButtonWasPressedFromCell:self];
+        favouriteButtonImage = [UIImage imageNamed:@"empty-star"];
+        self.isPressed = YES;
+        
+    }
+    //[self.favoriteButton setImage:favouriteButtonImage forState:UIControlStateNormal];
+}
 @end

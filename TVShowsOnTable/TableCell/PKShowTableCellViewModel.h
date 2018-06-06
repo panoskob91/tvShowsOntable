@@ -10,8 +10,11 @@
 #import "Show.h"
 #import "TVShowsCell.h"
 #import "AFSEShowGroup.h"
+#import "FavoritesHandlingDelegate.h"
 
-@interface PKShowTableCellViewModel : NSObject
+@interface PKShowTableCellViewModel : NSObject<FavoritesHandlingDelegate>
+
+#pragma mark - Properties
 
 @property (strong, nonatomic) Show *bindModel;
 //@property (strong, nonatomic) id bindModel;
@@ -43,11 +46,9 @@
 
 @property (strong, nonatomic) NSMutableArray<PKShowTableCellViewModel *> *showViewModelList;
 
-//- (instancetype)initWIthTitle:(NSString *)title
-//                  andImageURL:(NSString *)url
-//             andAverageRating:(NSString *)avgRating
-//                   andGenreID:(NSNumber *)genreID
-//                 andBindModel:(id)bindModel;
+@property (strong, nonatomic) NSString *favouritesImageName;
+
+#pragma mark - Initialisers
 
 - (instancetype)initWithShowViewModelObject:(Show *)showObject;
 
@@ -59,13 +60,4 @@
 
 - (void)updateView:(TVShowsCell *)cell;
 
-//+ (NSArray<NSString *> *)matchIdsWithNamesFromDictionary:(NSDictionary *)dict
-//                                        andSourceArray:(NSArray<PKShowTableCellViewModel *> *)sourceArray;
-//
-//+ (NSArray<PKShowTableCellViewModel *> *)groupItemsBasedOnGenreIdWithDataFromArray:(NSArray<Show *> *)shows;
-//
-//- (NSString *)getGenreNameBasedOnGenreIdFromDicrionary:(NSDictionary *)dict;
-//
-//+ (NSArray<PKShowTableCellViewModel *> *)getGroupedArrayFromViewModelsArray:(NSArray<PKShowTableCellViewModel *> *)viewModels
-//                                                         andGenreNamesArray:(NSArray<NSString *> *)genreNames;
 @end

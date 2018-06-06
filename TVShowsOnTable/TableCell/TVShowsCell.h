@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "Show.h"
 
+//#import "FavoritesHandlingDelegate.h"
+
+@protocol FavoritesHandlingDelegate;
 @interface TVShowsCell : UITableViewCell
+
+#pragma mark - IBOutlets
 
 /**
  ImageView for displaying show images
@@ -35,6 +40,20 @@
  ImageView displaying the show's media type
  */
 @property (strong, nonatomic) IBOutlet UIImageView *showTypeImageView;
+
+/**
+ Favourite/Unfavourite show
+ */
+@property (strong, nonatomic) IBOutlet UIButton *favoriteButton;
+
+#pragma mark - IBActions
+
+- (IBAction)favouriteUnfavouriteButtonPressed:(UIButton *)sender;
+
+
+#pragma mark - Delegate
+
+@property (weak, nonatomic) id <FavoritesHandlingDelegate> favouriteHandlingDelegate;
 
 
 /**
