@@ -71,8 +71,9 @@
 
 - (void)navigateToSearchVC
 {
-    SearchVC *searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SearchVC"];
-    [self.navigationController pushViewController:searchVC animated:YES];
+    //SearchVC *searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SearchVC"];
+    //[self.navigationController pushViewController:searchVC animated:YES];
+    [self performSegueWithIdentifier:@"tabBarControllerSegue" sender:self];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
